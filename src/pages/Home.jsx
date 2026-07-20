@@ -3,7 +3,6 @@ import {
   Search,
   Users,
   ArrowRight,
-  Layout,
   Sparkles,
   Compass,
 } from "lucide-react";
@@ -60,6 +59,36 @@ const Home = () => {
         {/* Card 2: Audience Insight */}
         <Link
           to="/audience-insight"
+          className="group relative flex flex-col justify-between p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-lg shadow-xl hover:shadow-[#38BDF8]/20 hover:-translate-y-1"
+        >
+          <div>
+            <div className="flex items-center justify-between mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#38BDF8] to-[#0284C7] flex items-center justify-center shadow-lg shadow-[#38BDF8]/30">
+                <Users className="w-7 h-7 text-white" />
+              </div>
+              <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#38BDF8]/20 text-[#38BDF8] border border-[#38BDF8]/30">
+                Audience Insight
+              </span>
+            </div>
+            <h2 className="text-2xl font-bold mb-2 group-hover:text-[#38BDF8] transition-colors">
+              Audience Analytics & AI
+            </h2>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Detailed demographic breakdown, authenticity scores, quality
+              ratings, and AI audience recommendations.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 text-sm font-semibold text-[#38BDF8] group-hover:translate-x-1 transition-transform">
+            <span>Open Audience Insight</span>
+            <ArrowRight className="w-4 h-4" />
+          </div>
+        </Link>
+
+      
+        {/* Card 2: Audience Insight */}
+        <Link
+          to="/contact"
           className="group relative flex flex-col justify-between p-8 rounded-3xl bg-white/5 border border-white/10 hover:border-[#38BDF8]/50 hover:bg-white/10 transition-all duration-300 backdrop-blur-lg shadow-xl hover:shadow-[#38BDF8]/20 hover:-translate-y-1"
         >
           <div>
