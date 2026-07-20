@@ -27,17 +27,31 @@ import {
     { label: "Audience Insights", icon: <Users size={16} /> },
     { label: "Lookalike Creator", icon: <UserPlus size={16} /> }, */
 }
-const Pill = ({ children, className = "" }) => (
-  <span
-    className={`px-3 py-1.5 rounded-full text-xs font-medium bg-[#F3F0FF] text-[#5B3DF5] ${className}`}
-  >
-    {children}
-  </span>
-);
+function Pill({ children, tone = "purple", size = "md", className = "" }) {
+  const tones = {
+    purple: "bg-violet-50 text-violet-700",
+    green: "bg-emerald-50 text-emerald-600",
+    outline: "bg-white text-gray-600 border border-gray-200",
+  };
+
+  const sizes = {
+    sm: "px-2 py-0.5 text-[10px]",
+    md: "px-3 py-1 text-[12px]",
+    lg: "px-4 py-1.5 text-sm",
+  };
+
+  return (
+    <span
+      className={`inline-flex items-center whitespace-nowrap rounded-md font-medium ${tones[tone]} ${sizes[size]} ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
 
 const InfoLabel = ({ title }) => (
   <div className="flex items-center gap-1.5">
-    <h3 className="text-sm font-semibold text-gray-900">{title}</h3>
+    <h3 className="text-lg font-semibold text-violet-600">{title}</h3>
     <Info className="w-3.5 h-3.5 text-gray-300" />
   </div>
 );
@@ -96,7 +110,7 @@ const MatchProgressBar = ({ label, value }) => (
     </div>
     <div className="w-full h-2 rounded-full bg-[#F3F0FF] overflow-hidden">
       <div
-        className="h-full rounded-full bg-[#5B3DF5]"
+       className="h-1.5 rounded-full bg-[#5B3DF5]"
         style={{ width: `${value}%` }}
       />
     </div>
@@ -116,11 +130,14 @@ const CreatorAvatar = ({ src, size = "w-16 h-16", rank }) => (
 
 const BestMatchStat = ({ icon: Icon, value, label }) => (
   <div className="flex items-center gap-1.5 text-sm text-gray-500">
-    <Icon className="w-3.5 h-3.5 text-gray-400" strokeWidth={2} />
+    <Icon className="w-4 h-4 text-violet-700 " strokeWidth={2} />
     <span className="font-semibold text-gray-900">{value}</span>
-    <span>{label}</span>
+    <span className="text-sm text-gray-500 whitespace-nowrap"> {/* Add whitespace-nowrap here */}
+        {label}
+      </span>
   </div>
 );
+// Inside your BestMatchStat component definition
 
 const SimilarCreatorCard = ({
   rank,
@@ -133,7 +150,7 @@ const SimilarCreatorCard = ({
 }) => (
   <div className="flex-1 min-w-[220px] border border-[#E5E7EB] rounded-xl p-4">
     <div className="flex items-center gap-3 mb-3">
-      <CreatorAvatar src={img} size="w-11 h-11" rank={rank} />
+      <CreatorAvatar src={img} size="w-20 h-20" rank={rank} />
       <div>
         <div className="flex items-center gap-1">
           <span className="text-sm font-semibold text-gray-900">{name}</span>
@@ -253,15 +270,7 @@ const similarCreators = [
     followers: "678K",
     engagement: "5.74%",
   },
-  {
-    rank: 5,
-    img: img1,
-    name: "Lily Patel",
-    handle: "lilypatel",
-    match: 88,
-    followers: "634K",
-    engagement: "5.66%",
-  },
+ 
 ];
 
 const comparisonRows = [
@@ -502,100 +511,119 @@ export default function LookalikeCreator() {
               </div>
             </Card>
 
-            <div className="grid grid-cols-3 gap-6">
-              <Card className="col-span-2">
-                <InfoLabel title="Best Match Creator" />
-                <div className="flex items-center justify-between mt-4">
-                  <div className="flex items-center gap-4">
-                    <CreatorAvatar src={img1} size="w-16 h-16" rank={1} />
-                    <div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-base font-bold text-gray-900">
-                          Sofia Rodriguez
-                        </span>
-                        <BadgeCheck
-                          className="w-4 h-4 text-[#5B3DF5] fill-[#5B3DF5]"
-                          stroke="white"
-                          strokeWidth={2}
-                        />
-                      </div>
-                      <p className="text-sm text-gray-400">@sofiarodriguez</p>
-                      <div className="flex items-center gap-1 text-sm text-gray-400 mt-0.5">
-                        <MapPin className="w-3.5 h-3.5" strokeWidth={2} />
-                        <span>Los Angeles, CA, USA</span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5 mt-2">
-                        <Pill>Fashion</Pill>
-                        <Pill>Beauty</Pill>
-                        <Pill>Lifestyle</Pill>
-                        <Pill>Wellness</Pill>
-                        <Pill>Travel</Pill>
+            <div className="grid grid-cols-3 gap-2">
+              <Card className="col-span-2 flex items-stretch gap-6 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <div className="flex flex-1 flex-col justify-between">
+                  <div>
+                    <InfoLabel title="Best Match Creator" />
+                    <div className="mt-5 flex items-start gap-4">
+                      <CreatorAvatar src={img1} size="w-40 h-40" rank={1} />
+                      <div>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xl font-bold text-gray-900">
+                            Sofia Rodriguez
+                          </span>
+                          <BadgeCheck
+                            className="h-5 w-5 fill-[#5B3DF5] text-[#5B3DF5]"
+                            stroke="white"
+                            strokeWidth={2}
+                          />
+                        </div>
+                        <p className="text-[13px] text-gray-500">
+                          @sofiarodriguez
+                        </p>
+                        <div className="mt-1.5 flex items-center gap-1.5 text-[13px] text-gray-500">
+                          <MapPin className="h-3.5 w-3.5" strokeWidth={2} />
+                          <span>Los Angeles, CA, USA</span>
+                        </div>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <Pill>Fashion</Pill>
+                          <Pill>Beauty</Pill>
+                          <Pill>Lifestyle</Pill>
+                          <Pill>Wellness</Pill>
+                          <Pill>Travel</Pill>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  <div className="mt-8 flex items-center gap-2">
+                    <BestMatchStat
+                      icon={Users}
+                      value="892K"
+                      label="Followers"
+                    />
+                    <BestMatchStat
+                      icon={TrendingUp}
+                      value="6.12%"
+                      label="Engagement"
+                    />
+                    <BestMatchStat
+                      icon={Heart}
+                      value="58.7K"
+                      label="Avg. Likes"
+                    />
+                  </div>
                 </div>
 
-                <div className="flex items-center gap-6 mt-4">
-                  <BestMatchStat icon={Users} value="892K" label="Followers" />
-                  <BestMatchStat
-                    icon={TrendingUp}
-                    value="6.12%"
-                    label="Engagement"
-                  />
-                  <BestMatchStat
-                    icon={Heart}
-                    value="58.7K"
-                    label="Avg. Likes"
-                  />
+                <div className="flex shrink-0 flex-col items-center justify-between border-l border-transparent pl-2">
+                  <div className="flex flex-col items-center">
+                    <div className="relative h-28 w-28">
+                      <svg
+                        viewBox="0 0 100 100"
+                        className="h-full w-full -rotate-90"
+                      >
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="44"
+                          fill="none"
+                          stroke="#F3F0FF"
+                          strokeWidth="8"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="44"
+                          fill="none"
+                          stroke="#5B3DF5"
+                          strokeWidth="8"
+                          strokeLinecap="round"
+                          strokeDasharray={`${2 * Math.PI * 44}`}
+                          strokeDashoffset={`${2 * Math.PI * 44 * (1 - 0.94)}`}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center pt-1">
+                        <span className="text-2xl font-bold text-[#5B3DF5]">
+                          94%
+                        </span>
+                        <span className="text-[10px] font-medium text-emerald-500">
+                          Match Score
+                        </span>
+                      </div>
+                    </div>
+                    <span className="mt-3 rounded-md bg-emerald-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-wide text-emerald-600">
+                      Excellent Match
+                    </span>
+                    <button className="mt-2 w-full rounded-lg border border-[#E9D5FF] px-4 py-2 text-sm font-semibold text-[#5B3DF5] transition-colors hover:bg-purple-50">
+                      View Profile
+                    </button>
+                  </div>
                 </div>
               </Card>
 
-              <Card className="flex flex-col items-center justify-center gap-3">
-                <div className="relative w-28 h-28">
-                  <svg
-                    viewBox="0 0 100 100"
-                    className="w-full h-full -rotate-90"
-                  >
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="44"
-                      fill="none"
-                      stroke="#F3F0FF"
-                      strokeWidth="8"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="44"
-                      fill="none"
-                      stroke="#5B3DF5"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                      strokeDasharray={`${2 * Math.PI * 44}`}
-                      strokeDashoffset={`${2 * Math.PI * 44 * (1 - 0.94)}`}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex flex-col items-center justify-center">
-                    <span className="text-xl font-bold text-[#5B3DF5]">
-                      94%
-                    </span>
-                    <span className="text-[10px] text-gray-400">
-                      Match Score
-                    </span>
-                  </div>
+              <Card className="col-span-1 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+                <InfoLabel title="Match Breakdown" />
+                <div className="flex flex-col gap-5 mt-6">
+                  {matchBreakdown.map((m) => (
+                    <MatchProgressBar key={m.label} {...m} />
+                  ))}
                 </div>
-                <span className="bg-emerald-50 text-emerald-600 text-xs font-semibold px-3 py-1 rounded-full">
-                  Excellent Match
-                </span>
-                <button className="w-full border border-[#E5E7EB] rounded-lg py-2 text-sm font-medium text-gray-600 hover:bg-gray-50">
-                  View Profile
-                </button>
               </Card>
             </div>
 
             <div className="grid grid-cols-3 gap-6">
-              <Card className="col-span-2">
+              <Card className="col-span-3">
                 <div className="flex items-center justify-between">
                   <InfoLabel title="Similar Creators" />
                   <button className="text-sm font-medium text-[#5B3DF5] flex items-center gap-1">
@@ -615,15 +643,6 @@ export default function LookalikeCreator() {
                   <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
                     <ChevronRight className="w-4 h-4 text-gray-500" />
                   </button>
-                </div>
-              </Card>
-
-              <Card>
-                <InfoLabel title="Match Breakdown" />
-                <div className="flex flex-col gap-4 mt-5">
-                  {matchBreakdown.map((m) => (
-                    <MatchProgressBar key={m.label} {...m} />
-                  ))}
                 </div>
               </Card>
             </div>
