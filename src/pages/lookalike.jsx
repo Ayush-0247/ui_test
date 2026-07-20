@@ -1,4 +1,3 @@
-
 import img1 from "../assets/img1.png";
 import {
   BadgeCheck,
@@ -10,19 +9,24 @@ import {
   TrendingUp,
   Heart,
   Info,
+  BarChart3,
+  User,
   X,
+  Layers,
+  UserPlus,
   Sparkles,
   CheckCircle2,
   ChevronRight,
   ChevronLeft,
   ArrowRight,
-  ShoppingBag,
-  LayoutGrid,
-  MessageSquareText,
-  UserSquare2,
   Mail,
 } from "lucide-react";
-
+{
+  /* <BarChart3 size={16} /> },
+    { label: "Stories & Hashtags", icon: <Layers size={16} /> },
+    { label: "Audience Insights", icon: <Users size={16} /> },
+    { label: "Lookalike Creator", icon: <UserPlus size={16} /> }, */
+}
 const Pill = ({ children, className = "" }) => (
   <span
     className={`px-3 py-1.5 rounded-full text-xs font-medium bg-[#F3F0FF] text-[#5B3DF5] ${className}`}
@@ -71,18 +75,18 @@ const Card = ({ children, className = "" }) => (
 //   </div>
 // );
 
-const NavItem = ({ icon: Icon, label, active }) => (
-  <div
-    className={`flex items-center gap-2 pb-4 pt-1 cursor-pointer border-b-2 ${
-      active
-        ? "border-[#5B3DF5] text-[#5B3DF5] font-semibold"
-        : "border-transparent text-gray-500 font-medium hover:text-gray-700"
-    }`}
-  >
-    <Icon className="w-4 h-4" strokeWidth={2} />
-    <span className="text-sm">{label}</span>
-  </div>
-);
+// const NavItem = ({ icon: Icon, label, active }) => (
+//   <div
+//     className={`flex items-center gap-2 pb-4 pt-1 cursor-pointer border-b-2 ${
+//       active
+//         ? "border-[#5B3DF5] text-[#5B3DF5] font-semibold"
+//         : "border-transparent text-gray-500 font-medium hover:text-gray-700"
+//     }`}
+//   >
+//     <Icon className="w-4 h-4" strokeWidth={2} />
+//     <span className="text-sm">{label}</span>
+//   </div>
+// );
 
 const MatchProgressBar = ({ label, value }) => (
   <div>
@@ -203,13 +207,23 @@ const RecommendationItem = ({ icon: Icon, title, subtitle }) => (
   </div>
 );
 
-const navItems = [
-  { icon: ShoppingBag, label: "Statistics & Media" },
-  { icon: LayoutGrid, label: "Stories & Hashtags" },
-  { icon: UserSquare2, label: "Audience Insights" },
-  { icon: Users, label: "Lookalike Creator", active: true },
-  { icon: MessageSquareText, label: "Contact Info" },
-];
+// const NavItem = ({ label, icon, active }) => (
+//   <div className="relative flex items-center gap-2 pb-4 pt-1 cursor-pointer">
+//     <span className={active ? "text-[#5B3DF5]" : "text-gray-400"}>{icon}</span>
+//     <span
+//       className={
+//         active
+//           ? "text-[13px] font-semibold text-[#5B3DF5]"
+//           : "text-[13px] font-medium text-gray-500"
+//       }
+//     >
+//       {label}
+//     </span>
+//     {active && (
+//       <span className="absolute left-0 right-0 -bottom-[1px] h-[2.5px] bg-[#5B3DF5] rounded-full" />
+//     )}
+//   </div>
+// );
 
 const similarCreators = [
   {
@@ -343,103 +357,129 @@ const keyRecommendations = [
     subtitle: "Authentic audience with high interactions",
   },
 ];
+function TopTabs() {
+  const tabs = [
+    { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
+    { label: "Stories & Hashtags", icon: <Layers size={16} /> },
+    { label: "Audience Insights", icon: <Users size={16} /> },
+    { label: "Lookalike Creator", icon: <UserPlus size={16} /> },
+    { label: "Contact Info", icon: <User size={16} />, active: true },
+  ];
+  return (
+    <div className="flex items-center justify-between border-b border-gray-100 bg-white px-8 pt-6">
+      <div className="flex gap-8">
+        {tabs.map((tab) => (
+          <button
+            key={tab.label}
+            className={`flex items-center gap-2 pb-2 text-sm font-medium transition ${
+              tab.active
+                ? "border-b-2 border-violet-900 text-violet-900 font-extrabold"
+                : "border-b-2 border-transparent text-gray-900 font-extrabold hover:text-gray-700"
+            }`}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
+        <X className="w-5 h-5 text-zinc-900" />
+      </button>
+    </div>
+  );
+}
+function ProfileSidebar() {
+  return (
+    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
+      <div className="relative ">
+        <img
+          src={img1}
+          alt="Isabella Martinez"
+          className="w-[230px] h-[230px] rounded-full object-cover"
+        />
+      </div>
 
+      <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
+      <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
+
+      <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
+        <MapPin className="w-3.5 h-3.5" />
+        <span>Los Angeles, CA, USA</span>
+      </div>
+
+      <div className="flex flex-wrap justify-center gap-2 mt-4">
+        {["Lifestyle", "Fashion", "Travel"].map((tag) => (
+          <span
+            key={tag}
+            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+      <div className="flex flex-wrap justify-center gap-2 mt-2">
+        {["Wellness", "Beauty"].map((tag) => (
+          <span
+            key={tag}
+            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="w-full flex flex-col gap-3 mt-6">
+        <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-sm font-semibold rounded-md py-3">
+          <Send className="w-4 h-4" />
+          Create Campaign
+        </button>
+        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
+          <Download className="w-5 h-5" />
+          Download Media Kit
+        </button>
+        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
+          <Star className="w-5 h-5" />
+          Add to Favorites
+        </button>
+      </div>
+
+      <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
+        <div className="flex flex-col items-center gap-1">
+          <Users className="w-6 h-6 text-blue-700" />
+          <span className="text-base font-bold text-gray-900">892K</span>
+          <span className="text-[11px] text-gray-400">Followers</span>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <TrendingUp className="w-6 h-6 text-blue-700" />
+          <span className="text-base font-bold text-gray-900">6.38%</span>
+          <span className="text-[11px] text-gray-400">Engagement</span>
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <Heart className="w-6 h-6 text-blue-700" />
+          <span className="text-base font-bold text-gray-900">57.2K</span>
+          <span className="text-[11px] text-gray-400">Avg. Likes</span>
+        </div>
+      </div>
+    </aside>
+  );
+}
 export default function LookalikeCreator() {
   return (
-    <div className="min-h-screen bg-[#F8F9FC] p-6 font-[Inter]">
-      <div className="flex gap-6 max-w-[1600px] mx-auto">
-        <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
-          <div className="relative ">
-            <img
-              src={img1}
-              alt="Isabella Martinez"
-              className="w-[230px] h-[230px] rounded-full object-cover"
-            />
-          </div>
+    <div className="min-h-screen w-full bg-[#F8F9FC] p-1 font-[Inter,sans-serif]">
+      <div className="flex gap-3 items-start max-w-[1580px] mx-auto border border-gray-100 bg-white shadow-sm">
+        <ProfileSidebar />
 
-          <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
-          <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
-
-          <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Los Angeles, CA, USA</span>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-2 mt-4">
-            {["Lifestyle", "Fashion", "Travel"].map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-2 mt-2">
-            {["Wellness", "Beauty"].map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="w-full flex flex-col gap-3 mt-6">
-            <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-sm font-semibold rounded-md py-3">
-              <Send className="w-4 h-4" />
-              Create Campaign
-            </button>
-            <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-              <Download className="w-5 h-5" />
-              Download Media Kit
-            </button>
-            <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-              <Star className="w-5 h-5" />
-              Add to Favorites
-            </button>
-          </div>
-
-          <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
-            <div className="flex flex-col items-center gap-1">
-              <Users className="w-6 h-6 text-blue-700" />
-              <span className="text-base font-bold text-gray-900">892K</span>
-              <span className="text-[11px] text-gray-400">Followers</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <TrendingUp className="w-6 h-6 text-blue-700" />
-              <span className="text-base font-bold text-gray-900">6.38%</span>
-              <span className="text-[11px] text-gray-400">Engagement</span>
-            </div>
-            <div className="flex flex-col items-center gap-1">
-              <Heart className="w-6 h-6 text-blue-700" />
-              <span className="text-base font-bold text-gray-900">57.2K</span>
-              <span className="text-[11px] text-gray-400">Avg. Likes</span>
-            </div>
-          </div>
-        </aside>
-
-        <main className="flex-1 min-w-0">
-          <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-white rounded-t-2xl px-6 pt-2">
-            <div className="flex items-center gap-8">
-              {navItems.map((item) => (
-                <NavItem key={item.label} {...item} />
-              ))}
-            </div>
-            <button className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center mb-4 hover:bg-gray-200">
-              <X className="w-4 h-4 text-gray-500" strokeWidth={2} />
-            </button>
-          </div>
+        <main className="flex-1 ">
+          <TopTabs />
 
           <div className="flex flex-col gap-6 mt-6">
-            <Card className="bg-[#F6F4FF] border-[#EDE9FE] flex items-center justify-between gap-6">
+            <Card className="!bg-[#F9F4FF] shadow-none border flex items-center justify-between gap-6">
               <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm">
                 <Sparkles className="w-5 h-5 text-[#5B3DF5]" strokeWidth={2} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-base font-bold text-gray-900">
+                  <h3 className="text-2xl font-bold text-violet-600">
                     AI Matching Engine
                   </h3>
                   <Info className="w-3.5 h-3.5 text-gray-400" />
