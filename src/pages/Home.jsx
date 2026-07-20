@@ -25,10 +25,8 @@ const PortalCard = ({
   const styles = themeStyles[theme];
 
   return (
-  <Link
+    <Link
       to={to}
-      target="_blank"
-      rel="noopener noreferrer"
       className="group flex items-center justify-between p-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
     >
       <div className="flex items-center gap-3">
