@@ -65,7 +65,7 @@ const DonutChart = ({
   );
 };
 
-const GenderDonut = ({ size = 130, strokeWidth = 22 }) => {
+const GenderDonut = ({ size = 130, strokeWidth = 14 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const femaleOffset = circumference - 0.85 * circumference;
@@ -83,6 +83,7 @@ const GenderDonut = ({ size = 130, strokeWidth = 22 }) => {
         fill="none"
         stroke="#38BDF8"
         strokeWidth={strokeWidth}
+        
       />
       <circle
         cx={size / 2}
@@ -93,7 +94,9 @@ const GenderDonut = ({ size = 130, strokeWidth = 22 }) => {
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={femaleOffset}
-        strokeLinecap="butt"
+        
+         strokeLinecap="round"
+        
       />
     </svg>
   );
