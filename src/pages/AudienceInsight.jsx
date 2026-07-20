@@ -193,7 +193,7 @@ const strengths = [
 
 export default function AudienceInsights() {
   return (
-    <div className="min-h-screen w-full bg-[#F8F9FC] p-6 font-[Inter,sans-serif]">
+    <div className="min-h-screen w-full bg-[#F8F9FC] p-1 font-[Inter,sans-serif]">
       <div className="flex gap-3 items-start max-w-[1580px] mx-auto">
         <aside className="w-[320px] shrink-0 bg-white rounded-lg   p-6 flex flex-col items-center">
           <div className="relative ">
@@ -316,12 +316,12 @@ export default function AudienceInsights() {
                   <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
                     This audience is highly engaged, active, and shows strong
                     interest in relevant content.
-                  </p>
-                </div>
-              </div>
-              <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5]">
+                  </p> <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
                 Top 8% of creators
               </span>
+                </div>
+              </div>
+             
             </div>
 
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
@@ -345,13 +345,13 @@ export default function AudienceInsights() {
                   <p className="mt-1.5 text-xs leading-relaxed text-gray-500">
                     Low fake follower rate with genuine interactions and real
                     audience behavior.
-                  </p>
+                  </p><span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
+                Estimated Fake Followers: 3.2%
+              </span>
                 </div>
               </div>
 
-              <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5]">
-                Estimated Fake Followers: 3.2%
-              </span>
+              
             </div>
 
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
@@ -383,9 +383,7 @@ export default function AudienceInsights() {
                 </div>
               </div>
 
-              <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5]">
-                Female Dominant Audience
-              </span>
+             
             </div>
           </div>
 
