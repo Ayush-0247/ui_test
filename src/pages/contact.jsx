@@ -50,7 +50,7 @@ function Card({ title, icon, tint = false, action, className = "", children }) {
     <div
       className={`rounded-2xl border ${tokens.border} ${
         tint ? tokens.purpleBg : "bg-white"
-      } p-6 shadow-sm ${className}`}
+      } p-4 shadow-sm ${className}`}
     >
       {(title || action) && (
         <div className="mb-4 flex items-center justify-between">
@@ -71,22 +71,27 @@ function Card({ title, icon, tint = false, action, className = "", children }) {
 }
 
 /** Small rounded pill used for skill tags, brand-category chips, status badges. */
-function Pill({ children, tone = "purple", className = "" }) {
+function Pill({ children, tone = "purple", size = "md", className = "" }) {
   const tones = {
     purple: "bg-violet-50 text-violet-700",
     green: "bg-emerald-50 text-emerald-600",
     outline: "bg-white text-gray-600 border border-gray-200",
   };
+
+  const sizes = {
+    sm: "px-2 py-0.5 text-[10px]",
+    md: "px-3 py-1 text-[12px]",
+    lg: "px-4 py-1.5 text-sm",
+  };
+
   return (
     <span
-     className={`inline-flex items-center whitespace-nowrap rounded-md px-3 py-1 text-[12px] font-medium ${tones[tone]} ${className}`}
+      className={`inline-flex items-center whitespace-nowrap rounded-md font-medium ${tones[tone]} ${sizes[size]} ${className}`}
     >
       {children}
     </span>
   );
 }
-
-
 
 /** Outline / solid button, reused for every CTA on the page. */
 function Button({
@@ -179,7 +184,7 @@ function CheckRow({ label, right, boldRight = false }) {
     <div className="flex items-center justify-between py-2">
       <div className="flex items-center gap-2.5">
         <CheckCircle2 size={17} className="text-emerald-500" />
-        <span className="text-sm text-gray-700">{label}</span>
+        <span className="text-sm font-bold text-gray-700">{label}</span>
       </div>
       {right && (
         <span
@@ -198,7 +203,7 @@ function StarRating({ label, value, icon }) {
     <div className="flex items-center justify-between py-1.5">
       <div className="flex items-center gap-2">
         <span className="text-violet-500">{icon}</span>
-        <span className="text-sm text-gray-700">{label}</span>
+        <span className="text-xs font-bold text-gray-700">{label}</span>
       </div>
       <div className="flex gap-0.5">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -218,23 +223,24 @@ function StarRating({ label, value, icon }) {
 }
 
 /** Contact-method row with icon, title, subtitle, availability badge & CTA. */
-function ContactMethodRow({ icon, title, subtitle, badge, cta }) {
+function ContactMethodRow({ icon, title, subtitle, badge }) {
   return (
-    <div className="flex items-center justify-between py-3">
+    <div className="flex items-center justify-between py-2 px-0 border rounded-xl border-gray-200 mb-2">
       <div className="flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-50 text-violet-600">
+        <span className="flex ml-2 items-center justify-center rounded-lg  text-violet-600">
           {icon}
         </span>
         <div>
-          <p className="text-sm font-medium text-gray-900">{title}</p>
+          <p className="text-sm font-bold text-gray-900">{title}</p>
           <p className="text-xs text-gray-400">{subtitle}</p>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {badge && <Pill tone="green">{badge}</Pill>}
-        <button className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50">
-          {cta}
-        </button>
+        {badge && (
+          <Pill className="mr-2" tone="green" size="sm">
+            {badge}
+          </Pill>
+        )}
       </div>
     </div>
   );
@@ -245,12 +251,12 @@ function RankRow({ rank, label, match }) {
   return (
     <div className="flex items-center justify-between py-2">
       <div className="flex items-center gap-3">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-100 text-xs font-semibold text-violet-700">
+        <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-violet-200  text-xs font-semibold text-violet-700">
           {rank}
         </span>
-        <span className="text-sm text-gray-800">{label}</span>
+        <span className="text-xs font-bold text-gray-800">{label}</span>
       </div>
-      <span className="text-sm font-semibold text-violet-700">{match}</span>
+      <span className="text-xs font-semibold text-violet-700">{match}</span>
     </div>
   );
 }
@@ -283,9 +289,9 @@ function TopTabs() {
           </button>
         ))}
       </div>
-       <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
-              <X className="w-5 h-5 text-zinc-900" />
-            </button>
+      <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
+        <X className="w-5 h-5 text-zinc-900" />
+      </button>
     </div>
   );
 }
@@ -294,7 +300,6 @@ function TopTabs() {
  * LEFT PROFILE SIDEBAR
  * ---------------------------------------------------------------------- */
 function ProfileSidebar() {
-
   return (
     <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
       <div className="relative ">
@@ -437,17 +442,22 @@ function BestTimeCard() {
           <p className="text-xs font-semibold text-violet-900">
             Best Time to Reach Out
           </p>
-          <p className="mt-1 text-xs font-bold text-zinc-600">Tuesday – Thursday</p>
-          <p className="text-xs text-zinc-600 font-bold">9:00 AM – 12:00 PM PST</p>
+          <p className="mt-1 text-xs font-bold text-zinc-600">
+            Tuesday – Thursday
+          </p>
+          <p className="text-xs text-zinc-600 font-bold">
+            9:00 AM – 12:00 PM PST
+          </p>
         </div>
       </div>
       <div className="mt-4 flex items-start gap-2 text-sm text-gray-500">
         <Sparkles size={14} className="mt-0.5 shrink-0 text-violet-500" />
         <p>
-          <span className="font-semibold text-violet-600">Tip:</span >
-          <span className="text-xs"> Send
-          personalized pitches during mid-morning for best results.</span>
-          
+          <span className="font-semibold text-violet-600">Tip:</span>
+          <span className="text-xs">
+            {" "}
+            Send personalized pitches during mid-morning for best results.
+          </span>
         </p>
       </div>
     </Card>
@@ -483,78 +493,78 @@ function CollaborationPreferencesCard() {
 
   return (
     <Card
-  title="Collaboration Preferences"
-  icon={<Info size={12} className="text-gray-300" />}
->
-  <div className="grid grid-cols-3 gap-6">
-    <div>
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-        Preferred Collaboration Types
-      </p>
-      {collabTypes.map((c) => (
-        <StarRating
-          key={c.label}
-          label={c.label}
-          value={c.value}
-          icon={c.icon}
-        />
-      ))}
-    </div>
+      title="Collaboration Preferences"
+      icon={<Info size={12} className="text-gray-300" />}
+    >
+      <div className="grid grid-cols-3 gap-3">
+        <div className="border-r border-gray-200 pr-2 ">
+          <p className="mb-1 text-[8px]  uppercase font-bold text-violet-600">
+            Preferred Collaboration Types
+          </p>
+          {collabTypes.map((c) => (
+            <StarRating
+              key={c.label}
+              label={c.label}
+              value={c.value}
+              icon={c.icon}
+            />
+          ))}
+        </div>
 
-    <div>
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-        Top Brand Categories
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {brandCategories.map((c) => (
-          <Pill key={c} tone="purple">
-            {c}
-          </Pill>
-        ))}
-      </div>
-    </div>
+        <div className="border-r border-gray-200 pr-2 ">
+          <p className="mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
+            Top Brand Categories
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {brandCategories.map((c) => (
+              <Pill key={c} tone="purple">
+                {c}
+              </Pill>
+            ))}
+          </div>
+        </div>
 
-    <div>
-      <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-gray-400">
-        Brand She Prefers
-      </p>
-      <div className="space-y-0.5">
-        {prefers.map((p) => (
-          <CheckRow key={p} label={p} />
-        ))}
+        <div>
+          <p className="mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
+            Brand She Prefers
+          </p>
+          <div className="space-y-0.5">
+            {prefers.map((p) => (
+              <CheckRow key={p} label={p} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</Card>
+    </Card>
   );
 }
 
 function ContactMethodsCard() {
   return (
     <Card title="Contact Methods">
-      <div className="divide-y divide-gray-50">
+      <div className=" rounded-md">
         <ContactMethodRow
-          icon={<Mail size={16} />}
+          icon={<Mail size={14} />}
           title="Email"
           subtitle="hello@isabellamartinez.com"
           badge="Available"
           cta="Copy"
         />
         <ContactMethodRow
-          icon={<User size={16} />}
+          icon={<User size={14} />}
           title="Instagram DM"
           subtitle="@isabellamarts"
           badge="Available"
           cta="Open"
         />
         <ContactMethodRow
-          icon={<User size={16} />}
+          icon={<User size={14} />}
           title="Management"
           subtitle="Sun & Co. Management · team@sunandco.com"
           cta="View"
         />
         <ContactMethodRow
-          icon={<Globe size={16} />}
+          icon={<Globe size={14} />}
           title="Website"
           subtitle="www.isabellamartinez.com"
           cta="Visit"
@@ -575,19 +585,20 @@ function CampaignFitChecklistCard() {
   return (
     <Card
       title="Campaign Fit Checklist"
-      icon={<Info size={14} className="text-gray-300" />}
+      icon={<Info size={14} className="text-gray-300 font-bold" />}
     >
       <div className="divide-y divide-gray-50">
         {items.map((i) => (
           <CheckRow key={i.label} label={i.label} right={i.value} />
         ))}
       </div>
-      <div className="mt-3 flex items-center justify-between border-t border-gray-100 pt-3">
-        <span className="flex items-center gap-2 text-sm font-semibold text-gray-900">
-          <Star size={15} className="fill-amber-400 text-amber-400" />
+      <div className="mt-3 flex items-center justify-between gap-2 border-t border-gray-100 pt-3">
+        <span className="flex min-w-0 items-center gap-2 whitespace-nowrap text-xs font-semibold text-gray-900">
+          <Star size={15} className="shrink-0 fill-amber-400 text-amber-400" />
           Overall Campaign Fit
         </span>
-        <span className="text-sm font-semibold text-violet-700">
+
+        <span className="shrink-0 whitespace-nowrap text-xs font-semibold text-violet-700">
           Excellent Match
         </span>
       </div>
@@ -602,52 +613,54 @@ function AIOutreachRecommendationCard() {
       title="AI Outreach Recommendation"
       icon={<Info size={14} className="text-gray-300" />}
     >
-      <div className="grid grid-cols-2 gap-8">
-        <div>
-          <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
-            <Sparkles size={14} /> Suggested Pitch Angle
-          </p>
-          <div className="rounded-xl bg-white p-4 text-sm leading-relaxed text-gray-600 shadow-sm">
-            "Focus on a lifestyle storytelling approach that highlights
-            authenticity, wellness, and everyday elegance. Emphasize shared
-            values around quality, sustainability, and empowerment."
-          </div>
-          <Pill tone="purple" className="mt-3">
-            Tone: Warm, Personal, Value-Aligned
-          </Pill>
-          <div className="mt-4 flex items-start justify-between gap-3 rounded-xl bg-white/60 p-3">
-            <p className="flex items-start gap-2 text-xs text-gray-500">
-              <Lightbulb
-                size={14}
-                className="mt-0.5 shrink-0 text-violet-500"
-              />
-              <span>
-                <span className="font-semibold text-gray-700">AI Tip:</span>{" "}
-                Reference her recent posts about self-care and travel for a more
-                personalized approach.
-              </span>
-            </p>
-            <Button
-              variant="solid"
-              icon={<Sparkles size={13} />}
-              className="shrink-0 whitespace-nowrap !px-3 !py-2 text-xs"
-            >
-              Generate Pitch Ideas
-            </Button>
-          </div>
-        </div>
+     <div className="grid grid-cols-2 gap-8">
+  <div>
+    <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
+      <Sparkles size={14} /> Suggested Pitch Angle
+    </p>
+    <div className="rounded-md bg-violet-100 p-4 text-xs leading-relaxed text-black shadow-sm">
+      "Focus on a lifestyle storytelling approach that highlights
+      authenticity, wellness, and everyday elegance. Emphasize shared
+      values around quality, sustainability, and empowerment."
+    </div>
+    
+    <span className="mt-3 inline-flex items-center rounded-full bg-[#F3E8FF] px-3 py-1 text-[13px] font-medium leading-none text-[#4C1D95]">
+      Tone: Warm, Personal, Value-Aligned
+    </span>
+  </div>
 
-        <div>
-          <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
-            <Trophy size={14} /> Best Partnership Categories
-          </p>
-          <div className="rounded-xl bg-white p-4 shadow-sm">
-            <RankRow rank={1} label="Fashion & Apparel" match="92% Match" />
-            <RankRow rank={2} label="Beauty & Skincare" match="90% Match" />
-            <RankRow rank={3} label="Wellness & Health" match="88% Match" />
-          </div>
-        </div>
-      </div>
+  <div>
+    <p className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
+      <Trophy size={14} /> Best Partnership Categories
+    </p>
+    <div className="rounded-xl p-4 ">
+      <RankRow rank={1} label="Fashion & Apparel" match="92% Match" />
+      <RankRow rank={2} label="Beauty & Skincare" match="90% Match" />
+      <RankRow rank={3} label="Wellness & Health" match="88% Match" />
+    </div>
+  </div>
+
+  <div className="col-span-2 mt-0 flex items-start justify-between gap-3 rounded-xl bg-[#F3E8FF] px-4 py-3">
+    <p className="flex items-center gap-2 text-sm text-gray-700">
+      <Lightbulb
+        size={14}
+        className="shrink-0 text-violet-500"
+      />
+      <span>
+        <span className="font-semibold text-violet-700">AI Tip:</span>{" "}
+        Reference her recent posts about self-care and travel for a more
+        personalized approach.
+      </span>
+    </p>
+    <Button
+      variant="solid"
+      icon={<Sparkles size={13} />}
+      className="shrink-0 whitespace-nowrap !px-3 !py-2 text-xs"
+    >
+      Generate Pitch Ideas
+    </Button>
+  </div>
+</div>
     </Card>
   );
 }
@@ -665,7 +678,6 @@ export default function Contact() {
           <TopTabs />
 
           <div className="space-y-4 p-3">
-          
             <div className="grid grid-cols-13 gap-3">
               <div className="col-span-5">
                 <ContactAvailabilityCard />
@@ -679,7 +691,7 @@ export default function Contact() {
             </div>
 
             {/* Row 2 — collaboration preferences + contact methods */}
-            <div className="grid grid-cols-12 gap-6">
+            <div className="grid grid-cols-12 gap-3">
               <div className="col-span-8">
                 <CollaborationPreferencesCard />
               </div>
