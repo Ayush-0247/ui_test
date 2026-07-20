@@ -3,8 +3,6 @@ import {
   Search,
   Users,
   ArrowRight,
-  Sparkles,
-  Compass,
 } from "lucide-react";
 
 const themeStyles = {
@@ -51,12 +49,9 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col items-center justify-center p-6">
       <div className="mb-10 flex flex-col items-center gap-3">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-gray-200 text-[11px] font-semibold tracking-wider text-gray-500 uppercase shadow-sm">
-          <Sparkles className="w-3.5 h-3.5" />
-          App Reception
-        </div>
+      
         <h1 className="text-2xl font-semibold tracking-tight text-gray-800">
-          Portal
+        Welcome to KALO
         </h1>
       </div>
 
@@ -83,10 +78,7 @@ const Home = () => {
         />
       </div>
 
-      <div className="mt-12 flex items-center gap-2 text-xs text-gray-400">
-        <Compass className="w-3.5 h-3.5" />
-        <span>Select a destination</span>
-      </div>
+      
     </div>
   );
 };
