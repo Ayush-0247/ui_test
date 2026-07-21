@@ -185,10 +185,10 @@ function ProfileSidebar() {
 function TopTabs() {
   const tabs = [
     { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={16} /> },
+    { label: "Stories & Hashtags", icon: <Layers size={16} />,active: true },
     { label: "Audience Insights", icon: <Users size={16} /> },
     { label: "Lookalike Creator", icon: <UserPlus size={16} /> },
-    { label: "Contact Info", icon: <User size={16} />, active: true },
+    { label: "Contact Info", icon: <User size={16} />,  },
   ];
   return (
     <div className="flex items-center justify-between border-b border-gray-100 px-8 pt-6">
