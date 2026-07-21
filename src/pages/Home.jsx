@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {  Users, ArrowRight } from "lucide-react";
+import { Users, ArrowRight } from "lucide-react";
 
 const themeStyles = {
   indigo: {
@@ -54,6 +54,13 @@ const Home = () => {
         /> */}
 
         <PortalCard
+          to="/Searchbar"
+          icon={Users}
+          title="Search Bar Page"
+          theme="sky"
+        />
+
+        <PortalCard
           to="/audience-insight"
           icon={Users}
           title="Audience Insight Page"
@@ -80,10 +87,17 @@ const Home = () => {
           theme="sky"
         />
 
-         <PortalCard
+        <PortalCard
           to="/Statsandmedia"
           icon={Users}
           title="Stats and Media Page"
+          theme="sky"
+        />
+
+         <PortalCard
+          to="/performance"
+          icon={Users}
+          title="Performance Page"
           theme="sky"
         />
       </div>
