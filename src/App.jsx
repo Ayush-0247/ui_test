@@ -4,6 +4,7 @@ import Page1 from "./pages/page1";
 import AudienceInsight from "./pages/AudienceInsight";
 import Contact from "./pages/contact";
 import Lookalike from "./pages/lookalike";
+import Story from "./pages/StoryAndHastag";
 export default function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ export default function App() {
       <Route path="/audience-insight" element={<AudienceInsight />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/lookalike" element={<Lookalike />} />
+      <Route path="/StoryAndHastag" element={<Story />} />
     </Routes>
   );
 }

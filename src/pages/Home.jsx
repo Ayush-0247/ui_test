@@ -83,6 +83,13 @@ const Home = () => {
           theme="sky"
         />
 
+           <PortalCard
+          to="/StoryAndHastag"
+          icon={Users}
+          title="Stories and Hastag Page"
+          theme="sky"
+        />
+
       </div>
 
       
