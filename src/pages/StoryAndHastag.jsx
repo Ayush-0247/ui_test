@@ -185,10 +185,10 @@ function ProfileSidebar() {
 function TopTabs() {
   const tabs = [
     { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={16} />,active: true },
+    { label: "Stories & Hashtags", icon: <Layers size={16} />, active: true },
     { label: "Audience Insights", icon: <Users size={16} /> },
     { label: "Lookalike Creator", icon: <UserPlus size={16} /> },
-    { label: "Contact Info", icon: <User size={16} />,  },
+    { label: "Contact Info", icon: <User size={16} /> },
   ];
   return (
     <div className="flex items-center justify-between border-b border-gray-100 px-8 pt-6">
@@ -375,7 +375,7 @@ function HashtagsCard() {
           </span>
         ))}
       </div>
-       <div className="mt-5 flex justify-center">
+      <div className="mt-5 flex justify-center">
         <button className="text-sm font-bold text-violet-700 hover:underline">
           View More
         </button>
@@ -394,7 +394,8 @@ function BrandMentionsCard() {
     { name: "Glossier", value: 27, percent: "14%", bg: "bg-[#FCE7F3]" },
     { name: "Drunk Elephant", value: 24, percent: "12%", bg: "bg-[#FEF3C7]" },
     { name: "Tatcha", value: 21, percent: "11%", bg: "bg-[#DBEAFE]" },
-    { name: "Rare Beauty", value: 18, percent: "9%", bg: "bg-[#FCE7E7]" }, { name: "Beauty", value: 78, percent: "94%", bg: "bg-[#FCE7E7]" },
+    { name: "Rare Beauty", value: 18, percent: "9%", bg: "bg-[#FCE7E7]" },
+    { name: "Beauty", value: 78, percent: "94%", bg: "bg-[#FCE7E7]" },
   ];
   const maxValue = 38;
 
@@ -415,7 +416,7 @@ function BrandMentionsCard() {
           </div>
         ))}
       </div>
-       <div className="mt-5 flex justify-center">
+      <div className="mt-5 flex justify-center">
         <button className="text-sm font-bold text-violet-700 hover:underline">
           View More
         </button>
@@ -456,34 +457,32 @@ function HighlightCollectionsCard() {
           </button>
         </div>
       </div>
-
       <div className="grid grid-cols-3 gap-2">
-  {highlights.map(({ img, title, count, featured }) => (
-    <div key={title} className="w-[170px]">
-      <div className="relative h-[90px] overflow-hidden rounded-md">
-        <img
-          src={img}
-          alt={title}
-          className="h-full w-full object-cover"
-        />
+        {highlights.map(({ img, title, count, featured }) => (
+          <div key={title} className="w-[170px]">
+            <div className="relative h-[90px] overflow-hidden rounded-md">
+              <img
+                src={img}
+                alt={title}
+                className="h-full w-full object-cover"
+              />
 
-        {featured && (
-          <span className="absolute left-1 top-1 rounded bg-white/90 px-1 py-[2px] text-[8px] font-semibold text-[#5B3DF5]">
-            Featured
-          </span>
-        )}
-      </div>
+              {featured && (
+                <span className="absolute left-1 top-1 rounded bg-white/90 px-1 py-[2px] text-[8px] font-semibold text-[#5B3DF5]">
+                  Featured
+                </span>
+              )}
+            </div>
 
-      <p className="mt-1 truncate text-[11px] font-semibold text-[#1F2937]">
-        {title}
-      </p>
+            <p className="mt-1 truncate text-[11px] font-semibold text-[#1F2937]">
+              {title}
+            </p>
 
-      <p className="text-[10px] text-[#6B7280]">
-        {count}
-      </p>
-    </div>
-  ))}
-</div>  <div className="mt-5 flex justify-center">
+            <p className="text-[10px] text-[#6B7280]">{count}</p>
+          </div>
+        ))}
+      </div>{" "}
+      <div className="mt-5 flex justify-center">
         <button className="text-sm font-bold text-violet-700 hover:underline">
           View More
         </button>
@@ -602,10 +601,10 @@ export default function CreatorDashboard() {
               <HashtagsCard />
             </div>
           </div>
-      <div className="mt-5 grid grid-cols-[360px_1fr] gap-5">
-  <BrandMentionsCard />
-  <HighlightCollectionsCard />
-</div>
+          <div className="mt-5 grid grid-cols-[360px_1fr] gap-5">
+            <BrandMentionsCard />
+            <HighlightCollectionsCard />
+          </div>
 
           <AIContentIntelligenceCard />
         </main>

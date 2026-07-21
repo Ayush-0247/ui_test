@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-import {
-  Search,
-  Users,
-  ArrowRight,
-} from "lucide-react";
+import { Search, Users, ArrowRight } from "lucide-react";
 
 const themeStyles = {
   indigo: {
@@ -16,12 +12,7 @@ const themeStyles = {
   },
 };
 
-const PortalCard = ({
-  to,
-  icon: Icon,
-  title,
-  theme = "indigo",
-}) => {
+const PortalCard = ({ to, icon: Icon, title, theme = "indigo" }) => {
   const styles = themeStyles[theme];
 
   return (
@@ -49,19 +40,18 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col items-center justify-center p-6">
       <div className="mb-10 flex flex-col items-center gap-3">
-      
         <h1 className="text-2xl font-semibold tracking-tight text-gray-800">
-        Welcome to KALO
+          Welcome to KALO
         </h1>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl w-full">
-        <PortalCard
+        {/* <PortalCard
           to="/page1"
           icon={Search}
           title="Creator Discovery"
           theme="indigo"
-        />
+        /> */}
 
         <PortalCard
           to="/audience-insight"
@@ -76,23 +66,20 @@ const Home = () => {
           title="Contact Page"
           theme="sky"
         />
-   <PortalCard
+        <PortalCard
           to="/lookalike"
           icon={Users}
           title="Lookalike Page"
           theme="sky"
         />
 
-           <PortalCard
+        <PortalCard
           to="/StoryAndHastag"
           icon={Users}
           title="Stories and Hastag Page"
           theme="sky"
         />
-
       </div>
-
-      
     </div>
   );
 };
