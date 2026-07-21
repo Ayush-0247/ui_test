@@ -22,7 +22,6 @@ import {
   Info,
   ChevronDown,
   Sparkles,
-  AlertTriangle,
   Clock,
   Link,
   ChevronRight,
