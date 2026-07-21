@@ -1,4 +1,3 @@
-
 import {
   Sparkles,
   Search,
@@ -17,20 +16,53 @@ import {
   MoreHorizontal,
   Bookmark,
   Bell,
+  ArrowUp,
   BadgeCheck,
-  Heart,
-  Eye,
+  // Heart,
+  // Eye,
+  // Instagram,
   Droplet,
   Brush,
   Wind,
   HeartPulse,
   Flower2,
   Info,
-  ArrowUpRight,
+  ArrowRight,
   Plus,
   SlidersHorizontal,
 } from "lucide-react";
+import img2 from "../assets/kohli.jpg";
+import { SiTiktok } from "react-icons/si";
+import { FaInstagram } from "react-icons/fa";
+function SearchBar() {
+  return (
+    <div className="relative mx-auto mt-4 w-[90%] max-w-2xl">
+      {/* Outer Glassmorphism Container */}
+      <div className="rounded-full bg-white/40 backdrop-blur-md border border-white/60 p-[6px] shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        {/* Inner Solid Container */}
+        <div className="relative h-[52px] rounded-full bg-white flex items-center pl-5 pr-1.5 shadow-sm">
+          {/* Left Icon */}
+          <Sparkles size={18} className="text-[#6D5CFF] shrink-0" />
 
+          {/* Subtle Vertical Divider */}
+          <div className="w-[1px] h-5 bg-gray-200 ml-4 mr-3 shrink-0" />
+
+          {/* Input Field */}
+          <input
+            type="text"
+            defaultValue="Find skincare influencers for women 18-30 in USA"
+            className="flex-1 text-[15px] font-normal text-gray-800 placeholder-gray-400 outline-none bg-transparent w-full"
+          />
+
+          {/* Search Button */}
+          <button className="w-10 h-10 rounded-full bg-[#6D5CFF] flex items-center justify-center shrink-0 shadow-sm hover:brightness-110 transition-all duration-200">
+            <Search size={18} className="text-white" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const GRADIENTS = [
   "from-rose-200 to-orange-200",
@@ -103,7 +135,7 @@ function Badge({ children, variant = "purple", icon, className = "" }) {
   };
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium ${V[variant]} ${className}`}
+      className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs border border-purple-200 text-purple-700 font-medium ${V[variant]} ${className}`}
     >
       {icon}
       {children}
@@ -278,7 +310,7 @@ function HeroSearch() {
         Find the perfect creators for your brand
       </h2>
       <div className="relative mx-auto mt-4 w-[90%] max-w-2xl">
-        <div className="relative h-[52px] rounded-full bg-white shadow-md flex items-center pl-4 pr-1.5">
+        {/* <div className="relative h-[52px] rounded-full bg-white shadow-md flex items-center pl-4 pr-1.5">
           <Sparkles size={16} className="text-[#5B3DF5] shrink-0" />
           <input
             type="text"
@@ -288,7 +320,8 @@ function HeroSearch() {
           <button className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6D5CFF] to-[#8B7BFF] flex items-center justify-center shrink-0 shadow-sm hover:brightness-105 transition">
             <Search size={16} className="text-white" />
           </button>
-        </div>
+        </div> */}
+        <SearchBar />
       </div>
       <div className="relative mt-3.5 flex items-center justify-center gap-2 flex-wrap">
         {CHIPS.map((label) => (
@@ -361,7 +394,7 @@ function TrendingNiches() {
           {NICHES.map(({ label, count, icon: Icon, bg, color }) => (
             <div
               key={label}
-              className="shrink-0 w-[130px] h-[56px] rounded-xl border border-[#ECECEC] px-2.5 flex items-center gap-2 hover:shadow-sm transition"
+              className="shrink-0 w-[150px] h-[56px] rounded-xl border border-[#ECECEC] px-2.5 flex items-center gap-1hover:shadow-sm transition"
             >
               <div
                 className={`w-7 h-7 rounded-lg ${bg} ${color} flex items-center justify-center shrink-0`}
@@ -391,7 +424,7 @@ const CREATORS = [
     rank: 1,
     name: "Ashley Park",
     handle: "ashleyglow",
-    platform: "IG",
+    platform: "instagram",
     tags: ["Skincare", "Clean Beauty"],
     followers: "532K",
     engagement: "4.8%",
@@ -401,7 +434,7 @@ const CREATORS = [
     rank: 2,
     name: "Maddie Green",
     handle: "maddie.greenn",
-    platform: "TT",
+    platform: "tiktok",
     tags: ["Skincare", "Self Care"],
     followers: "318K",
     engagement: "6.2%",
@@ -411,7 +444,7 @@ const CREATORS = [
     rank: 3,
     name: "Valeria Cruz",
     handle: "valeria.skincare",
-    platform: "IG",
+    platform: "instagram",
     tags: ["Skincare", "Wellness"],
     followers: "276K",
     engagement: "5.1%",
@@ -421,79 +454,86 @@ const CREATORS = [
     rank: 4,
     name: "Sophie Lauren",
     handle: "sophielauren",
-    platform: "YT",
+    platform: "tiktok",
     tags: ["Skincare", "Clean Beauty"],
     followers: "610K",
     engagement: "3.9%",
     matchLabel: "Great Match",
   },
 ];
-function CreatorCard({
-  rank,
-  name,
-  handle,
-  platform,
-  tags,
-  followers,
-  engagement,
-  matchLabel,
-}) {
+
+function CreatorCard({ name, handle, tags, followers, engagement, platform }) {
   return (
-    <div className="w-full h-[210px] rounded-[14px] bg-white border border-[#ECECEC] shadow-sm p-3 flex flex-col">
-      <div className="flex items-center justify-between">
-        <div className="w-5 h-5 rounded-full bg-[#5B3DF5] text-white text-[10px] font-bold flex items-center justify-center">
-          {rank}
+    <div className="relative w-[180px] h-[180px] rounded-[12px] overflow-hidden shadow-sm group cursor-pointer">
+      {/* Background Image */}
+      <img
+        src={img2}
+        alt={name}
+        className="absolute inset-0 w-full h-full object-fill transition-transform duration-300 group-hover:scale-105"
+      />
+
+      {/* Dark Gradient Overlay for text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+      {/* Top Left - Platform Icon */}
+      {platform === "instagram" && (
+        <div className="absolute top-3 left-3 bg-gradient-to-tr from-[#FFDF40] via-[#FD1D1D] to-[#833AB4] p-1.5 rounded-lg shadow-sm">
+          <FaInstagram size={16} className="text-white" />
         </div>
+      )}
+
+      {platform === "tiktok" && (
+        <div className="absolute top-3 left-3 bg-black p-1.5 rounded-lg shadow-sm">
+          <SiTiktok size={16} className="text-white" />
+        </div>
+      )}
+
+      {/* Top Right - Bookmark Button */}
+      <button className="absolute top-3 right-3  p-1.5 rounded-lg shadow-sm hover:bg-gray-100 transition">
+        <Bookmark size={16} className="text-white" strokeWidth={2.5} />
+      </button>
+
+      {/* Bottom Content */}
+      <div className="absolute bottom-0 left-0 w-full p-2 pb-0 flex flex-col">
+        {/* Name & Verified Badge */}
         <div className="flex items-center gap-1.5">
-          <Badge variant="green">{engagement}</Badge>
-          <Bookmark size={13} className="text-gray-400" />
+          <h3 className="text-white font-bold text-[12px] ">
+            {name}
+          </h3>
+          <BadgeCheck
+            size={18}
+            className="text-white mt-0.5"
+            fill="white"
+            color="#262626"
+          />
         </div>
-      </div>
-      <div className="flex flex-col items-center mt-1">
-        <div className="relative">
-          <Avatar name={name} size={52} ring />
-          <div className="absolute -bottom-0.5 -right-0.5 bg-white rounded-full p-[1px]">
-            <BadgeCheck
-              size={13}
-              className="text-[#5B3DF5]"
-              fill="#5B3DF5"
-              color="white"
-            />
-          </div>
-        </div>
-        <p className="mt-1.5 text-sm font-bold text-gray-900 leading-tight">
-          {name}
-        </p>
-        <p className="text-[11px] text-gray-500 leading-tight">@{handle}</p>
-        <div className="flex gap-1 mt-1">
+
+        {/* Handle */}
+        <p className="text-gray-200 text-[9px] mb-1">@{handle}</p>
+
+        {/* Tags (Glassmorphism effect) */}
+        <div className="flex flex-wrap gap-2 mb-1">
           {tags.map((t) => (
-            <Badge key={t} variant="pastel" className="text-[9px] px-1.5 py-0">
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-sm border border-white/40 bg-white/30 backdrop-blur-md text-white text-[7px] font-medium tracking-wide"
+            >
               {t}
-            </Badge>
+            </span>
           ))}
         </div>
-      </div>
-      <div className="text-center mt-1">
-        <p className="text-[12px] font-semibold text-[#5B3DF5]">{matchLabel}</p>
-      </div>
-      <div className="mt-auto">
-        <div className="border-t border-[#F3F4F6] pt-1.5 flex text-center">
-          <div className="flex-1 flex flex-col items-center gap-0.5">
-            <Users size={11} className="text-gray-400" />
-            <p className="text-[10px] font-bold text-gray-900">{followers}</p>
+
+        {/* Stats Row */}
+        <div className="flex items-center gap-5 mb-1 text-white font-semibold text-[9px]">
+          <div className="flex items-center gap-1.5">
+            <Users size={12} className="text-gray-300" strokeWidth={2.5} />
+            <span>{followers}</span>
           </div>
-          <div className="flex-1 flex flex-col items-center gap-0.5 border-x border-[#F3F4F6]">
-            <Heart size={11} className="text-gray-400" />
-            <p className="text-[10px] font-bold text-gray-900">{engagement}</p>
-          </div>
-          <div className="flex-1 flex flex-col items-center gap-0.5">
-            <Eye size={11} className="text-gray-400" />
-            <p className="text-[10px] font-bold text-gray-900">{platform}</p>
+          <div className="flex items-center gap-1.5">
+            <Star size={12} className="text-gray-300" strokeWidth={2.5} />
+            <span>{engagement}</span>
           </div>
         </div>
-        <Button variant="primary" className="w-full mt-1.5">
-          View Profile
-        </Button>
       </div>
     </div>
   );
@@ -567,11 +607,11 @@ function SpotlightSection() {
         {COLLECTIONS.map((c) => (
           <div
             key={c.title}
-            className={`relative h-[110px] rounded-xl overflow-hidden bg-gradient-to-br ${c.gradient} flex flex-col justify-between p-2.5`}
+            className={`relative h-[150px] rounded-xl overflow-hidden bg-gradient-to-br ${c.gradient} flex flex-col justify-between p-2.5`}
           >
-            <span className="self-start bg-white text-[#5B3DF5] text-[9px] font-semibold rounded-full px-1.5 py-0.5">
+            {/* <span className="self-start bg-white text-[#5B3DF5] text-[9px] font-semibold rounded-full px-1.5 py-0.5">
               Featured
-            </span>
+            </span> */}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative mt-auto text-white">
               <p className="text-xs font-bold leading-tight">{c.title}</p>
@@ -702,60 +742,66 @@ function TopCreatorsTable() {
 /* ---------- Right Analytics Sidebar ---------- */
 function DiscoveryScoreCard() {
   return (
-    <div className="bg-white rounded-[14px] border border-[#ECECEC] p-3.5">
+    <div className="bg-purple-50 rounded-[14px] border border-[#ECECEC] p-3.5">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-1.5">
           <Sparkles size={13} className="text-[#5B3DF5]" />
-          <p className="text-xs font-bold text-gray-900">
-            AI Search Insights
-          </p>
+          <p className="text-xs font-bold text-gray-900">AI Search Insights</p>
         </div>
-        <Badge variant="gray" className="uppercase tracking-wide text-[9px]">
+        <Badge
+          variant="gray"
+          className="uppercase border-violet-200 tracking-wide text-[9px]"
+        >
           Beta
         </Badge>
       </div>
       <p className="text-[10px] text-gray-500 leading-relaxed mb-3">
         Insights powered by AI to help you make data-driven creator decisions.
       </p>
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-500 mb-1">
-            Opportunity Score <Info size={10} />
+      <div className="border bg-white border-purple-200 rounded-xl px-3 py-2">
+        {/* Top Row: Score and Chart */}
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="flex items-center gap-1 text-[10px] font-semibold text-gray-500 mb-1">
+              Opportunity Score <Info size={10} />
+            </div>
+            <p className="text-[26px] font-bold text-[#5B3DF5] leading-none">
+              9.2
+            </p>
+            <button className="mt-1 px-2 py-0.5 text-[11px] font-semibold text-green-700 bg-green-50 rounded-full border border-green-100/50 shadow-[0_0_8px_rgba(74,222,128,0.2)] hover:bg-green-100 transition-colors">
+              Excellent
+            </button>
           </div>
-          <p className="text-[26px] font-bold text-[#5B3DF5] leading-none">
-            9.2
-          </p>
-          <Badge variant="green" className="mt-1">
-            Excellent
-          </Badge>
+          <div className="relative w-[56px] h-[56px] shrink-0">
+            <svg viewBox="0 0 72 72" className="w-full h-full -rotate-90">
+              <circle
+                cx="36"
+                cy="36"
+                r="30"
+                fill="none"
+                stroke="#F3F4F6"
+                strokeWidth="7"
+              />
+              <circle
+                cx="36"
+                cy="36"
+                r="30"
+                fill="none"
+                stroke="#22C55E"
+                strokeWidth="7"
+                strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 30}
+                strokeDashoffset={2 * Math.PI * 30 * (1 - 0.92)}
+              />
+            </svg>
+          </div>
         </div>
-        <div className="relative w-[56px] h-[56px] shrink-0">
-          <svg viewBox="0 0 72 72" className="w-full h-full -rotate-90">
-            <circle
-              cx="36"
-              cy="36"
-              r="30"
-              fill="none"
-              stroke="#F3F4F6"
-              strokeWidth="7"
-            />
-            <circle
-              cx="36"
-              cy="36"
-              r="30"
-              fill="none"
-              stroke="#22C55E"
-              strokeWidth="7"
-              strokeLinecap="round"
-              strokeDasharray={2 * Math.PI * 30}
-              strokeDashoffset={2 * Math.PI * 30 * (1 - 0.92)}
-            />
-          </svg>
-        </div>
+
+        {/* Bottom Row: Description */}
+        <p className="text-[10px] text-gray-500 mt-2 leading-relaxed">
+          High opportunity to achieve strong results with this search criteria.
+        </p>
       </div>
-      <p className="text-[10px] text-gray-500 mt-2 leading-relaxed">
-        High opportunity to achieve strong results with this search criteria.
-      </p>
     </div>
   );
 }
@@ -784,9 +830,12 @@ function AudienceSnapshotCard() {
           </div>
         ))}
       </div>
-      <Button variant="ghost" className="h-auto p-0 mt-3 text-xs">
+      {/* <Button variant="ghost" className="h-auto p-0 mt-3 text-xs">
         View full audience breakdown <ArrowUpRight size={11} />
-      </Button>
+      </Button> */}
+      <button className="p-2 flex gap-1 align-bottom items-center text-purple-400 text-xs">
+        View full audience breakdown <ArrowRight size={14} />
+      </button>
     </div>
   );
 }
@@ -802,7 +851,9 @@ function MarketTrendsCard() {
         <p className="text-xs font-bold text-gray-900">Market Trends</p>
         <Info size={10} className="text-gray-400" />
       </div>
-      <p className="text-[10px] text-gray-500 mb-3">Growing searches in skincare</p>
+      <p className="text-[10px] text-gray-500 mb-3">
+        Growing searches in skincare
+      </p>
       <div className="flex flex-col gap-2.5">
         {trends.map((t) => (
           <div key={t.label} className="flex items-center justify-between">
@@ -811,13 +862,13 @@ function MarketTrendsCard() {
               {t.label}
             </span>
             <span className="text-[11px] font-semibold text-[#22C55E] flex items-center gap-0.5">
-              <ArrowUpRight size={11} /> {t.growth}
+              <ArrowUp size={11} /> {t.growth}
             </span>
           </div>
         ))}
       </div>
       <Button variant="ghost" className="h-auto p-0 mt-3 text-xs">
-        View all trends <ArrowUpRight size={11} />
+        View all trends <ArrowUp size={11} />
       </Button>
     </div>
   );
@@ -840,14 +891,16 @@ function RefinementSuggestionsCard() {
         {suggestions.map((s) => (
           <div key={s.title} className="flex items-start justify-between gap-2">
             <div className="flex items-start gap-1.5">
-              <span className="mt-0.5 w-5 h-5 rounded-md bg-[#F5F1FF] text-[#5B3DF5] flex items-center justify-center shrink-0">
-                <Sparkles size={10} />
+              <span className="mt-0.5 w-5 h-5 rounded-md bg-pink-50 text-[#5B3DF5] flex items-center justify-center shrink-0">
+                <Sparkles  size={10} />
               </span>
               <div>
-                <p className="text-[11px] font-medium text-gray-900 leading-tight">
+                <p className="text-[10px] font-bold text-gray-500 leading-tight">
                   {s.title}
                 </p>
-                <p className="text-[10px] text-gray-500 leading-tight">{s.sub}</p>
+                <p className="text-[8px] text-gray-500 leading-tight">
+                  {s.sub}
+                </p>
               </div>
             </div>
             <button className="w-5 h-5 rounded-full border border-[#ECECEC] flex items-center justify-center text-gray-500 shrink-0 hover:bg-gray-50">
