@@ -672,6 +672,9 @@ export default function Contact() {
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       <div className="mx-auto flex max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
+
+
+        
         <ProfileSidebar />
 
         <div className="flex-1">

@@ -76,6 +76,13 @@ const Home = () => {
           title="Contact Page"
           theme="sky"
         />
+   <PortalCard
+          to="/lookalike"
+          icon={Users}
+          title="Lookalike Page"
+          theme="sky"
+        />
+
       </div>
 
       
