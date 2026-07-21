@@ -110,7 +110,7 @@ const MatchProgressBar = ({ label, value }) => (
     </div>
     <div className="w-full h-2 rounded-full bg-[#F3F0FF] overflow-hidden">
       <div
-       className="h-1.5 rounded-full bg-[#5B3DF5]"
+        className="h-1.5 rounded-full bg-[#5B3DF5]"
         style={{ width: `${value}%` }}
       />
     </div>
@@ -132,9 +132,11 @@ const BestMatchStat = ({ icon: Icon, value, label }) => (
   <div className="flex items-center gap-1.5 text-sm text-gray-500">
     <Icon className="w-4 h-4 text-violet-700 " strokeWidth={2} />
     <span className="font-semibold text-gray-900">{value}</span>
-    <span className="text-sm text-gray-500 whitespace-nowrap"> {/* Add whitespace-nowrap here */}
-        {label}
-      </span>
+    <span className="text-sm text-gray-500 whitespace-nowrap">
+      {" "}
+      {/* Add whitespace-nowrap here */}
+      {label}
+    </span>
   </div>
 );
 // Inside your BestMatchStat component definition
@@ -149,54 +151,54 @@ const SimilarCreatorCard = ({
   engagement,
 }) => {
   return (
-   <div className="relative w-[290px] h-[140px] rounded-2xl border border-[#E5E7EB] bg-white px-2 py-2">
-  <div className="flex items-center h-full gap-2">
-    {/* Avatar */}
-    <div className="">
-      <img
-        src={img}
-        alt={name}
-        className="w-30 h-30 rounded-full object-cover"
-      />
+    <div className="relative w-[290px] h-[140px] rounded-2xl border border-[#E5E7EB] bg-white px-2 py-2">
+      <div className="flex items-center h-full gap-2">
+        {/* Avatar */}
+        <div className="">
+          <img
+            src={img}
+            alt={name}
+            className="w-30 h-30 rounded-full object-cover"
+          />
 
-      {/* Rank */}
-      <div className="absolute top-5 left-2 w-7 h-7 rounded-full bg-[#5B3DF5] border-[3px] border-white flex items-center justify-center text-white text-sm font-bold">
-        {rank}
+          {/* Rank */}
+          <div className="absolute top-5 left-2 w-7 h-7 rounded-full bg-[#5B3DF5] border-[3px] border-white flex items-center justify-center text-white text-sm font-bold">
+            {rank}
+          </div>
+        </div>
+
+        {/* Details */}
+        <div className="flex flex-col justify-center">
+          <div className="flex items-center gap-1">
+            <span className="text-[16px] leading-none font-semibold text-[#111827]">
+              {name}
+            </span>
+
+            <BadgeCheck
+              className="w-4 h-4 fill-[#1D9BF0] text-[#1D9BF0]"
+              stroke="white"
+              strokeWidth={2}
+            />
+          </div>
+
+          <span className="mt-1 text-[15px] leading-none text-[#6B7280]">
+            @{handle}
+          </span>
+
+          <span className="mt-3 text-[14px] font-semibold leading-none text-[#22C55E]">
+            {match}% Match
+          </span>
+
+          <span className="mt-2 text-[14px] leading-none text-[#374151]">
+            <span className="font-semibold">{followers}</span> Followers
+          </span>
+
+          <span className="mt-2 text-[14px] leading-none text-[#374151]">
+            <span className="font-semibold">{engagement}</span> Engagement
+          </span>
+        </div>
       </div>
     </div>
-
-    {/* Details */}
-    <div className="flex flex-col justify-center">
-      <div className="flex items-center gap-1">
-        <span className="text-[16px] leading-none font-semibold text-[#111827]">
-          {name}
-        </span>
-
-        <BadgeCheck
-          className="w-4 h-4 fill-[#1D9BF0] text-[#1D9BF0]"
-          stroke="white"
-          strokeWidth={2}
-        />
-      </div>
-
-      <span className="mt-1 text-[15px] leading-none text-[#6B7280]">
-        @{handle}
-      </span>
-
-      <span className="mt-3 text-[14px] font-semibold leading-none text-[#22C55E]">
-        {match}% Match
-      </span>
-
-      <span className="mt-2 text-[14px] leading-none text-[#374151]">
-        <span className="font-semibold">{followers}</span> Followers
-      </span>
-
-      <span className="mt-2 text-[14px] leading-none text-[#374151]">
-        <span className="font-semibold">{engagement}</span> Engagement
-      </span>
-    </div>
-  </div>
-</div>
   );
 };
 
@@ -233,9 +235,11 @@ const ComparisonTableRow = ({
     </td>
     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{followers}</td>
     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{engagement}</td>
-    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{audienceFit}%</td>
-     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{contentFit}%</td>
-     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{brandFit}%</td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">
+      {audienceFit}%
+    </td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{contentFit}%</td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{brandFit}%</td>
   </tr>
 );
 
@@ -299,7 +303,6 @@ const similarCreators = [
     followers: "678K",
     engagement: "5.74%",
   },
- 
 ];
 
 const comparisonRows = [
@@ -581,7 +584,6 @@ export default function LookalikeCreator() {
                       icon={Users}
                       value="892K"
                       label="Followers"
-                      
                     />
                     <BestMatchStat
                       icon={TrendingUp}

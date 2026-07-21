@@ -83,7 +83,6 @@ const GenderDonut = ({ size = 130, strokeWidth = 14 }) => {
         fill="none"
         stroke="#38BDF8"
         strokeWidth={strokeWidth}
-        
       />
       <circle
         cx={size / 2}
@@ -94,9 +93,7 @@ const GenderDonut = ({ size = 130, strokeWidth = 14 }) => {
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={femaleOffset}
-        
-         strokeLinecap="round"
-        
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -319,12 +316,12 @@ export default function AudienceInsights() {
                   <p className="text-xs text-gray-500 mt-1.5 leading-relaxed">
                     This audience is highly engaged, active, and shows strong
                     interest in relevant content.
-                  </p> <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
-                Top 8% of creators
-              </span>
+                  </p>{" "}
+                  <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
+                    Top 8% of creators
+                  </span>
                 </div>
               </div>
-             
             </div>
 
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
@@ -348,13 +345,12 @@ export default function AudienceInsights() {
                   <p className="mt-1.5 text-xs leading-relaxed text-gray-500">
                     Low fake follower rate with genuine interactions and real
                     audience behavior.
-                  </p><span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
-                Estimated Fake Followers: 3.2%
-              </span>
+                  </p>
+                  <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold mt-4 leading-none text-[#5B3DF5]">
+                    Estimated Fake Followers: 3.2%
+                  </span>
                 </div>
               </div>
-
-              
             </div>
 
             <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
@@ -385,8 +381,6 @@ export default function AudienceInsights() {
                   </div>
                 </div>
               </div>
-
-             
             </div>
           </div>
 
@@ -428,7 +422,9 @@ export default function AudienceInsights() {
                         alt={c.name}
                         className="h-5 w-5 rounded-sm object-cover"
                       />
-                      <span className="text-sm font-bold text-zinc-900">{c.name}</span>
+                      <span className="text-sm font-bold text-zinc-900">
+                        {c.name}
+                      </span>
                     </div>
 
                     <span className="text-xs font-bold text-zinc-900">
@@ -452,7 +448,9 @@ export default function AudienceInsights() {
                     key={l.name}
                     className="flex items-center justify-between"
                   >
-                    <span className="text-xs font-bold text-zinc-900">{l.name}</span>
+                    <span className="text-xs font-bold text-zinc-900">
+                      {l.name}
+                    </span>
 
                     <span className="text-xs font-bold text-zinc-900">
                       {l.percent}
@@ -475,7 +473,9 @@ export default function AudienceInsights() {
                 {interestData.map((item) => (
                   <div key={item.name}>
                     <div className="mb-1.5 flex items-center justify-between">
-                      <span className="text-sm font-bold text-zinc-900">{item.name}</span>
+                      <span className="text-sm font-bold text-zinc-900">
+                        {item.name}
+                      </span>
 
                       <span className="text-sm font-bold text-zinc-900">
                         {item.percent}%

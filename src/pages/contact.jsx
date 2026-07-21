@@ -613,54 +613,51 @@ function AIOutreachRecommendationCard() {
       title="AI Outreach Recommendation"
       icon={<Info size={14} className="text-gray-300" />}
     >
-     <div className="grid grid-cols-2 gap-8">
-  <div>
-    <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
-      <Sparkles size={14} /> Suggested Pitch Angle
-    </p>
-    <div className="rounded-md bg-violet-100 p-4 text-xs leading-relaxed text-black shadow-sm">
-      "Focus on a lifestyle storytelling approach that highlights
-      authenticity, wellness, and everyday elegance. Emphasize shared
-      values around quality, sustainability, and empowerment."
-    </div>
-    
-    <span className="mt-3 inline-flex items-center rounded-full bg-[#F3E8FF] px-3 py-1 text-[13px] font-medium leading-none text-[#4C1D95]">
-      Tone: Warm, Personal, Value-Aligned
-    </span>
-  </div>
+      <div className="grid grid-cols-2 gap-8">
+        <div>
+          <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
+            <Sparkles size={14} /> Suggested Pitch Angle
+          </p>
+          <div className="rounded-md bg-violet-100 p-4 text-xs leading-relaxed text-black shadow-sm">
+            "Focus on a lifestyle storytelling approach that highlights
+            authenticity, wellness, and everyday elegance. Emphasize shared
+            values around quality, sustainability, and empowerment."
+          </div>
 
-  <div>
-    <p className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
-      <Trophy size={14} /> Best Partnership Categories
-    </p>
-    <div className="rounded-xl p-4 ">
-      <RankRow rank={1} label="Fashion & Apparel" match="92% Match" />
-      <RankRow rank={2} label="Beauty & Skincare" match="90% Match" />
-      <RankRow rank={3} label="Wellness & Health" match="88% Match" />
-    </div>
-  </div>
+          <span className="mt-3 inline-flex items-center rounded-full bg-[#F3E8FF] px-3 py-1 text-[13px] font-medium leading-none text-[#4C1D95]">
+            Tone: Warm, Personal, Value-Aligned
+          </span>
+        </div>
 
-  <div className="col-span-2 mt-0 flex items-start justify-between gap-3 rounded-xl bg-[#F3E8FF] px-4 py-3">
-    <p className="flex items-center gap-2 text-sm text-gray-700">
-      <Lightbulb
-        size={14}
-        className="shrink-0 text-violet-500"
-      />
-      <span>
-        <span className="font-semibold text-violet-700">AI Tip:</span>{" "}
-        Reference her recent posts about self-care and travel for a more
-        personalized approach.
-      </span>
-    </p>
-    <Button
-      variant="solid"
-      icon={<Sparkles size={13} />}
-      className="shrink-0 whitespace-nowrap !px-3 !py-2 text-xs"
-    >
-      Generate Pitch Ideas
-    </Button>
-  </div>
-</div>
+        <div>
+          <p className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
+            <Trophy size={14} /> Best Partnership Categories
+          </p>
+          <div className="rounded-xl p-4 ">
+            <RankRow rank={1} label="Fashion & Apparel" match="92% Match" />
+            <RankRow rank={2} label="Beauty & Skincare" match="90% Match" />
+            <RankRow rank={3} label="Wellness & Health" match="88% Match" />
+          </div>
+        </div>
+
+        <div className="col-span-2 mt-0 flex items-start justify-between gap-3 rounded-xl bg-[#F3E8FF] px-4 py-3">
+          <p className="flex items-center gap-2 text-sm text-gray-700">
+            <Lightbulb size={14} className="shrink-0 text-violet-500" />
+            <span>
+              <span className="font-semibold text-violet-700">AI Tip:</span>{" "}
+              Reference her recent posts about self-care and travel for a more
+              personalized approach.
+            </span>
+          </p>
+          <Button
+            variant="solid"
+            icon={<Sparkles size={13} />}
+            className="shrink-0 whitespace-nowrap !px-3 !py-2 text-xs"
+          >
+            Generate Pitch Ideas
+          </Button>
+        </div>
+      </div>
     </Card>
   );
 }
@@ -672,9 +669,6 @@ export default function Contact() {
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       <div className="mx-auto flex max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
-
-
-        
         <ProfileSidebar />
 
         <div className="flex-1">
