@@ -16,8 +16,8 @@ import {
   UserPlus,
   Sparkles,
   CheckCircle2,
-  ChevronRight,
-  ChevronLeft,
+  // ChevronRight,
+  // ChevronLeft,
   ArrowRight,
   Mail,
 } from "lucide-react";
@@ -51,7 +51,7 @@ function Pill({ children, tone = "purple", size = "md", className = "" }) {
 
 const InfoLabel = ({ title }) => (
   <div className="flex items-center gap-1.5">
-    <h3 className="text-lg font-semibold text-violet-600">{title}</h3>
+    <h3 className="text-lg font-bold text-violet-700">{title}</h3>
     <Info className="w-3.5 h-3.5 text-gray-300" />
   </div>
 );
@@ -147,29 +147,58 @@ const SimilarCreatorCard = ({
   match,
   followers,
   engagement,
-}) => (
-  <div className="flex-1 min-w-[220px] border border-[#E5E7EB] rounded-xl p-4">
-    <div className="flex items-center gap-3 mb-3">
-      <CreatorAvatar src={img} size="w-20 h-20" rank={rank} />
-      <div>
-        <div className="flex items-center gap-1">
-          <span className="text-sm font-semibold text-gray-900">{name}</span>
-          <BadgeCheck
-            className="w-3.5 h-3.5 text-[#5B3DF5] fill-[#5B3DF5]"
-            stroke="white"
-            strokeWidth={2}
-          />
-        </div>
-        <span className="text-xs text-gray-400">@{handle}</span>
+}) => {
+  return (
+   <div className="relative w-[290px] h-[140px] rounded-2xl border border-[#E5E7EB] bg-white px-2 py-2">
+  <div className="flex items-center h-full gap-2">
+    {/* Avatar */}
+    <div className="">
+      <img
+        src={img}
+        alt={name}
+        className="w-30 h-30 rounded-full object-cover"
+      />
+
+      {/* Rank */}
+      <div className="absolute top-5 left-2 w-7 h-7 rounded-full bg-[#5B3DF5] border-[3px] border-white flex items-center justify-center text-white text-sm font-bold">
+        {rank}
       </div>
     </div>
-    <p className="text-sm font-semibold text-emerald-500 mb-1">
-      {match}% Match
-    </p>
-    <p className="text-xs text-gray-500">{followers} Followers</p>
-    <p className="text-xs text-gray-500">{engagement} Engagement</p>
+
+    {/* Details */}
+    <div className="flex flex-col justify-center">
+      <div className="flex items-center gap-1">
+        <span className="text-[16px] leading-none font-semibold text-[#111827]">
+          {name}
+        </span>
+
+        <BadgeCheck
+          className="w-4 h-4 fill-[#1D9BF0] text-[#1D9BF0]"
+          stroke="white"
+          strokeWidth={2}
+        />
+      </div>
+
+      <span className="mt-1 text-[15px] leading-none text-[#6B7280]">
+        @{handle}
+      </span>
+
+      <span className="mt-3 text-[14px] font-semibold leading-none text-[#22C55E]">
+        {match}% Match
+      </span>
+
+      <span className="mt-2 text-[14px] leading-none text-[#374151]">
+        <span className="font-semibold">{followers}</span> Followers
+      </span>
+
+      <span className="mt-2 text-[14px] leading-none text-[#374151]">
+        <span className="font-semibold">{engagement}</span> Engagement
+      </span>
+    </div>
   </div>
-);
+</div>
+  );
+};
 
 const ComparisonTableRow = ({
   rank,
@@ -185,12 +214,12 @@ const ComparisonTableRow = ({
   isFirst,
 }) => (
   <tr className="border-t border-[#F1F2F6]">
-    <td className="py-3 pr-4 text-sm text-gray-400">{rank}</td>
+    <td className="py-1 pr-1 text-sm text-gray-700">{rank}</td>
     <td className="py-3 pr-4">
       <div className="flex items-center gap-2.5">
-        <img src={img} alt="" className="w-8 h-8 rounded-full object-cover" />
+        <img src={img} alt="" className="w-14 h-10 rounded-full object-cover" />
         <div>
-          <p className="text-sm font-medium text-gray-900 leading-tight">
+          <p className="text-sm font-bold text-gray-900 leading-tight">
             {name}
           </p>
           <p className="text-xs text-gray-400 leading-tight">@{handle}</p>
@@ -198,15 +227,15 @@ const ComparisonTableRow = ({
       </div>
     </td>
     <td
-      className={`py-3 pr-4 text-sm font-semibold ${isFirst ? "text-emerald-500" : "text-emerald-500"}`}
+      className={`py-3 pr-4 text-sm font-bold ${isFirst ? "text-emerald-500" : "text-emerald-500"}`}
     >
       {match}%
     </td>
-    <td className="py-3 pr-4 text-sm text-gray-700">{followers}</td>
-    <td className="py-3 pr-4 text-sm text-gray-700">{engagement}</td>
-    <td className="py-3 pr-4 text-sm text-gray-700">{audienceFit}%</td>
-    <td className="py-3 pr-4 text-sm text-gray-700">{contentFit}%</td>
-    <td className="py-3 pr-4 text-sm text-gray-700">{brandFit}%</td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{followers}</td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{engagement}</td>
+    <td className="py-3 font-bold pr-4 text-sm text-gray-700">{audienceFit}%</td>
+     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{contentFit}%</td>
+     <td className="py-3 font-bold pr-4 text-sm text-gray-700">{brandFit}%</td>
   </tr>
 );
 
@@ -244,7 +273,7 @@ const RecommendationItem = ({ icon: Icon, title, subtitle }) => (
 
 const similarCreators = [
   {
-    rank: 2,
+    rank: 1,
     img: img1,
     name: "Emma Chen",
     handle: "emmachen",
@@ -253,7 +282,7 @@ const similarCreators = [
     engagement: "5.98%",
   },
   {
-    rank: 3,
+    rank: 2,
     img: img1,
     name: "Ava Thompson",
     handle: "avathompson",
@@ -262,7 +291,7 @@ const similarCreators = [
     engagement: "6.21%",
   },
   {
-    rank: 4,
+    rank: 3,
     img: img1,
     name: "Mia Williams",
     handle: "miawilliams",
@@ -547,11 +576,12 @@ export default function LookalikeCreator() {
                     </div>
                   </div>
 
-                  <div className="mt-8 flex items-center gap-2">
+                  <div className="mt-8 flex items-center gap-1">
                     <BestMatchStat
                       icon={Users}
                       value="892K"
                       label="Followers"
+                      
                     />
                     <BestMatchStat
                       icon={TrendingUp}
@@ -622,7 +652,7 @@ export default function LookalikeCreator() {
               </Card>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-2">
               <Card className="col-span-3">
                 <div className="flex items-center justify-between">
                   <InfoLabel title="Similar Creators" />
@@ -631,18 +661,18 @@ export default function LookalikeCreator() {
                     <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
                   </button>
                 </div>
-                <div className="flex items-center gap-3 mt-4">
-                  <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
+                <div className="flex items-center gap-3 m-0 p-0 mt-1">
+                  {/* <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
                     <ChevronLeft className="w-4 h-4 text-gray-500" />
-                  </button>
-                  <div className="flex gap-4 overflow-hidden flex-1">
+                  </button> */}
+                  <div className="flex gap-2 flex-1">
                     {similarCreators.map((c) => (
                       <SimilarCreatorCard key={c.handle} {...c} />
                     ))}
                   </div>
-                  <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
+                  {/* <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
                     <ChevronRight className="w-4 h-4 text-gray-500" />
-                  </button>
+                  </button> */}
                 </div>
               </Card>
             </div>
@@ -652,15 +682,15 @@ export default function LookalikeCreator() {
               <div className="overflow-x-auto mt-4">
                 <table className="w-full">
                   <thead>
-                    <tr className="text-left text-xs text-gray-400">
-                      <th className="font-medium pb-2 pr-4"></th>
-                      <th className="font-medium pb-2 pr-4">Creator</th>
-                      <th className="font-medium pb-2 pr-4">Match Score</th>
-                      <th className="font-medium pb-2 pr-4">Followers</th>
-                      <th className="font-medium pb-2 pr-4">Engagement</th>
-                      <th className="font-medium pb-2 pr-4">Audience Fit</th>
-                      <th className="font-medium pb-2 pr-4">Content Fit</th>
-                      <th className="font-medium pb-2 pr-4">Brand Fit</th>
+                    <tr className="text-left text-xs text-gray-600">
+                      <th className="font-extrabold pb-2 pr-4"></th>
+                      <th className="font-extrabold pb-2 pr-4">Creator</th>
+                      <th className="font-extrabold pb-2 pr-4">Match Score</th>
+                      <th className="font-extrabold pb-2 pr-4">Followers</th>
+                      <th className="font-extrabold pb-2 pr-4">Engagement</th>
+                      <th className="font-extrabold pb-2 pr-4">Audience Fit</th>
+                      <th className="font-extrabold pb-2 pr-4">Content Fit</th>
+                      <th className="font-extrabold pb-2 pr-4">Brand Fit</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -671,7 +701,7 @@ export default function LookalikeCreator() {
                 </table>
               </div>
               <div className="flex justify-center mt-5">
-                <button className="border border-[#E5E7EB] rounded-lg px-6 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                <button className="border border-violet-700 rounded-lg px-12 py-2.5 text-sm font-bold text-violet-700 hover:bg-gray-50">
                   View Full Comparison
                 </button>
               </div>
@@ -679,8 +709,8 @@ export default function LookalikeCreator() {
 
             <Card className="bg-white">
               <div className="flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[#5B3DF5]" strokeWidth={2} />
-                <h3 className="text-sm font-semibold text-gray-900">
+                <Sparkles className="w-6 h-6 text-[#5B3DF5]" strokeWidth={2} />
+                <h3 className="text-lg font-bold text-violet-700">
                   AI Recommendation
                 </h3>
                 <Info className="w-3.5 h-3.5 text-gray-300" />
@@ -692,7 +722,7 @@ export default function LookalikeCreator() {
                   strokeWidth={2}
                 />
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-md font-bold text-violet-700">
                     Sofia Rodriguez is your top match!
                   </p>
                   <p className="text-sm text-gray-500 mt-0.5">
