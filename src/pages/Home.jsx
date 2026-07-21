@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Search, Users, ArrowRight } from "lucide-react";
+import {  Users, ArrowRight } from "lucide-react";
 
 const themeStyles = {
   indigo: {
@@ -41,7 +41,7 @@ const Home = () => {
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col items-center justify-center p-6">
       <div className="mb-10 flex flex-col items-center gap-3">
         <h1 className="text-2xl font-semibold tracking-tight text-gray-800">
-          Welcome to KALO
+          Welcome to KALO BY TG3
         </h1>
       </div>
 
