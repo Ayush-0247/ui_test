@@ -6,6 +6,7 @@ import {
   MessageSquare,
   LayoutGrid,
   Star,
+  AlertTriangle,
   Mail,
   Settings,
   Lock,
