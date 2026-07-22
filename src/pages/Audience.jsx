@@ -125,11 +125,14 @@ const strengths = [
   "Highly engaged beauty audience",
   "Strong presence in US & Europe",
   "High authenticity & quality",
+  "Low fake follower percentage",
 ];
 
 const opportunities = [
   "Grow presence in Asia market",
   "Expand content around wellness",
+  "Expand content around supplements",
+  "Expand content around beauty tools",
 ];
 
 // const recommendedFor = [
@@ -625,7 +628,7 @@ function AudienceIntelligence() {
             Great match for your brand
           </p>
         </div>
-        <div>
+        <div className="">
           <p
             className="text-xs font-semibold mb-1.5"
             style={{ color: HEADING }}
@@ -648,8 +651,11 @@ function AudienceIntelligence() {
               </li>
             ))}
           </ul>
+         
+        </div> 
+        <div className="flex flex-col w-[360px]">
           <p
-            className="text-xs font-semibold mb-1.5"
+            className="text-xs text-nowrap font-semibold mb-1.5"
             style={{ color: HEADING }}
           >
             Opportunities
@@ -671,6 +677,7 @@ function AudienceIntelligence() {
             ))}
           </ul>
         </div>
+        
       </div>
 
       {/* <p className="text-xs font-semibold mt-4 mb-2" style={{ color: HEADING }}>
