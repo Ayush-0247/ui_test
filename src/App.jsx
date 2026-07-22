@@ -10,6 +10,7 @@ import Searchbar from "./pages/Searchbar";
 import Performance from "./pages/Performance";
 import Overview from "./pages/Overview";
 import Content from "./pages/Content";
+import Audience from "./pages/Audience";
 export default function App() {
   return (
     <Routes>
@@ -24,7 +25,7 @@ export default function App() {
       <Route path="/Performance" element={<Performance />} />
       <Route path="/Overview" element={<Overview />} />
       <Route path="/Content" element={<Content />} />
-
+      <Route path="/audience" element={<Audience />} />
     </Routes>
   );
 }

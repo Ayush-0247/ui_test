@@ -114,6 +114,13 @@ const Home = () => {
           title="Content Page"
           theme="sky"
         />
+
+         <PortalCard
+          to="/audience"
+          icon={Users}
+          title="Audience Page"
+          theme="sky"
+        />
       </div>
     </div>
   );
