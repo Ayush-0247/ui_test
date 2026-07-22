@@ -763,12 +763,12 @@ function RecentContent() {
       />
       <div className="grid grid-cols-5 gap-4">
         {recentContent.map((post, i) => (
-          <div key={i}>
+          <div className="flex flex-col border p-2 border-gray-200 rounded-2xl" key={i}>
             <div className="relative rounded-xl overflow-hidden aspect-[4/5]">
               <img
                 src={`https://i.pravatar.cc/400?img=${post.img}`}
                 alt=""
-                className="w-full h-full object-cover"
+                className="w-90% h-full object-cover"
               />
               <span className="absolute top-2 right-2 bg-white/90 rounded-full p-1.5">
                 <Bookmark size={13} style={{ color: HEADING }} />
