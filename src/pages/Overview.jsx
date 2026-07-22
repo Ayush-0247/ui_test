@@ -718,8 +718,8 @@ function CategoriesAndPromo() {
         <SectionHeader icon={Tag} title="Categories" />
         <div className="flex flex-wrap gap-2">
           {tags.map((t) => (
-            // <Pill key={t}>{t}</Pill>
-            <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[8px] font-medium leading-none text-[#5B3DF5]">
+            // <Pill>{t}</Pill>
+            <span key={t} className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[8px] font-medium leading-none text-[#5B3DF5]">
               {t}
             </span>
           ))}
