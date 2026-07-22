@@ -701,7 +701,7 @@ function GrowthChart() {
               stroke={PURPLE}
               strokeWidth={2.5}
               fill="url(#growthFill)"
-              dot={false}
+              dot={!false}
               activeDot={{ r: 4, fill: PURPLE }}
             />
           </AreaChart>
