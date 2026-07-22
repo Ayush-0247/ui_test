@@ -1,19 +1,10 @@
 import { Link } from "react-router-dom";
-import { Users, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const themeStyles = {
-  indigo: {
-    iconBg: "bg-indigo-50",
-    iconText: "text-indigo-600",
-  },
-  sky: {
-    iconBg: "bg-sky-50",
-    iconText: "text-sky-600",
-  },
-};
 
-const PortalCard = ({ to, icon: Icon, title, theme = "indigo" }) => {
-  const styles = themeStyles[theme];
+
+const PortalCard = ({ to, title }) => {
+  // const styles = themeStyles[theme];
 
   return (
     <Link
@@ -21,11 +12,7 @@ const PortalCard = ({ to, icon: Icon, title, theme = "indigo" }) => {
       className="group flex items-center justify-between p-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
     >
       <div className="flex items-center gap-3">
-        <div
-          className={`w-10 h-10 rounded-lg flex items-center justify-center ${styles.iconBg}`}
-        >
-          <Icon className={`w-5 h-5 ${styles.iconText}`} />
-        </div>
+        
         <h2 className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
           {title}
         </h2>
@@ -53,74 +40,36 @@ const Home = () => {
           theme="indigo"
         /> */}
 
-        <PortalCard
-          to="/Searchbar"
-          icon={Users}
-          title="Search Bar Page"
-          theme="sky"
-        />
+        <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
 
         <PortalCard
           to="/audience-insight"
-          icon={Users}
           title="Audience Insight Page"
           theme="sky"
         />
 
-        <PortalCard
-          to="/contact"
-          icon={Users}
-          title="Contact Page"
-          theme="sky"
-        />
-        <PortalCard
-          to="/lookalike"
-          icon={Users}
-          title="Lookalike Page"
-          theme="sky"
-        />
+        <PortalCard to="/contact" title="Contact Page" theme="sky" />
+        <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
 
         <PortalCard
           to="/StoryAndHastag"
-          icon={Users}
           title="Stories and Hastag Page"
           theme="sky"
         />
 
         <PortalCard
           to="/Statsandmedia"
-          icon={Users}
           title="Stats and Media Page"
           theme="sky"
         />
 
-         <PortalCard
-          to="/performance"
-          icon={Users}
-          title="Performance Page"
-          theme="sky"
-        />
+        <PortalCard to="/performance" title="Performance Page" theme="sky" />
 
-        <PortalCard
-          to="/overview"
-          icon={Users}
-          title="Overview Page"
-          theme="sky"
-        />
+        <PortalCard to="/overview" title="Overview Page" theme="sky" />
 
-         <PortalCard
-          to="/content"
-          icon={Users}
-          title="Content Page"
-          theme="sky"
-        />
+        <PortalCard to="/content" title="Content Page" theme="sky" />
 
-         <PortalCard
-          to="/audience"
-          icon={Users}
-          title="Audience Page"
-          theme="sky"
-        />
+        <PortalCard to="/audience" title="Audience Page" theme="sky" />
       </div>
     </div>
   );
