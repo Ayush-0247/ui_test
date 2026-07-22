@@ -1,6 +1,5 @@
 
 import {
-  ArrowLeft,
   BadgeCheck,
   
   MapPin,
@@ -309,17 +308,7 @@ function Pill({ children,  }) {
 
 /* --------------------------------- header ---------------------------------- */
 
-function TopBar() {
-  return (
-    <button
-      className="flex items-center gap-1.5 text-sm font-medium mb-4"
-      style={{ color: HEADING }}
-    >
-      <ArrowLeft size={15} />
-      Back to search
-    </button>
-  );
-}
+
 
 function ProfileHeader() {
   return (
@@ -1045,7 +1034,7 @@ export default function Content() {
       className="min-h-screen font-sans p-6"
       style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
     >
-      <TopBar />
+    
       <ProfileHeader />
       <StatCardsRow />
       <Tabs />
