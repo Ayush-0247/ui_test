@@ -6,6 +6,8 @@ import Contact from "./pages/contact";
 import Lookalike from "./pages/lookalike";
 import Story from "./pages/StoryAndHastag";
 import Stats from "./pages/Stats";
+import Searchbar from "./pages/Searchbar";
+import Performance from "./pages/Performance";
 export default function App() {
   return (
     <Routes>
@@ -16,6 +18,8 @@ export default function App() {
       <Route path="/lookalike" element={<Lookalike />} />
       <Route path="/StoryAndHastag" element={<Story />} />
       <Route path="/Statsandmedia" element={<Stats />} />
+      <Route path="/Searchbar" element={<Searchbar />} />
+      <Route path="/Performance" element={<Performance />} />
     </Routes>
   );
 }
