@@ -8,6 +8,7 @@ import Story from "./pages/StoryAndHastag";
 import Stats from "./pages/Stats";
 import Searchbar from "./pages/Searchbar";
 import Performance from "./pages/Performance";
+import Overview from "./pages/Overview";
 export default function App() {
   return (
     <Routes>
@@ -20,6 +21,7 @@ export default function App() {
       <Route path="/Statsandmedia" element={<Stats />} />
       <Route path="/Searchbar" element={<Searchbar />} />
       <Route path="/Performance" element={<Performance />} />
+      <Route path="/Overview" element={<Overview />} />
     </Routes>
   );
 }
