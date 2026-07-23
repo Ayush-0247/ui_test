@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-
-
 const PortalCard = ({ to, title }) => {
   // const styles = themeStyles[theme];
 
@@ -12,7 +10,6 @@ const PortalCard = ({ to, title }) => {
       className="group flex items-center justify-between p-4 rounded-xl bg-white border border-gray-200 hover:border-gray-300 hover:shadow-sm transition-all duration-200"
     >
       <div className="flex items-center gap-3">
-        
         <h2 className="text-sm font-medium text-gray-700 group-hover:text-gray-900 transition-colors">
           {title}
         </h2>
@@ -39,36 +36,27 @@ const Home = () => {
           title="Creator Discovery"
           theme="indigo"
         /> */}
-
         <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
-
         <PortalCard
-          to="/audience-insight"
-          title="Audience Insight Page"
+          to="/Statsandmedia"
+          title="Stats and Media Page"
           theme="sky"
-        />
-
-        <PortalCard to="/contact" title="Contact Page" theme="sky" />
-        <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
-
+        />{" "}
         <PortalCard
           to="/StoryAndHastag"
           title="Stories and Hastag Page"
           theme="sky"
         />
-
         <PortalCard
-          to="/Statsandmedia"
-          title="Stats and Media Page"
+          to="/audience-insight"
+          title="Audience Insight Page"
           theme="sky"
         />
-
+        <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
+        <PortalCard to="/contact" title="Contact Page" theme="sky" />
         <PortalCard to="/performance" title="Performance Page" theme="sky" />
-
         <PortalCard to="/overview" title="Overview Page" theme="sky" />
-
         <PortalCard to="/content" title="Content Page" theme="sky" />
-
         <PortalCard to="/audience" title="Audience Page" theme="sky" />
       </div>
     </div>

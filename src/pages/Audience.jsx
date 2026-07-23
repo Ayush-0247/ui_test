@@ -536,14 +536,30 @@ function DotMap() {
     { x: 292, y: 132 },
   ];
   return (
-    <svg viewBox="0 0 340 155" className="w-full h-32">
-      {dots.map((d) => (
-        <circle key={d.key} cx={d.x} cy={d.y} r={1.6} fill={PURPLE_TINT} />
-      ))}
-      {markers.map((m, i) => (
-        <circle key={i} cx={m.x} cy={m.y} r={2.6} fill={PURPLE} />
-      ))}
-    </svg>
+  <svg viewBox="0 0 340 155" className="w-full h-32">
+  {dots.map((d) => (
+    <circle
+      key={d.key}
+      cx={d.x}
+      cy={d.y}
+      r={2.6}              // was 1.6
+      fill={PURPLE_TINT}
+      opacity={0.95}
+    />
+  ))}
+
+  {markers.map((m, i) => (
+    <circle
+      key={i}
+      cx={m.x}
+      cy={m.y}
+      r={5}                // was 2.6
+      fill={PURPLE}
+      stroke="#fff"
+      strokeWidth={1.5}
+    />
+  ))}
+</svg>
   );
 }
 
