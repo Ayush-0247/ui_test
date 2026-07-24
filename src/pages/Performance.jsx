@@ -1,4 +1,3 @@
-
 import {
   Home,
   Users,
@@ -80,8 +79,10 @@ function GradientAvatar({ name, src, size = 40, className = "" }) {
 export default function Performance() {
   return (
     <div className="min-h-screen bg-[#F8F9FC] text-gray-800 flex font-sans text-xs">
-      {/* 1. Left Icon Sidebar */}
-      <aside className="w-14 bg-white border-r border-gray-200 flex flex-col justify-between items-center py-4 shrink-0">
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
+
+      {/* 1. Left Icon Sidebar (laptop/desktop only) */}
+      <aside className="hidden lg:flex w-14 bg-white border-r border-gray-200 flex-col justify-between items-center py-4 shrink-0">
         <div className="flex flex-col items-center gap-5 w-full">
           {/* Logo */}
           <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-base shadow-sm">
@@ -126,8 +127,30 @@ export default function Performance() {
         </div>
       </aside>
 
+      {/* Mobile bottom nav bar (replaces the icon sidebar below lg) */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 flex items-center justify-around py-1.5 px-1">
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
+          <Home size={18} />
+        </button>
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
+          <Users size={18} />
+        </button>
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-50 text-purple-600">
+          <BarChart2 size={18} />
+        </button>
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
+          <MessageSquare size={18} />
+        </button>
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
+          <LayoutGrid size={18} />
+        </button>
+        <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
+          <Settings size={18} />
+        </button>
+      </nav>
+
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+      <main className="flex-1 overflow-y-auto p-2 sm:p-4 flex flex-col gap-3 min-w-0 pb-16 lg:pb-3">
         {/* Top Profile Header */}
         <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -158,10 +181,11 @@ export default function Performance() {
                   />
                 </div>
 
-                <div className="flex items-center gap-3 text-[11px] text-gray-500">
+                <div className="flex items-center gap-3 text-[11px] text-gray-500 flex-wrap">
                   <span className="text-gray-600 font-medium">@mariale</span>
                   <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-gray-50 border border-gray-200 text-gray-600 text-[10px]">
-                    <InstagramIcon size={11} className="text-pink-500" /> Instagram
+                    <InstagramIcon size={11} className="text-pink-500" />{" "}
+                    Instagram
                   </span>
                   <span className="flex items-center gap-0.5 text-gray-400">
                     <MapPin size={11} /> USA
@@ -184,8 +208,8 @@ export default function Performance() {
             </div>
 
             {/* Right Action Buttons */}
-            <div className="flex flex-col items-end gap-2.5 self-stretch justify-between">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col items-start md:items-end gap-2.5 self-stretch justify-between w-full md:w-auto">
+              <div className="flex items-center gap-2 flex-wrap">
                 <button className="h-8 px-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium text-[11px] flex items-center gap-1.5 shadow-xs transition-colors">
                   <Lock size={12} /> Unlock Full Report
                 </button>
@@ -194,7 +218,7 @@ export default function Performance() {
                 </button>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <button className="h-7 px-3 rounded-md bg-purple-600 hover:bg-purple-700 text-white font-medium text-[10px] flex items-center gap-1 transition-colors">
                   <Plus size={11} /> Add to Campaign
                 </button>
@@ -318,29 +342,29 @@ export default function Performance() {
         </div>
 
         {/* Tab Navigation */}
-        <div className="border-b border-gray-200 flex items-center gap-6 px-1 text-[11px] font-medium text-gray-500">
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+        <div className="border-b border-gray-200 flex items-center gap-6 px-1 text-[11px] font-medium text-gray-500 overflow-x-auto no-scrollbar whitespace-nowrap">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <Home size={12} /> Overview
           </button>
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <Users size={12} /> Audience
           </button>
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <FileText size={12} /> Content
           </button>
 
           {/* Active Performance Tab */}
-          <button className="pb-2 text-purple-600 font-semibold border-b-2 border-purple-600 flex items-center gap-1">
+          <button className="pb-2 text-purple-600 font-semibold border-b-2 border-purple-600 flex items-center gap-1 shrink-0">
             <BarChart2 size={12} /> Performance
           </button>
 
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <Users size={12} /> Partnerships
           </button>
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <Users size={12} /> Similar Creators
           </button>
-          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors">
+          <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
             <Link size={12} /> Contact
           </button>
         </div>
@@ -363,7 +387,7 @@ export default function Performance() {
               </div>
 
               {/* Chart Legend */}
-              <div className="flex items-center gap-4 text-[10px] text-gray-500 mb-3">
+              <div className="flex items-center gap-4 text-[10px] text-gray-500 mb-3 flex-wrap">
                 <span className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-purple-600" />{" "}
                   Engagement Rate (%)
@@ -378,10 +402,11 @@ export default function Performance() {
             </div>
 
             {/* SVG Chart Graphic */}
-            <div className="relative w-full h-36 mt-1">
+            <div className="relative w-full h-36 mt-1 overflow-x-auto no-scrollbar">
               <svg
-                className="w-full h-full overflow-visible"
+                className="h-full overflow-visible w-[560px] sm:w-full"
                 viewBox="0 0 500 130"
+                preserveAspectRatio="none"
               >
                 {/* Grid Lines */}
                 <line
@@ -597,9 +622,9 @@ export default function Performance() {
                 <Info size={12} className="text-gray-400" />
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap sm:flex-nowrap">
                 {/* Circular Score Donut Chart */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center shrink-0">
                   <p className="text-[10px] text-gray-400 font-semibold mb-1">
                     Performance Score
                   </p>
@@ -640,7 +665,7 @@ export default function Performance() {
                 </div>
 
                 {/* Bullet Points */}
-                <div className="flex-1 flex flex-col gap-2 text-[10px]">
+                <div className="flex-1 flex flex-col gap-2 text-[10px] min-w-[180px]">
                   <div className="flex items-start gap-1.5">
                     <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 size={10} />
@@ -710,8 +735,8 @@ export default function Performance() {
                 <Info size={12} className="text-gray-400" />
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-[10px]">
+              <div className="overflow-x-auto no-scrollbar">
+                <table className="w-full text-left text-[10px] min-w-[480px]">
                   <thead>
                     <tr className="text-gray-400 border-b border-gray-100 pb-1 font-medium">
                       <th className="pb-1.5 font-medium">Preview</th>
@@ -876,45 +901,47 @@ export default function Performance() {
               </div>
 
               {/* Heatmap Grid */}
-              <div className="flex flex-col gap-1">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
-                  (day, rowIdx) => (
-                    <div key={day} className="flex items-center gap-1">
-                      <span className="w-6 text-[9px] text-gray-400 font-medium">
-                        {day}
-                      </span>
-                      <div className="flex-1 grid grid-cols-12 gap-0.5">
-                        {Array.from({ length: 12 }).map((_, colIdx) => {
-                          // Density color mock logic
-                          const intensity = (rowIdx * 3 + colIdx * 7) % 5;
-                          const bgClasses = [
-                            "bg-purple-50",
-                            "bg-purple-100",
-                            "bg-purple-300",
-                            "bg-purple-500",
-                            "bg-purple-700",
-                          ];
-                          return (
-                            <div
-                              key={colIdx}
-                              className={`h-3.5 rounded-[2px] ${bgClasses[intensity]} transition-opacity hover:opacity-80`}
-                            />
-                          );
-                        })}
+              <div className="overflow-x-auto no-scrollbar">
+                <div className="flex flex-col gap-1 min-w-[320px]">
+                  {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(
+                    (day, rowIdx) => (
+                      <div key={day} className="flex items-center gap-1">
+                        <span className="w-6 text-[9px] text-gray-400 font-medium">
+                          {day}
+                        </span>
+                        <div className="flex-1 grid grid-cols-12 gap-0.5">
+                          {Array.from({ length: 12 }).map((_, colIdx) => {
+                            // Density color mock logic
+                            const intensity = (rowIdx * 3 + colIdx * 7) % 5;
+                            const bgClasses = [
+                              "bg-purple-50",
+                              "bg-purple-100",
+                              "bg-purple-300",
+                              "bg-purple-500",
+                              "bg-purple-700",
+                            ];
+                            return (
+                              <div
+                                key={colIdx}
+                                className={`h-3.5 rounded-[2px] ${bgClasses[intensity]} transition-opacity hover:opacity-80`}
+                              />
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  ),
-                )}
-              </div>
+                    ),
+                  )}
 
-              {/* X-Axis Hours Labels */}
-              <div className="flex items-center justify-between text-[8px] text-gray-400 ml-7 mt-1.5 font-medium">
-                <span>12 AM</span>
-                <span>4 AM</span>
-                <span>8 AM</span>
-                <span>12 PM</span>
-                <span>4 PM</span>
-                <span>8 PM</span>
+                  {/* X-Axis Hours Labels */}
+                  <div className="flex items-center justify-between text-[8px] text-gray-400 ml-7 mt-1.5 font-medium">
+                    <span>12 AM</span>
+                    <span>4 AM</span>
+                    <span>8 AM</span>
+                    <span>12 PM</span>
+                    <span>4 PM</span>
+                    <span>8 PM</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -945,9 +972,9 @@ export default function Performance() {
                 <Info size={12} className="text-gray-400" />
               </div>
 
-              <div className="grid grid-cols-12 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
                 {/* Score Left Box */}
-                <div className="col-span-5 border-r border-gray-100 pr-2 flex flex-col justify-center">
+                <div className="sm:col-span-5 sm:border-r border-gray-100 sm:pr-2 flex flex-col justify-center">
                   <p className="text-[9px] text-gray-400 font-semibold mb-1">
                     Brand Affinity Score
                   </p>
@@ -957,7 +984,7 @@ export default function Performance() {
                       /100
                     </span>
                   </p>
-                  <div className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[9px]">
+                  <div className="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-bold text-[9px] w-fit">
                     <Star
                       size={9}
                       className="fill-emerald-600 text-emerald-600"
@@ -967,7 +994,7 @@ export default function Performance() {
                 </div>
 
                 {/* Categories Right Box */}
-                <div className="col-span-7 flex flex-col gap-2">
+                <div className="sm:col-span-7 flex flex-col gap-2">
                   <div>
                     <p className="text-[9px] text-gray-400 font-medium mb-1">
                       Top Affinity Categories
@@ -1027,9 +1054,9 @@ export default function Performance() {
                 <Info size={12} className="text-gray-400" />
               </div>
 
-              <div className="grid grid-cols-12 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
                 {/* Left Bars */}
-                <div className="col-span-7 flex flex-col gap-2">
+                <div className="sm:col-span-7 flex flex-col gap-2">
                   <div className="flex items-center justify-between text-[9px] text-gray-400 font-medium">
                     <span>Top Hashtags</span>
                     <span>Avg Freg.</span>
@@ -1062,7 +1089,7 @@ export default function Performance() {
                 </div>
 
                 {/* Right Totals */}
-                <div className="col-span-5 border-l border-gray-100 pl-3 flex flex-col justify-center gap-2 text-[10px]">
+                <div className="sm:col-span-5 sm:border-l border-gray-100 sm:pl-3 flex flex-col justify-center gap-2 text-[10px]">
                   <div>
                     <p className="text-gray-400 text-[9px]">Total Reach</p>
                     <p className="font-bold text-gray-900 text-sm">
@@ -1111,7 +1138,7 @@ export default function Performance() {
               </div>
 
               {/* Creators Cards Row */}
-              <div className="grid grid-cols-5 gap-1.5 text-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-1.5">
                 {[
                   {
                     name: "glowbymaya",
@@ -1146,25 +1173,40 @@ export default function Performance() {
                 ].map((c, i) => (
                   <div
                     key={i}
-                    className="flex flex-col items-center gap-0.5 p-1 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="flex flex-row sm:flex-col items-center justify-between sm:justify-start gap-3 sm:gap-0.5 p-3 sm:p-1.5 rounded-xl border border-gray-200 sm:border-transparent bg-white sm:bg-transparent shadow-sm sm:shadow-none hover:bg-gray-50 transition-all text-left sm:text-center"
                   >
-                    <GradientAvatar name={c.name} size={32} />
-                    <p className="font-bold text-gray-900 text-[9px] truncate w-full mt-0.5">
-                      {c.name}
-                    </p>
-                    <p className="text-[8px] text-gray-400 truncate w-full">
-                      {c.handle}
-                    </p>
-                    <p className="text-[8px] text-gray-700 font-medium">
-                      {c.followers}{" "}
-                      <span className="text-gray-400">Followers</span>
-                    </p>
-                    <p className="text-[8px] font-semibold text-purple-600">
-                      {c.rate}{" "}
-                      <span className="text-gray-400 font-normal">
-                        Eng. Rate
-                      </span>
-                    </p>
+                    {/* Avatar (Left on mobile, Top on desktop) */}
+                    <div className="flex items-center gap-3 sm:flex-col sm:gap-0.5 w-full sm:w-auto overflow-hidden">
+                      <GradientAvatar
+                        name={c.name}
+                        size={36}
+                        className="shrink-0"
+                      />
+
+                      {/* Name & Handle */}
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-gray-900 text-[11px] sm:text-[9px] truncate w-full sm:mt-0.5">
+                          {c.name}
+                        </p>
+                        <p className="text-[10px] sm:text-[8px] text-gray-400 truncate w-full">
+                          {c.handle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stats (Right on mobile, Bottom on desktop) */}
+                    <div className="flex flex-col items-end sm:items-center shrink-0  ">
+                      <p className="text-[10px] sm:text-[8px] text-gray-700 font-medium">
+                        {c.followers}{" "}
+                        <span className="text-gray-400">Followers</span>
+                      </p>
+                      <p className="text-[10px] sm:text-[8px] font-semibold text-purple-600">
+                        {c.rate}{" "}
+                        <span className="text-gray-400 font-normal">
+                          Eng. Rate
+                        </span>
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>

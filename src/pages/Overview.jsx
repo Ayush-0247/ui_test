@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Home,
   Compass,
@@ -29,6 +30,8 @@ import {
   Eye,
   BadgeCheck,
   Tag,
+  Menu,
+  X,
 } from "lucide-react";
 import {
   LineChart,
@@ -221,44 +224,17 @@ const similarCreators = [
     er: "1.76%",
     img: 33,
   },
-  //   {
-  //     name: "Sarah's Day",
-  //     handle: "@sarahsday",
-  //     category: "Wellness",
-  //     followers: "4.3M",
-  //     er: "1.65%",
-  //     img: 48,
-  //   },
 ];
-
-// const categoryPillColors = {
-//   Beauty: { bg: "#FCE7F3", text: "#DB2777" },
-//   Skincare: { bg: PURPLE_TINT, text: PURPLE },
-//   Lifestyle: { bg: "#DBEAFE", text: "#2563EB" },
-//   Wellness: { bg: "#DCFCE7", text: "#16A34A" },
-// };
 
 /* -------------------------------- helpers -------------------------------- */
 
 function Pill({ children }) {
   return (
-    <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5]">
+    <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5] whitespace-nowrap">
       {children}
     </span>
   );
 }
-
-// function CategoryPill({ name }) {
-//   const c = categoryPillColors[name] || { bg: PURPLE_TINT, text: PURPLE };
-//   return (
-//     <span
-//       className="rounded-full px-2.5 py-0.5 text-[11px] font-medium"
-//       style={{ backgroundColor: c.bg, color: c.text }}
-//     >
-//       {name}
-//     </span>
-//   );
-// }
 
 function Card({ className = "", children }) {
   return (
@@ -298,114 +274,161 @@ function ViewAll() {
 
 /* --------------------------------- sidebar -------------------------------- */
 
-function Sidebar() {
+function Sidebar({ mobileOpen, onClose }) {
   return (
-    <aside
-      className="fixed left-0 top-0 h-screen w-[220px] bg-white flex flex-col"
-      style={{ borderRight: `1px solid ${BORDER}` }}
-    >
-      <div className="flex items-center gap-2 px-5 py-5">
+    <>
+      {/* mobile backdrop */}
+      {mobileOpen ? (
         <div
-          className="w-7 h-7 rounded-full flex items-center justify-center text-white text-sm font-bold"
+          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+          onClick={onClose}
+        />
+      ) : null}
+
+      <aside
+        className={`fixed left-0 top-0 h-screen w-[220px] bg-white flex flex-col z-50 transform transition-transform duration-200 ease-in-out
+          ${mobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
+        style={{ borderRight: `1px solid ${BORDER}` }}
+      >
+        <div className="flex items-center justify-between px-5 py-5">
+          <div className="flex items-center gap-2">
+            <div
+              className="w-7 h-7 rounded-full flex items-center justify-center text-white text-sm font-bold"
+              style={{ backgroundColor: PURPLE }}
+            >
+              C
+            </div>
+            <span className="font-bold text-[16px]" style={{ color: HEADING }}>
+              CreatorOS
+            </span>
+          </div>
+          <button className="lg:hidden" onClick={onClose} aria-label="Close menu">
+            <X size={20} style={{ color: MUTED }} />
+          </button>
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-3">
+          <ul className="flex flex-col gap-1">
+            {navItems.map(({ icon: Icon, label, active, badge }) => (
+              <li key={label}>
+                <a
+                  href="#"
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium ${
+                    active ? "" : "hover:bg-gray-50"
+                  }`}
+                  style={{
+                    backgroundColor: active ? PURPLE_TINT : "transparent",
+                    color: active ? PURPLE : "#6B7280",
+                  }}
+                >
+                  <span className="flex items-center gap-3">
+                    <Icon size={17} />
+                    {label}
+                  </span>
+                  {badge ? (
+                    <span
+                      className="w-5 h-5 rounded-full text-white text-[11px] font-semibold flex items-center justify-center"
+                      style={{ backgroundColor: PURPLE }}
+                    >
+                      {badge}
+                    </span>
+                  ) : null}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div className="my-3 border-t" style={{ borderColor: BORDER }} />
+
+          <ul className="flex flex-col gap-1">
+            {bottomNavItems.map(({ icon: Icon, label }) => (
+              <li key={label}>
+                <a
+                  href="#"
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50"
+                >
+                  <Icon size={17} />
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="px-3 pb-3">
+          <div
+            className="rounded-xl p-4 text-white"
+            style={{
+              background: "linear-gradient(135deg, #6C5CE7 0%, #5B4CDB 100%)",
+            }}
+          >
+            <Lock size={18} className="mb-2 opacity-90" />
+            <p className="text-[13px] font-semibold leading-snug mb-3">
+              Unlock audience and commercial insights
+            </p>
+            <button
+              className="bg-white rounded-full text-xs font-semibold px-3 py-1.5 w-full"
+              style={{ color: PURPLE }}
+            >
+              Upgrade Now
+            </button>
+          </div>
+        </div>
+
+        <div
+          className="flex items-center justify-between px-4 py-4"
+          style={{ borderTop: `1px solid ${BORDER}` }}
+        >
+          <div className="flex items-center gap-2.5">
+            <img
+              src="https://i.pravatar.cc/150?img=68"
+              alt="Alex Johnson"
+              className="w-9 h-9 rounded-full object-cover"
+            />
+            <div className="leading-tight">
+              <p className="text-sm font-semibold" style={{ color: HEADING }}>
+                Alex Johnson
+              </p>
+              <p className="text-xs" style={{ color: MUTED }}>
+                Brand Manager
+              </p>
+            </div>
+          </div>
+          <ChevronDown size={16} style={{ color: MUTED }} />
+        </div>
+      </aside>
+    </>
+  );
+}
+
+/* ------------------------------ mobile topbar ------------------------------ */
+
+function MobileTopbar({ onOpen }) {
+  return (
+    <div
+      className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-white px-4 py-3"
+      style={{ borderBottom: `1px solid ${BORDER}` }}
+    >
+      <button onClick={onOpen} aria-label="Open menu">
+        <Menu size={22} style={{ color: HEADING }} />
+      </button>
+      <div className="flex items-center gap-2">
+        <div
+          className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
           style={{ backgroundColor: PURPLE }}
         >
           C
         </div>
-        <span className="font-bold text-[16px]" style={{ color: HEADING }}>
+        <span className="font-bold text-[15px]" style={{ color: HEADING }}>
           CreatorOS
         </span>
       </div>
-
-      <nav className="flex-1 overflow-y-auto px-3">
-        <ul className="flex flex-col gap-1">
-          {navItems.map(({ icon: Icon, label, active, badge }) => (
-            <li key={label}>
-              <a
-                href="#"
-                className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium ${
-                  active ? "" : "hover:bg-gray-50"
-                }`}
-                style={{
-                  backgroundColor: active ? PURPLE_TINT : "transparent",
-                  color: active ? PURPLE : "#6B7280",
-                }}
-              >
-                <span className="flex items-center gap-3">
-                  <Icon size={17} />
-                  {label}
-                </span>
-                {badge ? (
-                  <span
-                    className="w-5 h-5 rounded-full text-white text-[11px] font-semibold flex items-center justify-center"
-                    style={{ backgroundColor: PURPLE }}
-                  >
-                    {badge}
-                  </span>
-                ) : null}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="my-3 border-t" style={{ borderColor: BORDER }} />
-
-        <ul className="flex flex-col gap-1">
-          {bottomNavItems.map(({ icon: Icon, label }) => (
-            <li key={label}>
-              <a
-                href="#"
-                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50"
-              >
-                <Icon size={17} />
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      <div className="px-3 pb-3">
-        <div
-          className="rounded-xl p-4 text-white"
-          style={{
-            background: "linear-gradient(135deg, #6C5CE7 0%, #5B4CDB 100%)",
-          }}
-        >
-          <Lock size={18} className="mb-2 opacity-90" />
-          <p className="text-[13px] font-semibold leading-snug mb-3">
-            Unlock audience and commercial insights
-          </p>
-          <button
-            className="bg-white rounded-full text-xs font-semibold px-3 py-1.5 w-full"
-            style={{ color: PURPLE }}
-          >
-            Upgrade Now
-          </button>
-        </div>
-      </div>
-
-      <div
-        className="flex items-center justify-between px-4 py-4"
-        style={{ borderTop: `1px solid ${BORDER}` }}
-      >
-        <div className="flex items-center gap-2.5">
-          <img
-            src="https://i.pravatar.cc/150?img=68"
-            alt="Alex Johnson"
-            className="w-9 h-9 rounded-full object-cover"
-          />
-          <div className="leading-tight">
-            <p className="text-sm font-semibold" style={{ color: HEADING }}>
-              Alex Johnson
-            </p>
-            <p className="text-xs" style={{ color: MUTED }}>
-              Brand Manager
-            </p>
-          </div>
-        </div>
-        <ChevronDown size={16} style={{ color: MUTED }} />
-      </div>
-    </aside>
+      <img
+        src="https://i.pravatar.cc/150?img=68"
+        alt="Alex Johnson"
+        className="w-7 h-7 rounded-full object-cover"
+      />
+    </div>
   );
 }
 
@@ -413,17 +436,17 @@ function Sidebar() {
 
 function ProfileHeader() {
   return (
-    <div className="flex items-start justify-between">
-      <div className="flex gap-5">
+    <div className="flex flex-col lg:flex-row items-start justify-between gap-4 lg:gap-0">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full lg:w-auto">
         <img
           src="https://i.pravatar.cc/150?img=47"
           alt="Mariale"
-          className="w-[90px] h-[90px] rounded-full object-cover"
+          className="w-[70px] h-[70px] lg:w-[90px] lg:h-[90px] rounded-full object-cover"
           style={{ border: `1px solid ${PURPLE}`, padding: 2 }}
         />
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold" style={{ color: HEADING }}>
+            <h1 className="text-xl lg:text-2xl font-bold" style={{ color: HEADING }}>
               Mariale
             </h1>
             <BadgeCheck
@@ -434,7 +457,7 @@ function ProfileHeader() {
             />
           </div>
           <div
-            className="flex items-center gap-2 mt-1 text-sm"
+            className="flex items-center gap-2 mt-1 text-sm flex-wrap"
             style={{ color: MUTED }}
           >
             <span className="font-semibold text-black">@mariale</span>
@@ -450,7 +473,7 @@ function ProfileHeader() {
             <MapPin size={14} />
             <span className="font-bold">Los Angeles, California, USA</span>
           </div>
-          <div className="flex gap-2 mt-3">
+          <div className="flex gap-2 mt-3 flex-wrap overflow-x-auto no-scrollbar">
             {tags.map((t) => (
               <Pill key={t}>{t}</Pill>
             ))}
@@ -458,17 +481,19 @@ function ProfileHeader() {
         </div>
       </div>
 
-      <div className="flex items-center gap-2 mt-1">
+      <div className="flex items-center gap-2 mt-1 flex-wrap w-full lg:w-auto">
         <button
           className="flex items-center gap-1.5 text-white text-sm font-medium rounded-lg px-4 py-2.5"
           style={{ backgroundColor: PURPLE }}
         >
           <Plus size={15} />
-          Add to Campaign
+          <span className="hidden sm:inline">Add to Campaign</span>
+          <span className="sm:hidden">Add</span>
         </button>
         <button className="flex items-center gap-1.5 text-sm rounded-lg px-4 py-2.5 bg-white  text-violet-700 font-medium">
           <Bookmark size={15} className="text-violet-600" />
-          Save Creator
+          <span className="hidden sm:inline">Save Creator</span>
+          <span className="sm:hidden">Save</span>
         </button>
         <button className="flex items-center gap-1.5 text-sm rounded-lg px-4 py-2.5 bg-white  text-violet-700 font-medium">
           <Send size={15} className="text-violet-600" />
@@ -488,7 +513,7 @@ function ProfileHeader() {
 function Tabs() {
   return (
     <div
-      className="flex gap-8 mt-6"
+      className="flex gap-6 lg:gap-8 mt-6 overflow-x-auto no-scrollbar"
       style={{ borderBottom: `1px solid ${BORDER}` }}
     >
       {tabs.map((t, i) => {
@@ -496,7 +521,7 @@ function Tabs() {
         return (
           <button
             key={t}
-            className="pb-3 text-sm"
+            className="pb-3 text-sm whitespace-nowrap"
             style={{
               color: active ? PURPLE : "black",
               fontWeight: active ? 900 : 700,
@@ -563,7 +588,7 @@ function StatCard({ label, value, change, caption, icon: Icon, spark, isBar }) {
 
 function StatCardsRow() {
   return (
-    <div className="grid grid-cols-7 gap-2 mt-6">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 mt-6">
       {statCards.map((c) => (
         <StatCard key={c.label} {...c} />
       ))}
@@ -628,7 +653,7 @@ function ProfileSnapshot() {
 
 function GrowthChart() {
   return (
-    <Card className="p-5 col-span-2 relative">
+    <Card className="p-5 col-span-1 lg:col-span-2 relative">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <BarChart2 size={18} style={{ color: PURPLE }} />
@@ -640,12 +665,13 @@ function GrowthChart() {
           className="flex items-center gap-1.5 text-xs font-bold rounded-md px-3 py-1.5"
           style={{ border: `1px solid ${BORDER}`, color: HEADING }}
         >
-          Last 30 Days
+          <span className="hidden sm:inline">Last 30 Days</span>
+          <span className="sm:hidden">30D</span>
           <ChevronDown size={13} />
         </button>
       </div>
 
-      <div className="h-64 relative">
+      <div className="h-56 lg:h-64 relative">
         <span
           className="absolute top-1 right-1 text-[8px] font-semibold rounded-md px-2 py-1"
           style={{ backgroundColor: PURPLE_TINT, color: PURPLE }}
@@ -718,7 +744,6 @@ function CategoriesAndPromo() {
         <SectionHeader icon={Tag} title="Categories" />
         <div className="flex flex-wrap gap-2">
           {tags.map((t) => (
-            // <Pill>{t}</Pill>
             <span key={t} className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[8px] font-medium leading-none text-[#5B3DF5]">
               {t}
             </span>
@@ -761,9 +786,9 @@ function RecentContent() {
         title="Recent Content"
         action={<ViewAll />}
       />
-      <div className="grid grid-cols-5 gap-4">
+      <div className="flex overflow-x-auto no-scrollbar gap-4 sm:grid sm:grid-cols-3 lg:grid-cols-5 sm:overflow-visible">
         {recentContent.map((post, i) => (
-          <div className="flex flex-col border p-2 border-gray-200 rounded-2xl" key={i}>
+          <div className="flex flex-col border p-2 border-gray-200 rounded-2xl w-[42vw] shrink-0 sm:w-auto sm:shrink" key={i}>
             <div className="relative rounded-xl overflow-hidden aspect-[4/5]">
               <img
                 src={`https://i.pravatar.cc/400?img=${post.img}`}
@@ -808,7 +833,7 @@ function MeterList({ icon, title, rows, labelKey }) {
         {rows.map((r) => (
           <li key={r[labelKey]} className="flex items-center gap-3 text-sm">
             <span
-              className="w-28 shrink-0 font-medium"
+              className="w-24 sm:w-28 shrink-0 font-medium truncate"
               style={{ color: HEADING }}
             >
               {r[labelKey]}
@@ -823,7 +848,7 @@ function MeterList({ icon, title, rows, labelKey }) {
               />
             </span>
             <span
-              className="w-20 text-right text-xs font-bold"
+              className="w-16 sm:w-20 text-right text-xs font-bold"
               style={{ color: MUTED }}
             >
               {r.count}
@@ -845,11 +870,11 @@ function SimilarCreators() {
         title="Similar Creators"
         action={<ViewAll />}
       />
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {similarCreators.map((c) => (
           <div
             key={c.handle}
-            className="rounded-[12px] p-2 flex flex-row items-center gap-5 w-max bg-white"
+            className="rounded-[12px] p-2 flex flex-row items-center gap-5 w-full lg:w-max bg-white"
             style={{ border: `1px solid ${BORDER || "#F1F5F9"}` }}
           >
             <div className="relative ">
@@ -871,12 +896,11 @@ function SimilarCreators() {
                 <BadgeCheck
                   size={15}
                   className="text-indigo-600"
-                  fill="#4F46E5" 
+                  fill="#4F46E5"
                   color="white"
                 />
               </div>
 
-              {/* Row 2: Handle */}
               <p
                 className="text-xs font-semibold text-slate-400 mt-0.5"
                 style={{ color: MUTED }}
@@ -884,17 +908,13 @@ function SimilarCreators() {
                 {c.handle}
               </p>
 
-              {/* Row 3: Category Pill */}
               <div className="mt-1">
-                
                 <div className="inline-flex items-center justify-center px-1.5 py-1 rounded-[8px] bg-indigo-50 text-indigo-600 text-[8px] font-bold">
                   {c.category}
                 </div>
               </div>
 
-              {/* Row 4: Stats */}
-              <div className="flex items-center gap-3 mt-3.5 text-[13px]">
-                {/* Followers */}
+              <div className="flex items-center gap-3 mt-3.5 text-[13px] flex-wrap">
                 <div className="flex items-baseline gap-1">
                   <span className="font-extrabold text-slate-800">
                     {c.followers}
@@ -902,10 +922,8 @@ function SimilarCreators() {
                   <span className="font-bold text-slate-400">Followers</span>
                 </div>
 
-                {/* Vertical Divider */}
                 <div className="w-[1.5px] h-3.5 bg-slate-200 rounded-full"></div>
 
-                {/* Engagement Rate */}
                 <div className="font-extrabold text-slate-600">ER {c.er}</div>
               </div>
             </div>
@@ -919,18 +937,24 @@ function SimilarCreators() {
 /* ---------------------------------- app ----------------------------------- */
 
 function Overview() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div
       className="min-h-screen font-sans"
       style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
     >
-      <Sidebar />
-      <main className="ml-[220px] p-6">
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
+
+      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileTopbar onOpen={() => setMobileOpen(true)} />
+
+      <main className="lg:ml-[220px] p-3 sm:p-4 lg:p-6">
         <ProfileHeader />
         <Tabs />
         <StatCardsRow />
 
-        <div className="grid grid-cols-4 gap-5 mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5">
           <ProfileSnapshot />
           <GrowthChart />
           <CategoriesAndPromo />
@@ -938,7 +962,7 @@ function Overview() {
 
         <RecentContent />
 
-        <div className="grid grid-cols-2 gap-5 mt-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
           <MeterList
             icon={Hash}
             title="Top Hashtags"
