@@ -1,17 +1,14 @@
-import { useState } from "react";
+
+import SidebarOpen from "../components/SidebarOpen";
 import {
-  Home,
-  Compass,
-  Megaphone,
+  
   Users,
-  FileText,
+  
   BarChart2,
-  ClipboardList,
+ 
   MessageSquare,
-  CreditCard,
+ 
   Bookmark,
-  Building2,
-  Settings,
   MapPin,
   ExternalLink,
   //  Instagram,
@@ -30,8 +27,7 @@ import {
   Eye,
   BadgeCheck,
   Tag,
-  Menu,
-  X,
+
 } from "lucide-react";
 import {
   LineChart,
@@ -55,23 +51,7 @@ const GREEN = "#16A34A";
 
 /* ---------------------------------- data --------------------------------- */
 
-const navItems = [
-  { icon: Home, label: "Dashboard" },
-  { icon: Compass, label: "Discover" },
-  { icon: Megaphone, label: "Campaigns" },
-  { icon: Users, label: "Creators", active: true },
-  { icon: FileText, label: "Content" },
-  { icon: BarChart2, label: "Analytics" },
-  { icon: ClipboardList, label: "Reports" },
-  { icon: MessageSquare, label: "Messages", badge: 3 },
-  { icon: CreditCard, label: "Payments" },
-  { icon: Bookmark, label: "Saved" },
-];
 
-const bottomNavItems = [
-  { icon: Building2, label: "Brand Hub" },
-  { icon: Settings, label: "Settings" },
-];
 
 const tags = ["Beauty", "Skincare", "Lifestyle", "Wellness", "travel", "Food"];
 
@@ -274,163 +254,52 @@ function ViewAll() {
 
 /* --------------------------------- sidebar -------------------------------- */
 
-function Sidebar({ mobileOpen, onClose }) {
-  return (
-    <>
-      {/* mobile backdrop */}
-      {mobileOpen ? (
-        <div
-          className="fixed inset-0 bg-black/40 z-40 lg:hidden"
-          onClick={onClose}
-        />
-      ) : null}
+// function Sidebar({ mobileOpen, onClose }) {
+//   return (
+//     <>
+//       {/* mobile backdrop */}
+//       {mobileOpen ? (
+//         <div
+//           className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+//           onClick={onClose}
+//         />
+//       ) : null}
 
-      <aside
-        className={`fixed left-0 top-0 h-screen w-[220px] bg-white flex flex-col z-50 transform transition-transform duration-200 ease-in-out
-          ${mobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
-        style={{ borderRight: `1px solid ${BORDER}` }}
-      >
-        <div className="flex items-center justify-between px-5 py-5">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-7 h-7 rounded-full flex items-center justify-center text-white text-sm font-bold"
-              style={{ backgroundColor: PURPLE }}
-            >
-              C
-            </div>
-            <span className="font-bold text-[16px]" style={{ color: HEADING }}>
-              CreatorOS
-            </span>
-          </div>
-          <button className="lg:hidden" onClick={onClose} aria-label="Close menu">
-            <X size={20} style={{ color: MUTED }} />
-          </button>
-        </div>
-
-        <nav className="flex-1 overflow-y-auto px-3">
-          <ul className="flex flex-col gap-1">
-            {navItems.map(({ icon: Icon, label, active, badge }) => (
-              <li key={label}>
-                <a
-                  href="#"
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium ${
-                    active ? "" : "hover:bg-gray-50"
-                  }`}
-                  style={{
-                    backgroundColor: active ? PURPLE_TINT : "transparent",
-                    color: active ? PURPLE : "#6B7280",
-                  }}
-                >
-                  <span className="flex items-center gap-3">
-                    <Icon size={17} />
-                    {label}
-                  </span>
-                  {badge ? (
-                    <span
-                      className="w-5 h-5 rounded-full text-white text-[11px] font-semibold flex items-center justify-center"
-                      style={{ backgroundColor: PURPLE }}
-                    >
-                      {badge}
-                    </span>
-                  ) : null}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          <div className="my-3 border-t" style={{ borderColor: BORDER }} />
-
-          <ul className="flex flex-col gap-1">
-            {bottomNavItems.map(({ icon: Icon, label }) => (
-              <li key={label}>
-                <a
-                  href="#"
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-500 hover:bg-gray-50"
-                >
-                  <Icon size={17} />
-                  {label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="px-3 pb-3">
-          <div
-            className="rounded-xl p-4 text-white"
-            style={{
-              background: "linear-gradient(135deg, #6C5CE7 0%, #5B4CDB 100%)",
-            }}
-          >
-            <Lock size={18} className="mb-2 opacity-90" />
-            <p className="text-[13px] font-semibold leading-snug mb-3">
-              Unlock audience and commercial insights
-            </p>
-            <button
-              className="bg-white rounded-full text-xs font-semibold px-3 py-1.5 w-full"
-              style={{ color: PURPLE }}
-            >
-              Upgrade Now
-            </button>
-          </div>
-        </div>
-
-        <div
-          className="flex items-center justify-between px-4 py-4"
-          style={{ borderTop: `1px solid ${BORDER}` }}
-        >
-          <div className="flex items-center gap-2.5">
-            <img
-              src="https://i.pravatar.cc/150?img=68"
-              alt="Alex Johnson"
-              className="w-9 h-9 rounded-full object-cover"
-            />
-            <div className="leading-tight">
-              <p className="text-sm font-semibold" style={{ color: HEADING }}>
-                Alex Johnson
-              </p>
-              <p className="text-xs" style={{ color: MUTED }}>
-                Brand Manager
-              </p>
-            </div>
-          </div>
-          <ChevronDown size={16} style={{ color: MUTED }} />
-        </div>
-      </aside>
-    </>
-  );
-}
+//      <SidebarOpen />
+//     </>
+//   );
+// }
 
 /* ------------------------------ mobile topbar ------------------------------ */
 
-function MobileTopbar({ onOpen }) {
-  return (
-    <div
-      className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-white px-4 py-3"
-      style={{ borderBottom: `1px solid ${BORDER}` }}
-    >
-      <button onClick={onOpen} aria-label="Open menu">
-        <Menu size={22} style={{ color: HEADING }} />
-      </button>
-      <div className="flex items-center gap-2">
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
-          style={{ backgroundColor: PURPLE }}
-        >
-          C
-        </div>
-        <span className="font-bold text-[15px]" style={{ color: HEADING }}>
-          CreatorOS
-        </span>
-      </div>
-      <img
-        src="https://i.pravatar.cc/150?img=68"
-        alt="Alex Johnson"
-        className="w-7 h-7 rounded-full object-cover"
-      />
-    </div>
-  );
-}
+// function MobileTopbar({ onOpen }) {
+//   return (
+//     <div
+//       className="lg:hidden sticky top-0 z-30 flex items-center justify-between bg-white px-4 py-3"
+//       style={{ borderBottom: `1px solid ${BORDER}` }}
+//     >
+//       <button onClick={onOpen} aria-label="Open menu">
+//         <Menu size={22} style={{ color: HEADING }} />
+//       </button>
+//       <div className="flex items-center gap-2">
+//         <div
+//           className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
+//           style={{ backgroundColor: PURPLE }}
+//         >
+//           C
+//         </div>
+//         <span className="font-bold text-[15px]" style={{ color: HEADING }}>
+//           CreatorOS
+//         </span>
+//       </div>
+//       <img
+//         src="https://i.pravatar.cc/150?img=68"
+//         alt="Alex Johnson"
+//         className="w-7 h-7 rounded-full object-cover"
+//       />
+//     </div>
+//   );
+// }
 
 /* --------------------------------- header --------------------------------- */
 
@@ -937,7 +806,7 @@ function SimilarCreators() {
 /* ---------------------------------- app ----------------------------------- */
 
 function Overview() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+ // const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div
@@ -946,10 +815,10 @@ function Overview() {
     >
       <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
 
-      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
-      <MobileTopbar onOpen={() => setMobileOpen(true)} />
+      <SidebarOpen />
+      {/* <MobileTopbar onOpen={() => setMobileOpen(true)} /> */}
 
-      <main className="lg:ml-[220px] p-3 sm:p-4 lg:p-6">
+      <main className="lg:ml-[250px] p-3 sm:p-4 lg:p-6">
         <ProfileHeader />
         <Tabs />
         <StatCardsRow />
