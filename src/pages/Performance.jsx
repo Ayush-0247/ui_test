@@ -6,7 +6,6 @@ import {
   LayoutGrid,
   Star,
   AlertTriangle,
-  Mail,
   Settings,
   Lock,
   Plus,
@@ -27,7 +26,7 @@ import {
   ChevronRight,
   TrendingUp,
 } from "lucide-react";
-
+import SidebarClose  from "../components/SidebarClose";
 function InstagramIcon({ size = 12, className = "" }) {
   return (
     <svg
@@ -81,51 +80,7 @@ export default function Performance() {
     <div className="min-h-screen bg-[#F8F9FC] text-gray-800 flex font-sans text-xs">
       <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
 
-      {/* 1. Left Icon Sidebar (laptop/desktop only) */}
-      <aside className="hidden lg:flex w-14 bg-white border-r border-gray-200 flex-col justify-between items-center py-4 shrink-0">
-        <div className="flex flex-col items-center gap-5 w-full">
-          {/* Logo */}
-          <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white font-bold text-base shadow-sm">
-            e
-          </div>
-
-          {/* Nav Icons */}
-          <nav className="flex flex-col items-center gap-3 w-full px-2">
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <Home size={17} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <Users size={17} />
-            </button>
-            {/* Active Item */}
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-50 text-purple-600 font-medium transition-colors shadow-xs">
-              <BarChart2 size={17} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <MessageSquare size={17} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <LayoutGrid size={17} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <Star size={17} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-purple-600 hover:bg-purple-50 transition-colors">
-              <Mail size={17} />
-            </button>
-          </nav>
-        </div>
-
-        {/* Bottom Actions */}
-        <div className="flex flex-col items-center gap-3">
-          <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors">
-            <Settings size={17} />
-          </button>
-          <div className="w-8 h-8 rounded-full bg-gray-100 border border-gray-300 text-gray-700 font-semibold flex items-center justify-center text-[10px]">
-            JD
-          </div>
-        </div>
-      </aside>
+      <SidebarClose />
 
       {/* Mobile bottom nav bar (replaces the icon sidebar below lg) */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 flex items-center justify-around py-1.5 px-1">
