@@ -164,7 +164,7 @@ export default function AudienceInsights() {
      
            <div className="sticky top-0 z-30 bg-white border-b border-[#ECECEC] p-2">
          
-        <TopTabs activeTab="/Statsandmedia" />
+        <TopTabs activeTab="/audience-insight" />
           
         </div>
 
