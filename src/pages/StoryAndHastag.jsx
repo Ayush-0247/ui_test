@@ -1,16 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Users,
-  UserPlus,
-  Layers,
-  User,
-  X,
-  MapPin,
-  Send,
-  Download,
-  Star,
-  TrendingUp,
-  Heart,
   Info,
   Droplet,
   Sparkles,
@@ -21,8 +9,8 @@ import {
   CheckCircle2,
   BarChart3,
 } from "lucide-react";
-
-import img1 from "../assets/img1.png";
+import ProfileSidebar from "../components/ProfileSidebar";
+import TopTabs from "../components/TopTabs";
 import highlight1 from "../assets/skin.jpg";
 import highlight2 from "../assets/travel.jpg";
 import highlight3 from "../assets/coffee.jpg";
@@ -60,151 +48,6 @@ function CardHeader({ title, action }) {
 /* ---------------------------------------------------------
    Left sidebar (Desktop)
 --------------------------------------------------------- */
-
-function ProfileSidebar() {
-  return (
-    <aside className="w-full lg:w-[320px] lg:shrink-0 bg-white rounded-lg border border-gray-200  p-6 pb-2 flex flex-col items-center">
-      <div className="relative ">
-        <img
-          src={img1}
-          alt="Isabella Martinez"
-          className="w-[180px] h-[180px] sm:w-[230px] sm:h-[230px] rounded-full object-cover"
-        />
-      </div>
-
-      <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
-      <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
-
-      <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
-        <MapPin className="w-3.5 h-3.5" />
-        <span>Los Angeles, CA, USA</span>
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-2 mt-4">
-        {["Lifestyle", "Fashion", "Travel"].map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-      <div className="flex flex-wrap justify-center gap-2 mt-2">
-        {["Wellness", "Beauty"].map((tag) => (
-          <span
-            key={tag}
-            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
-
-      <div className="w-full flex flex-col gap-3 mt-6">
-        <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-sm font-semibold rounded-md py-3">
-          <Send className="w-4 h-4" />
-          Create Campaign
-        </button>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-          <Download className="w-5 h-5" />
-          Download Media Kit
-        </button>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-          <Star className="w-5 h-5" />
-          Add to Favorites
-        </button>
-      </div>
-
-      <div className="w-full flex items-center justify-between mt-3 pt-3 border-t border-[#E5E7EB]">
-        <div className="flex flex-col items-center gap-1">
-          <Users className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">892K</span>
-          <span className="text-[11px] text-gray-400">Followers</span>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-          <TrendingUp className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">6.38%</span>
-          <span className="text-[11px] text-gray-400">Engagement</span>
-        </div>
-        <div className="flex flex-col items-center gap-1">
-          <Heart className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">57.2K</span>
-          <span className="text-[11px] text-gray-400">Avg. Likes</span>
-        </div>
-      </div>
-    </aside>
-  );
-}
-
-/* ---------------------------------------------------------
-   Top tabs (Desktop)
---------------------------------------------------------- */
-
-function TopTabs() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const tabs = [
-    {
-      label: "Stories & Hashtags",
-      icon: <Layers className="w-4 h-4" />,
-      path: "/StoryAndHastag",
-    },
-    {
-      label: "Lookalike Creator",
-      icon: <UserPlus className="w-4 h-4" />,
-      path: "/lookalike",
-    },
-    {
-      label: "Contact Info",
-      icon: <User className="w-4 h-4" />,
-      path: "/contact",
-    },
-    {
-      label: "Statistics & Media",
-      icon: <BarChart3 className="w-4 h-4" />,
-      path: "/Statsandmedia",
-    },
-
-    {
-      label: "Audience Insights",
-      icon: <Users className="w-4 h-4" />,
-      path: "/audience-insight",
-    },
-  ];
-
-  return (
-    <div className="flex items-center justify-between border-b border-[#ECECEC] px-2 sm:px-6 pt-3 pb-1 overflow-x-auto scrollbar-none gap-4">
-      <div className="flex gap-6 sm:gap-8 min-w-max">
-        {tabs.map((tab) => {
-          const isActive =
-            location.pathname === tab.path ||
-            (tab.path === "/Statsandmedia" &&
-              (location.pathname === "/Statsandmedia" ||
-                location.pathname === "/"));
-          return (
-            <button
-              key={tab.label}
-              onClick={() => navigate(tab.path)}
-              className={`flex items-center gap-2 pb-2.5 text-xs sm:text-sm transition whitespace-nowrap cursor-pointer ${
-                isActive
-                  ? "border-b-2 border-[#5B3DF5] text-[#5B3DF5] font-bold"
-                  : "border-b-2 border-transparent text-[#6B7280] font-semibold hover:text-[#1F2937]"
-              }`}
-            >
-              {tab.icon}
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
-      <button className="mb-2 w-7 h-7 rounded-md bg-white border border-[#E5E7EB] flex items-center justify-center shrink-0 ml-2 cursor-pointer hover:bg-gray-50">
-        <X className="w-4 h-4 text-[#1F2937]" />
-      </button>
-    </div>
-  );
-}
 
 /* ---------------------------------------------------------
    Story Activity card
@@ -693,37 +536,6 @@ function AIContentIntelligenceCard() {
    Dedicated Mobile View Component
 --------------------------------------------------------- */
 
-function MobileView() {
-  // const [profileExpanded, setProfileExpanded] = useState(false);
-  // const [activeTab, setActiveTab] = useState("Stories & Hashtags");
-
-  // const tabs = [
-  //   { label: "Statistics & Media", icon: <BarChart3 size={15} /> },
-  //   { label: "Stories & Hashtags", icon: <Layers size={15} /> },
-  //   { label: "Audience Insights", icon: <Users size={15} /> },
-  //   { label: "Lookalike Creator", icon: <UserPlus size={15} /> },
-  //   { label: "Contact Info", icon: <User size={15} /> },
-  // ];
-
-  return (
-    <div className="block md:hidden min-h-screen bg-[#F8F9FC] text-gray-900 pb-12">
-      {/* Mobile Top App Header */}
-      <ProfileSidebar />
-
-      <TopTabs />
-
-      {/* Mobile Content Stack */}
-      <div className="p-3 space-y-3">
-        <StoryActivityCard />
-        <ContentThemesCard />
-        <HashtagsCard />
-        <BrandMentionsCard />
-        <HighlightCollectionsCard />
-        <AIContentIntelligenceCard />
-      </div>
-    </div>
-  );
-}
 
 /* ---------------------------------------------------------
    Page Export
@@ -731,40 +543,34 @@ function MobileView() {
 
 export default function CreatorDashboard() {
   return (
-    <div
-      className="min-h-screen bg-[#F8F9FC] p-0 font-sans"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
-      {/* DESKTOP / LAPTOP / MAC VIEW - Hidden on mobile, visible on md and up */}
-      <div className="hidden md:flex mx-auto max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
-        <ProfileSidebar />
+   <div className="min-h-screen xl:h-screen bg-white text-[#1F2937] flex flex-col xl:flex-row overflow-x-hidden xl:overflow-hidden">
+  <ProfileSidebar />
 
-        <main className="flex-1 bg-white p-4 shadow-sm">
-          <TopTabs />
-          <div className="mt-3 flex gap-3">
-            <div className="w-[330px]">
-              <StoryActivityCard />
-            </div>
+  <main className="flex-1 min-w-0 flex flex-col border-t xl:border-t-0 xl:border-l border-[#ECECEC] bg-white">
+    
+  
+     <div className="sticky top-0 z-30 bg-white border-b border-[#ECECEC] p-2">
+         
+        <TopTabs activeTab="/StoryAndHastag" />
+          
+        </div>
 
-            <div className="w-[320px]">
-              <ContentThemesCard />
-            </div>
-
-            <div className="w-[260px]">
-              <HashtagsCard />
-            </div>
-          </div>
-          <div className="mt-5 grid grid-cols-[360px_1fr] gap-5">
-            <BrandMentionsCard />
-            <HighlightCollectionsCard />
-          </div>
-
-          <AIContentIntelligenceCard />
-        </main>
+    {/* Scrollable Content only on desktop */}
+    <div className="flex-1 p-3 sm:p-4 xl:p-5 space-y-4 xl:overflow-y-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <StoryActivityCard />
+        <ContentThemesCard />
+        <HashtagsCard />
       </div>
 
-      {/* MOBILE SCREEN VIEW - Visible only on mobile (< md) */}
-      <MobileView />
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] gap-4 xl:gap-5">
+        <BrandMentionsCard />
+        <HighlightCollectionsCard />
+      </div>
+
+      <AIContentIntelligenceCard />
     </div>
+  </main>
+</div>
   );
 }
