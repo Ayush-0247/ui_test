@@ -169,9 +169,9 @@ export default function AudienceInsights() {
         </div>
 
           {/* Only this scrolls on desktop */}
-          <div className="flex-1 xl:overflow-y-auto">
-            <div className="px-3 lg:px-0 py-3 space-y-3">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-3 lg:px-0">
+          <div className="flex-1 p-3 sm:p-4 xl:p-5 space-y-4 xl:overflow-y-auto">
+            <div className="">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-0 px-3 lg:px-0">
                 <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
                   <CardHeader title="Audience Quality Score" />
                   <div className="flex items-center gap-5 flex-wrap sm:flex-nowrap">
