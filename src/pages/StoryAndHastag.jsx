@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Users,
   UserPlus,
@@ -20,8 +20,6 @@ import {
   ChevronRight,
   CheckCircle2,
   BarChart3,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
 
 import img1 from "../assets/img1.png";
@@ -65,16 +63,16 @@ function CardHeader({ title, action }) {
 
 function ProfileSidebar() {
   return (
-    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200 p-6 flex flex-col items-center">
-      <div className="relative">
+    <aside className="w-full lg:w-[320px] lg:shrink-0 bg-white rounded-lg border border-gray-200  p-6 pb-2 flex flex-col items-center">
+      <div className="relative ">
         <img
           src={img1}
           alt="Isabella Martinez"
-          className="w-[230px] h-[230px] rounded-full object-cover"
+          className="w-[180px] h-[180px] sm:w-[230px] sm:h-[230px] rounded-full object-cover"
         />
       </div>
 
-      <h2 className="text-lg font-bold text-gray-900 mt-2">Isabella Martinez</h2>
+      <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
       <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
 
       <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
@@ -118,7 +116,7 @@ function ProfileSidebar() {
         </button>
       </div>
 
-      <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
+      <div className="w-full flex items-center justify-between mt-3 pt-3 border-t border-[#E5E7EB]">
         <div className="flex flex-col items-center gap-1">
           <Users className="w-6 h-6 text-blue-700" />
           <span className="text-base font-bold text-gray-900">892K</span>
@@ -144,32 +142,65 @@ function ProfileSidebar() {
 --------------------------------------------------------- */
 
 function TopTabs() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const tabs = [
-    { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={16} />, active: true },
-    { label: "Audience Insights", icon: <Users size={16} /> },
-    { label: "Lookalike Creator", icon: <UserPlus size={16} /> },
-    { label: "Contact Info", icon: <User size={16} /> },
+    {
+      label: "Stories & Hashtags",
+      icon: <Layers className="w-4 h-4" />,
+      path: "/StoryAndHastag",
+    },
+    {
+      label: "Lookalike Creator",
+      icon: <UserPlus className="w-4 h-4" />,
+      path: "/lookalike",
+    },
+    {
+      label: "Contact Info",
+      icon: <User className="w-4 h-4" />,
+      path: "/contact",
+    },
+    {
+      label: "Statistics & Media",
+      icon: <BarChart3 className="w-4 h-4" />,
+      path: "/Statsandmedia",
+    },
+
+    {
+      label: "Audience Insights",
+      icon: <Users className="w-4 h-4" />,
+      path: "/audience-insight",
+    },
   ];
+
   return (
-    <div className="flex items-center justify-between border-b border-gray-100 px-8 pt-6">
-      <div className="flex gap-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.label}
-            className={`flex items-center gap-2 pb-2 text-sm font-medium transition ${
-              tab.active
-                ? "border-b-2 border-violet-900 text-violet-900 font-extrabold"
-                : "border-b-2 border-transparent text-gray-900 font-extrabold hover:text-gray-700"
-            }`}
-          >
-            {tab.icon}
-            {tab.label}
-          </button>
-        ))}
+    <div className="flex items-center justify-between border-b border-[#ECECEC] px-2 sm:px-6 pt-3 pb-1 overflow-x-auto scrollbar-none gap-4">
+      <div className="flex gap-6 sm:gap-8 min-w-max">
+        {tabs.map((tab) => {
+          const isActive =
+            location.pathname === tab.path ||
+            (tab.path === "/Statsandmedia" &&
+              (location.pathname === "/Statsandmedia" ||
+                location.pathname === "/"));
+          return (
+            <button
+              key={tab.label}
+              onClick={() => navigate(tab.path)}
+              className={`flex items-center gap-2 pb-2.5 text-xs sm:text-sm transition whitespace-nowrap cursor-pointer ${
+                isActive
+                  ? "border-b-2 border-[#5B3DF5] text-[#5B3DF5] font-bold"
+                  : "border-b-2 border-transparent text-[#6B7280] font-semibold hover:text-[#1F2937]"
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
-      <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
-        <X className="w-5 h-5 text-zinc-900" />
+      <button className="mb-2 w-7 h-7 rounded-md bg-white border border-[#E5E7EB] flex items-center justify-center shrink-0 ml-2 cursor-pointer hover:bg-gray-50">
+        <X className="w-4 h-4 text-[#1F2937]" />
       </button>
     </div>
   );
@@ -188,76 +219,203 @@ function StoryActivityCard() {
 
   return (
     <div className="h-full rounded-2xl border border-[#ECECEC] bg-white p-4 shadow-sm flex flex-col justify-between">
-      <CardHeader title="Story Activity" />
+      {/* MOBILE ONLY LAYOUT */}
+      <div className="flex sm:hidden flex-col w-full h-full">
+        <CardHeader title="Story Activity" />
 
-      <div className="flex flex-col sm:flex-row md:grid md:grid-cols-[120px_auto] items-center sm:items-start gap-4">
-        <div className="relative flex h-28 w-28 shrink-0 items-center justify-center">
-          <svg viewBox="0 0 120 120" className="h-28 w-28 -rotate-90">
-            <circle
-              cx="60"
-              cy="60"
-              r="50"
-              fill="none"
-              stroke="#ECECEC"
-              strokeWidth="12"
-            />
-            <circle
-              cx="60"
-              cy="60"
-              r="50"
-              fill="none"
-              stroke="url(#donutGradient)"
-              strokeWidth="12"
-              strokeDasharray={2 * Math.PI * 50}
-              strokeDashoffset={2 * Math.PI * 50 * 0.22}
-              strokeLinecap="round"
-            />
-            <defs>
-              <linearGradient
-                id="donutGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop offset="0%" stopColor="#5B3DF5" />
-                <stop offset="100%" stopColor="#7C5CFF" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div className="absolute flex flex-col items-center">
-            <span className="text-2xl font-bold text-[#1F2937]">487</span>
-            <span className="text-xs text-[#6B7280]">Highlights</span>
+        {/* Top Row: Condensed Chart + Stat Block */}
+        <div className="flex flex-row items-center justify-between gap-3 mt-3 mb-5 p-3 rounded-xl bg-gradient-to-br from-gray-50 to-white border border-gray-100 shadow-sm">
+          <div className="flex items-center gap-3">
+            {/* Scaled Down Chart */}
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center">
+              <svg viewBox="0 0 120 120" className="h-14 w-14 -rotate-90">
+                {/* Added inner background circle here */}
+                <circle cx="60" cy="60" r="38" fill="#fff" />
+
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  fill="none"
+                  stroke="#ECECEC"
+                  strokeWidth="12"
+                />
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  fill="none"
+                  stroke="url(#donutGradientMobile)"
+                  strokeWidth="12"
+                  strokeDasharray={2 * Math.PI * 50}
+                  strokeDashoffset={2 * Math.PI * 50 * 0.22}
+                  strokeLinecap="round"
+                />
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  fill="none"
+                  stroke="#3B82F6"
+                  strokeWidth="12"
+                />
+
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="50"
+                  fill="none"
+                  stroke="url(#donutGradientMobile)"
+                  strokeWidth="12"
+                />
+
+                <circle cx="60" cy="60" r="44" fill="#fff" />
+                <defs>
+                  <linearGradient
+                    id="donutGradientMobile"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop offset="0%" stopColor="#5B3DF5" />
+                    <stop offset="100%" stopColor="#7C5CFF" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div className="absolute flex flex-col items-center">
+                <span className="text-[13px] font-black text-[#1F2937]">
+                  487
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold text-gray-800">
+                Total Highlights
+              </span>
+              <span className="text-[9px] font-medium text-gray-400">
+                Lifetime
+              </span>
+            </div>
+          </div>
+
+          {/* Stat Pill */}
+          <div className="rounded-lg bg-[#F5F1FF] px-2.5 py-1.5 flex flex-col items-center justify-center text-center shrink-0 border border-[#E9D5FF]">
+            <span className="text-[14px] font-black text-[#5B3DF5] leading-none mb-0.5">
+              62
+            </span>
+            <span className="text-[8px] font-bold uppercase tracking-wider text-[#5B3DF5]">
+              Per Month
+            </span>
           </div>
         </div>
-
-        <div className="flex flex-col w-full">
-          <p className="mb-2 text-xs font-bold text-zinc-700 text-center sm:text-left">
-            Active Story Series
+        {/* Bottom Row: IG-Style Horizontal Scrollable Stories */}
+        <div>
+          <p className="mb-2.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">
+            Active Series
           </p>
-          <div className="space-y-2.5">
+          <div
+            className="flex flex-row overflow-x-auto gap-4 pb-2 pl-1"
+            style={{ scrollbarWidth: "none" }}
+          >
             {stories.map((s) => (
-              <div key={s.id} className="flex items-center gap-2.5">
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className="h-10 w-10 rounded-full object-cover shrink-0"
-                />
-                <div>
-                  <p className="text-xs font-bold leading-tight text-[#1F2937]">
-                    {s.title}
-                  </p>
-                  <p className="text-[12px] text-[#6B7280]">{s.count}</p>
+              <div
+                key={s.id}
+                className="flex flex-col items-center gap-1.5 shrink-0 w-16"
+              >
+                <div className="p-[2px] rounded-full bg-gradient-to-tr from-[#5B3DF5] via-purple-400 to-pink-400 shadow-sm cursor-pointer">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    className="h-14 w-14 rounded-full object-cover border-2 border-white"
+                  />
                 </div>
+                <p className="text-[9px] font-bold text-gray-800 text-center leading-tight truncate w-full">
+                  {s.title}
+                </p>
+                <p className="text-[8px] font-medium text-gray-400 text-center">
+                  {s.count}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center">
-        <div className="rounded-md bg-[#F5F1FF] px-4 py-1.5 text-xs sm:text-[15px] font-bold text-[#5B3DF5] text-center">
-          Avg. Stories per Month: 62
+      {/* LAPTOP ONLY LAYOUT (Untouched) */}
+      <div className="hidden sm:flex flex-col h-full justify-between">
+        <CardHeader title="Story Activity" />
+
+        <div className="flex flex-col sm:flex-row md:grid md:grid-cols-[120px_auto] items-center sm:items-start gap-4">
+          <div className="relative flex h-28 w-28 shrink-0 items-center justify-center">
+            <svg viewBox="0 0 120 120" className="h-28 w-28 -rotate-90">
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                fill="none"
+                stroke="#ECECEC"
+                strokeWidth="12"
+              />
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                fill="none"
+                stroke="url(#donutGradientDesktop)"
+                strokeWidth="12"
+                strokeDasharray={2 * Math.PI * 50}
+                strokeDashoffset={2 * Math.PI * 50 * 0.22}
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient
+                  id="donutGradientDesktop"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#5B3DF5" />
+                  <stop offset="100%" stopColor="#7C5CFF" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="absolute flex flex-col items-center">
+              <span className="text-2xl font-bold text-[#1F2937]">487</span>
+              <span className="text-xs text-[#6B7280]">Highlights</span>
+            </div>
+          </div>
+
+          <div className="flex flex-col w-full">
+            <p className="mb-2 text-xs font-bold text-zinc-700 text-center sm:text-left">
+              Active Story Series
+            </p>
+            <div className="space-y-2.5">
+              {stories.map((s) => (
+                <div key={s.id} className="flex items-center gap-2.5">
+                  <img
+                    src={s.img}
+                    alt={s.title}
+                    className="h-10 w-10 rounded-full object-cover shrink-0"
+                  />
+                  <div>
+                    <p className="text-xs font-bold leading-tight text-[#1F2937]">
+                      {s.title}
+                    </p>
+                    <p className="text-[12px] text-[#6B7280]">{s.count}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4 flex justify-center">
+          <div className="rounded-md bg-[#F5F1FF] px-4 py-1.5 text-xs sm:text-[15px] font-bold text-[#5B3DF5] text-center">
+            Avg. Stories per Month: 62
+          </div>
         </div>
       </div>
     </div>
@@ -367,7 +525,9 @@ function BrandMentionsCard() {
             <span
               className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${bg}`}
             />
-            <span className="w-24 sm:w-28 shrink-0 text-xs sm:text-sm text-[#1F2937] truncate">{name}</span>
+            <span className="w-24 sm:w-28 shrink-0 text-xs sm:text-sm text-[#1F2937] truncate">
+              {name}
+            </span>
             <ProgressBar percent={(value / maxValue) * 100} />
             <span className="w-16 sm:w-20 shrink-0 text-right text-xs sm:text-sm font-medium text-[#1F2937]">
               {value} ({percent})
@@ -482,11 +642,8 @@ function AIContentIntelligenceCard() {
         Isabella's story content drives{" "}
         <span className="font-semibold text-[#5B3DF5]">2.1x</span> higher
         engagement than her feed posts.
-        <br className="hidden sm:block" />
-        {" "}Skincare and travel themes <span className="italic">
-          resonate most
-        </span>{" "}
-        with her audience.
+        <br className="hidden sm:block" /> Skincare and travel themes{" "}
+        <span className="italic">resonate most</span> with her audience.
       </div>
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 border-t border-[#ECECEC] pt-6">
@@ -537,162 +694,23 @@ function AIContentIntelligenceCard() {
 --------------------------------------------------------- */
 
 function MobileView() {
-  const [profileExpanded, setProfileExpanded] = useState(false);
-  const [activeTab, setActiveTab] = useState("Stories & Hashtags");
+  // const [profileExpanded, setProfileExpanded] = useState(false);
+  // const [activeTab, setActiveTab] = useState("Stories & Hashtags");
 
-  const tabs = [
-    { label: "Statistics & Media", icon: <BarChart3 size={15} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={15} /> },
-    { label: "Audience Insights", icon: <Users size={15} /> },
-    { label: "Lookalike Creator", icon: <UserPlus size={15} /> },
-    { label: "Contact Info", icon: <User size={15} /> },
-  ];
+  // const tabs = [
+  //   { label: "Statistics & Media", icon: <BarChart3 size={15} /> },
+  //   { label: "Stories & Hashtags", icon: <Layers size={15} /> },
+  //   { label: "Audience Insights", icon: <Users size={15} /> },
+  //   { label: "Lookalike Creator", icon: <UserPlus size={15} /> },
+  //   { label: "Contact Info", icon: <User size={15} /> },
+  // ];
 
   return (
     <div className="block md:hidden min-h-screen bg-[#F8F9FC] text-gray-900 pb-12">
       {/* Mobile Top App Header */}
-      <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-xs">
-        <div className="flex items-center gap-3">
-          <img
-            src={img1}
-            alt="Isabella Martinez"
-            className="w-9 h-9 rounded-full object-cover ring-2 ring-violet-500/20"
-          />
-          <div>
-            <h1 className="text-sm font-bold text-gray-900 leading-tight">
-              Isabella Martinez
-            </h1>
-            <p className="text-[11px] text-gray-500">@isabellamarts</p>
-          </div>
-        </div>
-        <button
-          onClick={() => setProfileExpanded(!profileExpanded)}
-          className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-violet-50 text-violet-700 border border-violet-100"
-        >
-          {profileExpanded ? "Hide Profile" : "Profile Details"}
-          {profileExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-        </button>
-      </header>
+      <ProfileSidebar />
 
-      {/* Expandable Mobile Profile Sheet */}
-      {profileExpanded && (
-        <div className="bg-white border-b border-gray-200 p-4 shadow-sm">
-          <div className="flex flex-col items-center text-center">
-            <img
-              src={img1}
-              alt="Isabella Martinez"
-              className="w-20 h-20 rounded-full object-cover ring-4 ring-violet-100 mb-2"
-            />
-            <h2 className="text-base font-bold text-gray-900">Isabella Martinez</h2>
-            <p className="text-xs text-gray-400">@isabellamarts</p>
-
-            <div className="flex items-center gap-1 text-gray-500 text-xs mt-1">
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Los Angeles, CA, USA</span>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-1.5 mt-3">
-              {["Lifestyle", "Fashion", "Travel", "Wellness", "Beauty"].map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2 py-0.5 text-[10px] font-bold text-[#6348e6]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* Quick Stats */}
-            <div className="w-full grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-gray-100">
-              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
-                <Users className="w-4 h-4 text-blue-700 mb-0.5" />
-                <span className="text-xs font-bold text-gray-900">892K</span>
-                <span className="text-[10px] text-gray-400">Followers</span>
-              </div>
-              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
-                <TrendingUp className="w-4 h-4 text-blue-700 mb-0.5" />
-                <span className="text-xs font-bold text-gray-900">6.38%</span>
-                <span className="text-[10px] text-gray-400">Engagement</span>
-              </div>
-              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
-                <Heart className="w-4 h-4 text-blue-700 mb-0.5" />
-                <span className="text-xs font-bold text-gray-900">57.2K</span>
-                <span className="text-[10px] text-gray-400">Avg Likes</span>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="w-full flex flex-col gap-2 mt-4">
-              <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-xs font-semibold rounded-lg py-2.5">
-                <Send className="w-3.5 h-3.5" />
-                Create Campaign
-              </button>
-              <div className="grid grid-cols-2 gap-2">
-                <button className="flex items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg py-2">
-                  <Download className="w-3.5 h-3.5" />
-                  Media Kit
-                </button>
-                <button className="flex items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg py-2">
-                  <Star className="w-3.5 h-3.5" />
-                  Favorite
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Summary Stats Strip (collapsed view) */}
-      {!profileExpanded && (
-        <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-around">
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4 text-blue-700" />
-            <div>
-              <span className="text-xs font-bold text-gray-900 block leading-none">892K</span>
-              <span className="text-[9px] text-gray-400">Followers</span>
-            </div>
-          </div>
-          <div className="h-5 w-[1px] bg-gray-200" />
-          <div className="flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-blue-700" />
-            <div>
-              <span className="text-xs font-bold text-gray-900 block leading-none">6.38%</span>
-              <span className="text-[9px] text-gray-400">Engagement</span>
-            </div>
-          </div>
-          <div className="h-5 w-[1px] bg-gray-200" />
-          <div className="flex items-center gap-2">
-            <Heart className="w-4 h-4 text-blue-700" />
-            <div>
-              <span className="text-xs font-bold text-gray-900 block leading-none">57.2K</span>
-              <span className="text-[9px] text-gray-400">Avg Likes</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Mobile Tab Navigation */}
-      <div className="bg-white border-b border-gray-200 px-3 pt-3 overflow-x-auto">
-        <div className="flex gap-2 min-w-max pb-2">
-          {tabs.map((tab) => {
-            const isActive = tab.label === activeTab;
-            return (
-              <button
-                key={tab.label}
-                onClick={() => setActiveTab(tab.label)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap ${
-                  isActive
-                    ? "bg-[#5B3DF5] text-white shadow-xs"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                {tab.icon}
-                {tab.label}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <TopTabs />
 
       {/* Mobile Content Stack */}
       <div className="p-3 space-y-3">

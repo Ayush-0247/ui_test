@@ -117,7 +117,7 @@ const ProgressBar = ({ percent, max = 100 }) => (
 );
 
 const NavItem = ({ label, icon, active }) => (
-  <div className="relative flex items-center gap-2 pb-4 pt-1 cursor-pointer">
+  <div className="relative flex items-center gap-2 pb-4 pt-1 cursor-pointer shrink-0 whitespace-nowrap">
     <span className={active ? "text-[#5B3DF5]" : "text-gray-400"}>{icon}</span>
     <span
       className={
@@ -194,13 +194,15 @@ const strengths = [
 export default function AudienceInsights() {
   return (
     <div className="min-h-screen w-full bg-[#F8F9FC] p-1 font-[Inter,sans-serif]">
-      <div className="flex gap-3 items-start max-w-[1580px] mx-auto">
-        <aside className="w-[320px] shrink-0 bg-white rounded-lg   p-6 flex flex-col items-center">
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
+
+      <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-start max-w-[1580px] mx-auto">
+        <aside className="w-full lg:w-[320px] lg:shrink-0 bg-white rounded-lg   p-3 flex flex-col items-center">
           <div className="relative ">
             <img
               src={img1}
               alt="Isabella Martinez"
-              className="w-[230px] h-[230px] rounded-full object-cover"
+              className="w-[180px] h-[180px] sm:w-[230px] sm:h-[230px] rounded-full object-cover"
             />
           </div>
 
@@ -248,7 +250,7 @@ export default function AudienceInsights() {
             </button>
           </div>
 
-          <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
+          <div className="w-full flex items-center justify-between mt-3 pt-5 border-t border-[#E5E7EB]">
             <div className="flex flex-col items-center gap-1">
               <Users className="w-6 h-6 text-blue-700" />
               <span className="text-base font-bold text-gray-900">892K</span>
@@ -268,9 +270,13 @@ export default function AudienceInsights() {
         </aside>
 
         <main className="flex-1 min-w-0">
-          <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-white rounded-lg px-6 pt-2">
-            <div className="flex items-center gap-8 ">
+          <div className="flex items-center justify-between border-b border-[#E5E7EB] bg-white rounded-lg px-4 sm:px-6 pt-2 gap-3">
+            <div className="flex items-center gap-5 sm:gap-8 overflow-x-auto no-scrollbar">
               <NavItem
+                label="Audience Insights"
+                icon={<Users size={20} strokeWidth={2.5} />}
+                active
+              /> <NavItem
                 label="Statistics & Media"
                 icon={<Users size={20} strokeWidth={2.5} />}
               />
@@ -278,11 +284,7 @@ export default function AudienceInsights() {
                 label="Stories & Hashtags"
                 icon={<Sparkles size={20} strokeWidth={2.5} />}
               />
-              <NavItem
-                label="Audience Insights"
-                icon={<Users size={20} strokeWidth={2.5} />}
-                active
-              />
+             
               <NavItem
                 label="Lookalike Creator"
                 icon={<Users size={20} strokeWidth={2.5} />}
@@ -297,10 +299,10 @@ export default function AudienceInsights() {
             </button>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 mt-3">
-            <div className="bg-white rounded-xl border border-[#E5E7EB]  p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-3 lg:px-0">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Audience Quality Score" />
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-5 flex-wrap sm:flex-nowrap">
                 <div className="relative shrink-0">
                   <DonutChart percentage={92} />
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -324,10 +326,10 @@ export default function AudienceInsights() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Audience Authenticity" />
 
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-5 flex-wrap sm:flex-nowrap">
                 <div className="relative shrink-0">
                   <DonutChart percentage={91} />
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
@@ -353,7 +355,7 @@ export default function AudienceInsights() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Gender Split" />
 
               <div className="flex items-center justify-between gap-5">
@@ -384,8 +386,8 @@ export default function AudienceInsights() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 mt-3">
-            <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-3 px-3 lg:px-0">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Age Distribution" />
 
               <div className="flex flex-col gap-4">
@@ -407,7 +409,7 @@ export default function AudienceInsights() {
               </div>
             </div>
 
-            <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Top Countries" />
 
               <div className="flex flex-col gap-4">
@@ -439,7 +441,7 @@ export default function AudienceInsights() {
               </span>
             </div>
 
-            <div className="bg-white rounded-xl border border-[#E5E7EB] p-6">
+            <div className="bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Audience Languages" />
 
               <div className="flex flex-col gap-4">
@@ -465,8 +467,8 @@ export default function AudienceInsights() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 mt-3 mb-6">
-            <div className="col-span-1 bg-white rounded-xl border border-[#E5E7EB] p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 mt-3 mb-6 px-3 lg:px-0">
+            <div className="lg:col-span-1 bg-white rounded-xl border border-[#E5E7EB] p-4 sm:p-6">
               <CardHeader title="Audience Interests" />
 
               <div className="flex flex-col gap-4">
@@ -492,7 +494,7 @@ export default function AudienceInsights() {
               </span>
             </div>
 
-            <div className="col-span-2 bg-white rounded-3xl border border-[#E5E7EB] shadow-sm p-6 flex flex-col">
+            <div className="lg:col-span-2 bg-white rounded-3xl border border-[#E5E7EB] shadow-sm p-4 sm:p-6 flex flex-col">
               <div className="flex items-center gap-2 mb-5">
                 <Sparkles className="w-4 h-4 text-[#5B3DF5]" />
                 <h3 className="text-[15px] font-bold text-[#462fba]">
@@ -501,7 +503,7 @@ export default function AudienceInsights() {
                 <Info className="w-3.5 h-3.5 text-gray-400" />
               </div>
 
-              <div className="bg-[#F3F0FF] rounded-2xl px-6 py-4 text-center mb-6">
+              <div className="bg-[#F3F0FF] rounded-2xl px-4 sm:px-6 py-4 text-center mb-6">
                 <p className="text-sm text-[#5B3DF5]  border-[#5B3DF5] font-extrabold">
                   Your audience is young, female-dominant, and highly engaged in
                   lifestyle, beauty, and travel content. They value
@@ -509,7 +511,7 @@ export default function AudienceInsights() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-8 flex-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 flex-1">
                 <div>
                   <h4 className="text-sm font-extrabold text-[#462fba] mb-4">
                     Key Recommendations

@@ -1,4 +1,5 @@
 import img1 from "../assets/img1.png";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   BadgeCheck,
   MapPin,
@@ -58,7 +59,7 @@ const InfoLabel = ({ title }) => (
 
 const Card = ({ children, className = "" }) => (
   <div
-    className={`bg-white rounded-2xl border border-[#E5E7EB] shadow-sm p-6 ${className}`}
+    className={`bg-white rounded-2xl border border-[#E5E7EB] shadow-sm p-4 sm:p-6 ${className}`}
   >
     {children}
   </div>
@@ -151,7 +152,7 @@ const SimilarCreatorCard = ({
   engagement,
 }) => {
   return (
-    <div className="relative w-[290px] h-[140px] rounded-2xl border border-[#E5E7EB] bg-white px-2 py-2">
+    <div className="relative w-[260px] sm:w-[290px] h-[140px] shrink-0 rounded-2xl border border-[#E5E7EB] bg-white px-2 py-2">
       <div className="flex items-center h-full gap-2">
         {/* Avatar */}
         <div className="">
@@ -398,45 +399,80 @@ const keyRecommendations = [
     subtitle: "Authentic audience with high interactions",
   },
 ];
+
 function TopTabs() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const tabs = [
-    { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={16} /> },
-    { label: "Audience Insights", icon: <Users size={16} /> },
-    { label: "Lookalike Creator", icon: <UserPlus size={16} /> , active: true  },
-    { label: "Contact Info", icon: <User size={16} />},
+    {
+      label: "Lookalike Creator",
+      icon: <UserPlus className="w-4 h-4" />,
+      path: "/lookalike",
+    },
+    {
+      label: "Contact Info",
+      icon: <User className="w-4 h-4" />,
+      path: "/contact",
+    },
+    {
+      label: "Statistics & Media",
+      icon: <BarChart3 className="w-4 h-4" />,
+      path: "/Statsandmedia",
+    },
+    {
+      label: "Stories & Hashtags",
+      icon: <Layers className="w-4 h-4" />,
+      path: "/StoryAndHastag",
+    },
+    {
+      label: "Audience Insights",
+      icon: <Users className="w-4 h-4" />,
+      path: "/audience-insight",
+    },
+    
   ];
+
   return (
-    <div className="flex items-center justify-between border-b border-gray-100 bg-white px-8 pt-6">
-      <div className="flex gap-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.label}
-            className={`flex items-center gap-2 pb-2 text-sm font-medium transition ${
-              tab.active
-                ? "border-b-2 border-violet-900 text-violet-900 font-extrabold"
-                : "border-b-2 border-transparent text-gray-900 font-extrabold hover:text-gray-700"
-            }`}
-          >
-            {tab.icon}
-            {tab.label}
-          </button>
-        ))}
+    <div className="flex items-center justify-between border-b border-[#ECECEC] px-2 sm:px-6 pt-3 pb-1 overflow-x-auto scrollbar-none gap-4">
+      <div className="flex gap-6 sm:gap-8 min-w-max">
+        {tabs.map((tab) => {
+          const isActive =
+            location.pathname === tab.path ||
+            (tab.path === "/Statsandmedia" &&
+              (location.pathname === "/Statsandmedia" ||
+                location.pathname === "/"));
+          return (
+            <button
+              key={tab.label}
+              onClick={() => navigate(tab.path)}
+              className={`flex items-center gap-2 pb-2.5 text-xs sm:text-sm transition whitespace-nowrap cursor-pointer ${
+                isActive
+                  ? "border-b-2 border-[#5B3DF5] text-[#5B3DF5] font-bold"
+                  : "border-b-2 border-transparent text-[#6B7280] font-semibold hover:text-[#1F2937]"
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
-      <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
-        <X className="w-5 h-5 text-zinc-900" />
+      <button className="mb-2 w-7 h-7 rounded-md bg-white border border-[#E5E7EB] flex items-center justify-center shrink-0 ml-2 cursor-pointer hover:bg-gray-50">
+        <X className="w-4 h-4 text-[#1F2937]" />
       </button>
     </div>
   );
 }
+
 function ProfileSidebar() {
   return (
-    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
+    <aside className="w-full lg:w-[320px] lg:shrink-0 bg-white rounded-lg border border-gray-200  p-6 pb-2 flex flex-col items-center">
       <div className="relative ">
         <img
           src={img1}
           alt="Isabella Martinez"
-          className="w-[230px] h-[230px] rounded-full object-cover"
+          className="w-[180px] h-[180px] sm:w-[230px] sm:h-[230px] rounded-full object-cover"
         />
       </div>
 
@@ -484,7 +520,7 @@ function ProfileSidebar() {
         </button>
       </div>
 
-      <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
+      <div className="w-full flex items-center justify-between mt-3 pt-3 border-t border-[#E5E7EB]">
         <div className="flex flex-col items-center gap-1">
           <Users className="w-6 h-6 text-blue-700" />
           <span className="text-base font-bold text-gray-900">892K</span>
@@ -504,23 +540,26 @@ function ProfileSidebar() {
     </aside>
   );
 }
+
 export default function LookalikeCreator() {
   return (
     <div className="min-h-screen w-full bg-[#F8F9FC] p-1 font-[Inter,sans-serif]">
-      <div className="flex gap-3 items-start max-w-[1580px] mx-auto border border-gray-100 bg-white shadow-sm">
+      <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
+
+      <div className="flex flex-col lg:flex-row gap-3 items-stretch lg:items-start max-w-[1580px] mx-auto border border-gray-100 bg-white shadow-sm">
         <ProfileSidebar />
 
-        <main className="flex-1 ">
+        <main className="flex-1 min-w-0">
           <TopTabs />
 
-          <div className="flex flex-col gap-6 mt-6">
-            <Card className="!bg-[#F9F4FF] shadow-none border flex items-center justify-between gap-6">
+          <div className="flex flex-col gap-6 mt-2 px-2 sm:px-0">
+            <Card className="!bg-[#F9F4FF] shadow-none border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="w-11 h-11 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm">
                 <Sparkles className="w-5 h-5 text-[#5B3DF5]" strokeWidth={2} />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-2xl font-bold text-violet-600">
+                  <h3 className="text-xl sm:text-2xl font-bold text-violet-600">
                     AI Matching Engine
                   </h3>
                   <Info className="w-3.5 h-3.5 text-gray-400" />
@@ -531,55 +570,79 @@ export default function LookalikeCreator() {
                   creator match.
                 </p>
               </div>
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="bg-white rounded-xl px-6 py-3 text-center border border-[#E5E7EB]">
+              <div className="flex items-center gap-3 shrink-0 w-full sm:w-auto">
+                <div className="bg-white rounded-xl px-6 py-3 text-center border border-[#E5E7EB] flex-1 sm:flex-none">
                   <p className="text-base font-bold text-[#5B3DF5]">1.2M+</p>
                   <p className="text-xs text-gray-500">Creators Analyzed</p>
                 </div>
-                <div className="bg-white rounded-xl px-6 py-3 text-center border border-[#E5E7EB]">
+                <div className="bg-white rounded-xl px-6 py-3 text-center border border-[#E5E7EB] flex-1 sm:flex-none">
                   <p className="text-base font-bold text-[#5B3DF5]">94%</p>
                   <p className="text-xs text-gray-500">Match Accuracy</p>
                 </div>
               </div>
             </Card>
 
-            <div className="grid grid-cols-3 gap-2">
-              <Card className="col-span-2 flex items-stretch gap-6 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                <div className="flex flex-1 flex-col justify-between">
-                  <div>
-                    <InfoLabel title="Best Match Creator" />
-                    <div className="mt-5 flex items-start gap-4">
-                      <CreatorAvatar src={img1} size="w-40 h-40" rank={1} />
-                      <div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xl font-bold text-gray-900">
-                            Sofia Rodriguez
-                          </span>
-                          <BadgeCheck
-                            className="h-5 w-5 fill-[#5B3DF5] text-[#5B3DF5]"
-                            stroke="white"
-                            strokeWidth={2}
-                          />
-                        </div>
-                        <p className="text-[13px] text-gray-500">
-                          @sofiarodriguez
-                        </p>
-                        <div className="mt-1.5 flex items-center gap-1.5 text-[13px] text-gray-500">
-                          <MapPin className="h-3.5 w-3.5" strokeWidth={2} />
-                          <span>Los Angeles, CA, USA</span>
-                        </div>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          <Pill>Fashion</Pill>
-                          <Pill>Beauty</Pill>
-                          <Pill>Lifestyle</Pill>
-                          <Pill>Wellness</Pill>
-                          <Pill>Travel</Pill>
-                        </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+              <Card className="lg:col-span-2 flex flex-col rounded-2xl border border-gray-100 bg-white p-4 sm:p-6 shadow-sm">
+                <div className="flex sm:hidden flex-col w-full relative">
+                  <InfoLabel title="Best Match Creator" />
+
+                  <div className="flex flex-row items-center justify-between gap-2 w-full mt-4 mb-4">
+                    <CreatorAvatar
+                      src={img1}
+                      size="w-32 h-28 shrink-0"
+                      rank={1}
+                    />
+
+                    <div
+                      className="flex flex-row items-center gap-2 overflow-x-auto shrink-0"
+                      style={{ scrollbarWidth: "none" }}
+                    >
+                      <div className="flex items-center justify-center w-15 h-15 rounded-full border-[6px] border-[#5B3DF5] bg-white shrink-0">
+                        <span className="text-[13px] font-bold text-[#5B3DF5]">
+                          94%
+                        </span>
                       </div>
+
+                      <span className="shrink-0 rounded-md bg-emerald-50 px-2.5 py-1.5 text-[9px] font-bold uppercase tracking-wide text-emerald-600">
+                        Excellent
+                      </span>
+
+                      <button className="shrink-0 rounded-lg border border-[#E9D5FF] px-3 py-1.5 text-[10px] font-semibold text-[#5B3DF5] transition-colors hover:bg-purple-50">
+                        View Profile
+                      </button>
                     </div>
                   </div>
 
-                  <div className="mt-8 flex items-center gap-1">
+                  <div className="flex flex-col items-start w-full">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-lg font-bold text-gray-900">
+                        Sofia Rodriguez
+                      </span>
+                      <BadgeCheck
+                        className="h-5 w-5 fill-[#5B3DF5] text-[#5B3DF5]"
+                        stroke="white"
+                        strokeWidth={2}
+                      />
+                    </div>
+                    <p className="text-[13px] text-gray-500 mb-2">
+                      @sofiarodriguez
+                    </p>
+                    <div className="flex items-center gap-1.5 text-[13px] text-gray-500 mb-3">
+                      <MapPin className="h-3.5 w-3.5" strokeWidth={2} />
+                      <span>Los Angeles, CA, USA</span>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      <Pill>Fashion</Pill>
+                      <Pill>Beauty</Pill>
+                      <Pill>Lifestyle</Pill>
+                      <Pill>Wellness</Pill>
+                      <Pill>Travel</Pill>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2 w-full pt-4 border-t border-gray-100">
                     <BestMatchStat
                       icon={Users}
                       value="892K"
@@ -598,53 +661,112 @@ export default function LookalikeCreator() {
                   </div>
                 </div>
 
-                <div className="flex shrink-0 flex-col items-center justify-between border-l border-transparent pl-2">
-                  <div className="flex flex-col items-center">
-                    <div className="relative h-28 w-28">
-                      <svg
-                        viewBox="0 0 100 100"
-                        className="h-full w-full -rotate-90"
-                      >
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="44"
-                          fill="none"
-                          stroke="#F3F0FF"
-                          strokeWidth="8"
+                <div className="hidden sm:flex flex-row items-stretch gap-6 w-full">
+                  <div className="flex flex-1 flex-col justify-between">
+                    <div>
+                      <InfoLabel title="Best Match Creator" />
+                      <div className="mt-5 flex items-start gap-4">
+                        <CreatorAvatar
+                          src={img1}
+                          size="w-28 h-28 sm:w-40 sm:h-40"
+                          rank={1}
                         />
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="44"
-                          fill="none"
-                          stroke="#5B3DF5"
-                          strokeWidth="8"
-                          strokeLinecap="round"
-                          strokeDasharray={`${2 * Math.PI * 44}`}
-                          strokeDashoffset={`${2 * Math.PI * 44 * (1 - 0.94)}`}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center pt-1">
-                        <span className="text-2xl font-bold text-[#5B3DF5]">
-                          94%
-                        </span>
-                        <span className="text-[10px] font-medium text-emerald-500">
-                          Match Score
-                        </span>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xl font-bold text-gray-900">
+                              Sofia Rodriguez
+                            </span>
+                            <BadgeCheck
+                              className="h-5 w-5 fill-[#5B3DF5] text-[#5B3DF5]"
+                              stroke="white"
+                              strokeWidth={2}
+                            />
+                          </div>
+                          <p className="text-[13px] text-gray-500">
+                            @sofiarodriguez
+                          </p>
+                          <div className="mt-1.5 flex items-center gap-1.5 text-[13px] text-gray-500">
+                            <MapPin className="h-3.5 w-3.5" strokeWidth={2} />
+                            <span>Los Angeles, CA, USA</span>
+                          </div>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            <Pill>Fashion</Pill>
+                            <Pill>Beauty</Pill>
+                            <Pill>Lifestyle</Pill>
+                            <Pill>Wellness</Pill>
+                            <Pill>Travel</Pill>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <span className="mt-3 rounded-md bg-emerald-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-wide text-emerald-600">
-                      Excellent Match
-                    </span>
-                    <button className="mt-2 w-full rounded-lg border border-[#E9D5FF] px-4 py-2 text-sm font-semibold text-[#5B3DF5] transition-colors hover:bg-purple-50">
-                      View Profile
-                    </button>
+
+                    <div className="mt-8 flex items-center gap-1 flex-wrap">
+                      <BestMatchStat
+                        icon={Users}
+                        value="892K"
+                        label="Followers"
+                      />
+                      <BestMatchStat
+                        icon={TrendingUp}
+                        value="6.12%"
+                        label="Engagement"
+                      />
+                      <BestMatchStat
+                        icon={Heart}
+                        value="58.7K"
+                        label="Avg. Likes"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex shrink-0 flex-col items-center justify-between border-l border-transparent pl-2">
+                    <div className="flex flex-col items-center">
+                      <div className="relative h-28 w-28">
+                        <svg
+                          viewBox="0 0 100 100"
+                          className="h-full w-full -rotate-90"
+                        >
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="44"
+                            fill="none"
+                            stroke="#F3F0FF"
+                            strokeWidth="8"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="44"
+                            fill="none"
+                            stroke="#5B3DF5"
+                            strokeWidth="8"
+                            strokeLinecap="round"
+                            strokeDasharray={`${2 * Math.PI * 44}`}
+                            strokeDashoffset={`${2 * Math.PI * 44 * (1 - 0.94)}`}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center pt-1">
+                          <span className="text-2xl font-bold text-[#5B3DF5]">
+                            94%
+                          </span>
+                          <span className="text-[10px] font-medium text-emerald-500">
+                            Match Score
+                          </span>
+                        </div>
+                      </div>
+                      <span className="mt-3 rounded-md bg-emerald-50 px-4 py-1.5 text-[11px] font-bold uppercase tracking-wide text-emerald-600">
+                        Excellent Match
+                      </span>
+                      <button className="mt-2 w-full rounded-lg border border-[#E9D5FF] px-4 py-2 text-sm font-semibold text-[#5B3DF5] transition-colors hover:bg-purple-50">
+                        View Profile
+                      </button>
+                    </div>
                   </div>
                 </div>
               </Card>
 
-              <Card className="col-span-1 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+              <Card className="lg:col-span-1 rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
                 <InfoLabel title="Match Breakdown" />
                 <div className="flex flex-col gap-5 mt-6">
                   {matchBreakdown.map((m) => (
@@ -654,12 +776,13 @@ export default function LookalikeCreator() {
               </Card>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
-              <Card className="col-span-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+              <Card className="lg:col-span-3">
                 <div className="flex items-center justify-between">
                   <InfoLabel title="Similar Creators" />
-                  <button className="text-sm font-medium text-[#5B3DF5] flex items-center gap-1">
-                    View All Creators
+                  <button className="text-sm font-medium text-[#5B3DF5] flex items-center gap-1 shrink-0">
+                    <span className="hidden sm:inline">View All Creators</span>
+                    <span className="sm:hidden">View All</span>
                     <ArrowRight className="w-3.5 h-3.5" strokeWidth={2} />
                   </button>
                 </div>
@@ -667,7 +790,7 @@ export default function LookalikeCreator() {
                   {/* <button className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center shrink-0 hover:bg-gray-200">
                     <ChevronLeft className="w-4 h-4 text-gray-500" />
                   </button> */}
-                  <div className="flex gap-2 flex-1">
+                  <div className="flex gap-2 flex-1 overflow-x-auto no-scrollbar">
                     {similarCreators.map((c) => (
                       <SimilarCreatorCard key={c.handle} {...c} />
                     ))}
@@ -682,7 +805,7 @@ export default function LookalikeCreator() {
             <Card>
               <InfoLabel title="Creator Comparison Snapshot" />
               <div className="overflow-x-auto mt-4">
-                <table className="w-full">
+                <table className="w-full min-w-[640px]">
                   <thead>
                     <tr className="text-left text-xs text-gray-600">
                       <th className="font-extrabold pb-2 pr-4"></th>
@@ -740,7 +863,7 @@ export default function LookalikeCreator() {
                 ))}
               </div>
 
-              <div className="flex gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row gap-3 mt-6">
                 <button className="flex-1 bg-[#5B3DF5] text-white rounded-xl py-3 text-sm font-medium flex items-center justify-center gap-2 hover:bg-[#4c30e0]">
                   <Star className="w-4 h-4" strokeWidth={2} />
                   Add to Shortlist
