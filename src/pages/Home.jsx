@@ -36,7 +36,7 @@ const Home = () => {
           title="Creator Discovery"
           theme="indigo"
         /> */}
-        <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
+       
         <PortalCard
           to="/Statsandmedia"
           title="Stats and Media Page"
@@ -53,7 +53,7 @@ const Home = () => {
           theme="sky"
         />
         <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
-        <PortalCard to="/contact" title="Contact Page" theme="sky" />
+        <PortalCard to="/contact" title="Contact Page" theme="sky" /> <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
         <PortalCard to="/performance" title="Performance Page" theme="sky" />
         <PortalCard to="/overview" title="Overview Page" theme="sky" />
         <PortalCard to="/content" title="Content Page" theme="sky" />
