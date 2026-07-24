@@ -2,7 +2,6 @@ import { useRef } from "react";
 import TopTabs from "../components/TopTabs";
 import {
   Users,
-
   Star,
   TrendingUp,
   Heart,
@@ -66,19 +65,22 @@ function ViewLink({ children }) {
    Left sidebar
 --------------------------------------------------------- */
 
-
-
 /* ---------------------------------------------------------
    Top tabs
 --------------------------------------------------------- */
-
-
 
 /* ---------------------------------------------------------
    Row 1 — analytics stat cards
 --------------------------------------------------------- */
 
-function AnalyticsStatCard({ icon: Icon, title, value, subtitle, delta, hasInfo = false }) {
+function AnalyticsStatCard({
+  icon: Icon,
+  title,
+  value,
+  subtitle,
+  delta,
+  hasInfo = false,
+}) {
   return (
     <div className="flex-1 rounded-2xl border border-[#ECECEC] bg-white p-3.5 sm:p-4 shadow-sm min-w-0">
       <div className="flex items-center justify-between">
@@ -90,7 +92,9 @@ function AnalyticsStatCard({ icon: Icon, title, value, subtitle, delta, hasInfo 
           {hasInfo && <Info className="h-3 w-3 text-[#6B7280]" />}
         </div>
       </div>
-      <p className="mt-2 text-xl sm:text-2xl font-bold text-[#1F2937]">{value}</p>
+      <p className="mt-2 text-xl sm:text-2xl font-bold text-[#1F2937]">
+        {value}
+      </p>
       <div className="mt-1 flex items-center justify-between text-[10px] sm:text-[11px]">
         <span className="text-[#6B7280]">{subtitle}</span>
         <div className="flex items-center gap-1">
@@ -247,7 +251,9 @@ function ContentFormatPerformanceCard() {
                     className="h-2.5 w-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: s.color }}
                   />
-                  <span className="text-xs font-semibold text-[#1F2937]">{s.label}</span>
+                  <span className="text-xs font-semibold text-[#1F2937]">
+                    {s.label}
+                  </span>
                 </div>
                 <div className="text-right">
                   <p className="text-xs font-bold text-[#1F2937]">
@@ -746,7 +752,8 @@ function AIPerformanceSummaryCard() {
         <span className="font-bold text-[#5B3DF5]">60% higher</span> than
         similar creators.
         <br />
-        Reels drive the most engagement, especially lifestyle and travel content.
+        Reels drive the most engagement, especially lifestyle and travel
+        content.
       </div>
 
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3 border-t border-[#ECECEC] pt-3">
@@ -788,7 +795,8 @@ function AIPerformanceSummaryCard() {
             Recommendation
           </h4>
           <p className="mb-2 text-[10px] text-[#6B7280] leading-tight">
-            Increase posting frequency to 4-5 times per week to boost reach and engagement.
+            Increase posting frequency to 4-5 times per week to boost reach and
+            engagement.
           </p>
           <div className="flex items-end justify-between gap-1 h-10 px-2 py-1 bg-[#F5F3FF] rounded-lg">
             <div className="flex items-end gap-1 h-full flex-1">
@@ -801,7 +809,13 @@ function AIPerformanceSummaryCard() {
               ))}
             </div>
             <div className="text-[#5B3DF5] pl-1">
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <svg
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
                 <path d="M23 6l-9.5 9.5-5-5L1 18" />
                 <path d="M17 6h6v6" />
               </svg>
@@ -822,11 +836,8 @@ export default function StatisticsMedia() {
       <ProfileSidebar />
 
       <main className="flex-1 border-t xl:border-t-0 xl:border-l border-[#ECECEC] bg-white flex flex-col min-w-0">
-
         <div className="sticky top-0 z-30 bg-white border-b border-[#ECECEC] p-2">
-         
-        <TopTabs activeTab="/Statsandmedia" />
-          
+          <TopTabs activeTab="/Statsandmedia" />
         </div>
 
         {/* Scrollable Content */}
@@ -855,7 +866,6 @@ export default function StatisticsMedia() {
             </div>
           </div>
         </div>
-
       </main>
     </div>
   );
