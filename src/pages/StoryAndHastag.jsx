@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Users,
   UserPlus,
@@ -19,6 +20,8 @@ import {
   ChevronRight,
   CheckCircle2,
   BarChart3,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 
 import img1 from "../assets/img1.png";
@@ -33,23 +36,6 @@ import highlight6 from "../assets/food.jpg";
    Small reusable primitives
 --------------------------------------------------------- */
 
-// function TagPill({ children }) {
-//   return (
-//     <span className="inline-flex items-center rounded-full border border-[#5B3DF5]/30 bg-[#5B3DF5]/5 px-3 py-1 text-xs font-medium text-[#5B3DF5]">
-//       {children}
-//     </span>
-//   );
-// }
-
-// function StatItem({ value, label }) {
-//   return (
-//     <div className="flex flex-1 flex-col items-center">
-//       <span className="text-lg font-bold text-[#1F2937]">{value}</span>
-//       <span className="text-xs text-[#6B7280]">{label}</span>
-//     </div>
-//   );
-// }
-
 function ProgressBar({ percent, colorClass = "bg-[#5B3DF5]" }) {
   return (
     <div className="h-1.5 w-full overflow-hidden rounded-full bg-[#ECECEC]">
@@ -60,23 +46,6 @@ function ProgressBar({ percent, colorClass = "bg-[#5B3DF5]" }) {
     </div>
   );
 }
-
-// function Button({ variant = "primary", icon: Icon, children, className = "" }) {
-//   const base =
-//     "flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition";
-//   const variants = {
-//     primary:
-//       "bg-gradient-to-r from-[#5B3DF5] to-[#7C5CFF] text-white shadow-sm hover:opacity-95",
-//     outline:
-//       "border border-[#ECECEC] bg-white text-[#1F2937] hover:bg-[#FAFAFC]",
-//   };
-//   return (
-//     <button className={`${base} ${variants[variant]} ${className}`}>
-//       {Icon && <Icon className="h-4 w-4" />}
-//       {children}
-//     </button>
-//   );
-// }
 
 function CardHeader({ title, action }) {
   return (
@@ -90,22 +59,14 @@ function CardHeader({ title, action }) {
   );
 }
 
-// function ViewMoreLink() {
-//   return (
-//     <button className="mt-4 text-sm font-medium text-[#5B3DF5] hover:underline">
-//       View More
-//     </button>
-//   );
-// }
-
 /* ---------------------------------------------------------
-   Left sidebar
+   Left sidebar (Desktop)
 --------------------------------------------------------- */
 
 function ProfileSidebar() {
   return (
-    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
-      <div className="relative ">
+    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200 p-6 flex flex-col items-center">
+      <div className="relative">
         <img
           src={img1}
           alt="Isabella Martinez"
@@ -113,7 +74,7 @@ function ProfileSidebar() {
         />
       </div>
 
-      <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
+      <h2 className="text-lg font-bold text-gray-900 mt-2">Isabella Martinez</h2>
       <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
 
       <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
@@ -179,7 +140,7 @@ function ProfileSidebar() {
 }
 
 /* ---------------------------------------------------------
-   Top tabs
+   Top tabs (Desktop)
 --------------------------------------------------------- */
 
 function TopTabs() {
@@ -226,10 +187,10 @@ function StoryActivityCard() {
   ];
 
   return (
-    <div className="flex-1 rounded-2xl border border-[#ECECEC] bg-white p-3 shadow-sm">
+    <div className="h-full rounded-2xl border border-[#ECECEC] bg-white p-4 shadow-sm flex flex-col justify-between">
       <CardHeader title="Story Activity" />
 
-      <div className="grid grid-cols-[120px_auto] items-start gap-4">
+      <div className="flex flex-col sm:flex-row md:grid md:grid-cols-[120px_auto] items-center sm:items-start gap-4">
         <div className="relative flex h-28 w-28 shrink-0 items-center justify-center">
           <svg viewBox="0 0 120 120" className="h-28 w-28 -rotate-90">
             <circle
@@ -270,8 +231,8 @@ function StoryActivityCard() {
           </div>
         </div>
 
-        <div className="flex flex-col">
-          <p className="mb-2 text-xs font-bold text-zinc-700">
+        <div className="flex flex-col w-full">
+          <p className="mb-2 text-xs font-bold text-zinc-700 text-center sm:text-left">
             Active Story Series
           </p>
           <div className="space-y-2.5">
@@ -280,7 +241,7 @@ function StoryActivityCard() {
                 <img
                   src={s.img}
                   alt={s.title}
-                  className="h-10 w-10 rounded-full object-cover"
+                  className="h-10 w-10 rounded-full object-cover shrink-0"
                 />
                 <div>
                   <p className="text-xs font-bold leading-tight text-[#1F2937]">
@@ -294,8 +255,8 @@ function StoryActivityCard() {
         </div>
       </div>
 
-      <div className=" mt-3 flex justify-center">
-        <div className="rounded-md bg-[#F5F1FF] px-4 py-1 text-[15px] font-bold text-[#5B3DF5]">
+      <div className="mt-4 flex justify-center">
+        <div className="rounded-md bg-[#F5F1FF] px-4 py-1.5 text-xs sm:text-[15px] font-bold text-[#5B3DF5] text-center">
           Avg. Stories per Month: 62
         </div>
       </div>
@@ -316,7 +277,7 @@ function ContentThemesCard() {
   ];
 
   return (
-    <div className="flex-1 rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm">
+    <div className="h-full rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm flex flex-col justify-between">
       <CardHeader title="Content Themes" />
       <div className="space-y-4">
         {themes.map(({ label, icon: Icon, percent }) => (
@@ -357,18 +318,16 @@ function HashtagsCard() {
     { tag: "#wellness", count: 42 },
     { tag: "#shopmylook", count: 38 },
     { tag: "#beachlife", count: 35 },
-    // { tag: "#grwm", count: 33 },
-    // { tag: "#healthyhabits", count: 29 },
   ];
 
   return (
-    <div className="flex-1 rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm">
+    <div className="h-full rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm flex flex-col justify-between">
       <CardHeader title="Top Hashtags" />
       <div className="flex flex-wrap gap-2">
         {hashtags.map(({ tag, count }) => (
           <span
             key={tag}
-            className="flex items-center gap-1.5 rounded-lg border border-violet-300 bg-[#FAFAFC] px-2 py-1 text-[8px] font-semibold text-violet-700"
+            className="flex items-center gap-1.5 rounded-lg border border-violet-300 bg-[#FAFAFC] px-2.5 py-1 text-xs font-semibold text-violet-700"
           >
             {tag}
             <span className="text-[#4926f6]">{count}</span>
@@ -400,7 +359,7 @@ function BrandMentionsCard() {
   const maxValue = 38;
 
   return (
-    <div className="flex-1 rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm">
+    <div className="h-full rounded-2xl border border-[#ECECEC] bg-white p-5 shadow-sm flex flex-col justify-between">
       <CardHeader title="Brand Mentions" />
       <div className="space-y-4">
         {brands.map(({ name, value, percent, bg }) => (
@@ -408,9 +367,9 @@ function BrandMentionsCard() {
             <span
               className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${bg}`}
             />
-            <span className="w-28 shrink-0 text-sm text-[#1F2937]">{name}</span>
+            <span className="w-24 sm:w-28 shrink-0 text-xs sm:text-sm text-[#1F2937] truncate">{name}</span>
             <ProgressBar percent={(value / maxValue) * 100} />
-            <span className="w-16 shrink-0 text-right text-sm font-medium text-[#1F2937]">
+            <span className="w-16 sm:w-20 shrink-0 text-right text-xs sm:text-sm font-medium text-[#1F2937]">
               {value} ({percent})
             </span>
           </div>
@@ -457,9 +416,9 @@ function HighlightCollectionsCard() {
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {highlights.map(({ img, title, count, featured }) => (
-          <div key={title} className="w-[170px]">
+          <div key={title} className="w-full md:w-[170px]">
             <div className="relative h-[90px] overflow-hidden rounded-md">
               <img
                 src={img}
@@ -481,7 +440,7 @@ function HighlightCollectionsCard() {
             <p className="text-[10px] text-[#6B7280]">{count}</p>
           </div>
         ))}
-      </div>{" "}
+      </div>
       <div className="mt-5 flex justify-center">
         <button className="text-sm font-bold text-violet-700 hover:underline">
           View More
@@ -510,52 +469,52 @@ function AIContentIntelligenceCard() {
   ];
 
   return (
-    <div className="mt-5 rounded-2xl border border-[#ECECEC] bg-white p-6 shadow-sm">
+    <div className="mt-5 rounded-2xl border border-[#ECECEC] bg-white p-4 sm:p-6 shadow-sm">
       <div className="mb-4 flex items-center gap-1.5">
         <Sparkles className="h-5 w-5 text-[#5B3DF5]" />
-        <h3 className="text-[19px] font-bold text-violet-700">
+        <h3 className="text-base sm:text-[19px] font-bold text-violet-700">
           AI Content Intelligence
         </h3>
         <Info className="h-3.5 w-3.5 text-[#6B7280]" />
       </div>
 
-      <div className="rounded-xl bg-[#5B3DF5]/5 px-6 py-4 text-center text-sm text-[#5B3DF5]">
+      <div className="rounded-xl bg-[#5B3DF5]/5 px-4 sm:px-6 py-3 sm:py-4 text-center text-xs sm:text-sm text-[#5B3DF5]">
         Isabella's story content drives{" "}
         <span className="font-semibold text-[#5B3DF5]">2.1x</span> higher
         engagement than her feed posts.
-        <br />
-        Skincare and travel themes <span className="italic">
+        <br className="hidden sm:block" />
+        {" "}Skincare and travel themes <span className="italic">
           resonate most
         </span>{" "}
         with her audience.
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-0 border-t border-[#ECECEC] pt-6">
-        <div className="border-r border-gray-200  ">
-          <h4 className="mb-3 text-md font-bold text-violet-800">
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-0 border-t border-[#ECECEC] pt-6">
+        <div className="border-b md:border-b-0 md:border-r border-gray-200 pb-6 md:pb-0 md:pr-4">
+          <h4 className="mb-3 text-sm sm:text-md font-bold text-violet-800">
             Key Recommendations
           </h4>
           <ul className="space-y-3">
             {recommendations.map((text) => (
               <li
                 key={text}
-                className="flex items-start gap-2 text-sm text-[#1F2937]"
+                className="flex items-start gap-2 text-xs sm:text-sm text-[#1F2937]"
               >
-                <CheckCircle2 className="mt-0.5 h-6 w-6 shrink-0 text-[#5B3DF5]" />
+                <CheckCircle2 className="mt-0.5 h-5 w-5 sm:h-6 sm:w-6 shrink-0 text-[#5B3DF5]" />
                 {text}
               </li>
             ))}
           </ul>
         </div>
-        <div className="ml-5">
-          <h4 className="mb-3 text-md font-bold text-violet-800">
+        <div className="md:ml-5">
+          <h4 className="mb-3 text-sm sm:text-md font-bold text-violet-800">
             Content Insights
           </h4>
           <ul className="space-y-3">
             {insights.map((text) => (
               <li
                 key={text}
-                className="flex items-start gap-2 text-sm text-[#1F2937]"
+                className="flex items-start gap-2 text-xs sm:text-sm text-[#1F2937]"
               >
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#22C55E]" />
                 {text}
@@ -565,7 +524,7 @@ function AIContentIntelligenceCard() {
         </div>
       </div>
 
-      <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#5231f7] to-[#6640ff] py-3 text-sm font-semibold text-white shadow-sm hover:opacity-95">
+      <button className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#5231f7] to-[#6640ff] py-3 text-xs sm:text-sm font-semibold text-white shadow-sm hover:opacity-95">
         <BarChart3 className="h-4 w-4" />
         View Full Content Report
       </button>
@@ -574,7 +533,182 @@ function AIContentIntelligenceCard() {
 }
 
 /* ---------------------------------------------------------
-   Page
+   Dedicated Mobile View Component
+--------------------------------------------------------- */
+
+function MobileView() {
+  const [profileExpanded, setProfileExpanded] = useState(false);
+  const [activeTab, setActiveTab] = useState("Stories & Hashtags");
+
+  const tabs = [
+    { label: "Statistics & Media", icon: <BarChart3 size={15} /> },
+    { label: "Stories & Hashtags", icon: <Layers size={15} /> },
+    { label: "Audience Insights", icon: <Users size={15} /> },
+    { label: "Lookalike Creator", icon: <UserPlus size={15} /> },
+    { label: "Contact Info", icon: <User size={15} /> },
+  ];
+
+  return (
+    <div className="block md:hidden min-h-screen bg-[#F8F9FC] text-gray-900 pb-12">
+      {/* Mobile Top App Header */}
+      <header className="sticky top-0 z-30 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between shadow-xs">
+        <div className="flex items-center gap-3">
+          <img
+            src={img1}
+            alt="Isabella Martinez"
+            className="w-9 h-9 rounded-full object-cover ring-2 ring-violet-500/20"
+          />
+          <div>
+            <h1 className="text-sm font-bold text-gray-900 leading-tight">
+              Isabella Martinez
+            </h1>
+            <p className="text-[11px] text-gray-500">@isabellamarts</p>
+          </div>
+        </div>
+        <button
+          onClick={() => setProfileExpanded(!profileExpanded)}
+          className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-lg bg-violet-50 text-violet-700 border border-violet-100"
+        >
+          {profileExpanded ? "Hide Profile" : "Profile Details"}
+          {profileExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+        </button>
+      </header>
+
+      {/* Expandable Mobile Profile Sheet */}
+      {profileExpanded && (
+        <div className="bg-white border-b border-gray-200 p-4 shadow-sm">
+          <div className="flex flex-col items-center text-center">
+            <img
+              src={img1}
+              alt="Isabella Martinez"
+              className="w-20 h-20 rounded-full object-cover ring-4 ring-violet-100 mb-2"
+            />
+            <h2 className="text-base font-bold text-gray-900">Isabella Martinez</h2>
+            <p className="text-xs text-gray-400">@isabellamarts</p>
+
+            <div className="flex items-center gap-1 text-gray-500 text-xs mt-1">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>Los Angeles, CA, USA</span>
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-1.5 mt-3">
+              {["Lifestyle", "Fashion", "Travel", "Wellness", "Beauty"].map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2 py-0.5 text-[10px] font-bold text-[#6348e6]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            {/* Quick Stats */}
+            <div className="w-full grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-gray-100">
+              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
+                <Users className="w-4 h-4 text-blue-700 mb-0.5" />
+                <span className="text-xs font-bold text-gray-900">892K</span>
+                <span className="text-[10px] text-gray-400">Followers</span>
+              </div>
+              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
+                <TrendingUp className="w-4 h-4 text-blue-700 mb-0.5" />
+                <span className="text-xs font-bold text-gray-900">6.38%</span>
+                <span className="text-[10px] text-gray-400">Engagement</span>
+              </div>
+              <div className="flex flex-col items-center bg-gray-50 p-2 rounded-xl">
+                <Heart className="w-4 h-4 text-blue-700 mb-0.5" />
+                <span className="text-xs font-bold text-gray-900">57.2K</span>
+                <span className="text-[10px] text-gray-400">Avg Likes</span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="w-full flex flex-col gap-2 mt-4">
+              <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-xs font-semibold rounded-lg py-2.5">
+                <Send className="w-3.5 h-3.5" />
+                Create Campaign
+              </button>
+              <div className="grid grid-cols-2 gap-2">
+                <button className="flex items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg py-2">
+                  <Download className="w-3.5 h-3.5" />
+                  Media Kit
+                </button>
+                <button className="flex items-center justify-center gap-1.5 bg-white border border-gray-200 text-gray-700 text-xs font-bold rounded-lg py-2">
+                  <Star className="w-3.5 h-3.5" />
+                  Favorite
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Summary Stats Strip (collapsed view) */}
+      {!profileExpanded && (
+        <div className="bg-white border-b border-gray-200 px-4 py-2.5 flex items-center justify-around">
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4 text-blue-700" />
+            <div>
+              <span className="text-xs font-bold text-gray-900 block leading-none">892K</span>
+              <span className="text-[9px] text-gray-400">Followers</span>
+            </div>
+          </div>
+          <div className="h-5 w-[1px] bg-gray-200" />
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-4 h-4 text-blue-700" />
+            <div>
+              <span className="text-xs font-bold text-gray-900 block leading-none">6.38%</span>
+              <span className="text-[9px] text-gray-400">Engagement</span>
+            </div>
+          </div>
+          <div className="h-5 w-[1px] bg-gray-200" />
+          <div className="flex items-center gap-2">
+            <Heart className="w-4 h-4 text-blue-700" />
+            <div>
+              <span className="text-xs font-bold text-gray-900 block leading-none">57.2K</span>
+              <span className="text-[9px] text-gray-400">Avg Likes</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Tab Navigation */}
+      <div className="bg-white border-b border-gray-200 px-3 pt-3 overflow-x-auto">
+        <div className="flex gap-2 min-w-max pb-2">
+          {tabs.map((tab) => {
+            const isActive = tab.label === activeTab;
+            return (
+              <button
+                key={tab.label}
+                onClick={() => setActiveTab(tab.label)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition whitespace-nowrap ${
+                  isActive
+                    ? "bg-[#5B3DF5] text-white shadow-xs"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {tab.icon}
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Mobile Content Stack */}
+      <div className="p-3 space-y-3">
+        <StoryActivityCard />
+        <ContentThemesCard />
+        <HashtagsCard />
+        <BrandMentionsCard />
+        <HighlightCollectionsCard />
+        <AIContentIntelligenceCard />
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------
+   Page Export
 --------------------------------------------------------- */
 
 export default function CreatorDashboard() {
@@ -583,10 +717,11 @@ export default function CreatorDashboard() {
       className="min-h-screen bg-[#F8F9FC] p-0 font-sans"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
-      <div className="mx-auto flex max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
+      {/* DESKTOP / LAPTOP / MAC VIEW - Hidden on mobile, visible on md and up */}
+      <div className="hidden md:flex mx-auto max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
         <ProfileSidebar />
 
-        <main className="flex-1  bg-white p-4 shadow-sm">
+        <main className="flex-1 bg-white p-4 shadow-sm">
           <TopTabs />
           <div className="mt-3 flex gap-3">
             <div className="w-[330px]">
@@ -609,6 +744,9 @@ export default function CreatorDashboard() {
           <AIContentIntelligenceCard />
         </main>
       </div>
+
+      {/* MOBILE SCREEN VIEW - Visible only on mobile (< md) */}
+      <MobileView />
     </div>
   );
 }

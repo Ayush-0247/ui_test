@@ -1,3 +1,5 @@
+
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   BarChart3,
   Layers,
@@ -22,7 +24,7 @@ import {
   Trophy,
   Lightbulb,
 } from "lucide-react";
-import img1 from "../assets/img2.png";
+import img2 from "../assets/img2.png";
 /* -------------------------------------------------------------------------
  * DESIGN TOKENS
  * Centralising these means a re-theme only touches this block.
@@ -50,7 +52,7 @@ function Card({ title, icon, tint = false, action, className = "", children }) {
     <div
       className={`rounded-2xl border ${tokens.border} ${
         tint ? tokens.purpleBg : "bg-white"
-      } p-4 shadow-sm ${className}`}
+      } p-3 shadow-sm ${className}`}
     >
       {(title || action) && (
         <div className="mb-4 flex items-center justify-between">
@@ -265,32 +267,46 @@ function RankRow({ rank, label, match }) {
  * TOP NAV TABS
  * ---------------------------------------------------------------------- */
 function TopTabs() {
-  const tabs = [
-    { label: "Statistics & Media", icon: <BarChart3 size={16} /> },
-    { label: "Stories & Hashtags", icon: <Layers size={16} /> },
-    { label: "Audience Insights", icon: <Users size={16} /> },
-    { label: "Lookalike Creator", icon: <UserPlus size={16} /> },
-    { label: "Contact Info", icon: <User size={16} />, active: true },
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const tabs = [ { label: "Contact Info", icon: <User className="w-4 h-4" />, path: "/contact" },
+    {
+      label: "Statistics & Media",
+      icon: <BarChart3 className="w-4 h-4" />,
+      path: "/Statsandmedia",
+    },
+    { label: "Stories & Hashtags", icon: <Layers className="w-4 h-4" />, path: "/StoryAndHastag" },
+    { label: "Audience Insights", icon: <Users className="w-4 h-4" />, path: "/audience-insight" },
+    { label: "Lookalike Creator", icon: <UserPlus className="w-4 h-4" />, path: "/lookalike" },
+   
   ];
+
   return (
-    <div className="flex items-center justify-between border-b border-gray-100 px-8 pt-6">
-      <div className="flex gap-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.label}
-            className={`flex items-center gap-2 pb-2 text-sm font-medium transition ${
-              tab.active
-                ? "border-b-2 border-violet-900 text-violet-900 font-extrabold"
-                : "border-b-2 border-transparent text-gray-900 font-extrabold hover:text-gray-700"
-            }`}
-          >
-            {tab.icon}
-            {tab.label}
-          </button>
-        ))}
+    <div className="flex items-center justify-between border-b border-[#ECECEC] px-2 sm:px-6 pt-3 pb-1 overflow-x-auto scrollbar-none gap-4">
+      <div className="flex gap-6 sm:gap-8 min-w-max">
+        {tabs.map((tab) => {
+          const isActive =
+            location.pathname === tab.path ||
+            (tab.path === "/Statsandmedia" &&
+              (location.pathname === "/Statsandmedia" || location.pathname === "/"));
+          return (
+            <button
+              key={tab.label}
+              onClick={() => navigate(tab.path)}
+              className={`flex items-center gap-2 pb-2.5 text-xs sm:text-sm transition whitespace-nowrap cursor-pointer ${isActive
+                  ? "border-b-2 border-[#5B3DF5] text-[#5B3DF5] font-bold"
+                  : "border-b-2 border-transparent text-[#6B7280] font-semibold hover:text-[#1F2937]"
+                }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
-      <button className="mb-4 w-8 h-8 rounded-md bg-[#ffffff] border border-[#E5E7EB] flex items-center justify-center shrink-0">
-        <X className="w-5 h-5 text-zinc-900" />
+      <button className="mb-2 w-7 h-7 rounded-md bg-white border border-[#E5E7EB] flex items-center justify-center shrink-0 ml-2 cursor-pointer hover:bg-gray-50">
+        <X className="w-4 h-4 text-[#1F2937]" />
       </button>
     </div>
   );
@@ -301,74 +317,79 @@ function TopTabs() {
  * ---------------------------------------------------------------------- */
 function ProfileSidebar() {
   return (
-    <aside className="w-[320px] shrink-0 bg-white rounded-lg border border-gray-200  p-6 flex flex-col items-center">
-      <div className="relative ">
+    <aside className="w-full xl:w-[260px] shrink-0 bg-white rounded-md border border-[#ECECEC] p-5 flex flex-col items-center shadow-sm">
+      <div className="relative">
         <img
-          src={img1}
+          src={img2}
           alt="Isabella Martinez"
-          className="w-[230px] h-[230px] rounded-full object-cover"
+          className="w-[140px] h-[140px] rounded-full object-cover"
         />
+        <div className="absolute bottom-1 right-1 flex items-center justify-center w-6 h-6 rounded-full bg-[#0095F6] text-white ring-2 ring-white shadow-sm">
+          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+          </svg>
+        </div>
       </div>
 
-      <h2 className="text-lg font-bold text-gray-900">Isabella Martinez</h2>
-      <p className="text-sm text-gray-400 mt-0.5">@isabellamarts</p>
+      <h2 className="text-base font-bold text-[#1F2937] mt-3">Isabella Martinez</h2>
+      <p className="text-xs text-[#6B7280] mt-0.5">@isabellamarts</p>
 
-      <div className="flex items-center gap-1 text-gray-500 text-sm mt-2">
-        <MapPin className="w-3.5 h-3.5" />
+      <div className="flex items-center gap-1 text-[#6B7280] text-xs mt-1.5">
+        <MapPin className="w-3.5 h-3.5 text-[#6B7280]" />
         <span>Los Angeles, CA, USA</span>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-2 mt-4">
+      <div className="flex flex-wrap justify-center gap-1.5 mt-3">
         {["Lifestyle", "Fashion", "Travel"].map((tag) => (
           <span
             key={tag}
-            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
+            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F5F3FF] px-2.5 py-0.5 text-[10px] font-bold text-[#6348e6]"
           >
             {tag}
           </span>
         ))}
       </div>
-      <div className="flex flex-wrap justify-center gap-2 mt-2">
+      <div className="flex flex-wrap justify-center gap-1.5 mt-1.5">
         {["Wellness", "Beauty"].map((tag) => (
           <span
             key={tag}
-            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-bold leading-none text-[#6348e6]"
+            className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F5F3FF] px-2.5 py-0.5 text-[10px] font-bold text-[#6348e6]"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <div className="w-full flex flex-col gap-3 mt-6">
-        <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-sm font-semibold rounded-md py-3">
-          <Send className="w-4 h-4" />
+      <div className="w-full flex flex-col sm:flex-row xl:flex-col gap-2 mt-5">
+        <button className="w-full flex items-center justify-center gap-2 bg-[#5B3DF5] text-white text-xs font-semibold rounded-xl py-2.5 shadow-sm transition hover:opacity-95 cursor-pointer">
+          <Send className="w-3.5 h-3.5" />
           Create Campaign
         </button>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-          <Download className="w-5 h-5" />
+        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-[#1F2937] text-xs font-bold rounded-xl py-2.5 transition hover:bg-[#FAFAFC] cursor-pointer">
+          <Download className="w-4 h-4 text-[#6B7280]" />
           Download Media Kit
         </button>
-        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-gray-600 text-sm font-bold rounded-md py-3">
-          <Star className="w-5 h-5" />
+        <button className="w-full flex items-center justify-center gap-2 bg-white border border-[#E5E7EB] text-[#1F2937] text-xs font-bold rounded-xl py-2.5 transition hover:bg-[#FAFAFC] cursor-pointer">
+          <Star className="w-4 h-4 text-[#6B7280]" />
           Add to Favorites
         </button>
       </div>
 
-      <div className="w-full flex items-center justify-between mt-7 pt-6 border-t border-[#E5E7EB]">
-        <div className="flex flex-col items-center gap-1">
-          <Users className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">892K</span>
-          <span className="text-[11px] text-gray-400">Followers</span>
+      <div className="w-full flex items-center justify-between mt-5 pt-4 border-t border-[#E5E7EB]">
+        <div className="flex flex-col items-center gap-0.5">
+          <Users className="w-5 h-5 text-[#5B3DF5]" />
+          <span className="text-sm font-bold text-[#1F2937]">892K</span>
+          <span className="text-[10px] text-[#6B7280]">Followers</span>
         </div>
-        <div className="flex flex-col items-center gap-1">
-          <TrendingUp className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">6.38%</span>
-          <span className="text-[11px] text-gray-400">Engagement</span>
+        <div className="flex flex-col items-center gap-0.5">
+          <TrendingUp className="w-5 h-5 text-[#5B3DF5]" />
+          <span className="text-sm font-bold text-[#1F2937]">6.38%</span>
+          <span className="text-[10px] text-[#6B7280]">Engagement</span>
         </div>
-        <div className="flex flex-col items-center gap-1">
-          <Heart className="w-6 h-6 text-blue-700" />
-          <span className="text-base font-bold text-gray-900">57.2K</span>
-          <span className="text-[11px] text-gray-400">Avg. Likes</span>
+        <div className="flex flex-col items-center gap-0.5">
+          <Heart className="w-5 h-5 text-[#5B3DF5]" />
+          <span className="text-sm font-bold text-[#1F2937]">57.2K</span>
+          <span className="text-[10px] text-[#6B7280]">Avg. Likes</span>
         </div>
       </div>
     </aside>
@@ -496,23 +517,27 @@ function CollaborationPreferencesCard() {
       title="Collaboration Preferences"
       icon={<Info size={12} className="text-gray-300" />}
     >
-      <div className="grid grid-cols-3 gap-3">
-        <div className="border-r border-gray-200 pr-2 ">
-          <p className="mb-1 text-[8px]  uppercase font-bold text-violet-600">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-3">
+        {/* Mobile: Bottom border & padding. Desktop: Right border & padding */}
+        <div className="border-b md:border-b-0 md:border-r border-gray-200 pb-3 md:pb-0 md:pr-2">
+          <p className="mb-2 md:mb-1 text-[10px] md:text-[8px] uppercase tracking-wide font-bold text-violet-600">
             Preferred Collaboration Types
           </p>
-          {collabTypes.map((c) => (
-            <StarRating
-              key={c.label}
-              label={c.label}
-              value={c.value}
-              icon={c.icon}
-            />
-          ))}
+          <div className="space-y-1.5 md:space-y-0">
+            {collabTypes.map((c) => (
+              <StarRating
+                key={c.label}
+                label={c.label}
+                value={c.value}
+                icon={c.icon}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="border-r border-gray-200 pr-2 ">
-          <p className="mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
+        {/* Mobile: Bottom border & padding. Desktop: Right border & padding */}
+        <div className="border-b md:border-b-0 md:border-r border-gray-200 pb-3 md:pb-0 md:pr-2">
+          <p className="mb-2 md:mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
             Top Brand Categories
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -525,10 +550,10 @@ function CollaborationPreferencesCard() {
         </div>
 
         <div>
-          <p className="mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
+          <p className="mb-2 md:mb-1 text-[10px] uppercase tracking-wide font-bold text-violet-600">
             Brand She Prefers
           </p>
-          <div className="space-y-0.5">
+          <div className="space-y-1.5 md:space-y-0.5">
             {prefers.map((p) => (
               <CheckRow key={p} label={p} />
             ))}
@@ -613,7 +638,8 @@ function AIOutreachRecommendationCard() {
       title="AI Outreach Recommendation"
       icon={<Info size={14} className="text-gray-300" />}
     >
-      <div className="grid grid-cols-2 gap-8">
+      {/* Mobile: 1 Column | Desktop: 2 Columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
             <Sparkles size={14} /> Suggested Pitch Angle
@@ -633,14 +659,15 @@ function AIOutreachRecommendationCard() {
           <p className="mb-1 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
             <Trophy size={14} /> Best Partnership Categories
           </p>
-          <div className="rounded-xl p-4 ">
+          <div className="rounded-xl py-2 md:p-4">
             <RankRow rank={1} label="Fashion & Apparel" match="92% Match" />
             <RankRow rank={2} label="Beauty & Skincare" match="90% Match" />
             <RankRow rank={3} label="Wellness & Health" match="88% Match" />
           </div>
         </div>
 
-        <div className="col-span-2 mt-0 flex items-start justify-between gap-3 rounded-xl bg-[#F3E8FF] px-4 py-3">
+        {/* Mobile: Stack vertically | Desktop: Side-by-side spanning both columns */}
+        <div className="md:col-span-2 mt-0 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 rounded-xl bg-[#F3E8FF] px-4 py-3">
           <p className="flex items-center gap-2 text-sm text-gray-700">
             <Lightbulb size={14} className="shrink-0 text-violet-500" />
             <span>
@@ -652,7 +679,7 @@ function AIOutreachRecommendationCard() {
           <Button
             variant="solid"
             icon={<Sparkles size={13} />}
-            className="shrink-0 whitespace-nowrap !px-3 !py-2 text-xs"
+            className="w-full md:w-auto shrink-0 justify-center whitespace-nowrap !px-3 !py-2 text-xs"
           >
             Generate Pitch Ideas
           </Button>
@@ -664,51 +691,52 @@ function AIOutreachRecommendationCard() {
 
 export default function Contact() {
   return (
-    <div
-      className="min-h-screen bg-[#F8F9FC] p-0 font-sans"
-      style={{ fontFamily: "Inter, sans-serif" }}
-    >
-      <div className="mx-auto flex max-w-[1580px] overflow-hidden rounded-none border border-gray-100 bg-white shadow-sm">
-        <ProfileSidebar />
+       <div className="min-h-screen bg-white text-[#1F2937] flex flex-col xl:flex-row w-full">
+      <ProfileSidebar />
 
-        <div className="flex-1">
-          <TopTabs />
+     <div className="flex-1 border-l border-[#ECECEC] bg-white p-2 sm:p-6 min-w-0 overflow-hidden">
+  <TopTabs />
 
-          <div className="space-y-4 p-3">
-            <div className="grid grid-cols-13 gap-3">
-              <div className="col-span-5">
-                <ContactAvailabilityCard />
-              </div>
-              <div className="col-span-4">
-                <OutreachReadinessCard />
-              </div>
-              <div className="col-span-4">
-                <BestTimeCard />
-              </div>
-            </div>
+  <div className="space-y-4 p-1">
+    {/* Row 1 */}
+    <div className="grid grid-cols-1 lg:grid-cols-13 gap-2">
+      <div className="lg:col-span-5">
+        <ContactAvailabilityCard />
+      </div>
 
-            {/* Row 2 — collaboration preferences + contact methods */}
-            <div className="grid grid-cols-12 gap-3">
-              <div className="col-span-8">
-                <CollaborationPreferencesCard />
-              </div>
-              <div className="col-span-4">
-                <ContactMethodsCard />
-              </div>
-            </div>
+      <div className="lg:col-span-4">
+        <OutreachReadinessCard />
+      </div>
 
-            {/* Row 3 — campaign fit checklist + AI outreach recommendation */}
-            <div className="grid grid-cols-12 gap-6">
-              <div className="col-span-4">
-                <CampaignFitChecklistCard />
-              </div>
-              <div className="col-span-8">
-                <AIOutreachRecommendationCard />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="lg:col-span-4">
+        <BestTimeCard />
       </div>
     </div>
+
+    {/* Row 2 */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+      <div className="lg:col-span-8">
+        <CollaborationPreferencesCard />
+      </div>
+
+      <div className="lg:col-span-4">
+        <ContactMethodsCard />
+      </div>
+    </div>
+
+    {/* Row 3 */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6">
+      <div className="lg:col-span-4">
+        <CampaignFitChecklistCard />
+      </div>
+
+      <div className="lg:col-span-8">
+        <AIOutreachRecommendationCard />
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    
   );
 }

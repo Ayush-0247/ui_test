@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Sparkles,
   Search,
@@ -30,6 +31,10 @@ import {
   ArrowRight,
   Plus,
   SlidersHorizontal,
+  Menu,
+  X,
+  Home,
+  TrendingUp,
 } from "lucide-react";
 import img2 from "../assets/kohli.jpg";
 import { SiTiktok } from "react-icons/si";
@@ -188,12 +193,19 @@ function ProgressBar({ value = 0, color = "bg-[#5B3DF5]" }) {
 }
 function DropdownChip({ label }) {
   return (
-    <button className="h-[34px] rounded-full bg-white border border-[#ECECEC] px-3.5 flex items-center gap-1 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+    <button className="h-[34px] rounded-full bg-white border border-[#ECECEC] px-3.5 flex items-center gap-1 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors shrink-0">
       {label}
       <ChevronDown size={13} className="text-gray-400" />
     </button>
   );
 }
+
+/* ======================================================================
+   DESKTOP / LAPTOP LAYOUT — UNCHANGED FROM ORIGINAL
+   Everything in this section is rendered only at `lg` and above
+   (see the `hidden lg:flex` wrapper in App at the bottom of the file).
+   Nothing here was modified.
+   ====================================================================== */
 
 /* ---------- Sidebar ---------- */
 const NAV_ITEMS = [
@@ -310,17 +322,6 @@ function HeroSearch() {
         Find the perfect creators for your brand
       </h2>
       <div className="relative mx-auto mt-4 w-[90%] max-w-2xl">
-        {/* <div className="relative h-[52px] rounded-full bg-white shadow-md flex items-center pl-4 pr-1.5">
-          <Sparkles size={16} className="text-[#5B3DF5] shrink-0" />
-          <input
-            type="text"
-            defaultValue="Find skincare influencers for women 18-30 in USA"
-            className="flex-1 ml-2.5 text-[13px] font-medium text-gray-800 placeholder-gray-400 outline-none bg-transparent"
-          />
-          <button className="w-10 h-10 rounded-full bg-gradient-to-br from-[#6D5CFF] to-[#8B7BFF] flex items-center justify-center shrink-0 shadow-sm hover:brightness-105 transition">
-            <Search size={16} className="text-white" />
-          </button>
-        </div> */}
         <SearchBar />
       </div>
       <div className="relative mt-3.5 flex items-center justify-center gap-2 flex-wrap">
@@ -497,9 +498,7 @@ function CreatorCard({ name, handle, tags, followers, engagement, platform }) {
       <div className="absolute bottom-0 left-0 w-full p-2 pb-0 flex flex-col">
         {/* Name & Verified Badge */}
         <div className="flex items-center gap-1.5">
-          <h3 className="text-white font-bold text-[12px] ">
-            {name}
-          </h3>
+          <h3 className="text-white font-bold text-[12px] ">{name}</h3>
           <BadgeCheck
             size={18}
             className="text-white mt-0.5"
@@ -609,9 +608,6 @@ function SpotlightSection() {
             key={c.title}
             className={`relative h-[150px] rounded-xl overflow-hidden bg-gradient-to-br ${c.gradient} flex flex-col justify-between p-2.5`}
           >
-            {/* <span className="self-start bg-white text-[#5B3DF5] text-[9px] font-semibold rounded-full px-1.5 py-0.5">
-              Featured
-            </span> */}
             <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/50 to-transparent" />
             <div className="relative mt-auto text-white">
               <p className="text-xs font-bold leading-tight">{c.title}</p>
@@ -830,9 +826,6 @@ function AudienceSnapshotCard() {
           </div>
         ))}
       </div>
-      {/* <Button variant="ghost" className="h-auto p-0 mt-3 text-xs">
-        View full audience breakdown <ArrowUpRight size={11} />
-      </Button> */}
       <button className="p-2 flex gap-1 align-bottom items-center text-purple-400 text-xs">
         View full audience breakdown <ArrowRight size={14} />
       </button>
@@ -892,7 +885,7 @@ function RefinementSuggestionsCard() {
           <div key={s.title} className="flex items-start justify-between gap-2">
             <div className="flex items-start gap-1.5">
               <span className="mt-0.5 w-5 h-5 rounded-md bg-pink-50 text-[#5B3DF5] flex items-center justify-center shrink-0">
-                <Sparkles  size={10} />
+                <Sparkles size={10} />
               </span>
               <div>
                 <p className="text-[10px] font-bold text-gray-500 leading-tight">
@@ -934,11 +927,10 @@ function FloatingActionButton() {
   );
 }
 
-/* ---------- App ---------- */
-export default function App() {
+function DesktopApp() {
   return (
     <div
-      className="min-h-screen bg-[#FAFAFC] flex"
+      className="hidden lg:flex min-h-screen bg-[#FAFAFC]"
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       <Sidebar />
@@ -959,3 +951,606 @@ export default function App() {
     </div>
   );
 }
+
+/* ======================================================================
+   MOBILE LAYOUT — purpose-built, not a squeezed-down desktop view.
+   Rendered only below `lg`. Nothing above this line was changed to
+   make room for it.
+
+   Mobile-specific decisions:
+   - Sidebar becomes a slide-over drawer opened from a top app bar,
+     plus a persistent 5-item bottom tab bar for the primary actions
+     (thumb-reach, not a 9-item vertical list).
+   - Hero search collapses to a single-column, edge-to-edge search
+     field; filter chips become a horizontally scrollable row with a
+     "Filters" trigger instead of six separate dropdown pills.
+   - Recommended creators and spotlight collections become swipeable,
+     snap-scrolling carousels instead of fixed 3-4 column grids.
+   - The performance table (7 columns) is replaced with a stacked
+     creator card list — a table can't work on a 375px viewport.
+   - The AI insights sidebar becomes a bottom sheet opened from a
+     floating "Insights" pill, so the data still exists on mobile but
+     doesn't permanently eat screen width.
+   ====================================================================== */
+
+const MOBILE_TABS = [
+  { label: "Discover", icon: Home, active: true },
+  { label: "Campaigns", icon: Megaphone },
+  { label: "Creators", icon: Users },
+  { label: "Messages", icon: MessageSquare },
+];
+
+function MobileTopBar({ onOpenMenu }) {
+  return (
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-[#ECECEC] h-14 px-3 flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <button
+          onClick={onOpenMenu}
+          className="w-9 h-9 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 -ml-1"
+        >
+          <Menu size={19} />
+        </button>
+        <div className="flex items-center gap-1.5">
+          <Sparkles size={16} className="text-[#5B3DF5]" fill="#5B3DF5" />
+          <span className="text-[17px] font-bold text-[#111827]">Kalo</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-1.5">
+        <IconButton icon={<Bell size={15} />} size={34} />
+        <Avatar name="Sarah Mitchell" size={30} />
+      </div>
+    </header>
+  );
+}
+
+function MobileMenuDrawer({ open, onClose }) {
+  return (
+    <div
+      className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+      aria-hidden={!open}
+    >
+      {/* Scrim */}
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-black/40 transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}
+      />
+      {/* Drawer */}
+      <div
+        className={`absolute top-0 left-0 h-full w-[78%] max-w-[300px] bg-white shadow-xl flex flex-col pt-4 pb-4 px-3.5 transition-transform duration-200 ${open ? "translate-x-0" : "-translate-x-full"}`}
+      >
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2">
+            <Sparkles size={18} className="text-[#5B3DF5]" fill="#5B3DF5" />
+            <span className="text-xl font-bold text-[#111827]">Kalo</span>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full flex items-center justify-center text-gray-500 hover:bg-gray-50"
+          >
+            <X size={17} />
+          </button>
+        </div>
+        <nav className="flex flex-col gap-0.5 overflow-y-auto">
+          {NAV_ITEMS.map(({ label, icon: Icon, active }) => (
+            <button
+              key={label}
+              className={`h-11 px-2.5 rounded-xl flex items-center gap-2.5 text-[14px] font-medium transition-colors ${active ? "bg-[#F5F1FF] text-[#5B3DF5]" : "text-[#374151] hover:bg-gray-50"}`}
+            >
+              <Icon size={17} />
+              {label}
+            </button>
+          ))}
+        </nav>
+        <div className="mt-auto flex flex-col gap-2 pt-3 border-t border-[#ECECEC]">
+          <button className="h-10 rounded-xl border border-[#ECECEC] px-2.5 flex items-center justify-between text-[13px] text-gray-700">
+            <span className="flex items-center gap-2">
+              <Star size={15} className="text-gray-400" />
+              Favorites
+            </span>
+            <ChevronRight size={13} className="text-gray-400" />
+          </button>
+          <div className="flex items-center gap-2 px-1 pt-1">
+            <Avatar name="Sarah Mitchell" size={32} />
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-gray-900 truncate">
+                Sarah Mitchell
+              </p>
+              <p className="text-[10px] text-gray-500 truncate">
+                sarah@glowbeauty.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileBottomNav({ activeTab, onSelectTab, onOpenMore }) {
+  return (
+    <nav className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-white/95 backdrop-blur-md border-t border-[#ECECEC] pb-[env(safe-area-inset-bottom)]">
+      <div className="grid grid-cols-5 h-[58px]">
+        {MOBILE_TABS.map(({ label, icon: Icon }) => {
+          const isActive = activeTab === label;
+          return (
+            <button
+              key={label}
+              onClick={() => onSelectTab(label)}
+              className="flex flex-col items-center justify-center gap-0.5"
+            >
+              <Icon
+                size={19}
+                className={isActive ? "text-[#5B3DF5]" : "text-gray-400"}
+                fill={isActive ? "#5B3DF5" : "none"}
+                strokeWidth={isActive ? 0 : 2}
+              />
+              <span
+                className={`text-[10px] font-medium ${isActive ? "text-[#5B3DF5]" : "text-gray-400"}`}
+              >
+                {label}
+              </span>
+            </button>
+          );
+        })}
+        <button
+          onClick={onOpenMore}
+          className="flex flex-col items-center justify-center gap-0.5"
+        >
+          <MoreHorizontal size={19} className="text-gray-400" />
+          <span className="text-[10px] font-medium text-gray-400">More</span>
+        </button>
+      </div>
+    </nav>
+  );
+}
+
+function MobileHeroSearch({ onOpenFilter }) {
+  return (
+    <div className="relative overflow-hidden rounded-[18px] bg-gradient-to-br from-[#EDE7FF] via-[#E3EEFF] to-white px-4 pt-5 pb-4">
+      <div className="pointer-events-none absolute -top-10 -left-10 w-40 h-40 rounded-full bg-purple-200/40 blur-3xl" />
+      <Badge variant="purple" icon={<Sparkles size={9} />} className="mb-2">
+        AI-Powered Discovery
+      </Badge>
+      <h2 className="relative font-serif text-[22px] leading-[1.15] font-semibold text-gray-900">
+        Find the perfect creators for your brand
+      </h2>
+
+      {/* Edge-to-edge search field, thumb-sized */}
+      <div className="relative mt-3.5 h-[50px] rounded-2xl bg-white shadow-sm flex items-center pl-3.5 pr-1.5">
+        <Search size={17} className="text-gray-400 shrink-0" />
+        <input
+          type="text"
+          placeholder="Search skincare influencers..."
+          defaultValue="Skincare influencers, 18-30, USA"
+          className="flex-1 ml-2.5 text-[13px] font-medium text-gray-800 placeholder-gray-400 outline-none bg-transparent min-w-0"
+        />
+        <button className="w-[38px] h-[38px] rounded-xl bg-[#6D5CFF] flex items-center justify-center shrink-0">
+          <Search size={15} className="text-white" />
+        </button>
+      </div>
+
+      {/* Horizontally scrollable filter row + explicit Filters trigger */}
+      <div className="relative mt-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar -mx-4 px-4 pb-0.5">
+        <button
+          onClick={onOpenFilter}
+          className="h-8 shrink-0 rounded-full bg-[#5B3DF5] px-3 flex items-center gap-1 text-[11px] font-semibold text-white"
+        >
+          <SlidersHorizontal size={12} />
+          Filters
+        </button>
+        {CHIPS.map((label) => (
+          <button
+            key={label}
+            onClick={onOpenFilter}
+            className="h-[34px] rounded-full bg-white border border-[#ECECEC] px-3.5 flex items-center gap-1 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors shrink-0"
+          >
+            {label}
+            <ChevronDown size={13} className="text-gray-400" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileNichesCarousel() {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-2 px-0.5">
+        <h3 className="text-[13px] font-bold text-gray-900">Trending Niches</h3>
+        <button className="text-[11px] font-semibold text-[#5B3DF5]">
+          View all
+        </button>
+      </div>
+      <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+        {NICHES.map(({ label, count, icon: Icon, bg, color }) => (
+          <div
+            key={label}
+            className="shrink-0 snap-start w-[132px] rounded-xl border border-[#ECECEC] bg-white p-2.5 flex flex-col gap-2"
+          >
+            <div
+              className={`w-8 h-8 rounded-lg ${bg} ${color} flex items-center justify-center`}
+            >
+              <Icon size={15} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold text-gray-900 truncate">
+                {label}
+              </p>
+              <p className="text-[9px] text-gray-500 truncate">{count}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileCreatorCard({
+  name,
+  handle,
+  tags,
+  followers,
+  engagement,
+  platform,
+  matchLabel,
+}) {
+  return (
+    <div className="relative shrink-0 snap-start w-[62vw] max-w-[240px] aspect-[3/4] rounded-[14px] overflow-hidden shadow-sm">
+      <img
+        src={img2}
+        alt={name}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
+
+      {platform === "instagram" && (
+        <div className="absolute top-2.5 left-2.5 bg-gradient-to-tr from-[#FFDF40] via-[#FD1D1D] to-[#833AB4] p-1.5 rounded-lg shadow-sm">
+          <FaInstagram size={14} className="text-white" />
+        </div>
+      )}
+      {platform === "tiktok" && (
+        <div className="absolute top-2.5 left-2.5 bg-black p-1.5 rounded-lg shadow-sm">
+          <SiTiktok size={14} className="text-white" />
+        </div>
+      )}
+      <span className="absolute top-2.5 right-2.5 bg-white/90 backdrop-blur-sm text-[9px] font-semibold text-[#5B3DF5] px-2 py-0.5 rounded-full">
+        {matchLabel}
+      </span>
+
+      <div className="absolute bottom-0 left-0 w-full p-3 flex flex-col">
+        <div className="flex items-center gap-1.5">
+          <h3 className="text-white font-bold text-[13px]">{name}</h3>
+          <BadgeCheck
+            size={14}
+            className="text-white"
+            fill="white"
+            color="#262626"
+          />
+        </div>
+        <p className="text-gray-200 text-[10px] mb-1.5">@{handle}</p>
+        <div className="flex flex-wrap gap-1.5 mb-1.5">
+          {tags.map((t) => (
+            <span
+              key={t}
+              className="px-2 py-0.5 rounded-sm border border-white/40 bg-white/30 backdrop-blur-md text-white text-[8px] font-medium"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-4 text-white font-semibold text-[10px]">
+          <div className="flex items-center gap-1">
+            <Users size={12} className="text-gray-300" strokeWidth={2.5} />
+            <span>{followers}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Star size={12} className="text-gray-300" strokeWidth={2.5} />
+            <span>{engagement}</span>
+          </div>
+        </div>
+      </div>
+      <button className="absolute top-2.5 right-2.5 mt-8 hidden" />
+    </div>
+  );
+}
+
+function MobileCreatorCarousel() {
+  return (
+    <div>
+      <div className="flex items-start justify-between mb-2 px-0.5">
+        <div>
+          <h3 className="text-[13px] font-bold text-gray-900">
+            AI Recommended Creators
+          </h3>
+          <p className="text-[10px] text-gray-500 mt-0.5">
+            Curated by AI based on your search
+          </p>
+        </div>
+        <button className="text-[11px] font-semibold text-[#5B3DF5] shrink-0 ml-2">
+          View all
+        </button>
+      </div>
+      <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+        {CREATORS.map((c) => (
+          <MobileCreatorCard key={c.rank} {...c} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileSpotlightCarousel() {
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-2 px-0.5">
+        <h3 className="text-[13px] font-bold text-gray-900">
+          Spotlight Collections
+        </h3>
+        <span className="text-[10px] text-gray-400">Swipe →</span>
+      </div>
+      <div className="flex gap-2.5 overflow-x-auto no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+        {COLLECTIONS.map((c) => (
+          <div
+            key={c.title}
+            className={`relative shrink-0 snap-start w-[70vw] max-w-[260px] h-[130px] rounded-xl overflow-hidden bg-gradient-to-br ${c.gradient} flex flex-col justify-end p-3`}
+          >
+            <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="relative text-white">
+              <p className="text-[13px] font-bold leading-tight">{c.title}</p>
+              <div className="flex items-center justify-between mt-1">
+                <span className="text-[10px] opacity-90">{c.count}</span>
+                <AvatarGroup names={c.people} extra={c.extra} size={16} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Table with 7 columns can't work on a phone — stacked cards instead.
+function MobileCreatorListCard({ r }) {
+  return (
+    <div className="flex items-center gap-2.5 py-2.5 border-b border-[#F3F4F6] last:border-b-0">
+      <Avatar name={r.name} size={40} />
+      <div className="flex-1 min-w-0">
+        <p className="text-[12.5px] font-semibold text-gray-900 flex items-center gap-1 truncate">
+          {r.name}
+          <BadgeCheck size={11} className="text-[#5B3DF5] shrink-0" />
+        </p>
+        <p className="text-[10.5px] text-gray-500 truncate">
+          @{r.handle} · {r.location}
+        </p>
+        <div className="flex items-center gap-1.5 mt-1">
+          <Badge variant="pastel" className="px-1.5 py-0.5 text-[9px]">
+            {r.category}
+          </Badge>
+          <Badge variant="green" className="px-1.5 py-0.5 text-[9px]">
+            {r.status}
+          </Badge>
+        </div>
+      </div>
+      <div className="text-right shrink-0">
+        <p className="text-[12.5px] font-bold text-gray-900">{r.followers}</p>
+        <p className="text-[10.5px] font-semibold text-[#5B3DF5]">
+          {r.engagement}
+        </p>
+        <p className="text-[9.5px] text-gray-400">{r.avgViews} avg</p>
+      </div>
+    </div>
+  );
+}
+
+function MobileTopCreatorsList() {
+  return (
+    <div className="bg-white rounded-[14px] border border-[#ECECEC] p-3.5">
+      <div className="flex items-center justify-between mb-1">
+        <h3 className="text-[13px] font-bold text-gray-900">
+          Top Performing Creators
+        </h3>
+        <button className="text-[11px] font-semibold text-[#5B3DF5]">
+          View all
+        </button>
+      </div>
+      <div>
+        {ROWS.map((r) => (
+          <MobileCreatorListCard key={r.handle} r={r} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MobileFilterSheet({ open, onClose }) {
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("Skincare");
+
+  return (
+    <div
+      className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+    >
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-black/40 transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}
+      />
+      <div
+        className={`absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto bg-white rounded-t-[24px] p-5 pb-8 transition-transform duration-200 ${open ? "translate-y-0" : "translate-y-full"}`}
+      >
+        <div className="w-10 h-1.5 rounded-full bg-gray-300 mx-auto mb-4" />
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-bold text-gray-900">Filter Creators</h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        {/* Platform */}
+        <div className="mb-4">
+          <label className="text-xs font-bold text-gray-700 block mb-2">Platform</label>
+          <div className="grid grid-cols-3 gap-2">
+            {["All", "Instagram", "TikTok"].map((p) => (
+              <button
+                key={p}
+                onClick={() => setSelectedPlatform(p)}
+                className={`py-2 rounded-xl text-xs font-semibold border transition ${
+                  selectedPlatform === p
+                    ? "bg-[#5B3DF5] text-white border-[#5B3DF5]"
+                    : "bg-gray-50 text-gray-700 border-gray-200"
+                }`}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Category */}
+        <div className="mb-4">
+          <label className="text-xs font-bold text-gray-700 block mb-2">Category</label>
+          <div className="flex flex-wrap gap-2">
+            {["Skincare", "Beauty", "Fashion", "Travel", "Wellness", "Fitness"].map((c) => (
+              <button
+                key={c}
+                onClick={() => setSelectedCategory(c)}
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition ${
+                  selectedCategory === c
+                    ? "bg-[#5B3DF5] text-white border-[#5B3DF5]"
+                    : "bg-gray-50 text-gray-700 border-gray-200"
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Follower Range */}
+        <div className="mb-6">
+          <label className="text-xs font-bold text-gray-700 block mb-2">Followers</label>
+          <div className="grid grid-cols-2 gap-2">
+            <input
+              type="text"
+              placeholder="Min e.g. 10k"
+              className="px-3 py-2 border border-gray-200 rounded-xl text-xs font-medium outline-none"
+            />
+            <input
+              type="text"
+              placeholder="Max e.g. 500k"
+              className="px-3 py-2 border border-gray-200 rounded-xl text-xs font-medium outline-none"
+            />
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="w-full py-3 rounded-xl bg-gradient-to-r from-[#6D5CFF] to-[#8B7BFF] text-white text-xs font-bold shadow-sm"
+        >
+          Apply Filters
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function MobileInsightsTrigger({ onOpen }) {
+  return (
+    <button
+      onClick={onOpen}
+      className="fixed bottom-[74px] right-4 z-30 lg:hidden h-11 pl-3 pr-4 rounded-full bg-white border border-[#ECECEC] shadow-lg flex items-center gap-2 text-[12px] font-semibold text-gray-800"
+    >
+      <span className="w-6 h-6 rounded-full bg-[#5B3DF5] flex items-center justify-center text-white">
+        <TrendingUp size={13} />
+      </span>
+      AI Insights
+    </button>
+  );
+}
+
+function MobileInsightsSheet({ open, onClose }) {
+  return (
+    <div
+      className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+    >
+      <div
+        onClick={onClose}
+        className={`absolute inset-0 bg-black/40 transition-opacity duration-200 ${open ? "opacity-100" : "opacity-0"}`}
+      />
+      <div
+        className={`absolute bottom-0 left-0 right-0 max-h-[85vh] overflow-y-auto bg-[#FAFAFC] rounded-t-[20px] p-3.5 pb-8 transition-transform duration-200 ${open ? "translate-y-0" : "translate-y-full"}`}
+      >
+        <div className="w-10 h-1.5 rounded-full bg-gray-300 mx-auto mb-3" />
+        <div className="flex items-center justify-between mb-3 px-0.5">
+          <h3 className="text-[15px] font-bold text-gray-900">AI Insights</h3>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full bg-white border border-[#ECECEC] flex items-center justify-center text-gray-500"
+          >
+            <X size={15} />
+          </button>
+        </div>
+        <div className="flex flex-col gap-3">
+          <DiscoveryScoreCard />
+          <AudienceSnapshotCard />
+          <MarketTrendsCard />
+          <RefinementSuggestionsCard />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MobileApp() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [insightsOpen, setInsightsOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("Discover");
+
+  return (
+    <div
+      className="lg:hidden min-h-screen bg-[#FAFAFC]"
+      style={{ fontFamily: "Inter, sans-serif" }}
+    >
+      <MobileTopBar onOpenMenu={() => setMenuOpen(true)} />
+
+      <main className="px-4 pt-3 pb-[calc(58px+90px)] flex flex-col gap-4">
+        <MobileHeroSearch onOpenFilter={() => setFilterOpen(true)} />
+        <MobileNichesCarousel />
+        <MobileCreatorCarousel />
+        <MobileSpotlightCarousel />
+        <MobileTopCreatorsList />
+      </main>
+
+      <MobileInsightsTrigger onOpen={() => setInsightsOpen(true)} />
+      <MobileInsightsSheet
+        open={insightsOpen}
+        onClose={() => setInsightsOpen(false)}
+      />
+      <MobileFilterSheet
+        open={filterOpen}
+        onClose={() => setFilterOpen(false)}
+      />
+      <MobileMenuDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileBottomNav
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+        onOpenMore={() => setMenuOpen(true)}
+      />
+    </div>
+  );
+}
+
+/* ---------- App ---------- */
+export default function App() {
+  return (
+    <>
+      <DesktopApp />
+      <MobileApp />
+    </>
+  );
+}
+

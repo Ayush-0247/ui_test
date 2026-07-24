@@ -135,20 +135,6 @@ const opportunities = [
   "Expand content around beauty tools",
 ];
 
-// const recommendedFor = [
-//   "Skincare",
-//   "Cosmetics",
-//   "Wellness",
-//   "Beauty Tools",
-//   "Supplements",
-// ];
-// const contentIdeas = [
-//   "Skincare Routine",
-//   "Product Reviews",
-//   "GRWM",
-//   "Beauty Tips",
-// ];
-
 const audienceInterests = [
   { label: "Beauty", value: 78.6, icon: Heart },
   { label: "Skincare", value: 64.3, icon: Droplet },
@@ -196,7 +182,9 @@ const audienceSnapshot = [
   { label: "Authenticity", value: "High", icon: ShieldCheck },
 ];
 
-/* -------------------------------- helpers --------------------------------- */
+/* ======================================================================
+   SHARED HELPERS — used by both desktop and mobile layouts, unchanged.
+   ====================================================================== */
 
 function Card({ className = "", children }) {
   return (
@@ -253,19 +241,134 @@ function Bar({ value, max = 100, color = PURPLE, track = "#F1F1F8" }) {
   );
 }
 
-/* --------------------------------- header ---------------------------------- */
+function ScoreGauge({ score, label }) {
+  const data = [
+    { value: score, color: GREEN },
+    { value: 100 - score, color: "#E5E7EB" },
+  ];
+  return (
+    <div className="w-24 h-24 relative mx-auto">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Pie
+            data={data}
+            dataKey="value"
+            startAngle={90}
+            endAngle={-270}
+            innerRadius={34}
+            outerRadius={44}
+            stroke="none"
+          >
+            {data.map((d, i) => (
+              <Cell key={i} fill={d.color} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="text-xl font-bold" style={{ color: GREEN }}>
+          {score}
+        </span>
+        <span className="text-[10px] font-medium" style={{ color: GREEN }}>
+          {label}
+        </span>
+      </div>
+    </div>
+  );
+}
 
-// function TopBar() {
-//   return (
-//     <button
-//       className="flex items-center gap-1.5 text-sm font-medium mb-4"
-//       style={{ color: HEADING }}
-//     >
-//       <ArrowLeft size={15} />
-//       Back to search
-//     </button>
-//   );
-// }
+function QualityMeter({ title, caption, value, display }) {
+  return (
+    <div className="mb-4 last:mb-0">
+      <div className="flex items-center justify-between mb-1">
+        <span className="text-xs font-semibold" style={{ color: HEADING }}>
+          {title}
+        </span>
+        <span className="text-lg font-bold" style={{ color: GREEN }}>
+          {display}
+        </span>
+      </div>
+      <p className="text-xs mb-1.5" style={{ color: MUTED }}>
+        {caption}
+      </p>
+      <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
+        <div
+          className="h-full rounded-full"
+          style={{ width: `${value}%`, backgroundColor: GREEN }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function DotMap() {
+  // deterministic dot clusters approximating landmasses
+  const clusters = [
+    { cx: 60, cy: 45, rx: 45, ry: 30, n: 26 }, // N. America
+    { cx: 90, cy: 110, rx: 25, ry: 35, n: 16 }, // S. America
+    { cx: 195, cy: 45, rx: 30, ry: 22, n: 16 }, // Europe
+    { cx: 205, cy: 90, rx: 32, ry: 40, n: 20 }, // Africa
+    { cx: 265, cy: 55, rx: 55, ry: 35, n: 26 }, // Asia
+    { cx: 290, cy: 130, rx: 20, ry: 14, n: 10 }, // Australia
+  ];
+  const dots = [];
+  let seed = 1;
+  const rand = () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  clusters.forEach((c, ci) => {
+    for (let i = 0; i < c.n; i++) {
+      const a = rand() * Math.PI * 2;
+      const r = rand();
+      dots.push({
+        x: c.cx + Math.cos(a) * c.rx * r,
+        y: c.cy + Math.sin(a) * c.ry * r,
+        key: `${ci}-${i}`,
+      });
+    }
+  });
+  const markers = [
+    { x: 55, y: 48 },
+    { x: 195, y: 42 },
+    { x: 188, y: 38 },
+    { x: 62, y: 40 },
+    { x: 292, y: 132 },
+  ];
+  return (
+  <svg viewBox="0 0 340 155" className="w-full h-32">
+  {dots.map((d) => (
+    <circle
+      key={d.key}
+      cx={d.x}
+      cy={d.y}
+      r={2.6}              // was 1.6
+      fill={PURPLE_TINT}
+      opacity={0.95}
+    />
+  ))}
+
+  {markers.map((m, i) => (
+    <circle
+      key={i}
+      cx={m.x}
+      cy={m.y}
+      r={5}                // was 2.6
+      fill={PURPLE}
+      stroke="#fff"
+      strokeWidth={1.5}
+    />
+  ))}
+</svg>
+  );
+}
+
+/* ======================================================================
+   DESKTOP / LAPTOP LAYOUT — UNCHANGED FROM ORIGINAL
+   Everything in this section is rendered only at `lg` and above
+   (see the `hidden lg:block` wrapper in DesktopAudience). Nothing here
+   was modified from the version you sent.
+   ====================================================================== */
 
 function ProfileHeader() {
   return (
@@ -367,8 +470,6 @@ function ProfileHeader() {
   );
 }
 
-/* ------------------------------- stat cards -------------------------------- */
-
 function StatCard({ label, value, caption, icon: Icon }) {
   return (
     <Card className="p-4 flex-1">
@@ -423,8 +524,6 @@ function Tabs() {
     </div>
   );
 }
-
-/* ----------------------------- audience demographics ----------------------------- */
 
 function AudienceDemographics() {
   return (
@@ -499,70 +598,6 @@ function AudienceDemographics() {
   );
 }
 
-/* -------------------------------- audience location -------------------------------- */
-
-function DotMap() {
-  // deterministic dot clusters approximating landmasses
-  const clusters = [
-    { cx: 60, cy: 45, rx: 45, ry: 30, n: 26 }, // N. America
-    { cx: 90, cy: 110, rx: 25, ry: 35, n: 16 }, // S. America
-    { cx: 195, cy: 45, rx: 30, ry: 22, n: 16 }, // Europe
-    { cx: 205, cy: 90, rx: 32, ry: 40, n: 20 }, // Africa
-    { cx: 265, cy: 55, rx: 55, ry: 35, n: 26 }, // Asia
-    { cx: 290, cy: 130, rx: 20, ry: 14, n: 10 }, // Australia
-  ];
-  const dots = [];
-  let seed = 1;
-  const rand = () => {
-    seed = (seed * 9301 + 49297) % 233280;
-    return seed / 233280;
-  };
-  clusters.forEach((c, ci) => {
-    for (let i = 0; i < c.n; i++) {
-      const a = rand() * Math.PI * 2;
-      const r = rand();
-      dots.push({
-        x: c.cx + Math.cos(a) * c.rx * r,
-        y: c.cy + Math.sin(a) * c.ry * r,
-        key: `${ci}-${i}`,
-      });
-    }
-  });
-  const markers = [
-    { x: 55, y: 48 },
-    { x: 195, y: 42 },
-    { x: 188, y: 38 },
-    { x: 62, y: 40 },
-    { x: 292, y: 132 },
-  ];
-  return (
-  <svg viewBox="0 0 340 155" className="w-full h-32">
-  {dots.map((d) => (
-    <circle
-      key={d.key}
-      cx={d.x}
-      cy={d.y}
-      r={2.6}              // was 1.6
-      fill={PURPLE_TINT}
-      opacity={0.95}
-    />
-  ))}
-
-  {markers.map((m, i) => (
-    <circle
-      key={i}
-      cx={m.x}
-      cy={m.y}
-      r={5}                // was 2.6
-      fill={PURPLE}
-      stroke="#fff"
-      strokeWidth={1.5}
-    />
-  ))}
-</svg>
-  );
-}
-
 function AudienceLocation() {
   return (
     <Card>
@@ -581,7 +616,6 @@ function AudienceLocation() {
               className="flex items-center gap-2"
               style={{ color: HEADING }}
             >
-              {/* <span>{l.flag}</span> */}
               <img src={l.flag} className="w-5 rounded-md h-5" alt="" />
             <p className="font-bold">{l.country}</p>  
             </span>
@@ -592,44 +626,6 @@ function AudienceLocation() {
         ))}
       </ul>
     </Card>
-  );
-}
-
-/* ------------------------------- audience intelligence ------------------------------- */
-
-function ScoreGauge({ score, label }) {
-  const data = [
-    { value: score, color: GREEN },
-    { value: 100 - score, color: "#E5E7EB" },
-  ];
-  return (
-    <div className="w-24 h-24 relative mx-auto">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            startAngle={90}
-            endAngle={-270}
-            innerRadius={34}
-            outerRadius={44}
-            stroke="none"
-          >
-            {data.map((d, i) => (
-              <Cell key={i} fill={d.color} />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-xl font-bold" style={{ color: GREEN }}>
-          {score}
-        </span>
-        <span className="text-[10px] font-medium" style={{ color: GREEN }}>
-          {label}
-        </span>
-      </div>
-    </div>
   );
 }
 
@@ -695,29 +691,9 @@ function AudienceIntelligence() {
         </div>
         
       </div>
-
-      {/* <p className="text-xs font-semibold mt-4 mb-2" style={{ color: HEADING }}>
-        Recommended For
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {recommendedFor.map((r) => (
-          <Pill key={r}>{r}</Pill>
-        ))}
-      </div>
-
-      <p className="text-xs font-semibold mt-4 mb-2" style={{ color: HEADING }}>
-        Content Ideas
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {contentIdeas.map((r) => (
-          <Pill key={r}>{r}</Pill>
-        ))}
-      </div> */}
     </Card>
   );
 }
-
-/* -------------------------------- audience interests -------------------------------- */
 
 function AudienceInterests() {
   return (
@@ -743,8 +719,6 @@ function AudienceInterests() {
     </Card>
   );
 }
-
-/* -------------------------------- audience language -------------------------------- */
 
 function AudienceLanguage() {
   return (
@@ -795,32 +769,6 @@ function AudienceLanguage() {
   );
 }
 
-/* -------------------------- audience quality & authenticity -------------------------- */
-
-function QualityMeter({ title, caption, value, display }) {
-  return (
-    <div className="mb-4 last:mb-0">
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-xs font-semibold" style={{ color: HEADING }}>
-          {title}
-        </span>
-        <span className="text-lg font-bold" style={{ color: GREEN }}>
-          {display}
-        </span>
-      </div>
-      <p className="text-xs mb-1.5" style={{ color: MUTED }}>
-        {caption}
-      </p>
-      <div className="h-2 rounded-full bg-gray-100 overflow-hidden">
-        <div
-          className="h-full rounded-full"
-          style={{ width: `${value}%`, backgroundColor: GREEN }}
-        />
-      </div>
-    </div>
-  );
-}
-
 function AudienceQuality() {
   return (
     <Card>
@@ -840,8 +788,6 @@ function AudienceQuality() {
     </Card>
   );
 }
-
-/* -------------------------------- age & gender breakdown ------------------------------- */
 
 function AgeGenderBreakdown() {
   return (
@@ -934,8 +880,6 @@ function AgeGenderBreakdown() {
   );
 }
 
-/* ------------------------------- audience growth signals ------------------------------- */
-
 function AudienceGrowthSignals() {
   return (
     <Card>
@@ -1024,8 +968,6 @@ function AudienceGrowthSignals() {
   );
 }
 
-/* ------------------------------------ audience snapshot ------------------------------------ */
-
 function AudienceSnapshot() {
   return (
     <Card>
@@ -1050,15 +992,12 @@ function AudienceSnapshot() {
   );
 }
 
-/* ---------------------------------- app ------------------------------------ */
-
-export default function Audience() {
+function DesktopAudience() {
   return (
     <div
-      className="min-h-screen font-sans p-6"
+      className="hidden lg:block min-h-screen font-sans p-6"
       style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
     >
-      {/* <TopBar /> */}
       <ProfileHeader />
       <StatCardsRow />
       <Tabs />
@@ -1081,5 +1020,358 @@ export default function Audience() {
         <AudienceSnapshot />
       </div>
     </div>
+  );
+}
+
+/* ======================================================================
+   MOBILE LAYOUT — purpose-built, not a squeezed-down desktop view.
+   Rendered only below `lg`. Nothing above this line was changed to
+   make room for it.
+
+   Mobile-specific decisions:
+   - Profile header stacks vertically; the 6 action buttons collapse
+     into one primary CTA + icon row, with the secondary actions
+     (Add to Campaign / Save / Contact) as a horizontal scroll row
+     instead of competing for space next to the name.
+   - The 6 stat cards become a snap-scrolling horizontal carousel
+     instead of a 6-column grid nobody can read at 375px.
+   - The 7-item tab bar becomes horizontally scrollable pills.
+   - Every 3-column section grid becomes a single stacked column —
+     this is a long-form scroll read on mobile, not a dashboard grid.
+   - Audience Demographics, Audience Intelligence and Growth Signals
+     each get a mobile variant because their desktop versions rely on
+     internal 2-column grids and a hardcoded 360px width that don't
+     survive a phone screen — the mobile versions stack those pieces
+     instead of shrinking them.
+   ====================================================================== */
+
+function MobileProfileHeader() {
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex gap-3">
+        <div className="relative w-14 h-14 shrink-0">
+          <img
+            src="https://i.pravatar.cc/150?img=47"
+            alt="Mariale"
+            className="w-full h-full rounded-full object-cover"
+            style={{ border: `2px solid ${PURPLE_TINT}` }}
+          />
+          <span
+            className="absolute bottom-0 right-0 w-4 h-4 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: BLUE, border: "2px solid white" }}
+          >
+            <BadgeCheck size={9} className="text-white" />
+          </span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            <h1 className="text-[17px] font-bold truncate" style={{ color: HEADING }}>
+              Mariale
+            </h1>
+            <BadgeCheck size={15} className="shrink-0" fill={BLUE} color="white" />
+          </div>
+          <div className="flex items-center gap-1.5 mt-0.5 text-xs flex-wrap" style={{ color: MUTED }}>
+            <span className="font-semibold text-gray-600">@mariale</span>
+            <span className="flex items-center gap-1 rounded-md px-1.5 py-0.5 border border-[#C7C9D9] text-[10px]">
+              <FaInstagram size={9} className="text-pink-500" />
+              Instagram
+            </span>
+          </div>
+          <div className="flex items-center gap-1 mt-1 text-xs" style={{ color: MUTED }}>
+            <MapPin size={11} />
+            <span className="font-semibold text-gray-600">USA</span>
+          </div>
+        </div>
+        <button
+          className="rounded-lg p-2 bg-white self-start shrink-0"
+          style={{ border: `1px solid ${BORDER}` }}
+        >
+          <MoreHorizontal size={15} style={{ color: MUTED }} />
+        </button>
+      </div>
+
+      <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
+        {tags.map((t) => (
+          <span key={t} className="shrink-0">
+            <Pill>{t}</Pill>
+          </span>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-2">
+        <button
+          className="flex-1 flex items-center justify-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3 py-2.5"
+          style={{ backgroundColor: PURPLE }}
+        >
+          <Lock size={13} />
+          Unlock
+        </button>
+        <button
+          className="rounded-lg p-2.5 bg-white shrink-0"
+          style={{ border: `1px solid ${BORDER}`, color: HEADING }}
+        >
+          <Share2 size={14} />
+        </button>
+      </div>
+
+      <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
+        <button className="shrink-0 flex items-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3 py-2" style={{ backgroundColor: PURPLE }}>
+          <Plus size={12} />
+          Add to Campaign
+        </button>
+        <button className="shrink-0 flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-2 bg-white border border-violet-500 text-violet-500">
+          <Bookmark size={12} />
+          Save Creator
+        </button>
+        <button className="shrink-0 flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3 py-2 bg-white border border-violet-500 text-violet-500">
+          <Send size={12} />
+          Contact
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function MobileStatCard({ label, value, caption, icon: Icon }) {
+  return (
+    <div
+      className="shrink-0 snap-start w-[128px] bg-white rounded-xl p-3"
+      style={{ border: `1px solid ${BORDER}` }}
+    >
+      <div className="flex items-center gap-1 text-[10px] font-bold" style={{ color: HEADING }}>
+        <Icon size={12} style={{ color: PURPLE }} />
+        <span className="truncate">{label}</span>
+      </div>
+      <p className="text-base font-bold mt-1.5" style={{ color: HEADING }}>
+        {value}
+      </p>
+      <p className="text-[10px] mt-0.5 truncate" style={{ color: MUTED }}>
+        {caption}
+      </p>
+    </div>
+  );
+}
+
+function MobileStatCardsRow() {
+  return (
+    <div className="flex gap-2.5  overflow-x-auto no-scrollbar -mx-1 px-8 snap-x snap-mandatory">
+      {statCards.map((c) => (
+        <MobileStatCard key={c.label} {...c} />
+      ))}
+    </div>
+  );
+}
+
+function MobileTabs() {
+  return (
+    <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4" style={{ borderBottom: `1px solid ${BORDER}` }}>
+      {tabs.map(({ label, icon: Icon, active }) => (
+        <button
+          key={label}
+          className="shrink-0 pb-2.5 pt-1 px-1 flex items-center gap-2.5 text-[12.5px]"
+          style={{
+            color: active ? PURPLE : MUTED,
+            fontWeight: active ? 600 : 500,
+            borderBottom: active ? `2px solid ${PURPLE}` : "2px solid transparent",
+          }}
+        >
+          <Icon size={13} />
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+// Desktop version relies on a 2-col internal grid; mobile stacks
+// gender split above age groups so neither gets cramped.
+function MobileAudienceDemographics() {
+  return (
+    <Card>
+      <CardHeader icon={Users2} title="Audience Demographics" />
+      <p className="text-xs font-semibold mb-2" style={{ color: HEADING }}>
+        Gender Split
+      </p>
+      <div className="flex items-center gap-4">
+        <div className="w-20 h-20 shrink-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie data={genderSplit} dataKey="value" innerRadius={22} outerRadius={36} stroke="none">
+                {genderSplit.map((d, i) => (
+                  <Cell key={i} fill={d.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+        <ul className="flex flex-col gap-1.5 flex-1">
+          {genderSplit.map((d) => (
+            <li key={d.name} className="flex items-center justify-between text-xs">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
+                <span style={{ color: HEADING }}>{d.name}</span>
+              </span>
+              <span className="font-medium" style={{ color: HEADING }}>
+                {d.value}%
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <p className="text-xs font-semibold mt-4 mb-2" style={{ color: HEADING }}>
+        Age Groups
+      </p>
+      <ul className="flex flex-col gap-2.5">
+        {ageGroups.map((a) => (
+          <li key={a.label} className="flex items-center gap-2 text-xs">
+            <span className="w-10 shrink-0" style={{ color: MUTED }}>
+              {a.label}
+            </span>
+            <Bar value={a.value} max={45} />
+            <span className="w-10 text-right font-medium" style={{ color: HEADING }}>
+              {a.value}%
+            </span>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+// Desktop version has a hardcoded w-[360px] Opportunities column —
+// mobile stacks Strengths above Opportunities at full card width.
+function MobileAudienceIntelligence() {
+  return (
+    <Card>
+      <CardHeader icon={Sparkles} title="Audience Intelligence" />
+      <div className="flex items-center gap-4">
+        <ScoreGauge score={92} label="Excellent" />
+        <p className="text-xs flex-1" style={{ color: MUTED }}>
+          Great match for your brand
+        </p>
+      </div>
+
+      <p className="text-xs font-semibold mt-4 mb-1.5" style={{ color: HEADING }}>
+        Strengths
+      </p>
+      <ul className="flex flex-col gap-1.5">
+        {strengths.map((s) => (
+          <li key={s} className="flex items-start gap-1.5 text-xs" style={{ color: HEADING }}>
+            <CheckCircle2 size={13} className="mt-0.5 shrink-0" style={{ color: GREEN }} />
+            {s}
+          </li>
+        ))}
+      </ul>
+
+      <p className="text-xs font-semibold mt-4 mb-1.5" style={{ color: HEADING }}>
+        Opportunities
+      </p>
+      <ul className="flex flex-col gap-1.5">
+        {opportunities.map((s) => (
+          <li key={s} className="flex items-start gap-1.5 text-xs" style={{ color: HEADING }}>
+            <Lightbulb size={13} className="mt-0.5 shrink-0" style={{ color: AMBER }} />
+            {s}
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+// Desktop version uses a [1.5fr_1fr] grid for chart + stat cards side
+// by side; mobile stacks the chart above the two highlight cards.
+function MobileAudienceGrowthSignals() {
+  return (
+    <Card>
+      <CardHeader icon={TrendingUp} title="Audience Growth Signals" />
+      <p className="text-xs mb-1" style={{ color: MUTED }}>
+        Followers over time
+      </p>
+      <div className="h-36">
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart data={growthSignals} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: MUTED, fontSize: 10 }} />
+            <YAxis
+              domain={[5, 7]}
+              tickFormatter={(v) => `${v.toFixed(1)}M`}
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: MUTED, fontSize: 10 }}
+            />
+            <Tooltip contentStyle={{ borderRadius: 8, borderColor: BORDER, fontSize: 12 }} />
+            <Line type="monotone" dataKey="value" stroke={PURPLE} strokeWidth={2.5} dot={{ r: 3, fill: PURPLE }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="flex flex-col gap-2.5 mt-3">
+        <div className="rounded-lg p-3" style={{ backgroundColor: PURPLE_TINT }}>
+          <p className="text-[11px] mb-1" style={{ color: MUTED }}>
+            Strongest Region
+          </p>
+          <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: HEADING }}>
+            <img className="w-6 h-6" src={usa} alt="" /> United States
+          </p>
+          <p className="text-xs font-medium mt-0.5" style={{ color: GREEN }}>
+            +212K followers
+          </p>
+        </div>
+        <div className="rounded-lg p-3" style={{ backgroundColor: PURPLE_TINT }}>
+          <p className="text-[11px] mb-1" style={{ color: MUTED }}>
+            Fastest Growing Segment
+          </p>
+          <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: HEADING }}>
+            <Users2 size={14} style={{ color: PURPLE }} />
+            25-35
+          </p>
+          <p className="text-xs font-medium mt-0.5" style={{ color: GREEN }}>
+            +18.7% growth
+          </p>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+function MobileAudience() {
+  return (
+    <div
+      className="lg:hidden min-h-screen font-sans"
+      style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
+    >
+      <div className="sticky top-0 z-20 bg-[#F8F8FB]/95 backdrop-blur-md px-4 pt-4 pb-2">
+        <MobileProfileHeader />
+      </div>
+
+      <div className="px-4">
+        <MobileStatCardsRow />
+        <div className="mt-1">
+          <MobileTabs />
+        </div>
+      </div>
+
+      <div className="px-4 flex flex-col gap-4 mt-4 pb-8">
+        <MobileAudienceDemographics />
+        <AudienceLocation />
+        <MobileAudienceIntelligence />
+        <AudienceInterests />
+        <AudienceLanguage />
+        <AudienceQuality />
+        <AgeGenderBreakdown />
+        <MobileAudienceGrowthSignals />
+        <AudienceSnapshot />
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------- app ------------------------------------ */
+
+export default function Audience() {
+  return (
+    <>
+      <DesktopAudience />
+      <MobileAudience />
+    </>
   );
 }
