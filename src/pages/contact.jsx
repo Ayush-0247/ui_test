@@ -553,8 +553,8 @@ export default function Contact() {
         </div>
 
         {/* Scrollable Content */}
-        <div className="flex-1 xl:overflow-y-auto">
-          <div className="space-y-4 p-1">
+        <div className="flex-1  p-3 sm:p-4 xl:p-5 space-y-4 xl:overflow-y-auto">
+          <div className="space-y-4 ">
             {/* Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-13 gap-2">
               <div className="lg:col-span-5">
