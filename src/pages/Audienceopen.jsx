@@ -991,7 +991,10 @@ function AudienceSnapshot() {
 
 function DesktopAudience() {
   return (
-    <div className="hidden lg:flex h-screen font-sans" style={{ fontFamily: "Inter, sans-serif" }}>
+    <div
+      className="hidden lg:flex h-screen font-sans"
+      style={{ fontFamily: "Inter, sans-serif" }}
+    >
       {/* Fixed Sidebar - Does not scroll */}
       <div className="fixed left-0 top-0 h-screen overflow-hidden z-50 w-[280px]">
         <SidebarOpen />
@@ -1000,7 +1003,7 @@ function DesktopAudience() {
       {/* Scrollable Content Area */}
       <div
         className="flex-1 overflow-y-auto ml-[280px]"
-        style={{ 
+        style={{
           backgroundColor: "#F8F8FB",
         }}
       >
@@ -1009,19 +1012,19 @@ function DesktopAudience() {
           <StatCardsRow />
           <Tabs />
 
-          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start">
+          <div className="grid grid-cols-3 gap-5 mt-5">
             <AudienceDemographics />
             <AudienceLocation />
             <AudienceIntelligence />
           </div>
 
-          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start">
+          <div className="grid grid-cols-3 gap-5 mt-5">
             <AudienceInterests />
             <AudienceLanguage />
             <AudienceQuality />
           </div>
 
-          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start pb-8">
+         <div className="grid grid-cols-[1.4fr_2fr_1.15fr] gap-1 mt-5 items-start pb-8">
             <AgeGenderBreakdown />
             <AudienceGrowthSignals />
             <AudienceSnapshot />
