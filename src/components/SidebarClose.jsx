@@ -40,7 +40,8 @@ export default function SidebarNav() {
           </button>
         </div>
 
-        <nav className="mt-8 flex w-full flex-1 flex-col items-center overflow-y-auto scrollbar-hide">
+        {/* Updated nav classes here to hide the scrollbar natively */}
+        <nav className="mt-8 flex w-full flex-1 flex-col items-center overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <div className="flex w-full flex-col items-center space-y-6">
             {mainNavItems.map((item) => {
               const Icon = item.icon;
@@ -95,4 +96,3 @@ export default function SidebarNav() {
     </aside>
   );
 }
-
