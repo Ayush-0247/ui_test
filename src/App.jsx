@@ -14,6 +14,8 @@ import ContentOpen from "./pages/ContentOpen";
 import Audience from "./pages/Audience";
 import Audienceopen from "./pages/Audienceopen";
 import PerformanceOpen from "./pages/PerformanceOpen";
+import PartnershipClose from "./pages/PartnershipClose";
+import PartnershipOpen from "./pages/PartnershipOpen";
 
 import OverviewClose from "./pages/OverviewClose";
 export default function App() {
@@ -35,6 +37,8 @@ export default function App() {
       <Route path="/audience-open"  element={<Audienceopen />} />
       <Route path="/PerformanceOpen" element={<PerformanceOpen />} />
       <Route path="/overview-close" element={<OverviewClose />} />
+      <Route path="/Partnership-close" element={<PartnershipClose />} />
+      <Route path="/Partnership-open" element={<PartnershipOpen />} />
     </Routes>
   );
 }
