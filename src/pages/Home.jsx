@@ -55,21 +55,21 @@ const Home = () => {
         <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
         <PortalCard to="/contact" title="Contact Page" theme="sky" /> <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
 
-        <PortalCard to="/performance" title="Performance Page Closed Sidebar" theme="sky" />
-        <PortalCard to="/PerformanceOpen" title="Performance Page Open Sidebar" theme="sky" />
+        <PortalCard to="/performance" title="Performance Page close sidebar" theme="sky" />
+        <PortalCard to="/PerformanceOpen" title="Performance Page open sidebar" theme="sky" />
 
-        <PortalCard to="/overview-close" title="Overview Close Sidebar" theme="sky" />
-        <PortalCard to="/overview" title="Overview Open Sidebar" theme="sky" />
+        <PortalCard to="/overview-close" title="Overview Page close sidebar" theme="sky" />
+        <PortalCard to="/overview" title="Overview Page open sidebar" theme="sky" />
 
         
        
       
-        <PortalCard to="/content-close" title="Content Page Closed Sidebar" theme="sky" />
-        <PortalCard to="/content-open" title="Content Page OpenSidebar" theme="sky" />
+        <PortalCard to="/content-close" title="Content Page close sidebar" theme="sky" />
+        <PortalCard to="/content-open" title="Content Page open sidebar" theme="sky" />
 
 
-        <PortalCard to="/audience-close" title="Audience Page close" theme="sky" />
-        <PortalCard to="/audience-open" title="Audience Page open" theme="sky" />
+        <PortalCard to="/audience-close" title="Audience Page close sidebar" theme="sky" />
+        <PortalCard to="/audience-open" title="Audience Page open sidebar" theme="sky" />
         
          <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
       </div>
