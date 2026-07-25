@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+   base: "/ui_test/",
   // server: {
   //   watch: {
   //     usePolling: true,
@@ -11,3 +12,5 @@ export default defineConfig({
   //   },
   // },
 })
+
+
