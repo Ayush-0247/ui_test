@@ -71,7 +71,7 @@ const Home = () => {
         <PortalCard to="/audience-close" title="Audience Page close sidebar" theme="sky" />
         <PortalCard to="/audience-open" title="Audience Page open sidebar" theme="sky" />
         
-         <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
+        
       </div>
     </div>
   );
