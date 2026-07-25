@@ -1,12 +1,11 @@
 import {
-
   Building2,
   Users,
   BarChart3,
   MessageSquare,
   Sparkles,
-
   Mail,
+  Lightbulb,
   Lock,
   MoreHorizontal,
   Bookmark,
@@ -25,27 +24,100 @@ import {
   Megaphone,
   DollarSign,
   Calendar,
-  Check,
   AlertTriangle,
   ChevronRight,
   MapPin,
   Video,
   Layers,
   Layout,
-  Package,
+ 
   //   User,
   //   Instagram,
 } from "lucide-react";
 import SidebarClose from "../components/SidebarClose";
 export default function App() {
+  const metricsData = [
+    {
+      id: "total-collabs",
+      title: "Total Brand Collaborations",
+      value: "58",
+      trend: "+16%",
+      trendContext: "vs last 90 days",
+      Icon: Users,
+      iconWrapperClass: "bg-purple-50 text-purple-600",
+      sparklineClass: "text-purple-500",
+      sparklinePath: "M0 15 Q 15 18, 25 10 T 45 12 T 60 4",
+      bgClass: "",
+    },
+    {
+      id: "active-partnerships",
+      title: "Active Partnerships",
+      value: "14",
+      trend: "+7%",
+      trendContext: "vs last 90 days",
+      Icon: Zap,
+      iconWrapperClass: "bg-blue-50 text-blue-600",
+      sparklineClass: "text-blue-500",
+      sparklinePath: "M0 16 Q 15 12, 30 14 T 45 8 T 60 5",
+      bgClass: "",
+    },
+    {
+      id: "repeat-rate",
+      title: "Repeat Brand Rate",
+      value: "72%",
+      trend: "+12pp",
+      trendContext: "vs last 90 days",
+      Icon: RotateCw,
+      iconWrapperClass: "bg-purple-50 text-purple-600",
+      sparklineClass: "text-purple-500",
+      sparklinePath: "M0 14 Q 20 16, 35 11 T 50 8 T 60 3",
+      bgClass: "",
+    },
+    {
+      id: "sponsored-posts",
+      title: "Sponsored Posts %",
+      value: "68%",
+      trend: "+9%",
+      trendContext: "vs last 90 days",
+      Icon: Megaphone,
+      iconWrapperClass: "bg-blue-50 text-blue-600",
+      sparklineClass: "text-blue-500",
+      sparklinePath: "M0 18 Q 15 15, 30 10 T 45 13 T 60 6",
+      bgClass: "",
+    },
+    {
+      id: "est-value",
+      title: "Estimated Partnership Value",
+      value: "$312K",
+      trend: "+22%",
+      trendContext: "vs last 90 days",
+      Icon: DollarSign,
+      iconWrapperClass: "bg-purple-50 text-purple-600",
+      sparklineClass: "text-purple-500",
+      sparklinePath: "M0 16 Q 15 14, 30 8 T 45 10 T 60 2",
+      bgClass: "",
+    },
+    {
+      id: "avg-duration",
+      title: "Average Campaign Duration",
+      value: "45 Days",
+      trend: "+5 days",
+      trendContext: "vs last 90 days",
+      Icon: Calendar,
+      iconWrapperClass: "bg-purple-50 text-purple-600",
+      sparklineClass: "text-purple-500",
+      sparklinePath: "M0 15 Q 15 17, 30 11 T 45 12 T 60 5",
+      bgClass: "",
+    },
+  ];
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
+    <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
       <SidebarClose />
 
       {/* ================= MAIN DASHBOARD CONTENT CONTAINER ================= */}
-      <main className="min-w-0 space-y-5 px-4 py-5 sm:px-6 lg:ml-16 lg:h-screen lg:overflow-y-auto">
+      <main className=" min-w-0 space-y-1 px-5 py-3 sm:px-3 lg:ml-16 lg:h-screen lg:overflow-y-auto">
         {/* TOP PROFILE HEADER SECTION */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div className="bg-white p-3 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             {/* Left Profile Info */}
             <div className="flex items-start sm:items-center gap-5">
@@ -133,9 +205,9 @@ export default function App() {
         </div>
 
         {/* ================= HEADER STATS ROW (6 KPI CARDS) ================= */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 mt-0">
           {/* Card 1: Followers */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/60 flex items-center justify-center shrink-0">
               <Users className="w-5 h-5 text-blue-600" />
             </div>
@@ -154,7 +226,7 @@ export default function App() {
           </div>
 
           {/* Card 2: Engagement Rate */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-100/60 flex items-center justify-center shrink-0">
               <Heart className="w-5 h-5 text-pink-500" />
             </div>
@@ -173,7 +245,7 @@ export default function App() {
           </div>
 
           {/* Card 3: Avg Likes */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/60 flex items-center justify-center shrink-0">
               <ThumbsUp className="w-5 h-5 text-blue-500" />
             </div>
@@ -192,7 +264,7 @@ export default function App() {
           </div>
 
           {/* Card 4: Avg Comments */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/60 flex items-center justify-center shrink-0">
               <MessageSquare className="w-5 h-5 text-purple-600" />
             </div>
@@ -211,7 +283,7 @@ export default function App() {
           </div>
 
           {/* Card 5: Posts */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/60 flex items-center justify-center shrink-0">
               <FileText className="w-5 h-5 text-purple-600" />
             </div>
@@ -229,7 +301,7 @@ export default function App() {
           </div>
 
           {/* Card 6: Audience Quality */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm flex items-center gap-3">
+          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100/60 flex items-center justify-center shrink-0">
               <ShieldCheck className="w-5 h-5 text-emerald-500" />
             </div>
@@ -283,11 +355,7 @@ export default function App() {
           </button>
         </div>
 
-        {/* ================= DASHBOARD GRID SECTIONS ================= */}
-
-        {/* ---------- ROW 1: PARTNERSHIP OVERVIEW & AI PARTNERSHIP SCORE ---------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          {/* 1. Partnership Overview (7 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           <div className="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-1.5">
@@ -300,326 +368,210 @@ export default function App() {
 
             {/* Sub-grid of 6 Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-              {/* Tile 1 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                    <Users className="w-3.5 h-3.5" />
-                  </div>
-                  {/* Mini Sparkline */}
-                  <svg
-                    className="w-16 h-6 text-purple-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
-                  >
-                    <path
-                      d="M0 15 Q 15 18, 25 10 T 45 12 T 60 4"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Total Brand Collaborations
-                  </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    58
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +16%{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
+              {metricsData.map((metric) => {
+                const { Icon } = metric;
 
-              {/* Tile 2 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <Zap className="w-3.5 h-3.5" />
-                  </div>
-                  <svg
-                    className="w-16 h-6 text-blue-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
+                return (
+                  <div
+                    key={metric.id}
+                    className={`p-3.5 rounded-lg border border-slate-200 relative overflow-hidden ${metric.bgClass}`}
                   >
-                    <path
-                      d="M0 16 Q 15 12, 30 14 T 45 8 T 60 5"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Active Partnerships
+                    <div className="flex items-start justify-between">
+                      <div
+                        className={`w-7 h-7 rounded-lg flex items-center justify-center ${metric.iconWrapperClass}`}
+                      >
+                        <Icon className="w-3.5 h-3.5" />
+                      </div>
+                      {/* Mini Sparkline */}
+                      <svg
+                        className={`w-16 h-6 stroke-current ${metric.sparklineClass}`}
+                        viewBox="0 0 60 20"
+                        fill="none"
+                      >
+                        <path
+                          d={metric.sparklinePath}
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                    <div className="mt-2.5">
+                      <div className="text-xs text-slate-500 font-medium">
+                        {metric.title}
+                      </div>
+                      <div className="text-lg font-bold text-slate-900 mt-0.5">
+                        {metric.value}
+                      </div>
+                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
+                        {metric.trend}{" "}
+                        <span className="text-slate-400 font-normal">
+                          {metric.trendContext}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    14
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +7%{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tile 3 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                    <RotateCw className="w-3.5 h-3.5" />
-                  </div>
-                  <svg
-                    className="w-16 h-6 text-purple-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
-                  >
-                    <path
-                      d="M0 14 Q 20 16, 35 11 T 50 8 T 60 3"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Repeat Brand Rate
-                  </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    72%
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +12pp{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tile 4 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                    <Megaphone className="w-3.5 h-3.5" />
-                  </div>
-                  <svg
-                    className="w-16 h-6 text-blue-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
-                  >
-                    <path
-                      d="M0 18 Q 15 15, 30 10 T 45 13 T 60 6"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Sponsored Posts %
-                  </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    68%
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +9%{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tile 5 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                    <DollarSign className="w-3.5 h-3.5" />
-                  </div>
-                  <svg
-                    className="w-16 h-6 text-purple-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
-                  >
-                    <path
-                      d="M0 16 Q 15 14, 30 8 T 45 10 T 60 2"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Estimated Partnership Value
-                  </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    $312K
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +22%{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tile 6 */}
-              <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                <div className="flex items-start justify-between">
-                  <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                    <Calendar className="w-3.5 h-3.5" />
-                  </div>
-                  <svg
-                    className="w-16 h-6 text-purple-500 stroke-current"
-                    viewBox="0 0 60 20"
-                    fill="none"
-                  >
-                    <path
-                      d="M0 15 Q 15 17, 30 11 T 45 12 T 60 5"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-2.5">
-                  <div className="text-xs text-slate-500 font-medium">
-                    Average Campaign Duration
-                  </div>
-                  <div className="text-lg font-bold text-slate-900 mt-0.5">
-                    45 Days
-                  </div>
-                  <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                    +5 days{" "}
-                    <span className="text-slate-400 font-normal">
-                      vs last 90 days
-                    </span>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
 
-          {/* AI Partnership Score (5 cols) */}
-          <div className="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
-            <div className="flex items-center gap-1.5 mb-3">
-              <h2 className="text-sm font-bold text-slate-900">
-                AI Partnership Score
-              </h2>
-              <Info className="w-3.5 h-3.5 text-slate-400 cursor-pointer" />
+          <div className="lg:col-span-5 bg-white rounded-xl p-4 border border-slate-200 shadow-sm relative overflow-hidden flex flex-col">
+            {/* Header Section */}
+            <div className="flex items-center justify-between mb-4 z-10">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-md bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-purple-200">
+                  <Sparkles className="w-3 h-3" />
+                </div>
+                <div>
+                  <h2 className="text-sm font-bold text-slate-900 leading-tight">
+                    AI Partnership Score
+                  </h2>
+                  <p className="text-[10px] text-slate-500 font-medium">
+                    Predictive health analysis
+                  </p>
+                </div>
+              </div>
+              <button className="p-1 hover:bg-slate-50 rounded-full transition-colors">
+                <Info className="w-3.5 h-3.5 text-slate-400" />
+              </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-              {/* Radial Score Gauge (5 cols) */}
-              <div className="sm:col-span-5 flex flex-col items-center justify-center">
-                <div className="relative w-28 h-28 flex items-center justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center z-10">
+              {/* Left Column: Smaller Radial Score Gauge (5 cols) */}
+              <div className="md:col-span-5 flex flex-col items-center justify-center relative">
+                {/* Subtle background glow */}
+                <div className="absolute inset-0 bg-purple-400/20 blur-xl rounded-full w-20 h-20 mx-auto mix-blend-multiply"></div>
+
+                <div className="relative w-40 h-40 flex items-center justify-center">
                   <svg
-                    className="w-full h-full transform -rotate-90"
+                    className="w-full h-full transform -rotate-90 drop-shadow-sm"
                     viewBox="0 0 100 100"
                   >
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      stroke="#F1F5F9"
-                      strokeWidth="8"
-                      fill="transparent"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="42"
-                      stroke="url(#purpleGradient)"
-                      strokeWidth="8"
-                      strokeDasharray="263.8"
-                      strokeDashoffset="21"
-                      strokeLinecap="round"
-                      fill="transparent"
-                    />
                     <defs>
                       <linearGradient
-                        id="purpleGradient"
+                        id="aiScoreGradientSmall"
                         x1="0%"
                         y1="0%"
                         x2="100%"
                         y2="100%"
                       >
                         <stop offset="0%" stopColor="#8B5CF6" />
-                        <stop offset="100%" stopColor="#6D28D9" />
+                        <stop offset="50%" stopColor="#6366F1" />
+                        <stop offset="100%" stopColor="#3B82F6" />
                       </linearGradient>
                     </defs>
+                    {/* Background Track */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="42"
+                      stroke="#F1F5F9"
+                      strokeWidth="7"
+                      fill="transparent"
+                    />
+                    {/* Progress Track (92%) */}
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="42"
+                      stroke="url(#aiScoreGradientSmall)"
+                      strokeWidth="7"
+                      strokeDasharray="263.8"
+                      strokeDashoffset="21.1"
+                      strokeLinecap="round"
+                      fill="transparent"
+                      className="transition-all duration-1000 ease-out"
+                    />
                   </svg>
-                  <div className="absolute flex flex-col items-center justify-center text-center">
-                    <span className="text-2xl font-extrabold text-slate-900 leading-none">
+
+                  {/* Inner Score Text */}
+                  <div className="absolute flex flex-col items-center justify-center text-center mt-0.5">
+                    <span className="text-2xl font-black text-slate-900 tracking-tighter leading-none">
                       92
                     </span>
-                    <span className="text-[10px] font-medium text-slate-400 mt-0.5">
-                      /100
+                    <span className="text-[9px] font-bold text-slate-400 mt-0.5 uppercase tracking-wider">
+                      / 100
                     </span>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-emerald-500 mt-2">
-                  Excellent
-                </span>
+
+                {/* Status & Trend */}
+                <div className="mt-2.5 flex flex-col items-center gap-0.5">
+                  <span className="px-5 py-1 bg-emerald-50 text-emerald-600 text-[15px] font-bold rounded-md border border-emerald-100">
+                    Excellent
+                  </span>
+                  <div className="flex items-center gap-1 text-[10px] font-semibold text-slate-500 mt-0.5">
+                    <TrendingUp className="w-2.5 h-2.5 text-emerald-500" />
+                    <span>Top 5% niche</span>
+                  </div>
+                </div>
               </div>
 
-              {/* Lists of Insights (7 cols) */}
-              <div className="sm:col-span-7 space-y-3">
-                {/* Strengths */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                    <Check className="w-3.5 h-3.5 text-emerald-500" />
-                    <span>Strengths</span>
+              {/* Right Column: Smaller Insights Cards (7 cols) */}
+              <div className="md:col-span-7 flex flex-col gap-2">
+                {/* Strengths Card */}
+                <div className="bg-emerald-50/50 border border-emerald-100/80 rounded-lg p-2.5 hover:bg-emerald-50 transition-colors">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-[11px] font-bold text-emerald-900">
+                      Core Strengths
+                    </span>
                   </div>
-                  <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                    <li>High repeat partnerships</li>
-                    <li>Premium brand portfolio</li>
-                    <li>Consistent sponsorship frequency</li>
-                  </ul>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-1.5 py-0.5 bg-white border border-emerald-200 text-emerald-700 text-[10px] font-medium rounded shadow-sm">
+                      High repeat
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-white border border-emerald-200 text-emerald-700 text-[10px] font-medium rounded shadow-sm">
+                      Premium portfolio
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-white border border-emerald-200 text-emerald-700 text-[10px] font-medium rounded shadow-sm">
+                      Consistency
+                    </span>
+                  </div>
                 </div>
 
-                {/* Risks */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
+                {/* Risks Card */}
+                <div className="bg-amber-50/50 border border-amber-100/80 rounded-lg p-2.5 hover:bg-amber-50 transition-colors">
+                  <div className="flex items-center gap-1.5 mb-1.5">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Risks</span>
+                    <span className="text-[11px] font-bold text-amber-900">
+                      Potential Risks
+                    </span>
                   </div>
-                  <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                    <li>Few long-term retainers</li>
-                  </ul>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-1.5 py-0.5 bg-white border border-amber-200 text-amber-700 text-[10px] font-medium rounded shadow-sm">
+                      Few long-term retainers
+                    </span>
+                  </div>
                 </div>
 
-                {/* Growth Opportunities */}
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                    <span>Growth Opportunities</span>
+                {/* Growth Opportunities Card */}
+                <div className="bg-indigo-50/50 border border-indigo-100/80 rounded-lg p-2.5 hover:bg-indigo-50 transition-colors">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <Lightbulb className="w-3.5 h-3.5 text-indigo-500" />
+                    <span className="text-[11px] font-bold text-indigo-900">
+                      Growth Targets
+                    </span>
                   </div>
-                  <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                    <li>Luxury skincare</li>
-                    <li>Wellness brands</li>
-                    <li>Global campaigns</li>
-                  </ul>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-1.5 py-0.5 bg-white border border-indigo-200 text-indigo-700 text-[10px] font-medium rounded shadow-sm">
+                      Luxury skincare
+                    </span>
+                    <span className="px-1.5 py-0.5 bg-white border border-indigo-200 text-indigo-700 text-[10px] font-medium rounded shadow-sm">
+                      Wellness brands
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Decorative Glass Sparkle Graphic on the Right */}
-            <div className="absolute right-2 bottom-2 w-20 h-20 opacity-20 pointer-events-none">
-              <Sparkles className="w-full h-full text-purple-600" />
-            </div>
+            {/* Decorative Background Element */}
+            <div className="absolute -right-5 -bottom-5 w-24 h-24 bg-gradient-to-tl from-indigo-50 to-transparent rounded-full opacity-50 pointer-events-none"></div>
           </div>
         </div>
 
         {/* ---------- ROW 2: COLLABORATIONS, CATEGORIES & TIMELINE ---------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           {/* 2. Recent Brand Collaborations (5 cols) */}
           <div className="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
@@ -888,7 +840,7 @@ export default function App() {
         </div>
 
         {/* ---------- ROW 3: PARTNERS, PERFORMANCE & BRAND FIT ---------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           {/* 5. Top Brand Partners (4 cols) */}
           <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
@@ -969,8 +921,8 @@ export default function App() {
             </div>
 
             {/* Custom SVG Bar Chart */}
-            <div className="h-44 w-full pt-2 flex flex-col justify-between">
-              <svg className="w-full h-36" viewBox="0 0 300 120">
+            <div className="h-55  w-full pt-2 flex flex-col justify-between">
+              <svg className="w-full " viewBox="0 0 300 120">
                 {/* Y Gridlines */}
                 <line
                   x1="25"
@@ -1123,7 +1075,7 @@ export default function App() {
                 />
               </svg>
 
-              <div className="flex justify-between text-[10px] text-slate-500 font-medium px-4">
+              <div className="mb-12 flex justify-between text-[10px] text-slate-500 font-medium px-15">
                 <span>Reach</span>
                 <span>Likes</span>
                 <span>Comments</span>
@@ -1135,13 +1087,13 @@ export default function App() {
 
           {/* 7. Brand Fit Analysis (4 cols) */}
           <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
-            <h2 className="text-sm font-bold text-slate-900 mb-1">
+            <h2 className="text-sm font-bold text-slate-900 mb-0">
               7. Brand Fit Analysis
             </h2>
 
-            <div className="relative h-44 w-full flex items-center justify-center">
+            <div className="relative  w-full flex items-center justify-center">
               {/* Radar Spider Web Chart SVG */}
-              <svg className="w-52 h-44" viewBox="0 0 200 160">
+              <svg className="w-90 h-75 " viewBox="0 0 200 160">
                 {/* Hexagon Web Layers */}
                 <polygon
                   points="100,20 160,50 160,110 100,140 40,110 40,50"
@@ -1260,7 +1212,7 @@ export default function App() {
         </div>
 
         {/* ---------- ROW 4: BREAKDOWN, INDUSTRIES & FREQUENCY ---------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           {/* 8. Sponsored Content Breakdown (4 cols) */}
           <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <h2 className="text-sm font-bold text-slate-900 mb-2">
@@ -1520,7 +1472,7 @@ export default function App() {
         </div>
 
         {/* ---------- ROW 5: PRICING, BRANDS INTERESTED & AI INSIGHTS ---------- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           {/* 11. Estimated Partnership Pricing (4 cols) */}
           <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <h2 className="text-sm font-bold text-slate-900 mb-3">
@@ -1557,20 +1509,20 @@ export default function App() {
                   desc: "Best for Reach",
                   icon: Layout,
                 },
-                {
-                  title: "UGC Video",
-                  price: "$8,000",
-                  eng: "Avg. Eng. 2.8%",
-                  desc: "Best for Conversions",
-                  icon: Video,
-                },
-                {
-                  title: "Brand Package",
-                  price: "$20,000+",
-                  eng: "Avg. Eng. 3.0%",
-                  desc: "Best for Long-term",
-                  icon: Package,
-                },
+                // {
+                //   title: "UGC Video",
+                //   price: "$8,000",
+                //   eng: "Avg. Eng. 2.8%",
+                //   desc: "Best for Conversions",
+                //   icon: Video,
+                // },
+                // {
+                //   title: "Brand Package",
+                //   price: "$20,000+",
+                //   eng: "Avg. Eng. 3.0%",
+                //   desc: "Best for Long-term",
+                //   icon: Package,
+                // },
               ].map((item, idx) => {
                 const IconComponent = item.icon || Sparkles;
                 return (
