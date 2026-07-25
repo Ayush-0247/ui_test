@@ -996,13 +996,11 @@ function DesktopAudience() {
       style={{ fontFamily: "Inter, sans-serif" }}
     >
       {/* Fixed Sidebar - Does not scroll */}
-      <div className="fixed left-0 top-0 h-screen overflow-hidden z-50 w-[280px]">
-        <SidebarOpen />
-      </div>
+      <SidebarOpen />
 
       {/* Scrollable Content Area */}
       <div
-        className="flex-1 overflow-y-auto ml-[280px]"
+        className="h-screen flex-1 overflow-y-auto lg:ml-[250px]"
         style={{
           backgroundColor: "#F8F8FB",
         }}
@@ -1457,3 +1455,5 @@ export default function Audience() {
     </>
   );
 }
+
+
