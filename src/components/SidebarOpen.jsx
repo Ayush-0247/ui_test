@@ -15,8 +15,7 @@ import {
   LifeBuoy,
   MessageSquare,
 } from "lucide-react";
-
-import userAvatar from "../assets/yoga.jpg";
+import img1 from "../assets/img1.png"
 
 function NavItem({ icon: Icon, label, hasChevron }) {
   return (
@@ -120,9 +119,9 @@ export default function SidebarNav() {
         <button className="mt-3 flex w-full items-center justify-between rounded-lg bg-[#1F2937] px-2.5 py-2 hover:bg-[#374151] transition">
           <span className="flex items-center gap-2.5">
             <img
-              src={userAvatar}
+              src={img1}
               alt="Ayush Raj"
-              className="h-8 w-8 rounded-full bg-gray-500 object-cover"
+              className="h-10 w-10 rounded-full bg-gray-500 object-cover"
             />
             <span className="text-left w-28">
               <span className="block text-[13px] font-bold text-white truncate">

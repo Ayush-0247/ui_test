@@ -15,7 +15,7 @@ import {
   ChevronsRight,
 } from "lucide-react";
 
-import userAvatar from "../assets/yoga.jpg";
+import img1 from "../assets/img1.png";
 
 export default function SidebarNav() {
   const mainNavItems = [
@@ -87,7 +87,7 @@ export default function SidebarNav() {
 
         <button className="mt-3 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full transition hover:opacity-80">
           <img
-            src={userAvatar}
+            src={img1}
             alt="User Avatar"
             className="h-full w-full bg-gray-500 object-cover"
           />
