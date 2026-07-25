@@ -84,7 +84,7 @@ export default function SidebarNav() {
           </button>
         </div>
 
-        <nav className="mt-4 flex-1 space-y-0.5 overflow-y-auto px-1 scrollbar-hide">
+        <nav className="mt-4 flex-1 space-y-0.5 overflow-y-auto px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {mainNavItems.map((item) => (
             <NavItem key={item.label} {...item} />
           ))}
