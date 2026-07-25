@@ -73,6 +73,9 @@ const Home = () => {
 
         <PortalCard to="/Partnership-close" title="Partnership Page close sidebar" theme="sky" />
         <PortalCard to="/Partnership-open" title="Partnership Page open sidebar" theme="sky" />
+
+        <PortalCard to="/Contact-close" title="Contact Page close sidebar" theme="sky" />
+        <PortalCard to="/Contact-open" title="Contact Page open sidebar" theme="sky" />
         
       </div>
     </div>
