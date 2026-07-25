@@ -818,7 +818,7 @@ function Overview() {
       <SidebarClose />
       {/* <MobileTopbar onOpen={() => setMobileOpen(true)} /> */}
 
-      <main className="min-w-0 flex-1 p-3 sm:p-4 lg:p-6">
+      <main className="min-w-0 flex-1 p-3 sm:p-4 lg:ml-[72px] lg:p-6">
         <ProfileHeader />
         <Tabs />
         <StatCardsRow />
@@ -853,4 +853,5 @@ function Overview() {
 }
 
 export default Overview;
+
 

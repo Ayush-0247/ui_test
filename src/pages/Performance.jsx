@@ -105,7 +105,7 @@ export default function Performance() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="flex-1 overflow-y-auto p-2 sm:p-4 flex flex-col gap-3 min-w-0 pb-16 lg:pb-3">
+      <main className="flex-1 overflow-y-auto p-2 sm:p-4 flex flex-col gap-3 min-w-0 pb-16 lg:ml-[72px] lg:pb-3">
         {/* Top Profile Header */}
         <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -1245,3 +1245,4 @@ export default function Performance() {
     </div>
   );
 }
+
