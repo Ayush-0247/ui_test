@@ -49,7 +49,7 @@ export default function SidebarNav() {
   ];
 
   return (
-    <aside className="relative flex h-screen w-[250px] shrink-0 flex-col bg-[#111827] px-3 py-5">
+    <aside className="fixed left-0 top-0 z-40 flex h-screen w-[250px] shrink-0 flex-col bg-[#111827] px-3 py-5">
       <div className="flex flex-1 flex-col overflow-hidden">
         <div className="shrink-0 px-1">
           <div className="flex items-center gap-3">

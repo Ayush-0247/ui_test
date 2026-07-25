@@ -1,5 +1,5 @@
 
-import SidebarOpen from "../components/SidebarOpen";
+import SidebarClose from "../components/SidebarClose";
 import {
   
   Users,
@@ -265,7 +265,7 @@ function ViewAll() {
 //         />
 //       ) : null}
 
-//      <SidebarOpen />
+//      <SidebarClose />
 //     </>
 //   );
 // }
@@ -810,15 +810,15 @@ function Overview() {
 
   return (
     <div
-      className="min-h-screen font-sans"
+      className="flex min-h-screen font-sans"
       style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
     >
       <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
 
-      <SidebarOpen />
+      <SidebarClose />
       {/* <MobileTopbar onOpen={() => setMobileOpen(true)} /> */}
 
-      <main className="lg:ml-[250px] p-3 sm:p-4 lg:p-6">
+      <main className="min-w-0 flex-1 p-3 sm:p-4 lg:p-6">
         <ProfileHeader />
         <Tabs />
         <StatCardsRow />
@@ -853,3 +853,4 @@ function Overview() {
 }
 
 export default Overview;
+
