@@ -84,7 +84,7 @@ export default function Performance() {
         <SidebarOpen />
       </div>
 
-      <main className="flex-1 min-h-screen overflow-x-hidden p-0">
+      <main className="min-h-screen flex-1 overflow-x-hidden p-0 lg:ml-[250px]">
         <div className="h-[2000px] rounded-xl border-2  border-gray-300 p-0">
           {/* Mobile bottom nav bar (replaces the icon sidebar below lg) */}
           <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 flex items-center justify-around py-1.5 px-1">
@@ -1301,3 +1301,4 @@ export default function Performance() {
     </div>
   );
 }
+
