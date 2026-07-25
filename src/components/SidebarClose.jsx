@@ -30,7 +30,7 @@ export default function SidebarNav() {
   ];
 
   return (
-    <aside className="sticky left-0 top-0 z-40 flex h-screen w-[72px] shrink-0 flex-col items-center bg-[#111827] py-5">
+    <aside className="fixed left-0 top-0 z-40 hidden h-screen w-[72px] shrink-0 flex-col items-center bg-[#111827] py-5 lg:flex">
       <div className="flex w-full flex-1 flex-col items-center overflow-hidden">
         <div className="flex w-full shrink-0 flex-col items-center">
           <Layers className="h-7 w-7 text-[#5B3DF5] drop-shadow-md" />
@@ -95,3 +95,4 @@ export default function SidebarNav() {
     </aside>
   );
 }
+

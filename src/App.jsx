@@ -10,6 +10,7 @@ import Searchbar from "./pages/Searchbar";
 import Performance from "./pages/Performance";
 import Overview from "./pages/Overview";
 import Content from "./pages/Content";
+import ContentOpen from "./pages/ContentOpen";
 import Audience from "./pages/Audience";
 import PerformanceOpen from "./pages/PerformanceOpen";
 
@@ -27,7 +28,8 @@ export default function App() {
       <Route path="/Searchbar" element={<Searchbar />} />
       <Route path="/Performance" element={<Performance />} />
       <Route path="/Overview" element={<Overview />} />
-      <Route path="/Content" element={<Content />} />
+      <Route path="/content-close" element={<Content />} />
+      <Route path="/content-open" element={<ContentOpen />} />
       <Route path="/audience" element={<Audience />} />
       <Route path="/PerformanceOpen" element={<PerformanceOpen />} />
       <Route path="/overview-close" element={<OverviewClose />} />

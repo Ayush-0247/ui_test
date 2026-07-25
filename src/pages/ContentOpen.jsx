@@ -1,4 +1,4 @@
-import SidebarClose from "../components/SidebarClose";
+import SidebarOpen from "../components/SidebarOpen";
 import {
   BadgeCheck,
   MapPin,
@@ -929,11 +929,11 @@ function CaptionHookInsights() {
 function DesktopContent() {
   return (
     <div
-      className="hidden min-h-screen font-sans p-6 lg:block lg:pl-[96px]"
+      className="hidden min-h-screen font-sans p-6 lg:ml-[250px] lg:block"
       style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
     >
       <div>
-        <SidebarClose />
+        <SidebarOpen />
       </div>
       <ProfileHeader />
       <StatCardsRow />
@@ -1642,4 +1642,5 @@ export default function Content() {
     </>
   );
 }
+
 
