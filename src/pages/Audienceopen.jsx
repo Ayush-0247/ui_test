@@ -1,4 +1,4 @@
-import SidebarClose from "../components/SidebarClose";
+import SidebarOpen from "../components/SidebarOpen";
 import {
   BadgeCheck,
   MapPin,
@@ -995,12 +995,12 @@ function AudienceSnapshot() {
 
 function DesktopAudience() {
   return (
-   <div
-         className="hidden min-h-screen font-sans p-6 lg:block lg:pl-[96px]"
-         style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
-       >
-         <div>
-           <SidebarClose />
+    <div
+      className="hidden min-h-screen font-sans p-6 lg:ml-[250px] lg:block"
+      style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
+    >
+      <div>
+           <SidebarOpen />
          </div>
       <ProfileHeader />
       <StatCardsRow />
