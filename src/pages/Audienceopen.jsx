@@ -118,7 +118,7 @@ const topLocations = [
   { country: "United States", flag: usa, value: 47.2 },
   { country: "Italy", flag: phili, value: 8.9 },
   { country: "United Kingdom", flag: uk, value: 6.7 },
-  { country: "Canada", flag: canada , value: 5.3 },
+  { country: "Canada", flag: canada, value: 5.3 },
   { country: "Australia", flag: aus, value: 4.1 },
 ];
 
@@ -337,38 +337,35 @@ function DotMap() {
     { x: 292, y: 132 },
   ];
   return (
-  <svg viewBox="0 0 340 155" className="w-full h-32">
-  {dots.map((d) => (
-    <circle
-      key={d.key}
-      cx={d.x}
-      cy={d.y}
-      r={2.6}              // was 1.6
-      fill={PURPLE_TINT}
-      opacity={0.95}
-    />
-  ))}
+    <svg viewBox="0 0 340 155" className="w-full h-32">
+      {dots.map((d) => (
+        <circle
+          key={d.key}
+          cx={d.x}
+          cy={d.y}
+          r={2.6}
+          fill={PURPLE_TINT}
+          opacity={0.95}
+        />
+      ))}
 
-  {markers.map((m, i) => (
-    <circle
-      key={i}
-      cx={m.x}
-      cy={m.y}
-      r={5}                // was 2.6
-      fill={PURPLE}
-      stroke="#fff"
-      strokeWidth={1.5}
-    />
-  ))}
-</svg>
+      {markers.map((m, i) => (
+        <circle
+          key={i}
+          cx={m.x}
+          cy={m.y}
+          r={5}
+          fill={PURPLE}
+          stroke="#fff"
+          strokeWidth={1.5}
+        />
+      ))}
+    </svg>
   );
 }
 
 /* ======================================================================
-   DESKTOP / LAPTOP LAYOUT — UNCHANGED FROM ORIGINAL
-   Everything in this section is rendered only at `lg` and above
-   (see the `hidden lg:block` wrapper in DesktopAudience). Nothing here
-   was modified from the version you sent.
+   DESKTOP / LAPTOP LAYOUT — FIXED SIDEBAR VERSION
    ====================================================================== */
 
 function ProfileHeader() {
@@ -500,6 +497,7 @@ function StatCardsRow() {
     </div>
   );
 }
+
 function Tabs() {
   return (
     <div
@@ -618,7 +616,7 @@ function AudienceLocation() {
               style={{ color: HEADING }}
             >
               <img src={l.flag} className="w-5 rounded-md h-5" alt="" />
-            <p className="font-bold">{l.country}</p>  
+              <p className="font-bold">{l.country}</p>
             </span>
             <span className="font-bold" style={{ color: HEADING }}>
               {l.value}%
@@ -664,8 +662,7 @@ function AudienceIntelligence() {
               </li>
             ))}
           </ul>
-         
-        </div> 
+        </div>
         <div className="flex flex-col w-[360px]">
           <p
             className="text-xs text-nowrap font-semibold mb-1.5"
@@ -690,7 +687,6 @@ function AudienceIntelligence() {
             ))}
           </ul>
         </div>
-        
       </div>
     </Card>
   );
@@ -939,7 +935,7 @@ function AudienceGrowthSignals() {
               className="text-sm font-semibold flex items-center gap-1.5"
               style={{ color: HEADING }}
             >
-             <img className="w-7 h-7" src={usa} alt="" /> United States
+              <img className="w-7 h-7" src={usa} alt="" /> United States
             </p>
             <p className="text-xs font-medium mt-0.5" style={{ color: GREEN }}>
               +212K followers
@@ -995,58 +991,49 @@ function AudienceSnapshot() {
 
 function DesktopAudience() {
   return (
-    <div
-      className="hidden min-h-screen font-sans p-6 lg:ml-[250px] lg:block"
-      style={{ backgroundColor: "#F8F8FB", fontFamily: "Inter, sans-serif" }}
-    >
-      <div>
-           <SidebarOpen />
-         </div>
-      <ProfileHeader />
-      <StatCardsRow />
-      <Tabs />
-
-      <div className="grid grid-cols-3 gap-5 mt-5">
-        <AudienceDemographics />
-        <AudienceLocation />
-        <AudienceIntelligence />
+    <div className="hidden lg:flex h-screen font-sans" style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* Fixed Sidebar - Does not scroll */}
+      <div className="fixed left-0 top-0 h-screen overflow-hidden z-50 w-[280px]">
+        <SidebarOpen />
       </div>
 
-      <div className="grid grid-cols-3 gap-5 mt-5">
-        <AudienceInterests />
-        <AudienceLanguage />
-        <AudienceQuality />
-      </div>
+      {/* Scrollable Content Area */}
+      <div
+        className="flex-1 overflow-y-auto ml-[280px]"
+        style={{ 
+          backgroundColor: "#F8F8FB",
+        }}
+      >
+        <div className="p-6">
+          <ProfileHeader />
+          <StatCardsRow />
+          <Tabs />
 
-      <div className="grid grid-cols-3 gap-5 mt-5 mb-8">
-        <AgeGenderBreakdown />
-        <AudienceGrowthSignals />
-        <AudienceSnapshot />
+          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start">
+            <AudienceDemographics />
+            <AudienceLocation />
+            <AudienceIntelligence />
+          </div>
+
+          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start">
+            <AudienceInterests />
+            <AudienceLanguage />
+            <AudienceQuality />
+          </div>
+
+          <div className="grid grid-cols-[1.4fr_0.85fr_1.15fr] gap-5 mt-5 items-start pb-8">
+            <AgeGenderBreakdown />
+            <AudienceGrowthSignals />
+            <AudienceSnapshot />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
 /* ======================================================================
-   MOBILE LAYOUT — purpose-built, not a squeezed-down desktop view.
-   Rendered only below `lg`. Nothing above this line was changed to
-   make room for it.
-
-   Mobile-specific decisions:
-   - Profile header stacks vertically; the 6 action buttons collapse
-     into one primary CTA + icon row, with the secondary actions
-     (Add to Campaign / Save / Contact) as a horizontal scroll row
-     instead of competing for space next to the name.
-   - The 6 stat cards become a snap-scrolling horizontal carousel
-     instead of a 6-column grid nobody can read at 375px.
-   - The 7-item tab bar becomes horizontally scrollable pills.
-   - Every 3-column section grid becomes a single stacked column —
-     this is a long-form scroll read on mobile, not a dashboard grid.
-   - Audience Demographics, Audience Intelligence and Growth Signals
-     each get a mobile variant because their desktop versions rely on
-     internal 2-column grids and a hardcoded 360px width that don't
-     survive a phone screen — the mobile versions stack those pieces
-     instead of shrinking them.
+   MOBILE LAYOUT — unchanged from original
    ====================================================================== */
 
 function MobileProfileHeader() {
@@ -1069,19 +1056,33 @@ function MobileProfileHeader() {
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-1.5">
-            <h1 className="text-[17px] font-bold truncate" style={{ color: HEADING }}>
+            <h1
+              className="text-[17px] font-bold truncate"
+              style={{ color: HEADING }}
+            >
               Mariale
             </h1>
-            <BadgeCheck size={15} className="shrink-0" fill={BLUE} color="white" />
+            <BadgeCheck
+              size={15}
+              className="shrink-0"
+              fill={BLUE}
+              color="white"
+            />
           </div>
-          <div className="flex items-center gap-1.5 mt-0.5 text-xs flex-wrap" style={{ color: MUTED }}>
+          <div
+            className="flex items-center gap-1.5 mt-0.5 text-xs flex-wrap"
+            style={{ color: MUTED }}
+          >
             <span className="font-semibold text-gray-600">@mariale</span>
             <span className="flex items-center gap-1 rounded-md px-1.5 py-0.5 border border-[#C7C9D9] text-[10px]">
               <FaInstagram size={9} className="text-pink-500" />
               Instagram
             </span>
           </div>
-          <div className="flex items-center gap-1 mt-1 text-xs" style={{ color: MUTED }}>
+          <div
+            className="flex items-center gap-1 mt-1 text-xs"
+            style={{ color: MUTED }}
+          >
             <MapPin size={11} />
             <span className="font-semibold text-gray-600">USA</span>
           </div>
@@ -1119,7 +1120,10 @@ function MobileProfileHeader() {
       </div>
 
       <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
-        <button className="shrink-0 flex items-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3 py-2" style={{ backgroundColor: PURPLE }}>
+        <button
+          className="shrink-0 flex items-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3 py-2"
+          style={{ backgroundColor: PURPLE }}
+        >
           <Plus size={12} />
           Add to Campaign
         </button>
@@ -1142,7 +1146,10 @@ function MobileStatCard({ label, value, caption, icon: Icon }) {
       className="shrink-0 snap-start w-[128px] bg-white rounded-xl p-3"
       style={{ border: `1px solid ${BORDER}` }}
     >
-      <div className="flex items-center gap-1 text-[10px] font-bold" style={{ color: HEADING }}>
+      <div
+        className="flex items-center gap-1 text-[10px] font-bold"
+        style={{ color: HEADING }}
+      >
         <Icon size={12} style={{ color: PURPLE }} />
         <span className="truncate">{label}</span>
       </div>
@@ -1168,7 +1175,10 @@ function MobileStatCardsRow() {
 
 function MobileTabs() {
   return (
-    <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4" style={{ borderBottom: `1px solid ${BORDER}` }}>
+    <div
+      className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4"
+      style={{ borderBottom: `1px solid ${BORDER}` }}
+    >
       {tabs.map(({ label, icon: Icon, active }) => (
         <button
           key={label}
@@ -1176,7 +1186,9 @@ function MobileTabs() {
           style={{
             color: active ? PURPLE : MUTED,
             fontWeight: active ? 600 : 500,
-            borderBottom: active ? `2px solid ${PURPLE}` : "2px solid transparent",
+            borderBottom: active
+              ? `2px solid ${PURPLE}`
+              : "2px solid transparent",
           }}
         >
           <Icon size={13} />
@@ -1187,8 +1199,6 @@ function MobileTabs() {
   );
 }
 
-// Desktop version relies on a 2-col internal grid; mobile stacks
-// gender split above age groups so neither gets cramped.
 function MobileAudienceDemographics() {
   return (
     <Card>
@@ -1200,7 +1210,13 @@ function MobileAudienceDemographics() {
         <div className="w-20 h-20 shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
-              <Pie data={genderSplit} dataKey="value" innerRadius={22} outerRadius={36} stroke="none">
+              <Pie
+                data={genderSplit}
+                dataKey="value"
+                innerRadius={22}
+                outerRadius={36}
+                stroke="none"
+              >
                 {genderSplit.map((d, i) => (
                   <Cell key={i} fill={d.color} />
                 ))}
@@ -1210,9 +1226,15 @@ function MobileAudienceDemographics() {
         </div>
         <ul className="flex flex-col gap-1.5 flex-1">
           {genderSplit.map((d) => (
-            <li key={d.name} className="flex items-center justify-between text-xs">
+            <li
+              key={d.name}
+              className="flex items-center justify-between text-xs"
+            >
               <span className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: d.color }} />
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ backgroundColor: d.color }}
+                />
                 <span style={{ color: HEADING }}>{d.name}</span>
               </span>
               <span className="font-medium" style={{ color: HEADING }}>
@@ -1233,7 +1255,10 @@ function MobileAudienceDemographics() {
               {a.label}
             </span>
             <Bar value={a.value} max={45} />
-            <span className="w-10 text-right font-medium" style={{ color: HEADING }}>
+            <span
+              className="w-10 text-right font-medium"
+              style={{ color: HEADING }}
+            >
               {a.value}%
             </span>
           </li>
@@ -1243,8 +1268,6 @@ function MobileAudienceDemographics() {
   );
 }
 
-// Desktop version has a hardcoded w-[360px] Opportunities column —
-// mobile stacks Strengths above Opportunities at full card width.
 function MobileAudienceIntelligence() {
   return (
     <Card>
@@ -1256,25 +1279,47 @@ function MobileAudienceIntelligence() {
         </p>
       </div>
 
-      <p className="text-xs font-semibold mt-4 mb-1.5" style={{ color: HEADING }}>
+      <p
+        className="text-xs font-semibold mt-4 mb-1.5"
+        style={{ color: HEADING }}
+      >
         Strengths
       </p>
       <ul className="flex flex-col gap-1.5">
         {strengths.map((s) => (
-          <li key={s} className="flex items-start gap-1.5 text-xs" style={{ color: HEADING }}>
-            <CheckCircle2 size={13} className="mt-0.5 shrink-0" style={{ color: GREEN }} />
+          <li
+            key={s}
+            className="flex items-start gap-1.5 text-xs"
+            style={{ color: HEADING }}
+          >
+            <CheckCircle2
+              size={13}
+              className="mt-0.5 shrink-0"
+              style={{ color: GREEN }}
+            />
             {s}
           </li>
         ))}
       </ul>
 
-      <p className="text-xs font-semibold mt-4 mb-1.5" style={{ color: HEADING }}>
+      <p
+        className="text-xs font-semibold mt-4 mb-1.5"
+        style={{ color: HEADING }}
+      >
         Opportunities
       </p>
       <ul className="flex flex-col gap-1.5">
         {opportunities.map((s) => (
-          <li key={s} className="flex items-start gap-1.5 text-xs" style={{ color: HEADING }}>
-            <Lightbulb size={13} className="mt-0.5 shrink-0" style={{ color: AMBER }} />
+          <li
+            key={s}
+            className="flex items-start gap-1.5 text-xs"
+            style={{ color: HEADING }}
+          >
+            <Lightbulb
+              size={13}
+              className="mt-0.5 shrink-0"
+              style={{ color: AMBER }}
+            />
             {s}
           </li>
         ))}
@@ -1283,8 +1328,6 @@ function MobileAudienceIntelligence() {
   );
 }
 
-// Desktop version uses a [1.5fr_1fr] grid for chart + stat cards side
-// by side; mobile stacks the chart above the two highlight cards.
 function MobileAudienceGrowthSignals() {
   return (
     <Card>
@@ -1294,8 +1337,16 @@ function MobileAudienceGrowthSignals() {
       </p>
       <div className="h-36">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={growthSignals} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
-            <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fill: MUTED, fontSize: 10 }} />
+          <LineChart
+            data={growthSignals}
+            margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
+          >
+            <XAxis
+              dataKey="date"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: MUTED, fontSize: 10 }}
+            />
             <YAxis
               domain={[5, 7]}
               tickFormatter={(v) => `${v.toFixed(1)}M`}
@@ -1303,28 +1354,52 @@ function MobileAudienceGrowthSignals() {
               tickLine={false}
               tick={{ fill: MUTED, fontSize: 10 }}
             />
-            <Tooltip contentStyle={{ borderRadius: 8, borderColor: BORDER, fontSize: 12 }} />
-            <Line type="monotone" dataKey="value" stroke={PURPLE} strokeWidth={2.5} dot={{ r: 3, fill: PURPLE }} />
+            <Tooltip
+              contentStyle={{
+                borderRadius: 8,
+                borderColor: BORDER,
+                fontSize: 12,
+              }}
+            />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke={PURPLE}
+              strokeWidth={2.5}
+              dot={{ r: 3, fill: PURPLE }}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
       <div className="flex flex-col gap-2.5 mt-3">
-        <div className="rounded-lg p-3" style={{ backgroundColor: PURPLE_TINT }}>
+        <div
+          className="rounded-lg p-3"
+          style={{ backgroundColor: PURPLE_TINT }}
+        >
           <p className="text-[11px] mb-1" style={{ color: MUTED }}>
             Strongest Region
           </p>
-          <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: HEADING }}>
+          <p
+            className="text-sm font-semibold flex items-center gap-1.5"
+            style={{ color: HEADING }}
+          >
             <img className="w-6 h-6" src={usa} alt="" /> United States
           </p>
           <p className="text-xs font-medium mt-0.5" style={{ color: GREEN }}>
             +212K followers
           </p>
         </div>
-        <div className="rounded-lg p-3" style={{ backgroundColor: PURPLE_TINT }}>
+        <div
+          className="rounded-lg p-3"
+          style={{ backgroundColor: PURPLE_TINT }}
+        >
           <p className="text-[11px] mb-1" style={{ color: MUTED }}>
             Fastest Growing Segment
           </p>
-          <p className="text-sm font-semibold flex items-center gap-1.5" style={{ color: HEADING }}>
+          <p
+            className="text-sm font-semibold flex items-center gap-1.5"
+            style={{ color: HEADING }}
+          >
             <Users2 size={14} style={{ color: PURPLE }} />
             25-35
           </p>
