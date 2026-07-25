@@ -12,6 +12,7 @@ import Overview from "./pages/Overview";
 import Content from "./pages/Content";
 import ContentOpen from "./pages/ContentOpen";
 import Audience from "./pages/Audience";
+import Audienceopen from "./pages/Audienceopen";
 import PerformanceOpen from "./pages/PerformanceOpen";
 
 import OverviewClose from "./pages/OverviewClose";
@@ -30,7 +31,8 @@ export default function App() {
       <Route path="/Overview" element={<Overview />} />
       <Route path="/content-close" element={<Content />} />
       <Route path="/content-open" element={<ContentOpen />} />
-      <Route path="/audience" element={<Audience />} />
+      <Route path="/audience-close"  element={<Audience />} />
+      <Route path="/audience-open"  element={<Audienceopen />} />
       <Route path="/PerformanceOpen" element={<PerformanceOpen />} />
       <Route path="/overview-close" element={<OverviewClose />} />
     </Routes>
