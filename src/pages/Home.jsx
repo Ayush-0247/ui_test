@@ -53,9 +53,11 @@ const Home = () => {
           theme="sky"
         />
         <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
-        <PortalCard to="/contact" title="Contact Page" theme="sky" /> <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
+        <PortalCard to="/contact" title="Contact Page" theme="sky" />
+        <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
         <PortalCard to="/performance" title="Performance Page" theme="sky" />
         <PortalCard to="/overview" title="Overview Page" theme="sky" />
+        <PortalCard to="/overview-close" title="Overview Close Sidebar" theme="sky" />
         <PortalCard to="/content" title="Content Page" theme="sky" />
         <PortalCard to="/audience" title="Audience Page" theme="sky" />
       </div>

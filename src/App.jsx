@@ -11,6 +11,7 @@ import Performance from "./pages/Performance";
 import Overview from "./pages/Overview";
 import Content from "./pages/Content";
 import Audience from "./pages/Audience";
+import OverviewClose from "./pages/OverviewClose";
 export default function App() {
   return (
     <Routes>
@@ -26,6 +27,7 @@ export default function App() {
       <Route path="/Overview" element={<Overview />} />
       <Route path="/Content" element={<Content />} />
       <Route path="/audience" element={<Audience />} />
+      <Route path="/overview-close" element={<OverviewClose />} />
     </Routes>
   );
 }
