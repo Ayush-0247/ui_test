@@ -100,13 +100,7 @@ const NAV_TABS = [
   { key: "pricing", label: "Pricing", icon: Tag },
 ];
 
-/* ------------------------------------------------------------------
- * PLANS — each plan now carries a `monthly` AND a `yearly` variant.
- * The yearly tier isn't just "monthly x12 minus a discount" — per
- * the annual pricing screenshot, the quotas themselves increase on
- * annual billing (e.g. Starter search quota 20,000 -> 70,000). Edit
- * the numbers inside `monthly` / `yearly` to match your real plans.
- * ------------------------------------------------------------------ */
+
 
 const PLANS = [
   {
@@ -151,7 +145,7 @@ const PLANS = [
     accentText: "#4338CA",
     monthly: {
       tagline:
-        "Perfect for getting started, pay month-to-month with full access and zero long-term commitment.",
+        "Perfect for getting started, pay month.",
       price: 79,
       cta: "Get Started",
       prefix: "Everything in Free, plus:",
@@ -220,9 +214,7 @@ const PLANS = [
   },
 ];
 
-/* ------------------------------------------------------------------
- * SMALL PRESENTATIONAL PIECES
- * ------------------------------------------------------------------ */
+
 
 function Pill({ children }) {
   return (
