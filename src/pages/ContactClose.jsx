@@ -56,7 +56,7 @@ export default function App() {
       {/* ================= MAIN DASHBOARD CONTENT CONTAINER ================= */}
       <main className="min-h-screen min-w-0 overflow-y-auto px-4 py-5 space-y-5 sm:px-6 lg:ml-[72px] lg:px-8">
         {/* TOP PROFILE HEADER SECTION */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm relative overflow-hidden">
+        <div className="bg-white  relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             {/* Left Profile Info */}
             <div className="flex items-start sm:items-center gap-5">
