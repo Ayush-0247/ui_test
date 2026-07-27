@@ -18,7 +18,7 @@ import {
   CheckCircle2,
   Check,
   Minus,
-
+  ChevronDown,
   Handshake,
   Phone,
   Tag,
@@ -100,128 +100,123 @@ const NAV_TABS = [
   { key: "pricing", label: "Pricing", icon: Tag },
 ];
 
+/* ------------------------------------------------------------------
+ * PLANS — each plan now carries a `monthly` AND a `yearly` variant.
+ * The yearly tier isn't just "monthly x12 minus a discount" — per
+ * the annual pricing screenshot, the quotas themselves increase on
+ * annual billing (e.g. Starter search quota 20,000 -> 70,000). Edit
+ * the numbers inside `monthly` / `yearly` to match your real plans.
+ * ------------------------------------------------------------------ */
+
 const PLANS = [
   {
     key: "free",
     name: "Free Plan",
-    tagline: "Perfect for getting started",
-  
-    price: 0,
-    cta: "Get Started",
+    gradient: "linear-gradient(135deg, #FDEBD3 0%, #FFF7ED 60%)",
+    accent: "#F59E0B",
+    accentText: "#B45309",
+    monthly: {
+      tagline: "Perfect for getting started",
+      price: 0,
+      cta: "Current Plan",
+      features: [
+        "Search Quota: 200",
+        "Campaign Limit: 0",
+        "Compare Limit: 0",
+        "List Limit: 5",
+        "Influencers per List: 10",
+        "Outreach Quota: 0",
+      ],
+    },
+    yearly: {
+      tagline: "Perfect for getting started",
+      price: 0,
+      cta: "Current Plan",
+      features: [
+        "Search Quota: 200",
+        "Campaign Limit: 0",
+        "Compare Limit: 0",
+        "List Limit: 5",
+        "Influencers per List: 10",
+        "Outreach Quota: 0",
+      ],
+    },
     highlighted: false,
-    features: [
-      "  Search Quota: 200",
-      "Campaign Limit: 0",
-      "Compare Limit: 0",
-      "List Limit: 5",
-      "Influencers per List: 100",
-      "Outreach Quota: 0",
-    ],
   },
   {
     key: "starter",
-    name: "Starter",
-    tagline: "Perfect for getting started, pay month-to-month with full access and zero long-term commitment.",
-   
-    price: 79,
-    strikePrice: 61,
-    cta: "Get Started",
+    name: "Starter Plan",
+    gradient: "linear-gradient(135deg, #E4E7FB 0%, #F5F6FE 60%)",
+    accent: "#6366F1",
+    accentText: "#4338CA",
+    monthly: {
+      tagline:
+        "Perfect for getting started, pay month-to-month with full access and zero long-term commitment.",
+      price: 79,
+      cta: "Get Started",
+      prefix: "Everything in Free, plus:",
+      features: [
+        "Everything in Free",
+        "Search Quota: 20,000",
+        "Campaign Limit: 1",
+        "Compare Limit: 2",
+        "Credit Limit: 100",
+        "Export Limit: 500",
+      ],
+    },
+    yearly: {
+      tagline:
+        "Best value for serious growth, enjoy uninterrupted access all year while saving more overall.",
+      price: 660,
+      cta: "Get Started",
+      prefix: "Everything in Free, plus:",
+      features: [
+        "Everything in Free",
+        "Search Quota: 70,000",
+        "Campaign Limit: 15",
+        "Compare Limit: 5",
+        "Credit Limit: 7,000",
+        "Export Limit: 6,500",
+      ],
+    },
     highlighted: false,
-    prefix: "Everything in Free, plus:",
-    features: [
-      " Everything in Free",
-      "Search Quota: 20000",
-      "Campaign Limit: 1",
-      "Compare Limit: 2",
-      "Credit Limit: 100",
-      "Export Limit: 500",
-    ],
   },
   {
     key: "pro",
     name: "Enterprise Plan",
-    tagline: "Best for large teams and agencies.",
-
-    price: 199,
-    strikePrice: 161,
-    cta: "Get Started",
-    highlighted: true,
+    gradient: "linear-gradient(135deg, #FCE3EF 0%, #FEF5FA 60%)",
+    accent: "#EC4899",
+    accentText: "#BE185D",
     badge: "Most Popular",
-    prefix: "Everything in Starter, plus:",
-    features: [
-      "  Everything in Starter",
-      "Search Quota: 65000",
-      "Campaign Limit: 10",
-      "Compare Limit: 2",
-      "Credit Limit: 1500",
-      "Export Limit: Unlimited",
-    ],
-  },
-  //   {
-  //     key: "enterprise",
-  //     name: "Enterprise",
-  //     tagline: "For large organizations",
-  //     icon: ShieldCheck,
-  //     price: "Custom",
-  //     cta: "Contact Sales",
-  //     highlighted: false,
-  //     prefix: "Everything in Pro, plus:",
-  //     features: [
-  //       "Unlimited Searches",
-  //       "Dedicated Account Manager",
-  //       "Custom Integrations",
-  //       "White-labeled Reports",
-  //       "SLA & Priority Support",
-  //       "Advanced Security",
-  //     ],
-  //   },
-];
-
-const COMPARE_ROWS = [
-  {
-    label: "Monthly Price",
-    values: ["$0", "$79", "$199"],
-    strike: [null, "$61", "$161"],
-  },
-  {
-    label: "Search Quota",
-    values: ["200", "20,000", "65,000"],
-  },
-  {
-    label: "Campaign Limit",
-    values: ["0", "1", "10"],
-  },
-  {
-    label: "Compare Limit",
-    values: ["0", "2", "2"],
-  },
-  {
-    label: "List Limit",
-    values: ["5", "5", "5"],
-  },
-  {
-    label: "Influencers per List",
-    values: ["100", "100", "100"],
-  },
-  {
-    label: "Credit Limit",
-    values: ["—", "100", "1,500"],
-  },
-  {
-    label: "Export Limit",
-    values: ["—", "500", "Unlimited"],
-  },
-  {
-    label: "Outreach Quota",
-    values: ["0", "—", "—"],
-  },
-  {
-    label: "Includes Free Features",
-    values: [true, true, true],
-  },
-  {
-    label: "Includes Starter Features",
-    values: [false, false, true],
+    monthly: {
+      tagline: "Best for large teams and agencies.",
+      price: 199,
+      cta: "Get Started",
+      prefix: "Everything in Starter, plus:",
+      features: [
+        "Everything in Starter",
+        "Search Quota: 65,000",
+        "Campaign Limit: 10",
+        "Compare Limit: 2",
+        "Credit Limit: 1,500",
+        "Export Limit: Unlimited",
+      ],
+    },
+    yearly: {
+      tagline: "Best for large teams and agencies.",
+      price: 1668,
+      cta: "Get Started",
+      prefix: "Everything in Starter, plus:",
+      features: [
+        "Everything in Starter",
+        "Search Quota: 210,000",
+        "Campaign Limit: 120",
+        "Compare Limit: 5",
+        "Credit Limit: 18,000",
+        "Export Limit: Unlimited",
+      ],
+    },
+    highlighted: true,
   },
 ];
 
@@ -407,131 +402,168 @@ function TabBar({ tabs, activeTab, onChange }) {
   );
 }
 
+/* Monthly / Annually toggle + "50% OFF" badge, matching the screenshot. */
 function BillingToggle({ cycle, setCycle }) {
   return (
-    <div className="inline-flex items-center rounded-full bg-gray-100 p-1">
-      <button
-        onClick={() => setCycle("monthly")}
-        className={[
-          "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-          cycle === "monthly"
-            ? "bg-white text-gray-900 shadow-sm"
-            : "text-gray-500",
-        ].join(" ")}
+    <div className="flex items-center justify-center gap-3">
+      <div
+        className="inline-flex items-center rounded-full p-1"
+        style={{ backgroundColor: "#EEF0FE", border: `1px solid ${BORDER}` }}
       >
-        Monthly
-      </button>
-      <button
-        onClick={() => setCycle("yearly")}
-        className={[
-          "flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
-          cycle === "yearly"
-            ? "bg-violet-600 text-white shadow-sm"
-            : "text-gray-500",
-        ].join(" ")}
-      >
-        Yearly
-        <span
-          className={[
-            "rounded-full px-1.5 py-0.5 text-[10px] font-semibold",
-            cycle === "yearly"
-              ? "bg-white/20 text-white"
-              : "bg-emerald-100 text-emerald-600",
-          ].join(" ")}
+        <button
+          onClick={() => setCycle("monthly")}
+          className="rounded-full px-4 py-1.5 text-sm font-medium transition-colors"
+          style={{
+            color: cycle === "monthly" ? "#4338CA" : MUTED,
+            backgroundColor: cycle === "monthly" ? "white" : "transparent",
+            boxShadow:
+              cycle === "monthly" ? "0 1px 2px rgba(0,0,0,0.06)" : "none",
+          }}
         >
-          Save 20%
-        </span>
-      </button>
+          Monthly
+        </button>
+        <button
+          onClick={() => setCycle("yearly")}
+          className="rounded-full px-4 py-1.5 text-sm font-semibold transition-colors"
+          style={{
+            color: cycle === "yearly" ? "white" : MUTED,
+            backgroundColor: cycle === "yearly" ? "#6366F1" : "transparent",
+          }}
+        >
+          Annually
+        </button>
+      </div>
+      <span
+        className="rounded-full px-3 py-1.5 text-xs font-semibold"
+        style={{ backgroundColor: "#EEF0FE", color: "#4338CA" }}
+      >
+        50% OFF on Annual Plans
+      </span>
     </div>
   );
 }
 
-function PlanCard({ plan }) {
-//   const Icon = plan.icon;
-  const isCustom = typeof plan.price !== "number";
+function PlanCard({ plan, cycle }) {
+  const [expanded, setExpanded] = useState(false);
+  const data = plan[cycle];
+  const isCustom = typeof data.price !== "number";
+  const visibleFeatures = expanded ? data.features : data.features.slice(0, 5);
 
   return (
     <div
-      className={[
-        "relative flex flex-col rounded-2xl border p-6",
-        plan.highlighted
-          ? "border-violet-600 bg-white shadow-xl shadow-violet-100 ring-1 ring-violet-600"
-          : "border-gray-200 bg-white",
-      ].join(" ")}
+      className="relative flex flex-col rounded-2xl p-6"
+      style={{
+        background: plan.gradient,
+        border: plan.highlighted
+          ? `2px solid ${plan.accent}`
+          : `1px solid ${BORDER}`,
+        boxShadow: plan.highlighted
+          ? "0 10px 25px -10px rgba(236,72,153,0.35)"
+          : "none",
+      }}
     >
       {plan.badge && (
-        <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-violet-600 px-3 py-1 text-[11px] font-semibold text-white shadow-sm">
+        <span
+          className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[11px] font-semibold text-white shadow-sm"
+          style={{ backgroundColor: plan.accent }}
+        >
           {plan.badge}
         </span>
       )}
 
-      <div className="flex items-center gap-3">
-        {/* <span
-          className={[
-            "flex h-10 w-10 items-center justify-center rounded-xl",
-            plan.highlighted
-              ? "bg-violet-100 text-violet-600"
-              : "bg-gray-100 text-gray-500",
-          ].join(" ")}
-        >
-          <Icon size={18} /> 
-        </span> */}
-        <div>
-          <div className="font-semibold text-gray-900">{plan.name}</div>
-          <div className="text-xs text-gray-400">{plan.tagline}</div>
-        </div>
+      <div className="font-bold text-lg" style={{ color: HEADING }}>
+        {plan.name}
       </div>
 
-      <div className="mt-5 flex items-baseline gap-2">
+      <div className="mt-4 text-xs font-medium" style={{ color: MUTED }}>
+        Starts at
+      </div>
+      <div className="mt-1 flex items-baseline gap-1.5">
         {isCustom ? (
-          <span className="text-3xl font-bold text-gray-900">Custom</span>
+          <span className="text-3xl font-bold" style={{ color: HEADING }}>
+            Custom
+          </span>
         ) : (
           <>
-            <span className="text-3xl font-bold text-gray-900">
-              ${plan.price}
+            <span className="text-3xl font-bold" style={{ color: HEADING }}>
+              ${data.price}
             </span>
-            <span className="text-sm text-gray-400">/month</span>
-            {plan.strikePrice && (
-              <span className="text-sm text-gray-300 line-through">
-                ${plan.strikePrice}
-              </span>
-            )}
+            <span className="text-sm" style={{ color: MUTED }}>
+              per {cycle === "yearly" ? "year" : "month"}
+            </span>
           </>
         )}
       </div>
+      <p className="mt-3 text-sm leading-relaxed" style={{ color: MUTED }}>
+        {data.tagline}
+      </p>
 
       <button
-        className={[
-          "mt-5 w-full rounded-lg py-2.5 text-sm font-semibold transition-colors",
-          plan.highlighted
-            ? "bg-violet-600 text-white hover:bg-violet-700"
-            : plan.key === "free" || plan.key === "enterprise"
-              ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
-              : "bg-violet-50 text-violet-600 hover:bg-violet-100",
-        ].join(" ")}
+        className="mt-6 w-full rounded-lg py-2.5 text-sm font-semibold text-white transition-colors"
+        style={{ backgroundColor: plan.accent }}
       >
-        {plan.cta}
+        {data.cta}
       </button>
 
-      <div className="mt-6 text-sm font-medium text-gray-700">
-        {plan.prefix ?? "Includes:"}
+      <div
+        className="mt-6 border-t pt-4 text-sm font-semibold"
+        style={{ borderColor: "rgba(0,0,0,0.06)", color: HEADING }}
+      >
+        Features
       </div>
       <ul className="mt-3 flex flex-col gap-2.5">
-        {plan.features.map((feature) => (
+        {visibleFeatures.map((feature) => (
           <li
             key={feature}
-            className="flex items-start gap-2 text-sm text-gray-600"
+            className="flex items-start gap-2 text-sm"
+            style={{ color: "#374151" }}
           >
             <Check size={15} className="mt-0.5 shrink-0 text-emerald-500" />
             {feature}
           </li>
         ))}
       </ul>
+
+      {data.features.length > 5 && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-3 flex items-center gap-1 self-start text-sm font-medium"
+          style={{ color: plan.accentText }}
+        >
+          {expanded ? "See Less" : "See More"}
+          <ChevronDown
+            size={14}
+            style={{
+              transform: expanded ? "rotate(180deg)" : "none",
+              transition: "transform 0.15s",
+            }}
+          />
+        </button>
+      )}
     </div>
   );
 }
 
-function CompareTable({ plans, rows }) {
+/* Compare table is derived from the plan data itself (per active cycle)
+ * so it can never drift out of sync with the cards above it. */
+function CompareTable({ plans, cycle }) {
+  const rowLabels = [
+    "Everything in Free",
+    "Search Quota",
+    "Campaign Limit",
+    "Compare Limit",
+    "Credit Limit",
+    "Export Limit",
+  ];
+
+  const getValue = (plan, label) => {
+    const data = plan[cycle];
+    if (label === "Everything in Free") return plan.key !== "free";
+    const match = data.features.find((f) => f.startsWith(label));
+    if (!match) return "—";
+    return match.split(":")[1]?.trim() ?? "—";
+  };
+
   return (
     <div className="overflow-x-auto rounded-2xl border border-gray-100">
       <table className="w-full min-w-[720px] border-collapse text-sm">
@@ -558,34 +590,40 @@ function CompareTable({ plans, rows }) {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, idx) => (
+          <tr className="bg-white">
+            <td className="px-6 py-3.5 font-medium text-gray-700">
+              Price
+            </td>
+            {plans.map((plan) => (
+              <td key={plan.key} className="px-6 py-3.5 text-gray-700">
+                ${plan[cycle].price} / {cycle === "yearly" ? "yr" : "mo"}
+              </td>
+            ))}
+          </tr>
+          {rowLabels.map((label, idx) => (
             <tr
-              key={row.label}
-              className={idx % 2 === 0 ? "bg-white" : "bg-gray-50/40"}
+              key={label}
+              className={idx % 2 === 0 ? "bg-gray-50/40" : "bg-white"}
             >
               <td className="px-6 py-3.5 font-medium text-gray-700">
-                {row.label}
+                {label}
               </td>
-              {row.values.map((val, i) => (
-                <td key={i} className="px-6 py-3.5">
-                  {typeof val === "boolean" ? (
-                    val ? (
-                      <CheckCircle2 size={17} className="text-emerald-500" />
+              {plans.map((plan) => {
+                const val = getValue(plan, label);
+                return (
+                  <td key={plan.key} className="px-6 py-3.5">
+                    {typeof val === "boolean" ? (
+                      val ? (
+                        <CheckCircle2 size={17} className="text-emerald-500" />
+                      ) : (
+                        <Minus size={15} className="text-gray-300" />
+                      )
                     ) : (
-                      <Minus size={15} className="text-gray-300" />
-                    )
-                  ) : (
-                    <span className="flex items-center gap-2 text-gray-700">
-                      {val}
-                      {row.strike?.[i] && (
-                        <span className="text-gray-300 line-through">
-                          {row.strike[i]}
-                        </span>
-                      )}
-                    </span>
-                  )}
-                </td>
-              ))}
+                      <span className="text-gray-700">{val}</span>
+                    )}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
@@ -604,7 +642,6 @@ export default function CreatorPricingDashboard({
   stats = STATS,
   tabs = NAV_TABS,
   plans = PLANS,
-  compareRows = COMPARE_ROWS,
 }) {
   const [activeTab, setActiveTab] = useState("pricing");
   const [cycle, setCycle] = useState("yearly");
@@ -632,14 +669,14 @@ export default function CreatorPricingDashboard({
                   campaigns.
                 </p>
 
-                <div className="mt-6 flex justify-center">
+                <div className="mt-6">
                   <BillingToggle cycle={cycle} setCycle={setCycle} />
                 </div>
               </div>
 
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {plans.map((plan) => (
-                  <PlanCard key={plan.key} plan={plan} />
+                  <PlanCard key={plan.key} plan={plan} cycle={cycle} />
                 ))}
               </div>
 
@@ -647,7 +684,7 @@ export default function CreatorPricingDashboard({
                 <h3 className="mb-5 text-xl font-bold text-gray-900">
                   Compare Plans
                 </h3>
-                <CompareTable plans={plans} rows={compareRows} />
+                <CompareTable plans={plans} cycle={cycle} />
               </div>
             </div>
           </section>
