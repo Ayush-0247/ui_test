@@ -18,7 +18,7 @@ import {
   CheckCircle2,
   Check,
   Minus,
-  Sparkles,
+
   Handshake,
   Phone,
   Tag,
@@ -103,93 +103,126 @@ const NAV_TABS = [
 const PLANS = [
   {
     key: "free",
-    name: "Free",
+    name: "Free Plan",
     tagline: "Perfect for getting started",
-    icon: Sparkles,
+  
     price: 0,
     cta: "Get Started",
     highlighted: false,
     features: [
-      "1 Campaign",
-      "5 Creator Searches / month",
-      "Basic Creator Insights",
-      "Email Support",
+      "  Search Quota: 200",
+      "Campaign Limit: 0",
+      "Compare Limit: 0",
+      "List Limit: 5",
+      "Influencers per List: 100",
+      "Outreach Quota: 0",
     ],
   },
   {
     key: "starter",
     name: "Starter",
-    tagline: "Great for small teams",
-    icon: Users,
-    price: 49,
+    tagline: "Perfect for getting started, pay month-to-month with full access and zero long-term commitment.",
+   
+    price: 79,
     strikePrice: 61,
-    cta: "Start Free Trial",
+    cta: "Get Started",
     highlighted: false,
     prefix: "Everything in Free, plus:",
     features: [
-      "10 Campaigns",
-      "500 Creator Searches / month",
-      "Advanced Filters",
-      "Export Reports",
-      "Email Support",
+      " Everything in Free",
+      "Search Quota: 20000",
+      "Campaign Limit: 1",
+      "Compare Limit: 2",
+      "Credit Limit: 100",
+      "Export Limit: 500",
     ],
   },
   {
     key: "pro",
-    name: "Pro",
-    tagline: "For growing businesses",
-    icon: Users,
-    price: 129,
+    name: "Enterprise Plan",
+    tagline: "Best for large teams and agencies.",
+
+    price: 199,
     strikePrice: 161,
-    cta: "Start Free Trial",
+    cta: "Get Started",
     highlighted: true,
     badge: "Most Popular",
     prefix: "Everything in Starter, plus:",
     features: [
-      "Unlimited Campaigns",
-      "2,500 Creator Searches / month",
-      "Audience Demographics",
-      "AI Performance Score",
-      "Priority Support",
-      "Custom Reports",
+      "  Everything in Starter",
+      "Search Quota: 65000",
+      "Campaign Limit: 10",
+      "Compare Limit: 2",
+      "Credit Limit: 1500",
+      "Export Limit: Unlimited",
     ],
   },
-  {
-    key: "enterprise",
-    name: "Enterprise",
-    tagline: "For large organizations",
-    icon: ShieldCheck,
-    price: "Custom",
-    cta: "Contact Sales",
-    highlighted: false,
-    prefix: "Everything in Pro, plus:",
-    features: [
-      "Unlimited Searches",
-      "Dedicated Account Manager",
-      "Custom Integrations",
-      "White-labeled Reports",
-      "SLA & Priority Support",
-      "Advanced Security",
-    ],
-  },
+  //   {
+  //     key: "enterprise",
+  //     name: "Enterprise",
+  //     tagline: "For large organizations",
+  //     icon: ShieldCheck,
+  //     price: "Custom",
+  //     cta: "Contact Sales",
+  //     highlighted: false,
+  //     prefix: "Everything in Pro, plus:",
+  //     features: [
+  //       "Unlimited Searches",
+  //       "Dedicated Account Manager",
+  //       "Custom Integrations",
+  //       "White-labeled Reports",
+  //       "SLA & Priority Support",
+  //       "Advanced Security",
+  //     ],
+  //   },
 ];
 
 const COMPARE_ROWS = [
   {
     label: "Monthly Price",
-    values: ["$0", "$49", "$129", "Custom"],
-    strike: [null, "$61", "$161", null],
+    values: ["$0", "$79", "$199"],
+    strike: [null, "$61", "$161"],
   },
-  { label: "Campaigns", values: ["1", "10", "Unlimited", "Unlimited"] },
   {
-    label: "Creator Searches / month",
-    values: ["5", "500", "2,500", "Unlimited"],
+    label: "Search Quota",
+    values: ["200", "20,000", "65,000"],
   },
-  { label: "Advanced Filters", values: [false, true, true, true] },
-  { label: "AI Performance Score", values: [false, false, true, true] },
-  { label: "Export Reports", values: [false, true, true, true] },
-  { label: "Audience Demographics", values: [false, false, true, true] },
-  { label: "Priority Support", values: [false, false, true, true] },
+  {
+    label: "Campaign Limit",
+    values: ["0", "1", "10"],
+  },
+  {
+    label: "Compare Limit",
+    values: ["0", "2", "2"],
+  },
+  {
+    label: "List Limit",
+    values: ["5", "5", "5"],
+  },
+  {
+    label: "Influencers per List",
+    values: ["100", "100", "100"],
+  },
+  {
+    label: "Credit Limit",
+    values: ["—", "100", "1,500"],
+  },
+  {
+    label: "Export Limit",
+    values: ["—", "500", "Unlimited"],
+  },
+  {
+    label: "Outreach Quota",
+    values: ["0", "—", "—"],
+  },
+  {
+    label: "Includes Free Features",
+    values: [true, true, true],
+  },
+  {
+    label: "Includes Starter Features",
+    values: [false, false, true],
+  },
 ];
 
 /* ------------------------------------------------------------------
@@ -414,7 +447,7 @@ function BillingToggle({ cycle, setCycle }) {
 }
 
 function PlanCard({ plan }) {
-  const Icon = plan.icon;
+//   const Icon = plan.icon;
   const isCustom = typeof plan.price !== "number";
 
   return (
@@ -433,7 +466,7 @@ function PlanCard({ plan }) {
       )}
 
       <div className="flex items-center gap-3">
-        <span
+        {/* <span
           className={[
             "flex h-10 w-10 items-center justify-center rounded-xl",
             plan.highlighted
@@ -441,8 +474,8 @@ function PlanCard({ plan }) {
               : "bg-gray-100 text-gray-500",
           ].join(" ")}
         >
-          <Icon size={18} />
-        </span>
+          <Icon size={18} /> 
+        </span> */}
         <div>
           <div className="font-semibold text-gray-900">{plan.name}</div>
           <div className="text-xs text-gray-400">{plan.tagline}</div>
@@ -602,7 +635,7 @@ export default function CreatorPricingDashboard({
                 </div>
               </div>
 
-              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {plans.map((plan) => (
                   <PlanCard key={plan.key} plan={plan} />
                 ))}
