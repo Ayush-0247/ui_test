@@ -50,10 +50,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700">
-      {/* ================= LEFT SLIM NAVIGATION SIDEBAR ================= */}
+      {/*  LEFT SLIM NAVIGATION SIDEBAR  */}
       <SidebarClose />
 
-      {/* ================= MAIN DASHBOARD CONTENT CONTAINER ================= */}
+      {/*  MAIN DASHBOARD CONTENT CONTAINER  */}
       <main className="min-h-screen min-w-0 overflow-y-auto px-4 py-5 space-y-5 sm:px-6 lg:ml-[72px] lg:px-8">
         {/* TOP PROFILE HEADER SECTION */}
         <div className="bg-white  relative overflow-hidden">
