@@ -18,6 +18,8 @@ import PartnershipClose from "./pages/PartnershipClose";
 import PartnershipOpen from "./pages/PartnershipOpen";
 import ContactClose from "./pages/ContactClose";
 import ContactOpen from "./pages/ContactOpen";
+import PricingClose from "./pages/PrcicingClose";
+import PricingOpen from "./pages/PricingOpen";
 
 import OverviewClose from "./pages/OverviewClose";
 export default function App() {
@@ -43,6 +45,8 @@ export default function App() {
       <Route path="/Partnership-open" element={<PartnershipOpen />} />
       <Route path="/Contact-close" element={<ContactClose />} />
       <Route path="/Contact-open" element={<ContactOpen />} />
+      <Route path="/pricing-close" element={<PricingClose />} />
+      <Route path="/pricing-open" element={<PricingOpen />} />
 
     </Routes>
   );

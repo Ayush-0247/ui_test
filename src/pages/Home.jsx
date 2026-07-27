@@ -36,7 +36,6 @@ const Home = () => {
           title="Creator Discovery"
           theme="indigo"
         /> */}
-       
         <PortalCard
           to="/Statsandmedia"
           title="Stats and Media Page"
@@ -53,30 +52,80 @@ const Home = () => {
           theme="sky"
         />
         <PortalCard to="/lookalike" title="Lookalike Page" theme="sky" />
-        <PortalCard to="/contact" title="Contact Page" theme="sky" /> <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
-
-        <PortalCard to="/performance" title="Performance Page close sidebar" theme="sky" />
-        <PortalCard to="/PerformanceOpen" title="Performance Page open sidebar" theme="sky" />
-
-        <PortalCard to="/overview-close" title="Overview Page close sidebar" theme="sky" />
-        <PortalCard to="/overview" title="Overview Page open sidebar" theme="sky" />
-
-        
-       
+        <PortalCard to="/contact" title="Contact Page" theme="sky" />{" "}
+        <PortalCard to="/Searchbar" title="Search Bar Page" theme="sky" />
+        <PortalCard
+          to="/performance"
+          title="Performance Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/PerformanceOpen"
+          title="Performance Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/overview-close"
+          title="Overview Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/overview"
+          title="Overview Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/content-close"
+          title="Content Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/content-open"
+          title="Content Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/audience-close"
+          title="Audience  Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/audience-open"
+          title="Audience Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/Partnership-close"
+          title="Partnership Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/Partnership-open"
+          title="Partnership Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/Contact-close"
+          title="Contact Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/Contact-open"
+          title="Contact Page open sidebar"
+          theme="sky"
+        />
+        <PortalCard
+          to="/Pricing-close"
+          title="Pricing Page close sidebar"
+          theme="sky"
+        />
       
-        <PortalCard to="/content-close" title="Content Page close sidebar" theme="sky" />
-        <PortalCard to="/content-open" title="Content Page open sidebar" theme="sky" />
 
-
-        <PortalCard to="/audience-close" title="Audience  Page close sidebar" theme="sky" />
-        <PortalCard to="/audience-open" title="Audience Page open sidebar" theme="sky" />
-
-        <PortalCard to="/Partnership-close" title="Partnership Page close sidebar" theme="sky" />
-        <PortalCard to="/Partnership-open" title="Partnership Page open sidebar" theme="sky" />
-
-        <PortalCard to="/Contact-close" title="Contact Page close sidebar" theme="sky" />
-        <PortalCard to="/Contact-open" title="Contact Page open sidebar" theme="sky" />
-        
+        <PortalCard
+          to="/pricing-open"
+          title="Pricing Page open sidebar"
+          theme="sky"
+        />
       </div>
     </div>
   );
