@@ -116,7 +116,7 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
       <SidebarOpen />
 
-      <div className="ml-[250px] h-screen overflow-y-auto">
+      <div className="ml-62.5 h-screen overflow-y-auto">
         <main className="p-2 space-y-5">
           {/* TOP PROFILE HEADER SECTION */}
           <div className="bg-white p-3 relative overflow-hidden">
@@ -423,7 +423,7 @@ export default function App() {
               {/* Header Section */}
               <div className="flex items-center justify-between mb-4 z-10">
                 <div className="flex items-center gap-2">
-                  <div className="w-6 h-6 rounded-md bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-purple-200">
+                  <div className="w-6 h-6 rounded-md bg-linear-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-purple-200">
                     <Sparkles className="w-3 h-3" />
                   </div>
                   <div>
@@ -570,7 +570,7 @@ export default function App() {
               </div>
 
               {/* Decorative Background Element */}
-              <div className="absolute -right-5 -bottom-5 w-24 h-24 bg-gradient-to-tl from-indigo-50 to-transparent rounded-full opacity-50 pointer-events-none"></div>
+              <div className="absolute -right-5 -bottom-5 w-24 h-24 bg-linear-to-tl from-indigo-50 to-transparent rounded-full opacity-50 pointer-events-none"></div>
             </div>
           </div>
 
@@ -1094,130 +1094,130 @@ export default function App() {
             </div>
 
             {/* 7. Brand Fit Analysis (4 cols) */}
-            <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
-              <h2 className="text-sm font-bold text-slate-900 mb-0">
-                7. Brand Fit Analysis
-              </h2>
+          <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <h2 className="text-sm font-bold text-slate-900 mb-0">
+              7. Brand Fit Analysis
+            </h2>
 
-              <div className="relative  w-full flex items-center justify-center">
-                {/* Radar Spider Web Chart SVG */}
-                <svg className="w-90 h-75 " viewBox="0 0 200 160">
-                  {/* Hexagon Web Layers */}
-                  <polygon
-                    points="100,20 160,50 160,110 100,140 40,110 40,50"
-                    fill="none"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
-                  <polygon
-                    points="100,35 145,57.5 145,102.5 100,125 55,102.5 55,57.5"
-                    fill="none"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
-                  <polygon
-                    points="100,50 130,65 130,95 100,110 70,95 70,65"
-                    fill="none"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
+           <div className=" relative  w-full flex items-center justify-center">
+              {/* Radar Spider Web Chart SVG */}
+              <svg className=" w-90 h-50 " viewBox="0 0 200 160">
+                {/* Hexagon Web Layers */}
+                <polygon
+                  points="100,20 160,50 160,110 100,140 40,110 40,50"
+                  fill="none"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
+                <polygon
+                  points="100,35 145,57.5 145,102.5 100,125 55,102.5 55,57.5"
+                  fill="none"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
+                <polygon
+                  points="100,50 130,65 130,95 100,110 70,95 70,65"
+                  fill="none"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
 
-                  {/* Axis lines */}
-                  <line
-                    x1="100"
-                    y1="20"
-                    x2="100"
-                    y2="140"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
-                  <line
-                    x1="40"
-                    y1="50"
-                    x2="160"
-                    y2="110"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
-                  <line
-                    x1="40"
-                    y1="110"
-                    x2="160"
-                    y2="50"
-                    stroke="#F1F5F9"
-                    strokeWidth="1"
-                  />
+                {/* Axis lines */}
+                <line
+                  x1="100"
+                  y1="20"
+                  x2="100"
+                  y2="140"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="40"
+                  y1="50"
+                  x2="160"
+                  y2="110"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
+                <line
+                  x1="40"
+                  y1="110"
+                  x2="160"
+                  y2="50"
+                  stroke="#F1F5F9"
+                  strokeWidth="1"
+                />
 
-                  {/* Filled Data Polygon */}
-                  <polygon
-                    points="100,28 152,55 148,105 100,132 52,102 50,58"
-                    fill="#8B5CF6"
-                    fillOpacity="0.25"
-                    stroke="#7C3AED"
-                    strokeWidth="2"
-                  />
+                {/* Filled Data Polygon */}
+                <polygon
+                  points="100,28 152,55 148,105 100,132 52,102 50,58"
+                  fill="#8B5CF6"
+                  fillOpacity="0.25"
+                  stroke="#7C3AED"
+                  strokeWidth="2"
+                />
 
-                  {/* Vertex Dots */}
-                  <circle cx="100" cy="28" r="3" fill="#7C3AED" />
-                  <circle cx="152" cy="55" r="3" fill="#7C3AED" />
-                  <circle cx="148" cy="105" r="3" fill="#7C3AED" />
-                  <circle cx="100" cy="132" r="3" fill="#7C3AED" />
-                  <circle cx="52" cy="102" r="3" fill="#7C3AED" />
-                  <circle cx="50" cy="58" r="3" fill="#7C3AED" />
+                {/* Vertex Dots */}
+                <circle cx="100" cy="28" r="3" fill="#7C3AED" />
+                <circle cx="152" cy="55" r="3" fill="#7C3AED" />
+                <circle cx="148" cy="105" r="3" fill="#7C3AED" />
+                <circle cx="100" cy="132" r="3" fill="#7C3AED" />
+                <circle cx="52" cy="102" r="3" fill="#7C3AED" />
+                <circle cx="50" cy="58" r="3" fill="#7C3AED" />
 
                   {/* Axis Labels */}
-                  <text
-                    x="100"
-                    y="12"
-                    textAnchor="middle"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Audience Match
-                  </text>
-                  <text
-                    x="168"
-                    y="52"
-                    textAnchor="start"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Content Quality
-                  </text>
-                  <text
-                    x="168"
-                    y="112"
-                    textAnchor="start"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Brand Safety
-                  </text>
-                  <text
-                    x="100"
-                    y="152"
-                    textAnchor="middle"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Authenticity
-                  </text>
-                  <text
-                    x="32"
-                    y="112"
-                    textAnchor="end"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Conversion Potential
-                  </text>
-                  <text
-                    x="32"
-                    y="52"
-                    textAnchor="end"
-                    className="fill-slate-500 text-[8px] font-semibold"
-                  >
-                    Professionalism
-                  </text>
-                </svg>
-              </div>
+                <text
+                  x="100"
+                  y="12"
+                  textAnchor="middle"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Audience Match
+                </text>
+                <text
+                  x="168"
+                  y="52"
+                  textAnchor="start"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Content Quality
+                </text>
+                <text
+                  x="168"
+                  y="112"
+                  textAnchor="start"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Brand Safety
+                </text>
+                <text
+                  x="100"
+                  y="152"
+                  textAnchor="middle"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Authenticity
+                </text>
+                <text
+                  x="32"
+                  y="112"
+                  textAnchor="end"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Conversion Potential
+                </text>
+                <text
+                  x="32"
+                  y="52"
+                  textAnchor="end"
+                  className="fill-slate-500 text-[6px] font-semibold"
+                >
+                  Professionalism
+                </text>
+              </svg>
             </div>
           </div>
+        </div>
 
           {/* ---------- ROW 4: BREAKDOWN, INDUSTRIES & FREQUENCY ---------- */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
@@ -1415,7 +1415,7 @@ export default function App() {
 
               {/* Heatmap Grid */}
               <div className="space-y-1">
-                <div className="grid grid-cols-13 gap-1 text-[8px] text-slate-400 font-medium pl-6">
+                <div className="grid grid-cols-12 gap-1 text-[8px] text-slate-400 font-medium pl-6">
                   {[
                     "Jan",
                     "Feb",
@@ -1455,7 +1455,7 @@ export default function App() {
                             return (
                               <div
                                 key={mIdx}
-                                className={`h-3 rounded-xs ${colors[(intensity + dIdx) % 5]}`}
+                                className={`h-3 rounded-sm ${colors[(intensity + dIdx) % 5]}`}
                               ></div>
                             );
                           },
@@ -1470,9 +1470,9 @@ export default function App() {
               <div className="flex items-center justify-end gap-2 text-[9px] text-slate-400 font-medium mt-2">
                 <span>Low</span>
                 <div className="flex gap-0.5">
-                  <span className="w-2.5 h-2.5 bg-purple-100 rounded-xs"></span>
-                  <span className="w-2.5 h-2.5 bg-purple-300 rounded-xs"></span>
-                  <span className="w-2.5 h-2.5 bg-purple-600 rounded-xs"></span>
+                  <span className="w-2.5 h-2.5 bg-purple-100 rounded-sm"></span>
+                  <span className="w-2.5 h-2.5 bg-purple-300 rounded-sm"></span>
+                  <span className="w-2.5 h-2.5 bg-purple-600 rounded-sm"></span>
                 </div>
                 <span>High</span>
               </div>

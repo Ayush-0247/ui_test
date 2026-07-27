@@ -1091,9 +1091,9 @@ export default function App() {
               7. Brand Fit Analysis
             </h2>
 
-            <div className="relative  w-full flex items-center justify-center">
+            <div className=" relative  w-full flex items-center justify-center">
               {/* Radar Spider Web Chart SVG */}
-              <svg className="w-90 h-75 " viewBox="0 0 200 160">
+              <svg className=" w-100 h-60 " viewBox="0 0 200 160">
                 {/* Hexagon Web Layers */}
                 <polygon
                   points="100,20 160,50 160,110 100,140 40,110 40,50"
@@ -1157,12 +1157,12 @@ export default function App() {
                 <circle cx="52" cy="102" r="3" fill="#7C3AED" />
                 <circle cx="50" cy="58" r="3" fill="#7C3AED" />
 
-                {/* Axis Labels */}
+                  {/* Axis Labels */}
                 <text
                   x="100"
                   y="12"
                   textAnchor="middle"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Audience Match
                 </text>
@@ -1170,7 +1170,7 @@ export default function App() {
                   x="168"
                   y="52"
                   textAnchor="start"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Content Quality
                 </text>
@@ -1178,7 +1178,7 @@ export default function App() {
                   x="168"
                   y="112"
                   textAnchor="start"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Brand Safety
                 </text>
@@ -1186,7 +1186,7 @@ export default function App() {
                   x="100"
                   y="152"
                   textAnchor="middle"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Authenticity
                 </text>
@@ -1194,7 +1194,7 @@ export default function App() {
                   x="32"
                   y="112"
                   textAnchor="end"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Conversion Potential
                 </text>
@@ -1202,7 +1202,7 @@ export default function App() {
                   x="32"
                   y="52"
                   textAnchor="end"
-                  className="fill-slate-500 text-[8px] font-semibold"
+                  className="fill-slate-500 text-[6px] font-semibold"
                 >
                   Professionalism
                 </text>

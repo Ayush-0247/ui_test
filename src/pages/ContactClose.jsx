@@ -24,7 +24,7 @@ import {
   Megaphone,
   DollarSign,
   Calendar,
-  Check,
+
   AlertTriangle,
   MapPin,
   ChevronRight,
@@ -298,13 +298,13 @@ export default function App() {
             <span>Partnerships</span>
           </button>
 
-          <button
+          {/* <button
             className={tabClass("Similar Creators")}
             onClick={() => setActiveTab("Similar Creators")}
           >
             <Sparkles className="w-4 h-4" />
             <span>Similar Creators</span>
-          </button>
+          </button> */}
           <button
             className={tabClass("Contact")}
             onClick={() => setActiveTab("Contact")}
@@ -533,104 +533,68 @@ export default function App() {
               </div>
 
               {/* AI Partnership Score (5 cols) */}
-              <div className="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
-                <div className="flex items-center gap-1.5 mb-3">
-                  <h2 className="text-sm font-bold text-slate-900">
-                    AI Partnership Score
-                  </h2>
-                  <Info className="w-3.5 h-3.5 text-slate-400 cursor-pointer" />
-                </div>
+             <div className="lg:col-span-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
 
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                  <div className="sm:col-span-5 flex flex-col items-center justify-center">
-                    <div className="relative w-28 h-28 flex items-center justify-center">
-                      <svg
-                        className="w-full h-full transform -rotate-90"
-                        viewBox="0 0 100 100"
-                      >
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          stroke="#F1F5F9"
-                          strokeWidth="8"
-                          fill="transparent"
-                        />
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          stroke="url(#purpleGradient)"
-                          strokeWidth="8"
-                          strokeDasharray="263.8"
-                          strokeDashoffset="21"
-                          strokeLinecap="round"
-                          fill="transparent"
-                        />
-                        <defs>
-                          <linearGradient
-                            id="purpleGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop offset="0%" stopColor="#8B5CF6" />
-                            <stop offset="100%" stopColor="#6D28D9" />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                      <div className="absolute flex flex-col items-center justify-center text-center">
-                        <span className="text-2xl font-extrabold text-slate-900 leading-none">
-                          92
-                        </span>
-                        <span className="text-[10px] font-medium text-slate-400 mt-0.5">
-                          /100
-                        </span>
-                      </div>
-                    </div>
-                    <span className="text-xs font-bold text-emerald-500 mt-2">
-                      Excellent
-                    </span>
-                  </div>
+  {/* Header */}
+  <div className="flex items-center justify-between">
+    <div className="flex items-center gap-2">
+      <div className="w-8 h-8 rounded-lg bg-violet-100 flex items-center justify-center">
+        <Sparkles className="w-4 h-4 text-violet-600" />
+      </div>
 
-                  <div className="sm:col-span-7 space-y-3">
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>Strengths</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>High repeat partnerships</li>
-                        <li>Premium brand portfolio</li>
-                        <li>Consistent sponsorship frequency</li>
-                      </ul>
-                    </div>
+      <div>
+        <h2 className="text-sm font-bold text-slate-900">
+          AI Partnership
+        </h2>
+        <p className="text-[11px] text-slate-500">
+          Confidence • 97%
+        </p>
+      </div>
+    </div>
 
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                        <span>Risks</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>Few long-term retainers</li>
-                      </ul>
-                    </div>
+    <div className="text-right">
+      <p className="text-7xl font-black text-violet-600">92</p>
+      <span className="text-[11px] font-medium text-emerald-600">
+        Excellent
+      </span>
+    </div>
+  </div>
 
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                        <span>Growth Opportunities</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>Luxury skincare</li>
-                        <li>Wellness brands</li>
-                        <li>Global campaigns</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  {/* AI Insight */}
+  <div className="mt-5 rounded-xl bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-100 p-3">
+    <p className="text-[12px] leading-5 text-slate-700">
+      Strong fit for premium lifestyle and beauty brands with
+      excellent audience trust and consistent campaign quality.
+    </p>
+    <p>
+      <span className="font-semibold text-violet-600">Confidence:</span>{" "}
+      <span className="font-semibold text-violet-600">97%</span>
+    </p>
+  </div>
+
+  {/* Chips */}
+  <div className="mt-4 flex flex-wrap gap-2">
+
+    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-medium text-emerald-700">
+      <CheckCircle2 className="w-3 h-3" />
+      High Trust
+    </span>
+
+    <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-3 py-1 text-[11px] font-medium text-violet-700">
+      <Sparkles className="w-3 h-3" />
+      Luxury Ready
+    </span>
+
+    <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-[11px] font-medium text-amber-700">
+      <AlertTriangle className="w-3 h-3" />
+      Needs Retainers
+    </span>
+
+  </div>
+ 
+
+</div>
+              
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
               {/* 4. Past Brand Contacts (4 cols) */}
@@ -991,326 +955,7 @@ export default function App() {
           </div>
         )}
 
-        {/* ================= PARTNERSHIPS TAB VIEW ================= */}
-        {activeTab === "Partnerships" && (
-          <div className="space-y-5">
-            {/* ROW 1: PARTNERSHIP OVERVIEW & AI PARTNERSHIP SCORE */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              {/* 1. Partnership Overview (7 cols) */}
-              <div className="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-1.5">
-                    <h2 className="text-sm font-bold text-slate-900">
-                      1. Partnership Overview
-                    </h2>
-                    <Info className="w-3.5 h-3.5 text-slate-400 cursor-pointer" />
-                  </div>
-                </div>
-
-                {/* Sub-grid of 6 Metrics */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                        <Users className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-purple-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 15 Q 15 18, 25 10 T 45 12 T 60 4"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Total Brand Collaborations
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        58
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +16%{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                        <Zap className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-blue-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 16 Q 15 12, 30 14 T 45 8 T 60 5"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Active Partnerships
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        14
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +7%{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                        <RotateCw className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-purple-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 14 Q 20 16, 35 11 T 50 8 T 60 3"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Repeat Brand Rate
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        72%
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +12pp{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-                        <Megaphone className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-blue-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 18 Q 15 15, 30 10 T 45 13 T 60 6"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Sponsored Posts %
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        68%
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +9%{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                        <DollarSign className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-purple-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 16 Q 15 14, 30 8 T 45 10 T 60 2"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Estimated Partnership Value
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        $312K
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +22%{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-slate-50/70 p-3.5 rounded-xl border border-slate-100 relative overflow-hidden">
-                    <div className="flex items-start justify-between">
-                      <div className="w-7 h-7 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
-                        <Calendar className="w-3.5 h-3.5" />
-                      </div>
-                      <svg
-                        className="w-16 h-6 text-purple-500 stroke-current"
-                        viewBox="0 0 60 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 15 Q 15 17, 30 11 T 45 12 T 60 5"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="mt-2.5">
-                      <div className="text-xs text-slate-500 font-medium">
-                        Average Campaign Duration
-                      </div>
-                      <div className="text-lg font-bold text-slate-900 mt-0.5">
-                        45 Days
-                      </div>
-                      <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                        +5 days{" "}
-                        <span className="text-slate-400 font-normal">
-                          vs last 90 days
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* AI Partnership Score (5 cols) */}
-              <div className="lg:col-span-5 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between relative overflow-hidden">
-                <div className="flex items-center gap-1.5 mb-3">
-                  <h2 className="text-sm font-bold text-slate-900">
-                    AI Partnership Score
-                  </h2>
-                  <Info className="w-3.5 h-3.5 text-slate-400 cursor-pointer" />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
-                  <div className="sm:col-span-5 flex flex-col items-center justify-center">
-                    <div className="relative w-28 h-28 flex items-center justify-center">
-                      <svg
-                        className="w-full h-full transform -rotate-90"
-                        viewBox="0 0 100 100"
-                      >
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          stroke="#F1F5F9"
-                          strokeWidth="8"
-                          fill="transparent"
-                        />
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="42"
-                          stroke="url(#purpleGradient)"
-                          strokeWidth="8"
-                          strokeDasharray="263.8"
-                          strokeDashoffset="21"
-                          strokeLinecap="round"
-                          fill="transparent"
-                        />
-                        <defs>
-                          <linearGradient
-                            id="purpleGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop offset="0%" stopColor="#8B5CF6" />
-                            <stop offset="100%" stopColor="#6D28D9" />
-                          </linearGradient>
-                        </defs>
-                      </svg>
-                      <div className="absolute flex flex-col items-center justify-center text-center">
-                        <span className="text-2xl font-extrabold text-slate-900 leading-none">
-                          92
-                        </span>
-                        <span className="text-[10px] font-medium text-slate-400 mt-0.5">
-                          /100
-                        </span>
-                      </div>
-                    </div>
-                    <span className="text-xs font-bold text-emerald-500 mt-2">
-                      Excellent
-                    </span>
-                  </div>
-
-                  <div className="sm:col-span-7 space-y-3">
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>Strengths</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>High repeat partnerships</li>
-                        <li>Premium brand portfolio</li>
-                        <li>Consistent sponsorship frequency</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
-                        <span>Risks</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>Few long-term retainers</li>
-                      </ul>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 mb-1">
-                        <Sparkles className="w-3.5 h-3.5 text-purple-600" />
-                        <span>Growth Opportunities</span>
-                      </div>
-                      <ul className="text-[11px] text-slate-600 space-y-0.5 pl-5 list-disc">
-                        <li>Luxury skincare</li>
-                        <li>Wellness brands</li>
-                        <li>Global campaigns</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+       
       </main>
     </div>
   );
