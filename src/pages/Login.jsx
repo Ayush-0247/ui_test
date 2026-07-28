@@ -141,9 +141,12 @@ export default function KaloAuth() {
   return (
     <div className="min-h-screen w-full bg-slate-50 relative overflow-hidden flex flex-col">
       {/* Ambient purple glow bottom-left */}
-      <div className="pointer-events-none absolute -bottom-40 -left-32 w-[520px] h-[520px] rounded-full bg-indigo-300/30 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -left-32 w-[420px] h-[420px] rounded-full bg-indigo-300/30 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 left-24 w-72 h-72 rounded-full bg-indigo-200/40 blur-3xl" />
 
+
+ <div className="pointer-events-none absolute -top-80 -right-90 w-[520px] h-[520px] rounded-full bg-indigo-300/30  blur-3xl" />
+      <div className="pointer-events-none absolute top-0 right-10 w-72 h-72 rounded-full bg-indigo-200/40 blur-3xl" />
       {/* Decorative dot grids */}
       <DotGrid className="absolute top-16 right-16 opacity-70" />
       <DotGrid className="absolute bottom-24 right-28 opacity-70" />

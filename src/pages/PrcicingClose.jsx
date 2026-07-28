@@ -131,13 +131,7 @@ const PLANS = [
   },
 ];
 
-/* ------------------------------------------------------------------
- * SMALL PRESENTATIONAL PIECES
- * ------------------------------------------------------------------ */
 
-// Shared layout components imported from CreatorHeaderLayout
-
-/* Monthly / Annually toggle + "50% OFF" badge, matching the screenshot. */
 function BillingToggle({ cycle, setCycle }) {
   return (
     <div className="flex items-center justify-center gap-3">
@@ -279,8 +273,6 @@ function PlanCard({ plan, cycle }) {
   );
 }
 
-/* Compare table is derived from the plan data itself (per active cycle)
- * so it can never drift out of sync with the cards above it. */
 function CompareTable({ plans, cycle }) {
   const rowLabels = [
     "Everything in Free",
@@ -366,11 +358,6 @@ function CompareTable({ plans, cycle }) {
     </div>
   );
 }
-
-/* ------------------------------------------------------------------
- * MAIN EXPORT — drop <CreatorPricingDashboard /> anywhere.
- * Pass overrides via props if you don't want to edit the config above.
- * ------------------------------------------------------------------ */
 
 export default function CreatorPricingDashboard({
   creator = CREATOR,
