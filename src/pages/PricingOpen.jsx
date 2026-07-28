@@ -24,12 +24,11 @@ import {
   Tag,
   TrendingUp,
   Grid3x3,
-  UsersRound,
   BadgeCheck,
   Share2,
   Info,
 } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 /* ------------------------------------------------------------------
  * DESIGN TOKENS — edit these to reuse this file for another theme.
  * ------------------------------------------------------------------ */
@@ -90,13 +89,23 @@ const STATS = [
 ];
 
 const NAV_TABS = [
-  { key: "overview", label: "Overview", icon: Home },
-  { key: "audience", label: "Audience", icon: Users },
-  { key: "content", label: "Content", icon: Grid3x3 },
-  { key: "performance", label: "Performance", icon: BarChart2 },
-  { key: "partnerships", label: "Partnerships", icon: Handshake },
-  { key: "similar", label: "Similar Creators", icon: UsersRound },
-  { key: "contact", label: "Contact", icon: Phone },
+  { key: "overview", label: "Overview", icon: Home,
+    route: "/Overview", },
+  { key: "audience", label: "Audience", icon: Users,
+    route: "/audience-open", },
+  { key: "content", label: "Content", icon: Grid3x3 ,
+    route: "/content-open",},
+  { key: "performance", label: "Performance", icon: BarChart2,
+    route: "/PerformanceOpen",},
+  { key: "partnerships", label: "Partnerships", icon: Handshake ,
+    route: "/Partnership-open",},
+
+  {
+    key: "contact",
+    label: "Contact",
+    icon: Phone,
+    route: "/Contact-open",
+  },
   { key: "pricing", label: "Pricing", icon: Tag },
 ];
 
@@ -365,17 +374,26 @@ function ProfileHeader({ creator }) {
 }
 
 function TabBar({ tabs, activeTab, onChange }) {
+  const navigate = useNavigate();
+
   return (
     <div
       className="mt-5 flex gap-7"
       style={{ borderBottom: `1px solid ${BORDER}` }}
     >
-      {tabs.map(({ key, label, icon: Icon }) => {
+      {tabs.map(({ key, label, icon: Icon, route }) => {
         const active = key === activeTab;
+
         return (
           <button
             key={key}
-            onClick={() => onChange(key)}
+            onClick={() => {
+              if (route) {
+                navigate(route);
+              } else {
+                onChange(key);
+              }
+            }}
             className="flex items-center gap-1.5 pb-3 text-sm"
             style={{
               color: active ? PURPLE : MUTED,
