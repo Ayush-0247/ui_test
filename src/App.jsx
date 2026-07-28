@@ -20,7 +20,7 @@ import ContactClose from "./pages/ContactClose";
 import ContactOpen from "./pages/ContactOpen";
 import PricingClose from "./pages/PrcicingClose";
 import PricingOpen from "./pages/PricingOpen";
-
+import Login from "./pages/Login";
 import OverviewClose from "./pages/OverviewClose";
 export default function App() {
   return (
@@ -47,7 +47,7 @@ export default function App() {
       <Route path="/Contact-open" element={<ContactOpen />} />
       <Route path="/pricing-close" element={<PricingClose />} />
       <Route path="/pricing-open" element={<PricingOpen />} />
-
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
