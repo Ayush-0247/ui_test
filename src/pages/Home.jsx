@@ -126,6 +126,12 @@ const Home = () => {
           title="Pricing Page open sidebar"
           theme="sky"
         />
+
+         <PortalCard
+          to="/login"
+          title="Login and sign up Page"
+          theme="sky"
+        />
       </div>
     </div>
   );

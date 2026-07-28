@@ -24,12 +24,12 @@ import {
   Tag,
   TrendingUp,
   Grid3x3,
-  UsersRound,
+ 
   BadgeCheck,
   Share2,
   Info,
 } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 /* ------------------------------------------------------------------
  * DESIGN TOKENS — edit these to reuse this file for another theme.
  * ------------------------------------------------------------------ */
@@ -90,14 +90,21 @@ const STATS = [
 ];
 
 const NAV_TABS = [
-  { key: "overview", label: "Overview", icon: Home },
-  { key: "audience", label: "Audience", icon: Users },
-  { key: "content", label: "Content", icon: Grid3x3 },
-  { key: "performance", label: "Performance", icon: BarChart2 },
-  { key: "partnerships", label: "Partnerships", icon: Handshake },
-  { key: "similar", label: "Similar Creators", icon: UsersRound },
-  { key: "contact", label: "Contact", icon: Phone },
-  { key: "pricing", label: "Pricing", icon: Tag },
+  { key: "overview", label: "Overview", icon: Home ,
+    route: "/overview-close", },
+  { key: "audience", label: "Audience", icon: Users ,
+    route: "/audience-close", },
+  { key: "content", label: "Content", icon: Grid3x3 ,
+    route: "/content-close", },
+  { key: "performance", label: "Performance", icon: BarChart2 ,
+    route:"/Performance", },
+  { key: "partnerships", label: "Partnerships", icon: Handshake ,
+    route: "/Partnership-close", },
+
+  { key: "contact", label: "Contact", icon: Phone ,
+    route: "/Contact-close", },
+  { key: "pricing", label: "Pricing", icon: Tag ,
+    route: "/pricing-close", },
 ];
 
 /* ------------------------------------------------------------------
@@ -373,17 +380,26 @@ function ProfileHeader({ creator }) {
 }
 
 function TabBar({ tabs, activeTab, onChange }) {
+  const navigate = useNavigate();
+
   return (
     <div
       className="mt-5 flex gap-7"
       style={{ borderBottom: `1px solid ${BORDER}` }}
     >
-      {tabs.map(({ key, label, icon: Icon }) => {
+      {tabs.map(({ key, label, icon: Icon, route }) => {
         const active = key === activeTab;
+
         return (
           <button
             key={key}
-            onClick={() => onChange(key)}
+            onClick={() => {
+              if (route) {
+                navigate(route);
+              } else {
+                onChange(key);
+              }
+            }}
             className="flex items-center gap-1.5 pb-3 text-sm"
             style={{
               color: active ? PURPLE : MUTED,
