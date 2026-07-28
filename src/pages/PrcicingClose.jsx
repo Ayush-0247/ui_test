@@ -1,119 +1,23 @@
 import { useState } from "react";
 import SidebarClose from "../components/SidebarClose";
-import { FaInstagram } from "react-icons/fa";
 import {
-  Home,
-  Users,
-  BarChart2,
-  MapPin,
-  Lock,
-  Plus,
-  Bookmark,
-  Send,
-  MoreHorizontal,
-  ThumbsUp,
-  MessageSquare,
-  FileText,
-  ShieldCheck,
   CheckCircle2,
   Check,
   Minus,
   ChevronDown,
-  Handshake,
-  Phone,
-  Tag,
-  TrendingUp,
-  Grid3x3,
- 
-  BadgeCheck,
-  Share2,
-  Info,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-/* ------------------------------------------------------------------
- * DESIGN TOKENS — edit these to reuse this file for another theme.
- * ------------------------------------------------------------------ */
+import {
+  CREATOR,
+  STATS,
+  NAV_TABS_CLOSE,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
 
-const PURPLE = "#7C3AED";
-const PURPLE_TINT = "#EDE9FE";
-const BLUE = "#3B82F6";
 const HEADING = "#111827";
 const MUTED = "#6B7280";
 const BORDER = "#E5E7EB";
-
-/* ------------------------------------------------------------------
- * CONFIG — edit these arrays/objects to reuse this file for another
- * creator, plan set, or nav layout. Nothing below this block needs
- * to change for basic customization.
- * ------------------------------------------------------------------ */
-
-const CREATOR = {
-  name: "Mariale",
-  handle: "@mariale",
-  location: "USA",
-  avatar: "https://i.pravatar.cc/150?img=47",
-  tags: ["Beauty", "Cosmetics & Personal Care", "Beauty & Skincare"],
-};
-
-const STATS = [
-  {
-    icon: Users,
-    label: "Followers",
-    value: "6.0M",
-    caption: "+3.2% vs 30 days",
-  },
-  {
-    icon: TrendingUp,
-    label: "Engagement Rate",
-    value: "1.79%",
-    caption: "+0.29pp vs 30 days",
-  },
-  {
-    icon: ThumbsUp,
-    label: "Avg Likes",
-    value: "106.9K",
-    caption: "+8.7% vs 30 days",
-  },
-  {
-    icon: MessageSquare,
-    label: "Avg Comments",
-    value: "2.8K",
-    caption: "+5.1% vs 30 days",
-  },
-  { icon: FileText, label: "Posts", value: "6.3K", caption: "All time" },
-  {
-    icon: ShieldCheck,
-    label: "Audience Quality",
-    value: "88/100",
-    caption: "High Quality",
-  },
-];
-
-const NAV_TABS = [
-  { key: "overview", label: "Overview", icon: Home ,
-    route: "/overview-close", },
-  { key: "audience", label: "Audience", icon: Users ,
-    route: "/audience-close", },
-  { key: "content", label: "Content", icon: Grid3x3 ,
-    route: "/content-close", },
-  { key: "performance", label: "Performance", icon: BarChart2 ,
-    route:"/Performance", },
-  { key: "partnerships", label: "Partnerships", icon: Handshake ,
-    route: "/Partnership-close", },
-
-  { key: "contact", label: "Contact", icon: Phone ,
-    route: "/Contact-close", },
-  { key: "pricing", label: "Pricing", icon: Tag ,
-    route: "/pricing-close", },
-];
-
-/* ------------------------------------------------------------------
- * PLANS — each plan now carries a `monthly` AND a `yearly` variant.
- * The yearly tier isn't just "monthly x12 minus a discount" — per
- * the annual pricing screenshot, the quotas themselves increase on
- * annual billing (e.g. Starter search quota 20,000 -> 70,000). Edit
- * the numbers inside `monthly` / `yearly` to match your real plans.
- * ------------------------------------------------------------------ */
 
 const PLANS = [
   {
@@ -231,192 +135,7 @@ const PLANS = [
  * SMALL PRESENTATIONAL PIECES
  * ------------------------------------------------------------------ */
 
-function Pill({ children }) {
-  return (
-    <span
-      className="rounded-md px-2 py-0.5 text-xs font-medium text-gray-600"
-      style={{ border: `1px solid ${BORDER}` }}
-    >
-      {children}
-    </span>
-  );
-}
-
-function StatCard({ label, value, caption, icon: Icon }) {
-  return (
-    <div
-      className="flex-1 rounded-xl bg-white p-4"
-      style={{ border: `1px solid ${BORDER}` }}
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-black">
-          <Icon size={14} style={{ color: PURPLE }} />
-          {label}
-        </div>
-        <Info size={13} style={{ color: "#C7C9D9" }} />
-      </div>
-      <p className="mt-2 text-xl font-bold" style={{ color: HEADING }}>
-        {value}
-      </p>
-      <p className="mt-1 text-xs" style={{ color: MUTED }}>
-        {caption}
-      </p>
-    </div>
-  );
-}
-
-function StatCardsRow({ stats }) {
-  return (
-    <div className="mt-5 grid grid-cols-6 gap-4">
-      {stats.map((s) => (
-        <StatCard key={s.label} {...s} />
-      ))}
-    </div>
-  );
-}
-
-function ProfileHeader({ creator }) {
-  return (
-    <div className="flex items-start justify-between">
-      <div className="flex gap-4">
-        <div className="relative h-[70px] w-[70px] shrink-0">
-          <img
-            src={creator.avatar}
-            alt={creator.name}
-            className="h-full w-full rounded-full object-cover"
-            style={{ border: `2px solid ${PURPLE_TINT}` }}
-          />
-          <span
-            className="absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full"
-            style={{ backgroundColor: BLUE, border: "2px solid white" }}
-          >
-            <BadgeCheck size={11} className="text-white" />
-          </span>
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold" style={{ color: HEADING }}>
-              {creator.name}
-            </h1>
-            <BadgeCheck
-              size={17}
-              className="text-blue-500"
-              fill={BLUE}
-              color="white"
-            />
-          </div>
-          <div
-            className="mt-1 flex items-center gap-2 text-sm"
-            style={{ color: MUTED }}
-          >
-            <span className="font-semibold text-gray-600">
-              {creator.handle}
-            </span>
-            <span className="flex items-center gap-1 rounded-md border border-[#C7C9D9] px-2 py-0.5 text-xs">
-              <FaInstagram size={11} className="text-pink-500" />
-              Instagram
-            </span>
-          </div>
-          <div
-            className="mt-1.5 flex items-center gap-1.5 text-sm"
-            style={{ color: MUTED }}
-          >
-            <MapPin size={13} />
-            <span className="font-semibold text-gray-600">
-              {creator.location}
-            </span>
-          </div>
-          <div className="mt-2.5 flex gap-2">
-            {creator.tags.map((t) => (
-              <Pill key={t}>{t}</Pill>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-end gap-2">
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold text-white"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Lock size={13} />
-            Unlock
-          </button>
-          <button
-            className="flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-2 text-xs font-semibold"
-            style={{ border: `1px solid ${BORDER}`, color: HEADING }}
-          >
-            <Share2 size={13} />
-            Share Profile
-          </button>
-          <button
-            className="rounded-lg bg-white p-2"
-            style={{ border: `1px solid ${BORDER}` }}
-          >
-            <MoreHorizontal size={15} style={{ color: MUTED }} />
-          </button>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold text-white"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Plus size={13} />
-            Add to Campaign
-          </button>
-          <button className="flex items-center gap-1.5 rounded-lg border border-violet-500 bg-white px-3.5 py-2 text-xs font-semibold text-violet-500">
-            <Bookmark size={13} />
-            Save Creator
-          </button>
-          <button className="flex items-center gap-1.5 rounded-lg border border-violet-500 bg-white px-3.5 py-2 text-xs font-semibold text-violet-500">
-            <Send size={13} />
-            Contact
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function TabBar({ tabs, activeTab, onChange }) {
-  const navigate = useNavigate();
-
-  return (
-    <div
-      className="mt-5 flex gap-7"
-      style={{ borderBottom: `1px solid ${BORDER}` }}
-    >
-      {tabs.map(({ key, label, icon: Icon, route }) => {
-        const active = key === activeTab;
-
-        return (
-          <button
-            key={key}
-            onClick={() => {
-              if (route) {
-                navigate(route);
-              } else {
-                onChange(key);
-              }
-            }}
-            className="flex items-center gap-1.5 pb-3 text-sm"
-            style={{
-              color: active ? PURPLE : MUTED,
-              fontWeight: active ? 600 : 500,
-              borderBottom: active
-                ? `2px solid ${PURPLE}`
-                : "2px solid transparent",
-            }}
-          >
-            <Icon size={15} />
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+// Shared layout components imported from CreatorHeaderLayout
 
 /* Monthly / Annually toggle + "50% OFF" badge, matching the screenshot. */
 function BillingToggle({ cycle, setCycle }) {
@@ -656,7 +375,7 @@ function CompareTable({ plans, cycle }) {
 export default function CreatorPricingDashboard({
   creator = CREATOR,
   stats = STATS,
-  tabs = NAV_TABS,
+  tabs = NAV_TABS_CLOSE,
   plans = PLANS,
 }) {
   const [activeTab, setActiveTab] = useState("pricing");

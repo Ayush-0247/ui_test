@@ -236,25 +236,7 @@ function QualityRing({ score, color, label }) {
     </div>
   );
 }
-function PlatformBadge({ platform }) {
-  const isInsta = platform === "instagram";
-  return (
-    <span
-      className={`absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full ring-2 ring-white ${
-        isInsta
-          ? "bg-gradient-to-tr from-[#FEDA75] via-[#D62976] to-[#4F5BD5]"
-          : "bg-black"
-      }`}
-    >
-      {isInsta ? (
-        <FaInstagram size={11} className="text-white" />
-      ) : (
-        <SiTiktok size={11} className="text-white" />
-        // <span className="text-[9px] font-bold text-white">T</span>
-      )}
-    </span>
-  );
-}
+
 
 /* -------------------------------------------------------------------------- */
 /* Sidebar                                                                    */

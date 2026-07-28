@@ -1164,25 +1164,25 @@ function MobileNichesCarousel() {
       </div>
       <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
         {NICHES.map(({ label, count, icon: Icon, bg, color }) => (
-         <div
-  key={label}
-  className="shrink-0 snap-start w-[132px] rounded-xl border border-[#ECECEC] bg-white p-2 flex flex-row items-center gap-2.5"
->
-  {/* Icon on the left */}
-  <div
-    className={`w-7 h-7 shrink-0 rounded-lg ${bg} ${color} flex items-center justify-center`}
-  >
-    <Icon size={14} />
-  </div>
-  
-  {/* Text on the right */}
-  <div className="min-w-0 flex flex-col justify-center">
-    <p className="text-[11px] font-semibold text-gray-900 truncate">
-      {label}
-    </p>
-    <p className="text-[9px] text-gray-500 truncate">{count}</p>
-  </div>
-</div>
+          <div
+            key={label}
+            className="shrink-0 snap-start w-[132px] rounded-xl border border-[#ECECEC] bg-white p-2 flex flex-row items-center gap-2.5"
+          >
+            {/* Icon on the left */}
+            <div
+              className={`w-7 h-7 shrink-0 rounded-lg ${bg} ${color} flex items-center justify-center`}
+            >
+              <Icon size={14} />
+            </div>
+
+            {/* Text on the right */}
+            <div className="min-w-0 flex flex-col justify-center">
+              <p className="text-[11px] font-semibold text-gray-900 truncate">
+                {label}
+              </p>
+              <p className="text-[9px] text-gray-500 truncate">{count}</p>
+            </div>
+          </div>
         ))}
       </div>
     </div>
@@ -1201,10 +1201,10 @@ function MobileCreatorCard({
   return (
     <div className="relative shrink-0 snap-start w-[52vw] max-w-[240px] aspect-[3/4] rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_8px_24px_rgba(0,0,0,0.15)] overflow-hidden ">
       <img
-  src={img2}
-  alt={name}
-  className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-/>
+        src={img2}
+        alt={name}
+        className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent" />
 
       {platform === "instagram" && (
@@ -1275,10 +1275,10 @@ function MobileCreatorCarousel() {
         </button>
       </div>
       <div className="flex gap-4 overflow-x-auto no-scrollbar px-4 pb-4 snap-x snap-mandatory">
-  {CREATORS.map((c) => (
-    <MobileCreatorCard key={c.rank} {...c} />
-  ))}
-</div>
+        {CREATORS.map((c) => (
+          <MobileCreatorCard key={c.rank} {...c} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -1400,11 +1400,10 @@ function MobileFilterSheet({ open, onClose }) {
               <button
                 key={p}
                 onClick={() => setSelectedPlatform(p)}
-                className={`py-2 rounded-xl text-xs font-semibold border transition ${
-                  selectedPlatform === p
+                className={`py-2 rounded-xl text-xs font-semibold border transition ${selectedPlatform === p
                     ? "bg-[#5B3DF5] text-white border-[#5B3DF5]"
                     : "bg-gray-50 text-gray-700 border-gray-200"
-                }`}
+                  }`}
               >
                 {p}
               </button>
@@ -1420,11 +1419,10 @@ function MobileFilterSheet({ open, onClose }) {
               <button
                 key={c}
                 onClick={() => setSelectedCategory(c)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition ${
-                  selectedCategory === c
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition ${selectedCategory === c
                     ? "bg-[#5B3DF5] text-white border-[#5B3DF5]"
                     : "bg-gray-50 text-gray-700 border-gray-200"
-                }`}
+                  }`}
               >
                 {c}
               </button>

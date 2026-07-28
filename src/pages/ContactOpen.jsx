@@ -2,18 +2,8 @@ import { useState } from "react";
 import {
   Building2,
   Users,
-  MessageSquare,
   Sparkles,
   Mail,
-  Lock,
-  Share2,
-  Plus,
-  MoreHorizontal,
-  Bookmark,
-  Send,
-  CheckCircle2,
-  Home,
-  ThumbsUp,
   FileText,
   ShieldCheck,
   Info,
@@ -24,279 +14,52 @@ import {
   DollarSign,
   Calendar,
   AlertTriangle,
-  MapPin,
   ChevronRight,
   Phone,
-  TrendingUp,
   Rocket,
   Tag,
   Star,
   Clock,
   Download,
-  Grid3x3,
-  BarChart2,
-  Handshake,
-  UsersRound,
   Globe,
+  CheckCircle2,
+  Send,
 } from "lucide-react";
-import { FaInstagram } from "react-icons/fa";
 import SidebarOpen from "../components/SidebarOpen";
-const PURPLE = "#7C3AED";
-const PURPLE_TINT = "#EDE9FE";
-const BLUE = "#3B82F6";
-const HEADING = "#111827";
-const MUTED = "#6B7280";
-const BORDER = "#E5E7EB";
-const CREATOR = {
-  name: "Mariale",
-  handle: "@mariale",
-  location: "USA",
-  avatar: "https://i.pravatar.cc/150?img=47",
-  tags: ["Beauty", "Cosmetics & Personal Care", "Beauty & Skincare"],
-};
+import {
+  CREATOR,
+  STATS,
+  NAV_TABS,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
+// Shared CREATOR, STATS, NAV_TABS imported from CreatorHeaderLayout
 
-const STATS = [
-  {
-    icon: Users,
-    label: "Followers",
-    value: "6.0M",
-    caption: "+3.2% vs 30 days",
-  },
-  {
-    icon: TrendingUp,
-    label: "Engagement Rate",
-    value: "1.79%",
-    caption: "+0.29pp vs 30 days",
-  },
-  {
-    icon: ThumbsUp,
-    label: "Avg Likes",
-    value: "106.9K",
-    caption: "+8.7% vs 30 days",
-  },
-  {
-    icon: MessageSquare,
-    label: "Avg Comments",
-    value: "2.8K",
-    caption: "+5.1% vs 30 days",
-  },
-  { icon: FileText, label: "Posts", value: "6.3K", caption: "All time" },
-  {
-    icon: ShieldCheck,
-    label: "Audience Quality",
-    value: "88/100",
-    caption: "High Quality",
-  },
-];
-
-const NAV_TABS = [
-  { key: "overview", label: "Overview", icon: Home },
-  { key: "audience", label: "Audience", icon: Users },
-  { key: "content", label: "Content", icon: Grid3x3 },
-  { key: "performance", label: "Performance", icon: BarChart2 },
-  { key: "partnerships", label: "Partnerships", icon: Handshake },
-  { key: "similar", label: "Similar Creators", icon: UsersRound },
-  { key: "contact", label: "Contact", icon: Phone },
-  { key: "pricing", label: "Pricing", icon: Tag },
-];
-
-function Pill({ children }) {
-  return (
-    <span
-      className="rounded-md px-2 py-0.5 text-xs font-medium text-gray-600"
-      style={{ border: `1px solid ${BORDER}` }}
-    >
-      {children}
-    </span>
-  );
-}
-
-function StatCard({ label, value, caption, icon: Icon }) {
-  return (
-    <div
-      className="flex-1 rounded-xl bg-white p-4"
-      style={{ border: `1px solid ${BORDER}` }}
-    >
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5 text-xs font-bold text-black">
-          <Icon size={14} style={{ color: PURPLE }} />
-          {label}
-        </div>
-        <Info size={13} style={{ color: "#C7C9D9" }} />
-      </div>
-      <p className="mt-2 text-xl font-bold" style={{ color: HEADING }}>
-        {value}
-      </p>
-      <p className="mt-1 text-xs" style={{ color: MUTED }}>
-        {caption}
-      </p>
-    </div>
-  );
-}
-
-function TabBar({ tabs, activeTab, onChange }) {
-  return (
-    <div
-      className="mt-5 flex gap-7"
-      style={{ borderBottom: `1px solid ${BORDER}` }}
-    >
-      {tabs.map(({ key, label, icon: Icon }) => {
-        const active = key === activeTab;
-        return (
-          <button
-            key={key}
-            onClick={() => onChange(key)}
-            className="flex items-center gap-1.5 pb-3 text-sm"
-            style={{
-              color: active ? PURPLE : MUTED,
-              fontWeight: active ? 600 : 500,
-              borderBottom: active
-                ? `2px solid ${PURPLE}`
-                : "2px solid transparent",
-            }}
-          >
-            <Icon size={15} />
-            {label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function StatCardsRow({ stats }) {
-  return (
-    <div className="mt-5 grid grid-cols-6 gap-4">
-      {stats.map((s) => (
-        <StatCard key={s.label} {...s} />
-      ))}
-    </div>
-  );
-}
-
-function ProfileHeader({ creator }) {
-  return (
-    <div className="flex items-start justify-between">
-      <div className="flex gap-4">
-        <div className="relative h-[70px] w-[70px] shrink-0">
-          <img
-            src={creator.avatar}
-            alt={creator.name}
-            className="h-full w-full rounded-full object-cover"
-            style={{ border: `2px solid ${PURPLE_TINT}` }}
-          />
-          <span
-            className="absolute bottom-0 right-0 flex h-5 w-5 items-center justify-center rounded-full"
-            style={{ backgroundColor: BLUE, border: "2px solid white" }}
-          >
-            <BadgeCheck size={11} className="text-white" />
-          </span>
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold" style={{ color: HEADING }}>
-              {creator.name}
-            </h1>
-            <BadgeCheck
-              size={17}
-              className="text-blue-500"
-              fill={BLUE}
-              color="white"
-            />
-          </div>
-          <div
-            className="mt-1 flex items-center gap-2 text-sm"
-            style={{ color: MUTED }}
-          >
-            <span className="font-semibold text-gray-600">
-              {creator.handle}
-            </span>
-            <span className="flex items-center gap-1 rounded-md border border-[#C7C9D9] px-2 py-0.5 text-xs">
-              <FaInstagram size={11} className="text-pink-500" />
-              Instagram
-            </span>
-          </div>
-          <div
-            className="mt-1.5 flex items-center gap-1.5 text-sm"
-            style={{ color: MUTED }}
-          >
-            <MapPin size={13} />
-            <span className="font-semibold text-gray-600">
-              {creator.location}
-            </span>
-          </div>
-          <div className="mt-2.5 flex gap-2">
-            {creator.tags.map((t) => (
-              <Pill key={t}>{t}</Pill>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-end gap-2">
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold text-white"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Lock size={13} />
-            Unlock
-          </button>
-          <button
-            className="flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-2 text-xs font-semibold"
-            style={{ border: `1px solid ${BORDER}`, color: HEADING }}
-          >
-            <Share2 size={13} />
-            Share Profile
-          </button>
-          <button
-            className="rounded-lg bg-white p-2"
-            style={{ border: `1px solid ${BORDER}` }}
-          >
-            <MoreHorizontal size={15} style={{ color: MUTED }} />
-          </button>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 rounded-lg px-3.5 py-2 text-xs font-semibold text-white"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Plus size={13} />
-            Add to Campaign
-          </button>
-          <button className="flex items-center gap-1.5 rounded-lg border border-violet-500 bg-white px-3.5 py-2 text-xs font-semibold text-violet-500">
-            <Bookmark size={13} />
-            Save Creator
-          </button>
-          <button className="flex items-center gap-1.5 rounded-lg border border-violet-500 bg-white px-3.5 py-2 text-xs font-semibold text-violet-500">
-            <Send size={13} />
-            Contact
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
+// Shared layout components imported from CreatorHeaderLayout
 export default function App({
   creator = CREATOR,
   stats = STATS,
   tabs = NAV_TABS,
 }) {
-  const [activeTab, setActiveTab] = useState("Partnerships");
+  const [activeTab, setActiveTab] = useState("contact");
 
-  return (
-    <div className="h-screen bg-[#F8FAFC] overflow-hidden">
-      <SidebarOpen />
-
-      <div className="ml-[250px] h-screen overflow-y-auto">
-        <main className="p-2 space-y-5">
-          <ProfileHeader creator={creator} />
-
-          <StatCardsRow stats={stats} />
-          <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+ return (
+     <div className="flex h-screen overflow-hidden bg-gray-50">
+       <SidebarOpen />
+ 
+      <main
+         className="flex-1 overflow-y-auto overflow-x-hidden"
+         style={{ marginLeft: "256px" }}
+       >
+         <div className="bg-white px-6 pt-6">
+           <ProfileHeader creator={creator} />
+           <StatCardsRow stats={stats} />
+           <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+         </div>
 
           {/* ================= PARTNERSHIPS TAB VIEW ================= */}
-          {activeTab === "Partnerships" && (
+          {activeTab === "contact" && (
             <div className="space-y-5">
               {/* ROW 1: PARTNERSHIP OVERVIEW & AI PARTNERSHIP SCORE */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
@@ -934,6 +697,6 @@ export default function App({
           )}
         </main>
       </div>
-    </div>
+   
   );
 }

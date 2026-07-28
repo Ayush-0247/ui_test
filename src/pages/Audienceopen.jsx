@@ -1,20 +1,11 @@
+import { useState } from "react";
 import SidebarOpen from "../components/SidebarOpen";
 import {
-  BadgeCheck,
-  MapPin,
-  Lock,
-  Share2,
-  MoreHorizontal,
-  Plus,
-  Bookmark,
-  Send,
   Users,
   Users2,
   TrendingUp,
   Heart,
   MessageSquare,
-  Grid3x3,
-  Info,
   Globe2,
   Sparkles,
   CheckCircle2,
@@ -31,8 +22,26 @@ import {
   Handshake,
   Network as NetworkIcon,
   UsersRound,
+  MapPin,
+  Grid3x3,
+  BadgeCheck,
+  MoreHorizontal,
+  Share2,
+  Plus,
+  Bookmark,
+  Send,
+  Info,
+  Lock,
 } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
+import {
+  CREATOR,
+  STATS,
+  NAV_TABS,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
 import {
   PieChart,
   Pie,
@@ -49,24 +58,24 @@ import uk from "../assets/uk.png";
 import canada from "../assets/canada.png";
 import aus from "../assets/aus.png";
 import phili from "../assets/phili.png";
+
 /* -------------------------------- tokens --------------------------------- */
 
-const PURPLE = "#5B4CDB";
+const PURPLE = "#7C3AED";
 const PURPLE_LIGHT = "#8B7FE8";
-const PURPLE_TINT = "#EEF0FF";
-const BORDER = "#ECECF3";
+const PURPLE_TINT = "#EDE9FE";
+const BORDER = "#E5E7EB";
 const HEADING = "#111827";
 const MUTED = "#6B7280";
 const GREEN = "#16A34A";
 const AMBER = "#D97706";
-
 const BLUE = "#3B82F6";
 
 /* --------------------------------- data ----------------------------------- */
 
-const tags = ["Beauty", "cosmetic & personal care", "Beauty & Skincare"];
+// Shared CREATOR, STATS, NAV_TABS imported from CreatorHeaderLayout
 
-const tabs = [
+const mobileTabs = [
   { label: "Overview", icon: LayoutGrid },
   { label: "Content", icon: Grid3x3 },
   { label: "Audience", icon: Users, active: true },
@@ -76,7 +85,7 @@ const tabs = [
   { label: "Similar Creators", icon: UsersRound },
 ];
 
-const statCards = [
+const mobileStatCards = [
   { label: "Followers", value: "6.0M", caption: "Followers", icon: Users },
   {
     label: "Engagement Rate",
@@ -99,6 +108,7 @@ const statCards = [
     icon: ShieldCheck,
   },
 ];
+
 
 const genderSplit = [
   { name: "Female", value: 83.6, color: PURPLE },
@@ -368,161 +378,7 @@ function DotMap() {
    DESKTOP / LAPTOP LAYOUT — FIXED SIDEBAR VERSION
    ====================================================================== */
 
-function ProfileHeader() {
-  return (
-    <div className="flex items-start justify-between">
-      <div className="flex gap-4">
-        <div className="relative w-[70px] h-[70px] shrink-0">
-          <img
-            src="https://i.pravatar.cc/150?img=47"
-            alt="Mariale"
-            className="w-full h-full rounded-full object-cover"
-            style={{ border: `2px solid ${PURPLE_TINT}` }}
-          />
-          <span
-            className="absolute bottom-0 right-0 w-5 h-5 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: BLUE, border: "2px solid white" }}
-          >
-            <BadgeCheck size={11} className="text-white" />
-          </span>
-        </div>
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-bold" style={{ color: HEADING }}>
-              Mariale
-            </h1>
-            <BadgeCheck
-              size={17}
-              className="text-blue-500"
-              fill={BLUE}
-              color="white"
-            />
-          </div>
-          <div
-            className="flex items-center gap-2 mt-1 text-sm"
-            style={{ color: MUTED }}
-          >
-            <span className="font-semibold text-gray-600">@mariale</span>
-            <span className="flex items-center gap-1 rounded-md px-2 py-0.5 border border-[#C7C9D9] text-xs ">
-              <FaInstagram size={11} className="text-pink-500" />
-              Instagram
-            </span>
-          </div>
-          <div
-            className="flex items-center gap-1.5 mt-1.5 text-sm"
-            style={{ color: MUTED }}
-          >
-            <MapPin size={13} />
-            <span className="font-semibold text-gray-600">USA</span>
-          </div>
-          <div className="flex gap-2 mt-2.5">
-            {tags.map((t) => (
-              <Pill key={t}>{t}</Pill>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col items-end gap-2">
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3.5 py-2"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Lock size={13} />
-            Unlock
-          </button>
-          <button
-            className="flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3.5 py-2 bg-white"
-            style={{ border: `1px solid ${BORDER}`, color: HEADING }}
-          >
-            <Share2 size={13} />
-            Share Profile
-          </button>
-          <button
-            className="rounded-lg p-2 bg-white"
-            style={{ border: `1px solid ${BORDER}` }}
-          >
-            <MoreHorizontal size={15} style={{ color: MUTED }} />
-          </button>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            className="flex items-center gap-1.5 text-white text-xs font-semibold rounded-lg px-3.5 py-2"
-            style={{ backgroundColor: PURPLE }}
-          >
-            <Plus size={13} />
-            Add to Campaign
-          </button>
-          <button className="flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3.5 py-2 bg-white border border-violet-500 text-violet-500">
-            <Bookmark size={13} />
-            Save Creator
-          </button>
-          <button className="flex items-center gap-1.5 text-xs font-semibold rounded-lg px-3.5 py-2 bg-white border border-violet-500 text-violet-500">
-            <Send size={13} />
-            Contact
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function StatCard({ label, value, caption, icon: Icon }) {
-  return (
-    <Card className="p-4 flex-1">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center text-black gap-1.5 text-xs font-bold">
-          <Icon size={14} style={{ color: PURPLE }} />
-          {label}
-        </div>
-        <Info size={13} style={{ color: "#C7C9D9" }} />
-      </div>
-      <p className="text-xl font-bold mt-2" style={{ color: HEADING }}>
-        {value}
-      </p>
-      <p className="text-xs mt-1" style={{ color: MUTED }}>
-        {caption}
-      </p>
-    </Card>
-  );
-}
-
-function StatCardsRow() {
-  return (
-    <div className="grid grid-cols-6 gap-4 mt-5">
-      {statCards.map((c) => (
-        <StatCard key={c.label} {...c} />
-      ))}
-    </div>
-  );
-}
-
-function Tabs() {
-  return (
-    <div
-      className="flex gap-7 mt-5"
-      style={{ borderBottom: `1px solid ${BORDER}` }}
-    >
-      {tabs.map(({ label, icon: Icon, active }) => (
-        <button
-          key={label}
-          className="pb-3 flex items-center gap-1.5 text-sm"
-          style={{
-            color: active ? PURPLE : MUTED,
-            fontWeight: active ? 600 : 500,
-            borderBottom: active
-              ? `2px solid ${PURPLE}`
-              : "2px solid transparent",
-          }}
-        >
-          <Icon size={15} />
-          {label}
-        </button>
-      ))}
-    </div>
-  );
-}
+// Shared layout components imported from CreatorHeaderLayout
 
 function AudienceDemographics() {
   return (
@@ -990,6 +846,8 @@ function AudienceSnapshot() {
 }
 
 function DesktopAudience() {
+  const [activeTab, setActiveTab] = useState("audience");
+
   return (
     <div
       className="hidden lg:flex h-screen font-sans"
@@ -999,17 +857,20 @@ function DesktopAudience() {
       <SidebarOpen />
 
       {/* Scrollable Content Area */}
-      <div
-        className="h-screen flex-1 overflow-y-auto lg:ml-[250px]"
+      <main
+        className="h-screen flex-1 overflow-y-auto overflow-x-hidden"
         style={{
           backgroundColor: "#F8F8FB",
+          marginLeft: "256px",
         }}
       >
-        <div className="p-6">
-          <ProfileHeader />
-          <StatCardsRow />
-          <Tabs />
+        <div className="bg-white px-6 pt-6">
+          <ProfileHeader creator={CREATOR} />
+          <StatCardsRow stats={STATS} />
+          <TabBar tabs={NAV_TABS} activeTab={activeTab} onChange={setActiveTab} />
+        </div>
 
+        <div className="p-6">
           <div className="grid grid-cols-3 gap-5 mt-5">
             <AudienceDemographics />
             <AudienceLocation />
@@ -1022,13 +883,13 @@ function DesktopAudience() {
             <AudienceQuality />
           </div>
 
-         <div className="grid grid-cols-[1.4fr_2fr_1.15fr] gap-1 mt-5 items-start pb-8">
+          <div className="grid grid-cols-[1.4fr_2fr_1.15fr] gap-1 mt-5 items-start pb-8">
             <AgeGenderBreakdown />
             <AudienceGrowthSignals />
             <AudienceSnapshot />
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }
@@ -1097,7 +958,7 @@ function MobileProfileHeader() {
       </div>
 
       <div className="flex gap-1.5 overflow-x-auto no-scrollbar">
-        {tags.map((t) => (
+        {CREATOR.tags.map((t) => (
           <span key={t} className="shrink-0">
             <Pill>{t}</Pill>
           </span>
@@ -1167,7 +1028,7 @@ function MobileStatCard({ label, value, caption, icon: Icon }) {
 function MobileStatCardsRow() {
   return (
     <div className="flex gap-2.5  overflow-x-auto no-scrollbar -mx-1 px-8 snap-x snap-mandatory">
-      {statCards.map((c) => (
+      {mobileStatCards.map((c) => (
         <MobileStatCard key={c.label} {...c} />
       ))}
     </div>
@@ -1180,7 +1041,7 @@ function MobileTabs() {
       className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4"
       style={{ borderBottom: `1px solid ${BORDER}` }}
     >
-      {tabs.map(({ label, icon: Icon, active }) => (
+      {mobileTabs.map(({ label, icon: Icon, active }) => (
         <button
           key={label}
           className="shrink-0 pb-2.5 pt-1 px-1 flex items-center gap-2.5 text-[12.5px]"

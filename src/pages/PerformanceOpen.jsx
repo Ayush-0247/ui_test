@@ -1,32 +1,31 @@
+import { useState } from "react";
 import {
-  Home,
   Users,
-  BarChart2,
   MessageSquare,
-  LayoutGrid,
   Star,
   AlertTriangle,
-  Settings,
-  Lock,
-  Plus,
-  Bookmark,
-  Send,
-  MoreVertical,
-  MapPin,
   CheckCircle2,
-  Heart,
-  ThumbsUp,
-  FileText,
-  ShieldCheck,
   Info,
   ChevronDown,
   Sparkles,
   Clock,
-  Link,
   ChevronRight,
   TrendingUp,
 } from "lucide-react";
 import SidebarOpen from "../components/SidebarOpen";
+import {
+  CREATOR,
+  STATS,
+  NAV_TABS,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
+
+// Shared CREATOR, STATS, NAV_TABS imported from CreatorHeaderLayout
+
+// Shared layout components imported from CreatorHeaderLayout
+
 function InstagramIcon({ size = 12, className = "" }) {
   return (
     <svg
@@ -76,273 +75,25 @@ function GradientAvatar({ name, src, size = 40, className = "" }) {
 }
 
 export default function Performance() {
+  const [activeTab, setActiveTab] = useState("performance");
+
   return (
-    <div className="relative flex min-h-screen bg-[#F8F9FC] font-sans text-xs text-gray-800">
+    <div className="relative flex h-screen overflow-hidden bg-[#F8F9FC] font-sans text-xs text-gray-800">
       <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
 
-      <div className="sticky top-0 h-screen shrink-0 z-50">
-        <SidebarOpen />
-      </div>
+      <SidebarOpen />
 
-      <main className="min-h-screen flex-1 overflow-x-hidden p-0 lg:ml-[250px]">
-        <div className="h-[2000px] rounded-xl border-2  border-gray-300 p-0">
-          {/* Mobile bottom nav bar (replaces the icon sidebar below lg) */}
-          <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 flex items-center justify-around py-1.5 px-1">
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
-              <Home size={18} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
-              <Users size={18} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center bg-purple-50 text-purple-600">
-              <BarChart2 size={18} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
-              <MessageSquare size={18} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
-              <LayoutGrid size={18} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center text-gray-400">
-              <Settings size={18} />
-            </button>
-          </nav>
+      <main
+        className="flex-1 overflow-y-auto overflow-x-hidden"
+        style={{ marginLeft: "256px" }}
+      >
+        <div className="bg-white px-6 pt-6">
+          <ProfileHeader creator={CREATOR} />
+          <StatCardsRow stats={STATS} />
+          <TabBar tabs={NAV_TABS} activeTab={activeTab} onChange={setActiveTab} />
+        </div>
 
-          {/* Main Content Area */}
-          <main className="flex-1 overflow-y-auto p-2 sm:p-4 flex flex-col gap-3 min-w-0 pb-16 lg:pb-3">
-            {/* Top Profile Header */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-4 shadow-xs">
-              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                {/* Left Profile Details */}
-                <div className="flex items-center gap-4">
-                  <div className="relative">
-                    <GradientAvatar
-                      name="Mariale"
-                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-                      size={76}
-                    />
-                    <div className="absolute bottom-0 right-0 bg-white rounded-full p-[2px] shadow-xs">
-                      <CheckCircle2
-                        size={18}
-                        className="text-blue-500 fill-blue-500 text-white"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-1.5">
-                      <h1 className="text-xl font-bold text-gray-900 leading-none">
-                        Mariale
-                      </h1>
-                      <CheckCircle2
-                        size={16}
-                        className="text-blue-500 fill-blue-500 text-white"
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-3 text-[11px] text-gray-500 flex-wrap">
-                      <span className="text-gray-600 font-medium">
-                        @mariale
-                      </span>
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-gray-50 border border-gray-200 text-gray-600 text-[10px]">
-                        <InstagramIcon size={11} className="text-pink-500" />{" "}
-                        Instagram
-                      </span>
-                      <span className="flex items-center gap-0.5 text-gray-400">
-                        <MapPin size={11} /> USA
-                      </span>
-                    </div>
-
-                    {/* Category Pills */}
-                    <div className="flex flex-wrap items-center gap-1.5 mt-1">
-                      <span className="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 font-medium text-[10px]">
-                        Beauty
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 font-medium text-[10px]">
-                        Cosmetics & Personal Care
-                      </span>
-                      <span className="px-2.5 py-0.5 rounded-full bg-purple-50 text-purple-700 font-medium text-[10px]">
-                        Beauty & Skincare
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Action Buttons */}
-                <div className="flex flex-col items-start md:items-end gap-2.5 self-stretch justify-between w-full md:w-auto">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <button className="h-8 px-3.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-medium text-[11px] flex items-center gap-1.5 shadow-xs transition-colors">
-                      <Lock size={12} /> Unlock Full Report
-                    </button>
-                    <button className="w-8 h-8 rounded-lg border border-gray-200 hover:bg-gray-50 flex items-center justify-center text-gray-500 transition-colors">
-                      <MoreVertical size={14} />
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <button className="h-7 px-3 rounded-md bg-purple-600 hover:bg-purple-700 text-white font-medium text-[10px] flex items-center gap-1 transition-colors">
-                      <Plus size={11} /> Add to Campaign
-                    </button>
-                    <button className="h-7 px-3 rounded-md border border-purple-200 hover:bg-purple-50 text-purple-700 font-medium text-[10px] flex items-center gap-1 transition-colors">
-                      <Bookmark size={11} /> Save Creator
-                    </button>
-                    <button className="h-7 px-3 rounded-md border border-purple-200 hover:bg-purple-50 text-purple-700 font-medium text-[10px] flex items-center gap-1 transition-colors">
-                      <Send size={11} /> Contact
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 6 Key Performance Metric Cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5">
-              {/* Followers */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                  <Users size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">
-                    Followers
-                  </p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    6.0M
-                  </p>
-                  <p className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
-                    +3.2%{" "}
-                    <span className="text-gray-400 font-normal">
-                      vs 30 days
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Engagement Rate */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                  <Heart size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">
-                    Engagement Rate
-                  </p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    1.79%
-                  </p>
-                  <p className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
-                    +0.29pp{" "}
-                    <span className="text-gray-400 font-normal">
-                      vs 30 days
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Avg Likes */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                  <ThumbsUp size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">
-                    Avg Likes
-                  </p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    106.9K
-                  </p>
-                  <p className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
-                    +8.7%{" "}
-                    <span className="text-gray-400 font-normal">
-                      vs 30 days
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Avg Comments */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                  <MessageSquare size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">
-                    Avg Comments
-                  </p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    2.8K
-                  </p>
-                  <p className="text-[9px] text-emerald-600 font-semibold flex items-center gap-0.5">
-                    +5.1%{" "}
-                    <span className="text-gray-400 font-normal">
-                      vs 30 days
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Posts */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0">
-                  <FileText size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">Posts</p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    6.3K
-                  </p>
-                  <p className="text-[9px] text-gray-400">All time</p>
-                </div>
-              </div>
-
-              {/* Audience Quality */}
-              <div className="bg-white rounded-xl border border-gray-200 p-3 flex items-center gap-2.5 shadow-xs">
-                <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-                  <ShieldCheck size={16} />
-                </div>
-                <div>
-                  <p className="text-[10px] text-gray-400 font-medium">
-                    Audience Quality
-                  </p>
-                  <p className="text-base font-bold text-gray-900 leading-tight">
-                    88{" "}
-                    <span className="text-xs font-normal text-gray-400">
-                      / 100
-                    </span>
-                  </p>
-                  <p className="text-[9px] text-emerald-600 font-semibold">
-                    High Quality
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Tab Navigation */}
-            <div className="border-b border-gray-200 flex items-center gap-6 px-1 text-[11px] font-medium text-gray-500 overflow-x-auto no-scrollbar whitespace-nowrap">
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <Home size={12} /> Overview
-              </button>
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <Users size={12} /> Audience
-              </button>
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <FileText size={12} /> Content
-              </button>
-
-              {/* Active Performance Tab */}
-              <button className="pb-2 text-purple-600 font-semibold border-b-2 border-purple-600 flex items-center gap-1 shrink-0">
-                <BarChart2 size={12} /> Performance
-              </button>
-
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <Users size={12} /> Partnerships
-              </button>
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <Users size={12} /> Similar Creators
-              </button>
-              <button className="pb-2 text-gray-500 hover:text-gray-800 flex items-center gap-1 transition-colors shrink-0">
-                <Link size={12} /> Contact
-              </button>
-            </div>
+        <div className="p-3 sm:p-4 lg:p-6 flex flex-col gap-3 min-w-0 pb-16 lg:pb-3">
 
             {/* SECTION ROW 1: Performance Trend & AI Summary */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
@@ -1295,7 +1046,6 @@ export default function Performance() {
                 </div>
               </div>
             </div>
-          </main>
         </div>
       </main>
     </div>
