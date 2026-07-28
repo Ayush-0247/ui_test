@@ -11,8 +11,8 @@ import {
   ShieldCheck,
   BarChart3,
   Users,
-  UserPlus,
-  LogIn,
+//   UserPlus,
+//   LogIn,
 } from "lucide-react";
 import logo from "../assets/kalo-logo.png";
 // Small 4-point sparkle/star used for the decorative scatter
@@ -150,7 +150,7 @@ export default function KaloAuth() {
 
       {/* Decorative sparkles */}
       <Sparkle
-        className="absolute top-28 left-[16%]"
+        className="absolute top-10 left-[16%]"
         size={14}
         color="#A78BFA"
       />
@@ -165,12 +165,12 @@ export default function KaloAuth() {
         color="#C4B5FD"
       />
       <Sparkle
-        className="absolute top-24 right-[38%]"
-        size={14}
+        className="absolute top-16 right-[52%]"
+        size={22}
         color="#C4B5FD"
       />
       <Sparkle
-        className="absolute bottom-40 right-[14%]"
+        className="absolute bottom-45 right-[9%]"
         size={18}
         color="#7C3AED"
       />
@@ -182,24 +182,22 @@ export default function KaloAuth() {
 
       {/* Main content */}
       <div className="flex-1  flex items-center justify-center px-10 mb-4">
-          {/* Top bar */}
-      <div className="absolute top-10 left-10 w-full flex items-center justify-between px-10 pt-8">
-        <div className="flex items-center gap-2.5">
-          <div className=" rounded-xlflex items-center justify-center">
-           <img src={logo} className="h-15 " alt="" srcset="" />
-          </div>
-          <div>
-            <p className="text-lg font-bold text-slate-900 leading-none">
-              kalo
-            </p>
-            <p className="text-[11px] text-slate-400 leading-none mt-1">
-              AI Influencer Intelligence
-            </p>
+        {/* Top bar */}
+        <div className="absolute top-10 left-10 w-full flex items-center justify-between px-10 pt-8">
+          <div className="flex items-center gap-2.5">
+            <div className=" rounded-xlflex items-center justify-center">
+              <img src={logo} className="h-15 " alt="" srcset="" />
+            </div>
+            <div>
+              <p className="text-lg font-bold text-slate-900 leading-none">
+                kalo
+              </p>
+              <p className="text-[11px] text-slate-400 leading-none mt-1">
+                AI Influencer Intelligence
+              </p>
+            </div>
           </div>
         </div>
-
-        
-      </div>
         <div className="w-full max-w-5xl mt-0  flex items-center justify-between gap-16">
           {/* Left feature column */}
           <div className="hidden lg:flex flex-col gap-9 w-72">
@@ -210,7 +208,7 @@ export default function KaloAuth() {
 
           {/* Auth card */}
           <div className=" relative z-10 w-full max-w-[460px]  mr-15 rounded-3xl shadow-xl shadow-slate-200/70 border border-slate-100 px-9 py-4 ">
-            <div className="flex justify-center mb-1">
+            {/* <div className="flex justify-center mb-1">
               <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center">
                 {isSignup ? (
                   <UserPlus
@@ -226,7 +224,7 @@ export default function KaloAuth() {
                   />
                 )}
               </div>
-            </div>
+            </div> */}
 
             <h1 className="text-center text-2xl font-bold text-slate-900">
               {isSignup ? "Create your account" : "Welcome back"}
