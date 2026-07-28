@@ -1,41 +1,31 @@
-
 import SidebarClose from "../components/SidebarClose";
 import {
-  
-  Users,
-  
-  BarChart2,
- 
-  MessageSquare,
- 
-  Bookmark,
-  MapPin,
   ExternalLink,
-  //  Instagram,
   ChevronDown,
-  Lock,
   Heart,
+  Lock,
   MessageCircle,
   Hash,
   AtSign,
-  Grid3x3,
   UserCircle2,
-  Plus,
-  Send,
-  MoreHorizontal,
-  TrendingUp,
-  Eye,
   BadgeCheck,
+  BarChart2,
   Tag,
-
+  Grid3x3,
+  Bookmark,
+  Users,
 } from "lucide-react";
 import {
-  LineChart,
-  Line,
+  CREATOR,
+  STATS,
+  NAV_TABS_CLOSE,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
+import {
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   ResponsiveContainer,
@@ -47,84 +37,12 @@ const PURPLE_TINT = "#EEF0FF";
 const BORDER = "#ECECF3";
 const HEADING = "#111827";
 const MUTED = "#6B7280";
-const GREEN = "#16A34A";
 
 /* ---------------------------------- data --------------------------------- */
 
-
-
 const tags = ["Beauty", "Skincare", "Lifestyle", "Wellness", "travel", "Food"];
 
-const tabs = ["Overview", "Audience", "Content Analysis", "Performance"];
-
-const sparkline = (seed) =>
-  Array.from({ length: 12 }, (_, i) => ({
-    x: i,
-    y: seed + Math.sin(i / 1.6 + seed) * 8 + i * (seed % 3 === 0 ? 1.4 : 2.1),
-  }));
-
-const statCards = [
-  {
-    label: "Followers",
-    value: "6.2M",
-    change: "8.4%",
-    caption: "vs last 30 days",
-    icon: Users,
-    spark: sparkline(4),
-  },
-  {
-    label: "Following",
-    value: "392",
-    change: null,
-    caption: "vs last 30 days",
-    icon: Users,
-    spark: sparkline(7),
-  },
-  {
-    label: "Engagement Rate",
-    value: "1.79%",
-    change: "0.32pp",
-    caption: "vs last 30 days",
-    icon: TrendingUp,
-    spark: sparkline(2),
-  },
-  {
-    label: "Avg Likes",
-    value: "106.9K",
-    change: "10.4%",
-    caption: "vs last 30 days",
-    icon: Heart,
-    spark: sparkline(5),
-  },
-  {
-    label: "Avg Comments",
-    value: "2.8K",
-    change: "14.7%",
-    caption: "vs last 30 days",
-    icon: MessageSquare,
-    spark: sparkline(9),
-  },
-  {
-    label: "Avg Views",
-    value: "1.2M",
-    change: "22.1%",
-    caption: "vs last 30 days",
-    icon: Eye,
-    spark: sparkline(1),
-  },
-  {
-    label: "Posts",
-    value: "1,247",
-    change: null,
-    caption: "All time",
-    icon: Grid3x3,
-    isBar: true,
-    spark: Array.from({ length: 10 }, (_, i) => ({
-      x: i,
-      y: 10 + ((i * 37) % 40),
-    })),
-  },
-];
+// Unused local tabs and statCards arrays removed
 
 const growthData = [
   { date: "Apr 16", value: 5.25 },
@@ -208,13 +126,7 @@ const similarCreators = [
 
 /* -------------------------------- helpers -------------------------------- */
 
-function Pill({ children }) {
-  return (
-    <span className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[11px] font-medium leading-none text-[#5B3DF5] whitespace-nowrap">
-      {children}
-    </span>
-  );
-}
+// Pill helper removed
 
 function Card({ className = "", children }) {
   return (
@@ -303,167 +215,7 @@ function ViewAll() {
 
 /* --------------------------------- header --------------------------------- */
 
-function ProfileHeader() {
-  return (
-    <div className="flex flex-col lg:flex-row items-start justify-between gap-4 lg:gap-0">
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 w-full lg:w-auto">
-        <img
-          src="https://i.pravatar.cc/150?img=47"
-          alt="Mariale"
-          className="w-[70px] h-[70px] lg:w-[90px] lg:h-[90px] rounded-full object-cover"
-          style={{ border: `1px solid ${PURPLE}`, padding: 2 }}
-        />
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl lg:text-2xl font-bold" style={{ color: HEADING }}>
-              Mariale
-            </h1>
-            <BadgeCheck
-              size={20}
-              className="text-blue-500"
-              fill="#3B82F6"
-              color="white"
-            />
-          </div>
-          <div
-            className="flex items-center gap-2 mt-1 text-sm flex-wrap"
-            style={{ color: MUTED }}
-          >
-            <span className="font-semibold text-black">@mariale</span>
-            <span className="text-gray-300">•</span>
-            {/* <Instagram size={14} /> */}
-            <span className="font-semibold text-black">Instagram</span>
-            <ExternalLink size={12} />
-          </div>
-          <div
-            className="flex items-center gap-1.5 mt-1.5 text-sm"
-            style={{ color: MUTED }}
-          >
-            <MapPin size={14} />
-            <span className="font-bold">Los Angeles, California, USA</span>
-          </div>
-          <div className="flex gap-2 mt-3 flex-wrap overflow-x-auto no-scrollbar">
-            {tags.map((t) => (
-              <Pill key={t}>{t}</Pill>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 mt-1 flex-wrap w-full lg:w-auto">
-        <button
-          className="flex items-center gap-1.5 text-white text-sm font-medium rounded-lg px-4 py-2.5"
-          style={{ backgroundColor: PURPLE }}
-        >
-          <Plus size={15} />
-          <span className="hidden sm:inline">Add to Campaign</span>
-          <span className="sm:hidden">Add</span>
-        </button>
-        <button className="flex items-center gap-1.5 text-sm rounded-lg px-4 py-2.5 bg-white  text-violet-700 font-medium">
-          <Bookmark size={15} className="text-violet-600" />
-          <span className="hidden sm:inline">Save Creator</span>
-          <span className="sm:hidden">Save</span>
-        </button>
-        <button className="flex items-center gap-1.5 text-sm rounded-lg px-4 py-2.5 bg-white  text-violet-700 font-medium">
-          <Send size={15} className="text-violet-600" />
-          Contact
-        </button>
-        <button
-          className="rounded-lg p-2.5 bg-white text-violet-700 font-bold"
-          style={{ border: `1px solid ${BORDER}` }}
-        >
-          <MoreHorizontal size={16} style={{ color: MUTED }} />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function Tabs() {
-  return (
-    <div
-      className="flex gap-6 lg:gap-8 mt-6 overflow-x-auto no-scrollbar"
-      style={{ borderBottom: `1px solid ${BORDER}` }}
-    >
-      {tabs.map((t, i) => {
-        const active = i === 0;
-        return (
-          <button
-            key={t}
-            className="pb-3 text-sm whitespace-nowrap"
-            style={{
-              color: active ? PURPLE : "black",
-              fontWeight: active ? 900 : 700,
-              borderBottom: active
-                ? `2px solid ${PURPLE}`
-                : "2px solid transparent",
-            }}
-          >
-            {t}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-/* ------------------------------- stat cards ------------------------------- */
-
-function StatCard({ label, value, change, caption, icon: Icon, spark, isBar }) {
-  return (
-    <Card className="p-3 flex flex-col border rounded-sm shadow-none ">
-      <div
-        className="flex  items-center gap-1.5 text-[8px]"
-        style={{ color: MUTED }}
-      >
-        <Icon size={12} className="text-violet-600" />
-        {label}
-      </div>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-md font-bold" style={{ color: HEADING }}>
-          {value}
-        </span>
-        {change ? (
-          <span className="text-[10px] font-semibold" style={{ color: GREEN }}>
-            ↗ {change}
-          </span>
-        ) : null}
-      </div>
-      <p className="text-[8px] font-bold mt-1" style={{ color: MUTED }}>
-        {caption}
-      </p>
-      <div className="h-8 mt-3 -mx-1">
-        <ResponsiveContainer width="100%" height="100%">
-          {isBar ? (
-            <BarChart data={spark}>
-              <Bar dataKey="y" fill={PURPLE} radius={[2, 2, 0, 0]} />
-            </BarChart>
-          ) : (
-            <LineChart data={spark}>
-              <Line
-                type="linear"
-                dataKey="y"
-                stroke={PURPLE}
-                strokeWidth={2}
-                dot={{ r: 1 }}
-              />
-            </LineChart>
-          )}
-        </ResponsiveContainer>
-      </div>
-    </Card>
-  );
-}
-
-function StatCardsRow() {
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 mt-6">
-      {statCards.map((c) => (
-        <StatCard key={c.label} {...c} />
-      ))}
-    </div>
-  );
-}
+// Local ProfileHeader, Tabs, StatCard, StatCardsRow removed
 
 /* ----------------------------- middle section ----------------------------- */
 
@@ -613,7 +365,10 @@ function CategoriesAndPromo() {
         <SectionHeader icon={Tag} title="Categories" />
         <div className="flex flex-wrap gap-2">
           {tags.map((t) => (
-            <span key={t} className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[8px] font-medium leading-none text-[#5B3DF5]">
+            <span
+              key={t}
+              className="inline-flex items-center rounded-md border border-[#E5E7EB] bg-[#F9F4FF] px-2.5 py-1 text-[8px] font-medium leading-none text-[#5B3DF5]"
+            >
               {t}
             </span>
           ))}
@@ -657,7 +412,10 @@ function RecentContent() {
       />
       <div className="flex overflow-x-auto no-scrollbar gap-4 sm:grid sm:grid-cols-3 lg:grid-cols-5 sm:overflow-visible">
         {recentContent.map((post, i) => (
-          <div className="flex flex-col border p-2 border-gray-200 rounded-2xl w-[42vw] shrink-0 sm:w-auto sm:shrink" key={i}>
+          <div
+            className="flex flex-col border p-2 border-gray-200 rounded-2xl w-[42vw] shrink-0 sm:w-auto sm:shrink"
+            key={i}
+          >
             <div className="relative rounded-xl overflow-hidden aspect-[4/5]">
               <img
                 src={`https://i.pravatar.cc/400?img=${post.img}`}
@@ -806,7 +564,7 @@ function SimilarCreators() {
 /* ---------------------------------- app ----------------------------------- */
 
 function Overview() {
- // const [mobileOpen, setMobileOpen] = useState(false);
+  // const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div
@@ -819,9 +577,11 @@ function Overview() {
       {/* <MobileTopbar onOpen={() => setMobileOpen(true)} /> */}
 
       <main className="min-w-0 flex-1 p-3 sm:p-4 lg:ml-[72px] lg:p-6">
-        <ProfileHeader />
-        <Tabs />
-        <StatCardsRow />
+        <div className="bg-white px-6 pt-6 -mx-3 -mt-3 sm:-mx-4 sm:-mt-4 lg:-mx-6 lg:-mt-6 mb-6">
+          <ProfileHeader creator={CREATOR} />
+          <StatCardsRow stats={STATS} />
+          <TabBar tabs={NAV_TABS_CLOSE} activeTab="overview" />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 mt-5">
           <ProfileSnapshot />
@@ -853,5 +613,3 @@ function Overview() {
 }
 
 export default Overview;
-
-

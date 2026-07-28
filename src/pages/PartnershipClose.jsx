@@ -1,22 +1,6 @@
 import {
-  Building2,
-  Users,
-  BarChart3,
-  MessageSquare,
   Sparkles,
-  Mail,
-  Lightbulb,
-  Lock,
-  MoreHorizontal,
-  Bookmark,
-  Send,
   CheckCircle2,
-  Heart,
-  ThumbsUp,
-  FileText,
-  ShieldCheck,
-  Eye,
-  Folder,
   TrendingUp,
   Info,
   Zap,
@@ -26,15 +10,21 @@ import {
   Calendar,
   AlertTriangle,
   ChevronRight,
-  MapPin,
   Video,
   Layers,
   Layout,
- 
-  //   User,
-  //   Instagram,
+  Users,
+  Lightbulb,
 } from "lucide-react";
 import SidebarClose from "../components/SidebarClose";
+import {
+  CREATOR,
+  STATS,
+  NAV_TABS_CLOSE,
+  ProfileHeader,
+  StatCardsRow,
+  TabBar,
+} from "../components/CreatorHeaderLayout";
 export default function App() {
   const metricsData = [
     {
@@ -111,249 +101,17 @@ export default function App() {
     },
   ];
   return (
-    <div className="min-h-screen bg-white text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
+    <div className="min-h-screen bg-[#F8F9FC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
       <SidebarClose />
 
       {/* ================= MAIN DASHBOARD CONTENT CONTAINER ================= */}
-      <main className=" min-w-0 space-y-1 px-5 py-3 sm:px-3 lg:ml-16 lg:h-screen lg:overflow-y-auto">
-        {/* TOP PROFILE HEADER SECTION */}
-        <div className="bg-white p-3 relative overflow-hidden">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            {/* Left Profile Info */}
-            <div className="flex items-start sm:items-center gap-5">
-              {/* Creator Avatar with Verified Badge */}
-              <div className="relative shrink-0">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=250&auto=format&fit=crop"
-                  alt="Mariale"
-                  className="w-20 h-20 sm:w-22 sm:h-22 rounded-full object-cover ring-4 ring-purple-50 shadow-md"
-                />
-                <div className="absolute bottom-0 right-0 bg-white rounded-full p-0.5 shadow-sm">
-                  <CheckCircle2 className="w-5 h-5 text-white fill-blue-600" />
-                </div>
-              </div>
-
-              {/* Name and Meta */}
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
-                    Mariale
-                  </h1>
-                  <CheckCircle2 className="w-5 h-5 text-white fill-blue-500" />
-                  <span className="text-slate-400 text-sm font-medium ml-1">
-                    @mariale
-                  </span>
-
-                  {/* Instagram Badge */}
-                  <div className="inline-flex items-center gap-1.5 bg-linear-to-r from-purple-50 via-pink-50 to-orange-50 text-pink-700 px-2.5 py-1 rounded-lg text-xs font-semibold border border-pink-100 ml-1">
-                    {/* <Instagram className="w-3.5 h-3.5 text-pink-600" /> */}
-                    <span>Instagram</span>
-                  </div>
-
-                  {/* Location Tag */}
-                  <div className="inline-flex items-center gap-1 text-slate-400 text-xs font-medium ml-1">
-                    <MapPin className="w-3.5 h-3.5" />
-                    <span>USA</span>
-                  </div>
-                </div>
-
-                {/* Categories Tags */}
-                <div className="flex items-center gap-2 flex-wrap pt-0.5">
-                  <span className="bg-purple-50 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full border border-purple-100/60">
-                    Beauty
-                  </span>
-                  <span className="bg-purple-50 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full border border-purple-100/60">
-                    Cosmetics & Personal Care
-                  </span>
-                  <span className="bg-purple-50 text-purple-700 text-xs font-semibold px-3 py-1 rounded-full border border-purple-100/60">
-                    Beauty & Skincare
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Action Buttons */}
-            <div className="flex flex-col items-end gap-3 shrink-0">
-              {/* Top Row Actions */}
-              <div className="flex items-center gap-2">
-                <button className="bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-sm shadow-purple-200 flex items-center gap-2 transition-all cursor-pointer">
-                  <Lock className="w-3.5 h-3.5" />
-                  <span>Unlock Full Report</span>
-                </button>
-                <button className="p-2 text-slate-400 hover:text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition-all cursor-pointer">
-                  <MoreHorizontal className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Bottom Row Campaign Actions */}
-              <div className="flex items-center gap-2.5">
-                <button className="bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5 transition-all shadow-sm shadow-purple-100 cursor-pointer">
-                  <span className="text-base font-bold leading-none">+</span>
-                  <span>Add to Campaign</span>
-                </button>
-                <button className="border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer">
-                  <Bookmark className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Save Creator</span>
-                </button>
-                <button className="border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-all cursor-pointer">
-                  <Send className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Contact</span>
-                </button>
-              </div>
-            </div>
-          </div>
+      <main className="min-w-0 flex flex-col gap-3 pb-16 lg:ml-16 lg:h-screen lg:overflow-y-auto lg:pb-3">
+        <div className="bg-white px-6 pt-6 mb-3">
+          <ProfileHeader creator={CREATOR} />
+          <StatCardsRow stats={STATS} />
+          <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnerships" />
         </div>
-
-        {/* ================= HEADER STATS ROW (6 KPI CARDS) ================= */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 mt-0">
-          {/* Card 1: Followers */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/60 flex items-center justify-center shrink-0">
-              <Users className="w-5 h-5 text-blue-600" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                6.0M
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Followers
-              </div>
-              <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                +3.2%{" "}
-                <span className="text-slate-400 font-normal">vs 30 days</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2: Engagement Rate */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-pink-50 border border-pink-100/60 flex items-center justify-center shrink-0">
-              <Heart className="w-5 h-5 text-pink-500" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                1.79%
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Engagement Rate
-              </div>
-              <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                +0.29pp{" "}
-                <span className="text-slate-400 font-normal">vs 30 days</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3: Avg Likes */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100/60 flex items-center justify-center shrink-0">
-              <ThumbsUp className="w-5 h-5 text-blue-500" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                106.9K
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Avg Likes
-              </div>
-              <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                +8.7%{" "}
-                <span className="text-slate-400 font-normal">vs 30 days</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 4: Avg Comments */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/60 flex items-center justify-center shrink-0">
-              <MessageSquare className="w-5 h-5 text-purple-600" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                2.8K
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Avg Comments
-              </div>
-              <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                +5.1%{" "}
-                <span className="text-slate-400 font-normal">vs 30 days</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 5: Posts */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-100/60 flex items-center justify-center shrink-0">
-              <FileText className="w-5 h-5 text-purple-600" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                6.3K
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Posts
-              </div>
-              <div className="text-[10px] font-semibold text-slate-400 mt-0.5">
-                All time
-              </div>
-            </div>
-          </div>
-
-          {/* Card 6: Audience Quality */}
-          <div className="bg-white rounded-lg p-4 border border-slate-200/80  flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100/60 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5 text-emerald-500" />
-            </div>
-            <div>
-              <div className="text-xl font-bold text-slate-900 leading-tight">
-                88{" "}
-                <span className="text-xs font-normal text-slate-400">/100</span>
-              </div>
-              <div className="text-[11px] font-medium text-slate-400">
-                Audience Quality
-              </div>
-              <div className="text-[10px] font-semibold text-emerald-500 mt-0.5">
-                High Quality
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ================= NAVIGATION SUB-TABS BAR ================= */}
-        <div className="border-b border-slate-200/80 flex items-center gap-8 text-xs font-medium text-slate-500 px-2 pt-1">
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <Eye className="w-4 h-4" />
-            <span>Overview</span>
-          </button>
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <Users className="w-4 h-4" />
-            <span>Audience</span>
-          </button>
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <Folder className="w-4 h-4" />
-            <span>Content</span>
-          </button>
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <BarChart3 className="w-4 h-4" />
-            <span>Performance</span>
-          </button>
-
-          {/* Active Tab */}
-          <button className="flex items-center gap-1.5 py-2.5 text-purple-600 font-semibold border-b-2 border-purple-600 -mb-px transition-colors cursor-pointer">
-            <Building2 className="w-4 h-4" />
-            <span>Partnerships</span>
-          </button>
-
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <Sparkles className="w-4 h-4" />
-            <span>Similar Creators</span>
-          </button>
-          <button className="flex items-center gap-1.5 py-2.5 hover:text-slate-800 transition-colors cursor-pointer">
-            <Mail className="w-4 h-4" />
-            <span>Contact</span>
-          </button>
-        </div>
+        <div className="px-5 py-3 sm:px-3 flex flex-col gap-3">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           <div className="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
@@ -1639,6 +1397,7 @@ export default function App() {
               })}
             </div>
           </div>
+        </div>
         </div>
       </main>
     </div>
