@@ -111,7 +111,7 @@ export default function App() {
         <div className="bg-white px-6 pt-6 mb-3">
           <ProfileHeader creator={CREATOR} />
           <StatCardsRow stats={STATS} />
-          <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnership" />
+          <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnerships" />
         </div>
         <div className="px-2 sm:px-4 flex flex-col gap-3">
 
