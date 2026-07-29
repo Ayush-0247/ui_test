@@ -13,6 +13,7 @@ import {
   ProfileHeader,
   StatCardsRow,
   TabBar,
+  PURPLE,
 } from "../components/CreatorHeaderLayout";
 
 const HEADING = "#111827";
@@ -132,9 +133,42 @@ const PLANS = [
 ];
 
 
+function MobileStatCard({ label, value, caption, icon: Icon }) {
+  return (
+    <div
+      className="w-[100px] shrink-0 snap-start rounded-lg bg-white p-2.5 font-sans"
+      style={{ border: `1px solid ${BORDER}` }}
+    >
+      <div
+        className="flex items-center gap-1 text-[10px] font-semibold leading-tight"
+        style={{ color: HEADING }}
+      >
+        <Icon size={11} className="shrink-0" style={{ color: PURPLE }} />
+        <span className="truncate">{label}</span>
+      </div>
+      <p className="mt-1.5 text-[15px] font-bold leading-none" style={{ color: HEADING }}>
+        {value}
+      </p>
+      <p className="mt-1 truncate text-[9px] leading-tight" style={{ color: MUTED }}>
+        {caption}
+      </p>
+    </div>
+  );
+}
+
+function MobileStatCardsRow({ stats }) {
+  return (
+    <div className="-mx-4 mt-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      {stats.map((s) => (
+        <MobileStatCard key={s.label} {...s} />
+      ))}
+    </div>
+  );
+}
+
 function BillingToggle({ cycle, setCycle }) {
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div className="flex flex-col items-center justify-center gap-3 lg:flex-row">
       <div
         className="inline-flex items-center rounded-full p-1"
         style={{ backgroundColor: "#EEF0FE", border: `1px solid ${BORDER}` }}
@@ -163,7 +197,7 @@ function BillingToggle({ cycle, setCycle }) {
         </button>
       </div>
       <span
-        className="rounded-full px-3 py-1.5 text-xs font-semibold"
+        className="rounded-full px-3 py-1.5 text-center text-xs font-semibold"
         style={{ backgroundColor: "#EEF0FE", color: "#4338CA" }}
       >
         50% OFF on Annual Plans
@@ -180,7 +214,7 @@ function PlanCard({ plan, cycle }) {
 
   return (
     <div
-      className="relative flex flex-col rounded-2xl p-6"
+      className="relative flex flex-col rounded-2xl p-4 lg:p-6"
       style={{
         background: plan.gradient,
         border: plan.highlighted
@@ -292,17 +326,17 @@ function CompareTable({ plans, cycle }) {
   };
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-gray-100">
-      <table className="w-full min-w-[720px] border-collapse text-sm">
+    <div className="-mx-4 overflow-x-auto rounded-2xl border border-gray-100 px-4 lg:mx-0 lg:px-0">
+      <table className="w-full min-w-[640px] border-collapse text-sm lg:min-w-[720px]">
         <thead>
           <tr className="border-b border-gray-100">
-            <th className="px-6 py-4 text-left font-semibold text-gray-900">
+            <th className="px-3 py-3 text-left font-semibold text-gray-900 lg:px-6 lg:py-4">
               Feature
             </th>
             {plans.map((plan) => (
               <th
                 key={plan.key}
-                className="px-6 py-4 text-left font-semibold text-gray-900"
+                className="px-3 py-3 text-left font-semibold text-gray-900 lg:px-6 lg:py-4"
               >
                 <div className="flex items-center gap-2">
                   {plan.name}
@@ -318,11 +352,11 @@ function CompareTable({ plans, cycle }) {
         </thead>
         <tbody>
           <tr className="bg-white">
-            <td className="px-6 py-3.5 font-medium text-gray-700">
+            <td className="px-3 py-3 font-medium text-gray-700 lg:px-6 lg:py-3.5">
               Price
             </td>
             {plans.map((plan) => (
-              <td key={plan.key} className="px-6 py-3.5 text-gray-700">
+              <td key={plan.key} className="px-3 py-3 text-gray-700 lg:px-6 lg:py-3.5">
                 ${plan[cycle].price} / {cycle === "yearly" ? "yr" : "mo"}
               </td>
             ))}
@@ -332,13 +366,13 @@ function CompareTable({ plans, cycle }) {
               key={label}
               className={idx % 2 === 0 ? "bg-gray-50/40" : "bg-white"}
             >
-              <td className="px-6 py-3.5 font-medium text-gray-700">
+              <td className="px-3 py-3 font-medium text-gray-700 lg:px-6 lg:py-3.5">
                 {label}
               </td>
               {plans.map((plan) => {
                 const val = getValue(plan, label);
                 return (
-                  <td key={plan.key} className="px-6 py-3.5">
+                  <td key={plan.key} className="px-3 py-3 lg:px-6 lg:py-3.5">
                     {typeof val === "boolean" ? (
                       val ? (
                         <CheckCircle2 size={17} className="text-emerald-500" />
@@ -369,24 +403,33 @@ export default function CreatorPricingDashboard({
   const [cycle, setCycle] = useState("yearly");
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-gray-50 font-sans">
+    <div className="flex min-h-screen overflow-hidden bg-gray-50 font-sans lg:h-screen">
       <SidebarClose />
 
-      <main className="flex-1 overflow-y-auto overflow-x-hidden pl-20">
-        <div className="bg-white px-6 pt-6">
-          <ProfileHeader creator={creator} />
-          <StatCardsRow stats={stats} />
-          <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+      <main className="min-h-screen min-w-0 flex-1 overflow-y-auto overflow-x-hidden pb-16 lg:ml-[72px] lg:pb-0">
+        <div className="min-w-0 bg-white px-4 pt-4 lg:px-6 lg:pt-6">
+          <div className="[&>div.flex]:flex-col [&>div.flex]:items-stretch [&>div.flex]:gap-4 lg:[&>div.flex]:flex-row lg:[&>div.flex]:items-start lg:[&>div.flex]:gap-0 [&>div.flex>div:last-child]:w-full lg:[&>div.flex>div:last-child]:w-auto [&>div.flex>div:last-child_.flex]:flex-wrap lg:[&>div.flex>div:last-child_.flex]:flex-nowrap">
+            <ProfileHeader creator={creator} />
+          </div>
+          <div className="lg:hidden">
+            <MobileStatCardsRow stats={stats} />
+          </div>
+          <div className="hidden lg:block">
+            <StatCardsRow stats={stats} />
+          </div>
+          <div className="-mx-4 overflow-x-auto px-4 lg:mx-0 lg:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&>div]:min-w-max [&>div]:gap-4 lg:[&>div]:min-w-0 lg:[&>div]:gap-7">
+            <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
+          </div>
         </div>
 
         {activeTab === "pricing" && (
-          <section className="px-6 py-12">
+          <section className="px-4 py-8 lg:px-6 lg:py-12">
             <div className="mx-auto max-w-6xl">
               <div className="text-center">
-                <h2 className="text-3xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-gray-900 lg:text-3xl">
                   Simple, Transparent Pricing
                 </h2>
-                <p className="mt-2 text-gray-500">
+                <p className="mt-2 px-1 text-sm text-gray-500 lg:px-0 lg:text-base">
                   Choose the perfect plan to grow your influencer marketing
                   campaigns.
                 </p>
@@ -396,14 +439,14 @@ export default function CreatorPricingDashboard({
                 </div>
               </div>
 
-              <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-10 lg:grid-cols-3">
                 {plans.map((plan) => (
                   <PlanCard key={plan.key} plan={plan} cycle={cycle} />
                 ))}
               </div>
 
-              <div className="mt-14">
-                <h3 className="mb-5 text-xl font-bold text-gray-900">
+              <div className="mt-10 lg:mt-14">
+                <h3 className="mb-4 text-lg font-bold text-gray-900 lg:mb-5 lg:text-xl">
                   Compare Plans
                 </h3>
                 <CompareTable plans={plans} cycle={cycle} />
@@ -413,7 +456,7 @@ export default function CreatorPricingDashboard({
         )}
 
         {activeTab !== "pricing" && (
-          <div className="flex h-64 items-center justify-center text-gray-400">
+          <div className="flex h-64 items-center justify-center px-4 text-center text-gray-400">
             "{tabs.find((t) => t.key === activeTab)?.label}" content goes here.
           </div>
         )}
