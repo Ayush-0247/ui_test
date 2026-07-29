@@ -101,17 +101,19 @@ export default function App() {
     },
   ];
   return (
-    <div className="min-h-screen bg-[#F8F9FC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700 lg:h-screen lg:overflow-hidden">
-      <SidebarClose />
+   <div className="min-h-screen bg-[#F8F9FC] text-gray-800 flex font-sans text-xs">
+        <style>{`.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none}`}</style>
+  
+        <SidebarClose />
 
-      {/* ================= MAIN DASHBOARD CONTENT CONTAINER ================= */}
-      <main className="min-w-0 flex flex-col gap-3 pb-16 lg:ml-16 lg:h-screen lg:overflow-y-auto lg:pb-3">
+   {/* Main Content Area */}
+      <main className="flex-1 overflow-y-auto flex flex-col gap-3 min-w-0 pb-16 lg:ml-[72px] lg:pb-3">
         <div className="bg-white px-6 pt-6 mb-3">
           <ProfileHeader creator={CREATOR} />
           <StatCardsRow stats={STATS} />
-          <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnerships" />
+          <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnership" />
         </div>
-        <div className="px-5 py-3 sm:px-3 flex flex-col gap-3">
+        <div className="px-2 sm:px-4 flex flex-col gap-3">
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
           <div className="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
