@@ -34,9 +34,7 @@ import {
   StatCardsRow,
   TabBar,
 } from "../components/CreatorHeaderLayout";
-// Shared CREATOR, STATS, NAV_TABS imported from CreatorHeaderLayout
 
-// Shared layout components imported from CreatorHeaderLayout
 export default function App({
   creator = CREATOR,
   stats = STATS,
@@ -60,7 +58,7 @@ export default function App({
 
           {/* ================= PARTNERSHIPS TAB VIEW ================= */}
           {activeTab === "contact" && (
-            <div className="space-y-5">
+            <div className="p-3">
               {/* ROW 1: PARTNERSHIP OVERVIEW & AI PARTNERSHIP SCORE */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
                 {/* 1. Partnership Overview (7 cols) */}
@@ -336,7 +334,7 @@ export default function App({
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 my-5">
                 {/* 4. Past Brand Contacts (4 cols) */}
                 <div className="lg:col-span-4 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
                   <div>

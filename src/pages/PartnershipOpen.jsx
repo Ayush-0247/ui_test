@@ -126,7 +126,7 @@ export default function App() {
 
         <div className="p-3 sm:p-4 lg:p-6 space-y-5">
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 mt-0">
             <div className="lg:col-span-7 bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-1.5">
