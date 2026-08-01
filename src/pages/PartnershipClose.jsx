@@ -25,6 +25,7 @@ import {
   StatCardsRow,
   TabBar,
 } from "../components/CreatorHeaderLayout";
+import Steps from "../components/Steps";
 export default function App() {
   const metricsData = [
     {
@@ -111,6 +112,7 @@ export default function App() {
         <div className="bg-white px-6 pt-6 mb-3">
           <ProfileHeader creator={CREATOR} />
           <StatCardsRow stats={STATS} />
+          <Steps />
           <TabBar tabs={NAV_TABS_CLOSE} activeTab="partnerships" />
         </div>
         <div className="px-2 sm:px-4 flex flex-col gap-3">

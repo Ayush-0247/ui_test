@@ -15,6 +15,7 @@ import {
   TabBar,
   PURPLE,
 } from "../components/CreatorHeaderLayout";
+import Steps from "../components/Steps";
 
 const HEADING = "#111827";
 const MUTED = "#6B7280";
@@ -417,6 +418,7 @@ export default function CreatorPricingDashboard({
           <div className="hidden lg:block">
             <StatCardsRow stats={stats} />
           </div>
+          <Steps />
           <div className="-mx-4 overflow-x-auto px-4 lg:mx-0 lg:px-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [&>div]:min-w-max [&>div]:gap-4 lg:[&>div]:min-w-0 lg:[&>div]:gap-7">
             <TabBar tabs={tabs} activeTab={activeTab} onChange={setActiveTab} />
           </div>

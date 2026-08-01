@@ -22,6 +22,11 @@ import PricingClose from "./pages/PrcicingClose";
 import PricingOpen from "./pages/PricingOpen";
 import Login from "./pages/Login";
 import OverviewClose from "./pages/OverviewClose";
+import LifelinkrOverviewClose from "./pages/LifelinkrOverviewClose";
+import Steps from "./components/Steps";
+
+
+
 export default function App() {
   return (
     <Routes>
@@ -37,10 +42,11 @@ export default function App() {
       <Route path="/Overview" element={<Overview />} />
       <Route path="/content-close" element={<Content />} />
       <Route path="/content-open" element={<ContentOpen />} />
-      <Route path="/audience-close"  element={<Audience />} />
-      <Route path="/audience-open"  element={<Audienceopen />} />
+      <Route path="/audience-close" element={<Audience />} />
+      <Route path="/audience-open" element={<Audienceopen />} />
       <Route path="/PerformanceOpen" element={<PerformanceOpen />} />
       <Route path="/overview-close" element={<OverviewClose />} />
+      <Route path="/lifelinkr-overview-close" element={<LifelinkrOverviewClose />} />
       <Route path="/Partnership-close" element={<PartnershipClose />} />
       <Route path="/Partnership-open" element={<PartnershipOpen />} />
       <Route path="/Contact-close" element={<ContactClose />} />
@@ -48,6 +54,7 @@ export default function App() {
       <Route path="/pricing-close" element={<PricingClose />} />
       <Route path="/pricing-open" element={<PricingOpen />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/steps" element={<Steps />} />
     </Routes>
   );
 }

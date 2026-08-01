@@ -23,6 +23,7 @@ import {
   StatCardsRow,
   TabBar,
 } from "../components/CreatorHeaderLayout";
+import Steps from "../components/Steps";
 import {
   AreaChart,
   Area,
@@ -580,6 +581,7 @@ function Overview() {
         <div className="bg-white px-6 pt-6 -mx-3 -mt-3 sm:-mx-4 sm:-mt-4 lg:-mx-6 lg:-mt-6 mb-6">
           <ProfileHeader creator={CREATOR} />
           <StatCardsRow stats={STATS} />
+          <Steps />
           <TabBar tabs={NAV_TABS_CLOSE} activeTab="overview" />
         </div>
 
