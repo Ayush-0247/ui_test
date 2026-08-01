@@ -42,6 +42,7 @@ import {
   TabBar,
   Pill,
 } from "../components/CreatorHeaderLayout";
+import Steps from "../components/Steps";
 import {
   PieChart,
   Pie,
@@ -850,6 +851,7 @@ function DesktopAudience() {
       <div className="bg-white px-6 pt-6 -mx-6 -mt-6 mb-6">
         <ProfileHeader creator={CREATOR} />
         <StatCardsRow stats={STATS} />
+        <Steps />
         <TabBar tabs={NAV_TABS_CLOSE} activeTab="audience" />
       </div>
 

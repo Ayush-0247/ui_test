@@ -70,6 +70,11 @@ const Home = () => {
           theme="sky"
         />
         <PortalCard
+          to="/lifelinkr-overview-close"
+          title="Lifelinkr Overview Page close sidebar"
+          theme="sky"
+        />
+        <PortalCard
           to="/overview"
           title="Overview Page open sidebar"
           theme="sky"
@@ -130,6 +135,12 @@ const Home = () => {
          <PortalCard
           to="/login"
           title="Login and sign up Page"
+          theme="sky"
+        />
+
+        <PortalCard
+          to="/steps"
+          title="Steps Page"
           theme="sky"
         />
       </div>
