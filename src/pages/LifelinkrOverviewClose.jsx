@@ -1,4 +1,4 @@
-import React from "react";
+
 import SidebarClose from "../components/SidebarClose";
 import { NAV_TABS_CLOSE, TabBar } from "../components/CreatorHeaderLayout";
 import Steps from "../components/Steps";
@@ -40,25 +40,7 @@ function Avatar({
   );
 }
 
-function SidebarItem({ icon: Icon, label, active, indent }) {
-  return (
-    <div
-      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-[13.5px] cursor-pointer select-none ${active
-          ? "bg-blue-50 text-blue-600 font-medium"
-          : "text-slate-600 hover:bg-slate-50"
-        } ${indent ? "ml-1" : ""}`}
-    >
-      {Icon && (
-        <Icon
-          size={17}
-          strokeWidth={2}
-          className={active ? "text-blue-600" : "text-slate-400"}
-        />
-      )}
-      <span>{label}</span>
-    </div>
-  );
-}
+
 
 function TopButton({ icon: Icon, label, filled }) {
   return (
@@ -74,18 +56,7 @@ function TopButton({ icon: Icon, label, filled }) {
   );
 }
 
-function Tab({ label, active }) {
-  return (
-    <div
-      className={`px-1 pb-3 text-[13.5px] cursor-pointer border-b-2 ${active
-          ? "border-blue-600 text-blue-600 font-medium"
-          : "border-transparent text-slate-500 hover:text-slate-700"
-        }`}
-    >
-      {label}
-    </div>
-  );
-}
+
 
 function Card({ title, action, children, className = "" }) {
   return (
