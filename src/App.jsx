@@ -25,7 +25,7 @@ import OverviewClose from "./pages/OverviewClose";
 import LifelinkrOverviewClose from "./pages/LifelinkrOverviewClose";
 import Steps from "./components/Steps";
 import LifelinkrAppointment from "./pages/LifelinkrAppointment";
-import LifelinkrInteraction from "./pages/Lifelinkrinteraction";
+import LifelinkrInteraction from "./pages/LifelinkrInteraction";
 import LifelinkrTimeline from "./pages/LifrlinkrTimeline";
 // ci\cd pipiline test
 
