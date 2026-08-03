@@ -36,7 +36,7 @@ import {
   MapPin,
   User,
 } from "lucide-react";
-import Steps from "../components/steps";
+import Steps from "../components/Steps";
 const sidebarSections = [
   {
     items: [{ label: "Dashboard", icon: LayoutDashboard }],
