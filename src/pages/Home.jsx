@@ -124,23 +124,16 @@ const Home = () => {
           title="Pricing Page close sidebar"
           theme="sky"
         />
-      
-
         <PortalCard
           to="/pricing-open"
           title="Pricing Page open sidebar"
           theme="sky"
         />
-
-         <PortalCard
-          to="/login"
-          title="Login and sign up Page"
-          theme="sky"
-        />
-
+        <PortalCard to="/login" title="Login and sign up Page" theme="sky" />
+        <PortalCard to="/steps" title="Steps Page" theme="sky" />
         <PortalCard
-          to="/steps"
-          title="Steps Page"
+          to="/lifelinkr-interaction"
+          title="Lifelinkr Interaction Page"
           theme="sky"
         />
       </div>
