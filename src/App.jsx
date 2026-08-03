@@ -24,7 +24,7 @@ import Login from "./pages/Login";
 import OverviewClose from "./pages/OverviewClose";
 import LifelinkrOverviewClose from "./pages/LifelinkrOverviewClose";
 import Steps from "./components/Steps";
-
+import LifelinkrAppointment from "./pages/LifelinkrAppointment";
 
 
 export default function App() {
@@ -55,6 +55,7 @@ export default function App() {
       <Route path="/pricing-open" element={<PricingOpen />} />
       <Route path="/login" element={<Login />} />
       <Route path="/steps" element={<Steps />} />
+      <Route path="/lifelinkr-appointment" element={<LifelinkrAppointment />} />
     </Routes>
   );
 }
