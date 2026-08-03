@@ -25,6 +25,8 @@ import OverviewClose from "./pages/OverviewClose";
 import LifelinkrOverviewClose from "./pages/LifelinkrOverviewClose";
 import Steps from "./components/Steps";
 import LifelinkrInteraction from "./pages/Lifelinkrinteraction";
+import LifelinkrTimeline from "./pages/LifrlinkrTimeline";
+
 
 export default function App() {
   return (
@@ -58,6 +60,7 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/steps" element={<Steps />} />
       <Route path="/lifelinkr-interaction" element={<LifelinkrInteraction />} />
+      <Route path="/lifelinkr-timeline" element={<LifelinkrTimeline />} />
     </Routes>
   );
 }
