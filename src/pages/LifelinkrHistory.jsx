@@ -1,28 +1,19 @@
-
 import {
-  BarChart3,
-  Menu,
-  Search,
-  Bell,
-  Globe,
   ChevronDown,
   ArrowLeft,
   Phone,
   MessageCircle,
   Mail,
   Pencil,
-  LayoutGrid,
- 
-
   Calendar,
   StickyNote,
   FileText,
   ClipboardList,
   History as HistoryIcon,
+  LayoutGrid,
   Filter,
   MoreVertical,
   CheckCircle2,
-  
   CalendarPlus,
   ListPlus,
   Send,
@@ -30,8 +21,8 @@ import {
 } from "lucide-react";
 import Steps from "../components/Steps";
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
-
-
+import LifelinkrTopBar from "../components/LifelinkrTopBar";
+import LifelinkrLeadHeader from "../components/LifelinkrLeadHeader";
 
 const tabs = [
   { label: "Overview", icon: LayoutGrid },
@@ -149,8 +140,6 @@ const historyRows = [
   },
 ];
 
-
-
 function SummaryRow({ label, children }) {
   return (
     <div className="flex items-center justify-between py-2">
@@ -176,141 +165,26 @@ function QuickAction({ icon: Icon, label, color }) {
 export default function LeadHistoryPage() {
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col text-[13px]">
-      {/* Top bar */}
-      <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 shrink-0">
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <BarChart3 size={22} className="text-blue-600" />
-            <span className="font-bold text-gray-900 tracking-tight text-[15px]">
-              LIFELINKR
-            </span>
-          </div>
-          <Menu size={18} className="text-gray-400" />
-        </div>
-
-        <div className="flex-1 max-w-md mx-6">
-          <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-400">
-            <Search size={15} />
-            <span className="flex-1 text-[13px]">
-              Search by name, phone, email, UHID...
-            </span>
-            <span className="text-[11px] border border-gray-300 rounded px-1 text-gray-400">
-              ⌘K
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-5">
-          <div className="relative">
-            <Bell size={18} className="text-gray-500" />
-            <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-              3
-            </span>
-          </div>
-          <div className="flex items-center gap-1 text-gray-500">
-            <Globe size={16} />
-            <span className="text-[12px] font-medium">EN</span>
-            <ChevronDown size={12} />
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-[12px]">
-              V
-            </div>
-            <div className="leading-tight">
-              <p className="font-medium text-gray-800 text-[13px]">Vivek</p>
-              <p className="text-[11px] text-gray-400">Connector</p>
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Global Top Bar */}
+      <LifelinkrTopBar />
 
       <div className="flex flex-1 min-h-0">
-        {/* Sidebar */}
-       <LifelinkrAsidebar />
+        {/* Global Sidebar */}
+        <LifelinkrAsidebar />
 
         {/* Main content */}
         <main className="flex-1 overflow-y-auto p-6">
-          {/* Back link + actions */}
-          <div className="flex items-center justify-between mb-4">
-            <button className="flex items-center gap-2 text-gray-500 text-[13px] hover:text-gray-700">
-              <ArrowLeft size={15} /> Back to All Leads
-            </button>
-            <div className="flex items-center gap-2">
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
-                <Phone size={14} /> Call
-              </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
-                <MessageCircle size={14} className="text-green-500" /> WhatsApp
-              </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
-                <Mail size={14} /> Email
-              </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
-                <Pencil size={14} /> Edit
-              </button>
-              <button className="flex items-center gap-1.5 bg-blue-600 text-white rounded-lg px-4 py-1.5 text-[13px] font-medium">
-                More <ChevronDown size={14} />
-              </button>
-            </div>
-          </div>
+          {/* Global Lead Header */}
+          <LifelinkrLeadHeader />
 
-          {/* Lead header */}
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center font-semibold text-lg">
-              IS
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="text-xl font-semibold text-gray-900">
-                  Inderjeet Singh
-                </h1>
-                <span className="bg-orange-100 text-orange-600 text-[11px] font-medium px-2 py-0.5 rounded-full">
-                  Contacted
-                </span>
-              </div>
-              <p className="text-gray-400 text-[12px] mt-0.5">
-                L-1012 &nbsp;•&nbsp; UHID: UH-25-000123 &nbsp;•&nbsp; Source:
-                Google Ads
-              </p>
-              <div className="flex items-center gap-5 mt-1.5 text-[12px] text-gray-600">
-                <span className="flex items-center gap-1.5">
-                  <Phone size={13} /> +91 98765 43210
-                </span>
-                <span className="flex items-center gap-1.5 text-green-600">
-                  <MessageCircle size={13} /> WhatsApp
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Mail size={13} /> inderjeet.singh@example.com
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-[1fr_300px] gap-5">
+          <div className="grid grid-cols-[1fr_300px] gap-5 mt-5">
             {/* Left column */}
             <div>
-              {/* Lead journey card */}
-              <div className=" p-5 mb-4">
-            <Steps />
-
-                <div className="flex items-center gap-4 mt-6 pt-4 border-t border-gray-100">
-                  <span className="text-[13px] text-gray-500 shrink-0">
-                    Journey Progress
-                  </span>
-                  <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-600 rounded-full" style={{ width: "22%" }} />
-                  </div>
-                  <span className="text-[12px] text-gray-500 shrink-0">
-                    Completed 2 / 9 stages
-                  </span>
-                  <span className="text-[12px] text-gray-500 shrink-0">
-                    22% Complete
-                  </span>
-                </div>
-              </div>
+              {/* Lead journey (Steps) */}
+              <Steps />
 
               {/* Tabs */}
-              <div className="flex items-center gap-6 border-b border-gray-200 mb-4 overflow-x-auto">
+              <div className="flex items-center gap-6 border-b border-gray-200 mb-4 overflow-x-auto mt-4">
                 {tabs.map((tab) => (
                   <button
                     key={tab.label}
@@ -336,7 +210,7 @@ export default function LeadHistoryPage() {
 
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex-1 flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-400">
-                    <Search size={14} />
+                    <Filter size={14} />
                     <span className="text-[13px]">Search history...</span>
                   </div>
                   <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-600">
@@ -347,7 +221,7 @@ export default function LeadHistoryPage() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="text-[11px] uppercase tracking-wide text-gray-400 border-b border-gray-100">
-                      <th className="font-medium py-2 pr-3 w-[110px]">Date & Time</th>
+                      <th className="font-medium py-2 pr-3 w-[110px]">Date &amp; Time</th>
                       <th className="font-medium py-2 pr-3 w-[180px]">Activity</th>
                       <th className="font-medium py-2 pr-3">Details</th>
                       <th className="font-medium py-2 pr-3 w-[130px]">By</th>
@@ -387,9 +261,7 @@ export default function LeadHistoryPage() {
                             <span className="text-[12px]">
                               {row.by}
                               <br />
-                              <span className="text-gray-400 text-[11px]">
-                                {row.byRole}
-                              </span>
+                              <span className="text-gray-400 text-[11px]">{row.byRole}</span>
                             </span>
                           </span>
                         </td>
@@ -444,9 +316,7 @@ export default function LeadHistoryPage() {
                   <SummaryRow label="First Enquiry">30 Jul, 2025</SummaryRow>
                   <SummaryRow label="Last Contacted">30 Jul, 2025</SummaryRow>
                   <SummaryRow label="Next Follow-up">
-                    <span className="text-red-500 font-medium">
-                      Today, 04:00 PM
-                    </span>
+                    <span className="text-red-500 font-medium">Today, 04:00 PM</span>
                   </SummaryRow>
                 </div>
               </div>
@@ -475,11 +345,31 @@ export default function LeadHistoryPage() {
               <div className="bg-white border border-gray-200 rounded-xl p-5">
                 <p className="font-medium text-gray-800 mb-3">Quick Actions</p>
                 <div className="space-y-2">
-                  <QuickAction icon={StickyNote} label="Add Note" color="border-blue-100 bg-blue-50 text-blue-600" />
-                  <QuickAction icon={CalendarPlus} label="Schedule Appointment" color="border-blue-100 bg-blue-50 text-blue-600" />
-                  <QuickAction icon={ListPlus} label="Add Task" color="border-blue-100 bg-blue-50 text-blue-600" />
-                  <QuickAction icon={Send} label="Send WhatsApp" color="border-blue-100 bg-blue-50 text-blue-600" />
-                  <QuickAction icon={UploadCloud} label="Upload Document" color="border-blue-100 bg-blue-50 text-blue-600" />
+                  <QuickAction
+                    icon={StickyNote}
+                    label="Add Note"
+                    color="border-blue-100 bg-blue-50 text-blue-600"
+                  />
+                  <QuickAction
+                    icon={CalendarPlus}
+                    label="Schedule Appointment"
+                    color="border-blue-100 bg-blue-50 text-blue-600"
+                  />
+                  <QuickAction
+                    icon={ListPlus}
+                    label="Add Task"
+                    color="border-blue-100 bg-blue-50 text-blue-600"
+                  />
+                  <QuickAction
+                    icon={Send}
+                    label="Send WhatsApp"
+                    color="border-blue-100 bg-blue-50 text-blue-600"
+                  />
+                  <QuickAction
+                    icon={UploadCloud}
+                    label="Upload Document"
+                    color="border-blue-100 bg-blue-50 text-blue-600"
+                  />
                 </div>
               </div>
             </div>
