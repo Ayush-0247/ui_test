@@ -70,11 +70,6 @@ const Home = () => {
           theme="sky"
         />
         <PortalCard
-          to="/lifelinkr-overview-close"
-          title="Lifelinkr Overview Page close sidebar"
-          theme="sky"
-        />
-        <PortalCard
           to="/overview"
           title="Overview Page open sidebar"
           theme="sky"
@@ -132,29 +127,30 @@ const Home = () => {
         <PortalCard to="/login" title="Login and sign up Page" theme="sky" />
         <PortalCard to="/steps" title="Steps Page" theme="sky" />
         <PortalCard
-          to="/lifelinkr-interaction"
-          title="Lifelinkr Interaction Page"
+          to="/lifelinkr-asidebar"
+          title="Lifelinkr Asidebar Page"
           theme="sky"
         />
-
+        <PortalCard
+          to="/lifelinkr-overview-close"
+          title="Lifelinkr Overview Page "
+          theme="sky"
+        />{" "}
         <PortalCard
           to="/lifelinkr-timeline"
           title="Lifelinkr Timeline Page"
           theme="sky"
         />
-
+        <PortalCard
+          to="/lifelinkr-interaction"
+          title="Lifelinkr Interaction Page"
+          theme="sky"
+        />
         <PortalCard
           to="/lifelinkr-appointment"
           title="Lifelinkr Appointment Page"
           theme="sky"
         />
-
-        <PortalCard
-          to="/lifelinkr-asidebar"
-          title="Lifelinkr Asidebar Page"
-          theme="sky"
-        />
-
         <PortalCard
           to="/lifelinkr-notes"
           title="Lifelinkr Notes Page"
@@ -164,8 +160,7 @@ const Home = () => {
           to="/lifelinkr-document"
           title="Lifelinkr Document Page"
           theme="sky"
-             />
-
+        />
         <PortalCard
           to="/lifelinkr-history"
           title="Lifelinkr History Page"
