@@ -1,24 +1,19 @@
 import { useState } from "react";
 import {
-  Search,
-  Bell,
-  Globe,
-  ChevronDown,
-  ArrowLeft,
-  Phone,
-  Mail,
-  Pencil,
   Plus,
   MoreVertical,
   CalendarDays,
   CheckSquare,
   ChevronsRight,
   CheckCircle2,
-  List,
+  ChevronDown,
 } from "lucide-react";
 
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
+import LifelinkrTopBar from "../components/LifelinkrTopBar";
+import LifelinkrLeadHeader from "../components/LifelinkrLeadHeader";
 import Steps from "../components/Steps";
+
 const NAVY = "#1B2559";
 const BLUE = "#2E5AF0";
 
@@ -30,8 +25,6 @@ function WhatsAppIcon({ className }) {
     </svg>
   );
 }
-
-
 
 const tabs = [
   "Overview",
@@ -57,7 +50,7 @@ const notes = [
   },
   {
     title: "Financial discussion",
-    body: "Discussed approx. budget range \u20b92 - \u20b93 Lakh. Looking for EMI options.",
+    body: "Discussed approx. budget range ₹2 - ₹3 Lakh. Looking for EMI options.",
     by: "Vivek (Connector)",
     date: "30 Jul 2025, 11:20 AM",
     tag: "Financial",
@@ -105,172 +98,6 @@ function NoteIcon({ className }) {
     </svg>
   );
 }
-
-function TopBar() {
-  return (
-    <header className="flex flex-wrap items-center gap-3 border-b border-slate-200 bg-white px-4 py-3 sm:gap-4 sm:px-6">
-      {/* Sidebar toggle — wire this to your global sidebar's open/collapse handler */}
-      <button
-        className="shrink-0 text-slate-500 hover:text-slate-700"
-        aria-label="Toggle sidebar"
-      >
-        <List className="h-5 w-5" />
-      </button>
-
-      <div className="order-3 w-full flex-1 sm:order-none sm:w-auto">
-        <div className="flex w-full items-center gap-2 rounded-lg bg-slate-100 px-3.5 py-2.5 sm:max-w-md">
-          <Search className="h-4 w-4 shrink-0 text-slate-400" />
-          <input
-            placeholder="Search by name, phone, email, UHID..."
-            className="w-full bg-transparent text-[13.5px] text-slate-600 placeholder:text-slate-400 focus:outline-none"
-          />
-          <span className="hidden shrink-0 text-[12px] font-medium text-slate-400 sm:block">
-            ⌘ K
-          </span>
-        </div>
-      </div>
-
-      <div className="ml-auto flex items-center gap-4 sm:gap-5">
-        <button
-          className="relative text-slate-500 hover:text-slate-700"
-          aria-label="Notifications"
-        >
-          <Bell className="h-5 w-5" />
-          <span
-            className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full text-[9px] font-bold text-white"
-            style={{ backgroundColor: BLUE }}
-          >
-            2
-          </span>
-        </button>
-        <button className="hidden items-center gap-1 text-[13px] font-medium text-slate-500 hover:text-slate-700 sm:flex">
-          <Globe className="h-[18px] w-[18px]" />
-          EN
-          <ChevronDown className="h-3.5 w-3.5" />
-        </button>
-        <div className="flex items-center gap-2">
-          <div className="hidden text-right leading-tight sm:block">
-            <div
-              className="text-[13.5px] font-semibold"
-              style={{ color: NAVY }}
-            >
-              Vivek
-            </div>
-            <div className="text-[11px] text-slate-400">Connector</div>
-          </div>
-          <div
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-bold text-white"
-            style={{ backgroundColor: BLUE }}
-          >
-            V
-          </div>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-function ActionButton({ icon: Icon, iconClass, children }) {
-  return (
-    <button
-      className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3.5 py-2 text-[13px] font-semibold hover:bg-slate-50"
-      style={{ color: NAVY }}
-    >
-      <Icon className={`h-4 w-4 ${iconClass}`} />
-      {children}
-    </button>
-  );
-}
-
-function LeadHeader() {
-  return (
-    <div className="border-b border-slate-100 bg-white px-4 pb-5 pt-4 sm:px-6">
-      <a
-        href="#"
-        className="inline-flex items-center gap-1.5 text-[13px] font-semibold"
-        style={{ color: BLUE }}
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to All Leads
-      </a>
-
-      <div className="mt-4 flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
-        <div className="flex items-start gap-4">
-          <div
-            className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-[20px] font-bold"
-            style={{ backgroundColor: "#EAF0FF", color: BLUE }}
-          >
-            IS
-          </div>
-          <div>
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h1 className="text-[20px] font-bold" style={{ color: NAVY }}>
-                Inderjeet Singh
-              </h1>
-              <span className="rounded-full bg-orange-100 px-3 py-1 text-[11.5px] font-semibold text-orange-600">
-                Contacted
-              </span>
-            </div>
-            <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] text-slate-500">
-              <span>L-1012</span>
-              <span>•</span>
-              <span>UHID: UH-25-000123</span>
-              <span>•</span>
-              <span>Source: Google Ads</span>
-            </div>
-            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[13px]">
-              <span
-                className="flex items-center gap-1.5"
-                style={{ color: NAVY }}
-              >
-                <Phone className="h-3.5 w-3.5" style={{ color: BLUE }} />
-                +91 98765 43210
-              </span>
-              <span
-                className="flex items-center gap-1.5"
-                style={{ color: NAVY }}
-              >
-                <WhatsAppIcon className="h-3.5 w-3.5 text-green-500" />
-                WhatsApp
-              </span>
-              <span
-                className="flex items-center gap-1.5"
-                style={{ color: NAVY }}
-              >
-                <Mail className="h-3.5 w-3.5" style={{ color: BLUE }} />
-                inderjeet.singh@example.com
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <ActionButton icon={Phone} iconClass="text-blue-600">
-            Call
-          </ActionButton>
-          <ActionButton icon={WhatsAppIcon} iconClass="text-green-500">
-            WhatsApp
-          </ActionButton>
-          <ActionButton icon={Mail} iconClass="text-blue-600">
-            Email
-          </ActionButton>
-          <ActionButton icon={Pencil} iconClass="text-blue-600">
-            Edit
-          </ActionButton>
-          <button
-            className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-[13px] font-semibold text-white"
-            style={{ backgroundColor: BLUE }}
-          >
-            More
-            <ChevronDown className="h-4 w-4" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
 
 function Tabs({ active, setActive }) {
   return (
@@ -509,29 +336,23 @@ export default function LeadDetailPage() {
   return (
     <div
       className="min-h-screen bg-slate-50"
-      style={{
-        fontFamily: "'Baloo 2', ui-rounded, system-ui, sans-serif",
-      }}
+      style={{ fontFamily: "'Baloo 2', ui-rounded, system-ui, sans-serif" }}
     >
-      {/* Main Layout */}
       <div className="flex">
         {/* Sidebar */}
         <LifelinkrAsidebar />
 
         {/* Main Content */}
         <div className="flex-1 min-w-0">
-          <TopBar />
-
-          <LeadHeader />
+          <LifelinkrTopBar />
+          <LifelinkrLeadHeader />
 
           <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6">
             <div className="flex flex-col gap-5 lg:flex-row">
               {/* Left Section */}
               <div className="flex-1 space-y-5 min-w-0">
                 <Steps />
-
                 <Tabs active={activeTab} setActive={setActiveTab} />
-
                 {activeTab === "Notes" ? (
                   <NotesSection />
                 ) : (
