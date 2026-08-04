@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Steps from "../components/Steps";
+import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
 import {
   Menu,
   Search,
@@ -75,8 +76,6 @@ const sidebarSections = [
   },
 ];
 
-
-
 const tabs = [
   "Overview",
   "Timeline",
@@ -131,8 +130,6 @@ const timelineEvents = [
   },
 ];
 
-
-
 function SidebarItem({ item }) {
   const Icon = item.icon;
   return (
@@ -145,7 +142,10 @@ function SidebarItem({ item }) {
           : "text-gray-600 hover:bg-gray-50",
       ].join(" ")}
     >
-      <Icon size={16} className={item.active ? "text-blue-600" : "text-gray-400"} />
+      <Icon
+        size={16}
+        className={item.active ? "text-blue-600" : "text-gray-400"}
+      />
       <span className="truncate">{item.label}</span>
     </button>
   );
@@ -162,7 +162,6 @@ function QuickActionButton({ icon: Icon, label }) {
 
 export default function LeadDetailDashboard() {
   const [activeTab, setActiveTab] = useState("Timeline");
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-gray-800 font-sans">
@@ -223,64 +222,7 @@ export default function LeadDetailDashboard() {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside
-          className={[
-            "w-60 shrink-0 bg-white border-r border-gray-200 flex flex-col",
-            "fixed lg:sticky top-16 left-0 h-[calc(100vh-64px)] z-20 transition-transform duration-200",
-            mobileNavOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
-          ].join(" ")}
-        >
-          <div className="p-3">
-            <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-3">
-              <Search size={14} className="text-gray-400" />
-              <span className="text-[13px] text-gray-400 ml-2">Search</span>
-              <span className="ml-auto text-[11px] text-gray-400">⌘ K</span>
-            </div>
-            <div className="flex bg-gray-100 rounded-lg p-1 mb-3">
-              <button className="flex-1 flex items-center justify-center gap-1.5 bg-white shadow-sm rounded-md py-1.5 text-[12.5px] font-medium text-gray-800">
-                <ListChecks size={14} />
-                Menu
-              </button>
-              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 text-[12.5px] text-gray-500">
-                <Contact size={14} />
-                Account
-              </button>
-            </div>
-          </div>
-          <nav className="flex-1 overflow-y-auto px-3 space-y-4 pb-3">
-            {sidebarSections.map((section, i) => (
-              <div key={i}>
-                {section.heading && (
-                  <div className="flex items-center gap-2 px-2.5 py-1.5 mb-1 text-blue-600 font-medium text-[13px]">
-                    <BarChart3 size={16} className="text-blue-600" />
-                    {section.heading}
-                  </div>
-                )}
-                <div className="space-y-0.5">
-                  {section.items.map((item) => (
-                    <SidebarItem key={item.label} item={item} />
-                  ))}
-                </div>
-                {i < sidebarSections.length - 1 && (
-                  <div className="h-px bg-gray-100 mt-3" />
-                )}
-              </div>
-            ))}
-          </nav>
-          <div className="p-3 border-t border-gray-100">
-            <button className="w-full flex items-center justify-center gap-2 text-[12.5px] text-gray-500 bg-gray-50 hover:bg-gray-100 rounded-lg py-2">
-              <ChevronLeft size={14} />
-              Collapse
-            </button>
-          </div>
-        </aside>
-
-        {mobileNavOpen && (
-          <div
-            className="fixed inset-0 bg-black/30 z-10 lg:hidden"
-            onClick={() => setMobileNavOpen(false)}
-          />
-        )}
+        <LifelinkrAsidebar />
 
         {/* Main content */}
         <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-5">
@@ -306,7 +248,8 @@ export default function LeadDetailDashboard() {
                     </span>
                   </div>
                   <div className="text-[12.5px] text-gray-400 mt-0.5">
-                    L-1006 &nbsp;·&nbsp; UHID: UHI-26-000123 &nbsp;·&nbsp; Source: Google Ads
+                    L-1006 &nbsp;·&nbsp; UHID: UHI-26-000123 &nbsp;·&nbsp;
+                    Source: Google Ads
                   </div>
                   <div className="flex items-center gap-4 mt-1.5 text-[12.5px] text-gray-500">
                     <span className="flex items-center gap-1.5">
@@ -353,7 +296,7 @@ export default function LeadDetailDashboard() {
             {/* Left / center column */}
             <div className="flex-1 min-w-0 space-y-4">
               {/* Lead journey */}
-            <Steps />
+              <Steps />
 
               {/* Tabs + timeline */}
               <div className="bg-white border border-gray-200 rounded-xl">
@@ -408,7 +351,9 @@ export default function LeadDetailDashboard() {
                                 <div className="text-[13.5px] font-medium text-gray-900">
                                   {ev.title}
                                 </div>
-                                <div className="text-[12.5px] text-gray-500">{ev.desc}</div>
+                                <div className="text-[12.5px] text-gray-500">
+                                  {ev.desc}
+                                </div>
                               </div>
                               <div className="text-[11.5px] text-gray-400 sm:text-right shrink-0 whitespace-nowrap">
                                 <div>{ev.time}</div>
@@ -474,7 +419,9 @@ export default function LeadDetailDashboard() {
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-gray-500">Next Follow-up</dt>
-                    <dd className="text-blue-600 font-medium">Today, 04:00 PM</dd>
+                    <dd className="text-blue-600 font-medium">
+                      Today, 04:00 PM
+                    </dd>
                   </div>
                 </dl>
               </div>
@@ -499,7 +446,9 @@ export default function LeadDetailDashboard() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500">Reminder</span>
-                    <span className="text-gray-800 font-medium">in 15m before</span>
+                    <span className="text-gray-800 font-medium">
+                      in 15m before
+                    </span>
                   </div>
                 </div>
                 <button className="w-full flex items-center justify-center gap-1.5 border border-gray-200 rounded-lg py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
@@ -515,7 +464,10 @@ export default function LeadDetailDashboard() {
                 </div>
                 <div className="space-y-2">
                   <QuickActionButton icon={Plus} label="Add Note" />
-                  <QuickActionButton icon={CalendarPlus} label="Schedule Appointment" />
+                  <QuickActionButton
+                    icon={CalendarPlus}
+                    label="Schedule Appointment"
+                  />
                   <QuickActionButton icon={CheckSquare} label="Add Task" />
                 </div>
               </div>
