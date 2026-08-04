@@ -160,12 +160,7 @@ const Home = () => {
           to="/lifelinkr-document"
           title="Lifelinkr Document Page"
           theme="sky"
-        />
-        <PortalCard
-          to="/lifelinkr-history"
-          title="Lifelinkr History Page"
-          theme="sky"
-        />
+             />
       </div>
     </div>
   );
