@@ -162,10 +162,16 @@ const Home = () => {
           theme="sky"
              />
              <PortalCard
+          to="/lifelinkr-task"
+          title="Lifelinkr task Page"
+          theme="sky"
+             />
+             <PortalCard
           to="/lifelinkr-history"
           title="Lifelinkr history Page"
           theme="sky"
              />
+           
       </div>
     </div>
   );

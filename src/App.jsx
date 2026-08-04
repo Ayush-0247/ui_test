@@ -30,6 +30,7 @@ import LifelinkrTimeline from "./pages/LifrlinkrTimeline";
 import LifelinkrAsidebar from "./components/LifelinkrAsidebar";
 import LifelinkrNotes from "./pages/LifelinkrNotes";
 import LifelinkrDocument from "./pages/LifelinkrDocument";
+import LifelinkrTask from "./pages/LifelinkrTask";
 import LifelinkrHistory from "./pages/LifelinkrHistory";
 // ci\cd pipiline test
 
@@ -70,6 +71,7 @@ export default function App() {
       <Route path="/lifelinkr-asidebar" element={<LifelinkrAsidebar />} />
       <Route path="/lifelinkr-notes" element={<LifelinkrNotes />} />
       <Route path="/lifelinkr-document" element={<LifelinkrDocument />} />
+      <Route path="/lifelinkr-task" element={<LifelinkrTask />} />
       <Route path="/lifelinkr-history" element={<LifelinkrHistory />} />
     </Routes>
   );

@@ -1,7 +1,8 @@
+
 import {
-
+  BarChart3,
+  Menu,
   Search,
-
   Bell,
   Globe,
   ChevronDown,
@@ -10,468 +11,475 @@ import {
   MessageCircle,
   Mail,
   Pencil,
-  CheckSquare,
-  Upload,
-  ChevronRight,
+  LayoutGrid,
+ 
+
+  Calendar,
+  StickyNote,
+  FileText,
+  ClipboardList,
+  History as HistoryIcon,
   Filter,
-  Plus,
-  ClipboardCheck,
-  Circle,
-  CheckCircle2,
-  AlertCircle,
   MoreVertical,
-  CalendarClock,
-  ClipboardEdit,
+  CheckCircle2,
+  
+  CalendarPlus,
+  ListPlus,
   Send,
+  UploadCloud,
 } from "lucide-react";
+import Steps from "../components/Steps";
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
 
-import Steps from "../components/Steps";
 
 
 const tabs = [
-  "Overview",
-  "Timeline",
-  "Interactions",
-  "Appointments",
-  "Notes",
-  "Documents",
-  "Tasks",
-  "History",
+  { label: "Overview", icon: LayoutGrid },
+  { label: "Timeline", icon: Calendar },
+  { label: "Interactions", icon: MessageCircle },
+  { label: "Appointments", icon: Calendar },
+  { label: "Notes", icon: StickyNote },
+  { label: "Documents", icon: FileText },
+  { label: "Tasks", icon: ClipboardList },
+  { label: "History", icon: HistoryIcon, active: true },
 ];
 
-const taskStats = [
-  { icon: ClipboardCheck, label: "Total Tasks", value: 8, bg: "bg-blue-50", fg: "text-blue-600" },
-  { icon: Circle, label: "To Do", value: 3, bg: "bg-blue-50", fg: "text-blue-500" },
-  { icon: ClipboardEdit, label: "In Progress", value: 2, bg: "bg-amber-50", fg: "text-amber-500" },
-  { icon: CheckCircle2, label: "Completed", value: 2, bg: "bg-green-50", fg: "text-green-600" },
-  { icon: AlertCircle, label: "Overdue", value: 1, bg: "bg-red-50", fg: "text-red-500" },
+const historyRows = [
+  {
+    date: "30 Jul 2025",
+    time: "10:30 AM",
+    activity: "Stage Changed",
+    icon: Calendar,
+    details: 'Lead stage changed from "Query" to "Contacted"',
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "System",
+    tagColor: "bg-gray-100 text-gray-600",
+  },
+  {
+    date: "30 Jul 2025",
+    time: "10:30 AM",
+    activity: "Call Logged",
+    icon: Phone,
+    details: "Initial call made to the lead. Discussed IVF treatment and next steps.",
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "Call",
+    tagColor: "bg-emerald-50 text-emerald-700",
+  },
+  {
+    date: "30 Jul 2025",
+    time: "10:45 AM",
+    activity: "WhatsApp Message",
+    icon: MessageCircle,
+    details: "Brochure and price list shared with lead.",
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "WhatsApp",
+    tagColor: "bg-emerald-50 text-emerald-700",
+  },
+  {
+    date: "30 Jul 2025",
+    time: "11:02 AM",
+    activity: "Note Added",
+    icon: StickyNote,
+    details: "Lead is interested in IVF. Prefers evening appointments.",
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "Manual",
+    tagColor: "bg-purple-50 text-purple-700",
+  },
+  {
+    date: "30 Jul 2025",
+    time: "04:00 PM",
+    activity: "Next Follow-up Set",
+    icon: Calendar,
+    details: "Follow-up call scheduled for 02 Aug 2025 at 11:00 AM",
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "Manual",
+    tagColor: "bg-purple-50 text-purple-700",
+  },
+  {
+    date: "02 Aug 2025",
+    time: "10:15 AM",
+    activity: "Lead Information Updated",
+    icon: Pencil,
+    details: 'Updated lead value to "High"',
+    by: "Dr. Mehta",
+    byRole: "(Fertility Specialist)",
+    tag: "Manual",
+    tagColor: "bg-purple-50 text-purple-700",
+    avatarColor: "bg-purple-500",
+  },
+  {
+    date: "02 Aug 2025",
+    time: "11:00 AM",
+    activity: "Appointment Scheduled",
+    icon: Calendar,
+    details: "Appointment scheduled for 08 Aug 2025 at 02:00 PM with Dr. Mehta",
+    by: "Dr. Mehta",
+    byRole: "(Fertility Specialist)",
+    tag: "Appointment",
+    tagColor: "bg-amber-50 text-amber-700",
+    avatarColor: "bg-purple-500",
+  },
+  {
+    date: "02 Aug 2025",
+    time: "11:05 AM",
+    activity: "Document Uploaded",
+    icon: FileText,
+    details: "Lab test report uploaded by lead.",
+    by: "Vivek",
+    byRole: "(Connector)",
+    tag: "Upload",
+    tagColor: "bg-gray-100 text-gray-600",
+  },
+  {
+    date: "02 Aug 2025",
+    time: "02:00 PM",
+    activity: "Task Created",
+    icon: CheckCircle2,
+    details: 'Task "Prepare treatment plan" created and assigned to Dr. Mehta.',
+    by: "Dr. Mehta",
+    byRole: "(Fertility Specialist)",
+    tag: "Task",
+    tagColor: "bg-gray-100 text-gray-600",
+    avatarColor: "bg-purple-500",
+  },
 ];
 
-function AssigneeBadge({ initials, name, role }) {
+
+
+function SummaryRow({ label, children }) {
   return (
-    <div className="flex items-center gap-2">
-      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-[10px] font-semibold text-white">
-        {initials}
-      </span>
-      <div className="leading-tight">
-        <div className="text-[13px] text-gray-800">{name}</div>
-        {role && <div className="text-[11px] text-gray-400">{role}</div>}
-      </div>
+    <div className="flex items-center justify-between py-2">
+      <span className="text-sm text-gray-400">{label}</span>
+      <span className="text-sm text-gray-800">{children}</span>
     </div>
   );
 }
 
-function PriorityPill({ level }) {
-  const styles = {
-    High: "bg-red-50 text-red-500",
-    Medium: "bg-amber-50 text-amber-600",
-    Low: "bg-green-50 text-green-600",
-  };
+function QuickAction({ icon: Icon, label, color }) {
   return (
-    <span className={`inline-block rounded px-2.5 py-1 text-[11px] font-medium ${styles[level]}`}>
-      {level}
-    </span>
+    <button
+      className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-medium border ${color}`}
+    >
+      <span className="flex items-center gap-2">
+        <Icon size={16} />
+        {label}
+      </span>
+    </button>
   );
 }
 
-function StatusPill({ status }) {
-  const styles = {
-    "To Do": "bg-blue-50 text-blue-500",
-    "In Progress": "bg-amber-50 text-amber-600",
-    Completed: "bg-green-50 text-green-600",
-  };
+export default function LeadHistoryPage() {
   return (
-    <span className={`inline-block rounded px-2.5 py-1 text-[11px] font-medium ${styles[status]}`}>
-      {status}
-    </span>
-  );
-}
-
-const tasksData = [
-  {
-    name: "Call for follow-up",
-    desc: "Follow up call to discuss treatment options.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "30 Jul 2025",
-    time: "04:00 PM",
-    overdue: true,
-    priority: "High",
-    status: "To Do",
-    checked: false,
-  },
-  {
-    name: "Share IVF brochure",
-    desc: "Send brochure and price list over WhatsApp.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "31 Jul 2025",
-    time: "11:00 AM",
-    priority: "Medium",
-    status: "To Do",
-    checked: false,
-  },
-  {
-    name: "Prepare treatment plan",
-    desc: "Create a personalized treatment plan.",
-    assignee: { initials: "DM", name: "Dr. Mehta", role: "(Fertility Specialist)" },
-    due: "02 Aug 2025",
-    time: "10:30 AM",
-    priority: "High",
-    status: "In Progress",
-    checked: false,
-  },
-  {
-    name: "Verify insurance details",
-    desc: "Check and verify insurance coverage.",
-    assignee: { initials: null, name: "Lab Team", role: null },
-    due: "02 Aug 2025",
-    time: "02:00 PM",
-    priority: "Low",
-    status: "In Progress",
-    checked: false,
-  },
-  {
-    name: "Collect initial documents",
-    desc: "Aadhaar, reports and previous medical history.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "29 Jul 2025",
-    time: "01:00 PM",
-    priority: "Medium",
-    status: "Completed",
-    checked: true,
-  },
-  {
-    name: "Welcome message",
-    desc: "Send welcome message and thank you note.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "29 Jul 2025",
-    time: "11:30 AM",
-    priority: "Low",
-    status: "Completed",
-    checked: true,
-  },
-  {
-    name: "Schedule baseline scan",
-    desc: "Book baseline scan with Dr. Mehta.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "05 Aug 2025",
-    time: "10:00 AM",
-    priority: "High",
-    status: "To Do",
-    checked: false,
-  },
-  {
-    name: "Payment follow-up",
-    desc: "Follow up on the advance payment.",
-    assignee: { initials: "V", name: "Vivek", role: "(Connector)" },
-    due: "06 Aug 2025",
-    time: "04:00 PM",
-    priority: "Medium",
-    status: "To Do",
-    checked: false,
-  },
-];
-
-export default function LifelinkrLeadUI() {
-  return (
-    <div className="flex h-screen w-full bg-gray-50 text-gray-900" style={{ fontFamily: "'Inter', ui-sans-serif, system-ui" }}>
-      {/* Sidebar */}
-     <LifelinkrAsidebar />
-
-      {/* Main */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Topbar */}
-        <header className="flex items-center gap-4 border-b border-gray-200 bg-white px-6 py-3">
-          <div className="flex flex-1 max-w-xl items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-gray-400">
-            <Search className="h-4 w-4" />
-            <span className="flex-1">Search by name, phone, email, UHID...</span>
-            <span className="rounded border border-gray-200 px-1.5 py-0.5 text-[10px] text-gray-400">⌘K</span>
+    <div className="min-h-screen bg-gray-50 text-gray-900 flex flex-col text-[13px]">
+      {/* Top bar */}
+      <header className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-4 shrink-0">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <BarChart3 size={22} className="text-blue-600" />
+            <span className="font-bold text-gray-900 tracking-tight text-[15px]">
+              LIFELINKR
+            </span>
           </div>
-          <div className="ml-auto flex items-center gap-5">
-            <div className="relative">
-              <Bell className="h-5 w-5 text-gray-500" />
-              <span className="absolute -right-1.5 -top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-blue-600 text-[8px] text-white">2</span>
+          <Menu size={18} className="text-gray-400" />
+        </div>
+
+        <div className="flex-1 max-w-md mx-6">
+          <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-400">
+            <Search size={15} />
+            <span className="flex-1 text-[13px]">
+              Search by name, phone, email, UHID...
+            </span>
+            <span className="text-[11px] border border-gray-300 rounded px-1 text-gray-400">
+              ⌘K
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-5">
+          <div className="relative">
+            <Bell size={18} className="text-gray-500" />
+            <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+              3
+            </span>
+          </div>
+          <div className="flex items-center gap-1 text-gray-500">
+            <Globe size={16} />
+            <span className="text-[12px] font-medium">EN</span>
+            <ChevronDown size={12} />
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-[12px]">
+              V
             </div>
-            <div className="flex items-center gap-1 text-gray-500">
-              <Globe className="h-4.5 w-4.5" />
-              <span className="text-xs font-medium">EN</span>
-              <ChevronDown className="h-3 w-3" />
+            <div className="leading-tight">
+              <p className="font-medium text-gray-800 text-[13px]">Vivek</p>
+              <p className="text-[11px] text-gray-400">Connector</p>
             </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex flex-1 min-h-0">
+        {/* Sidebar */}
+       <LifelinkrAsidebar />
+
+        {/* Main content */}
+        <main className="flex-1 overflow-y-auto p-6">
+          {/* Back link + actions */}
+          <div className="flex items-center justify-between mb-4">
+            <button className="flex items-center gap-2 text-gray-500 text-[13px] hover:text-gray-700">
+              <ArrowLeft size={15} /> Back to All Leads
+            </button>
             <div className="flex items-center gap-2">
-              <div className="text-right leading-tight">
-                <div className="text-[13px] font-semibold text-gray-800">Vivek</div>
-                <div className="text-[11px] text-gray-400">Connector</div>
-              </div>
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-xs font-semibold text-white">
-                V
-              </div>
+              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
+                <Phone size={14} /> Call
+              </button>
+              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
+                <MessageCircle size={14} className="text-green-500" /> WhatsApp
+              </button>
+              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
+                <Mail size={14} /> Email
+              </button>
+              <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-700 bg-white">
+                <Pencil size={14} /> Edit
+              </button>
+              <button className="flex items-center gap-1.5 bg-blue-600 text-white rounded-lg px-4 py-1.5 text-[13px] font-medium">
+                More <ChevronDown size={14} />
+              </button>
             </div>
           </div>
-        </header>
-
-        {/* Content */}
-        <main className="flex-1 overflow-y-auto px-6 py-5">
-          <button className="mb-3 flex items-center gap-1.5 text-sm font-medium text-blue-600">
-            <ArrowLeft className="h-4 w-4" /> Back to All Leads
-          </button>
 
           {/* Lead header */}
-          <div className="mb-4 flex items-start justify-between">
-            <div className="flex gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-lg font-semibold text-blue-600">
-                IS
-              </div>
-              <div>
-                <div className="flex items-center gap-3">
-                  <h1 className="text-xl font-bold text-gray-900">Inderjeet Singh</h1>
-                  <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-500">
-                    Contacted
-                  </span>
-                </div>
-                <div className="mt-1 text-[13px] text-gray-400">
-                  L-1012 &nbsp;•&nbsp; UHID: UH-25-000123 &nbsp;•&nbsp; Source: Google Ads
-                </div>
-                <div className="mt-2 flex items-center gap-5 text-[13px] text-gray-600">
-                  <span className="flex items-center gap-1.5">
-                    <Phone className="h-3.5 w-3.5 text-blue-500" /> +91 98765 43210
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <MessageCircle className="h-3.5 w-3.5 text-green-500" /> WhatsApp
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Mail className="h-3.5 w-3.5 text-blue-400" /> inderjeet.singh@example.com
-                  </span>
-                </div>
-              </div>
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-14 h-14 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center font-semibold text-lg">
+              IS
             </div>
-
-            <div className="flex items-center gap-2.5">
-              <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-[13px] font-medium text-gray-700">
-                <Phone className="h-3.5 w-3.5 text-gray-500" /> Call
-              </button>
-              <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-[13px] font-medium text-gray-700">
-                <MessageCircle className="h-3.5 w-3.5 text-gray-500" /> WhatsApp
-              </button>
-              <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-[13px] font-medium text-gray-700">
-                <Mail className="h-3.5 w-3.5 text-gray-500" /> Email
-              </button>
-              <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3.5 py-2 text-[13px] font-medium text-gray-700">
-                <Pencil className="h-3.5 w-3.5 text-gray-500" /> Edit
-              </button>
-              <button className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-[13px] font-medium text-white">
-                More <ChevronDown className="h-3.5 w-3.5" />
-              </button>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl font-semibold text-gray-900">
+                  Inderjeet Singh
+                </h1>
+                <span className="bg-orange-100 text-orange-600 text-[11px] font-medium px-2 py-0.5 rounded-full">
+                  Contacted
+                </span>
+              </div>
+              <p className="text-gray-400 text-[12px] mt-0.5">
+                L-1012 &nbsp;•&nbsp; UHID: UH-25-000123 &nbsp;•&nbsp; Source:
+                Google Ads
+              </p>
+              <div className="flex items-center gap-5 mt-1.5 text-[12px] text-gray-600">
+                <span className="flex items-center gap-1.5">
+                  <Phone size={13} /> +91 98765 43210
+                </span>
+                <span className="flex items-center gap-1.5 text-green-600">
+                  <MessageCircle size={13} /> WhatsApp
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Mail size={13} /> inderjeet.singh@example.com
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="flex gap-5">
+          <div className="grid grid-cols-[1fr_300px] gap-5">
             {/* Left column */}
-            <div className="flex-1 min-w-0">
-              {/* Lead Journey */}
-             <Steps />
+            <div>
+              {/* Lead journey card */}
+              <div className=" p-5 mb-4">
+            <Steps />
+
+                <div className="flex items-center gap-4 mt-6 pt-4 border-t border-gray-100">
+                  <span className="text-[13px] text-gray-500 shrink-0">
+                    Journey Progress
+                  </span>
+                  <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-full bg-blue-600 rounded-full" style={{ width: "22%" }} />
+                  </div>
+                  <span className="text-[12px] text-gray-500 shrink-0">
+                    Completed 2 / 9 stages
+                  </span>
+                  <span className="text-[12px] text-gray-500 shrink-0">
+                    22% Complete
+                  </span>
+                </div>
+              </div>
 
               {/* Tabs */}
-              <div className="mb-5 flex items-center gap-6 border-b border-gray-200 bg-white px-1 rounded-t-xl">
-                {tabs.map((t) => (
+              <div className="flex items-center gap-6 border-b border-gray-200 mb-4 overflow-x-auto">
+                {tabs.map((tab) => (
                   <button
-                    key={t}
-                    className={`border-b-2 px-1 py-3 text-[13.5px] font-medium ${
-                      t === "Tasks"
+                    key={tab.label}
+                    className={`pb-2.5 text-[13px] font-medium whitespace-nowrap border-b-2 ${
+                      tab.active
                         ? "border-blue-600 text-blue-600"
                         : "border-transparent text-gray-500 hover:text-gray-700"
                     }`}
                   >
-                    {t}
+                    {tab.label}
                   </button>
                 ))}
               </div>
 
-              {/* Tasks card */}
-              <div className="rounded-xl border border-gray-200 bg-white p-5">
-                <div className="mb-4 flex items-start justify-between">
-                  <div>
-                    <h3 className="text-[15px] font-semibold text-gray-800">Tasks</h3>
-                    <p className="text-[13px] text-gray-400">All tasks and to-dos related to this lead.</p>
+              {/* History card */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="font-medium text-gray-800">History</p>
+                </div>
+                <p className="text-gray-400 text-[12px] mb-4">
+                  Complete activity history and changes for this lead.
+                </p>
+
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex-1 flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-400">
+                    <Search size={14} />
+                    <span className="text-[13px]">Search history...</span>
                   </div>
-                  <div className="flex items-center gap-2.5">
-                    <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-[13px] text-gray-600">
-                      All Tasks <ChevronDown className="h-3.5 w-3.5" />
-                    </button>
-                    <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-3 py-1.5 text-[13px] text-gray-600">
-                      <Filter className="h-3.5 w-3.5" /> Filter
-                    </button>
-                    <button className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-3.5 py-1.5 text-[13px] font-medium text-white">
-                      <Plus className="h-3.5 w-3.5" /> Add Task
-                    </button>
-                  </div>
+                  <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-1.5 text-[13px] font-medium text-gray-600">
+                    <Filter size={14} /> Filter
+                  </button>
                 </div>
 
-                {/* Stat cards */}
-                <div className="mb-5 grid grid-cols-5 gap-3">
-                  {taskStats.map(({ icon: Icon, label, value, bg, fg }) => (
-                    <div key={label} className="flex items-center gap-2.5 rounded-lg border border-gray-200 px-3.5 py-3">
-                      <div className={`flex h-8 w-8 items-center justify-center rounded-md ${bg}`}>
-                        <Icon className={`h-4 w-4 ${fg}`} />
-                      </div>
-                      <div>
-                        <div className="text-[12px] text-gray-400">{label}</div>
-                        <div className="text-[16px] font-bold text-gray-800">{value}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Table */}
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse text-left text-[13px]">
-                    <thead>
-                      <tr className="border-b border-gray-100 text-[12px] text-gray-400">
-                        <th className="w-8 py-2.5 font-medium"></th>
-                        <th className="py-2.5 font-medium">Task Name</th>
-                        <th className="py-2.5 font-medium">Description</th>
-                        <th className="py-2.5 font-medium">Assigned To</th>
-                        <th className="py-2.5 font-medium">Due Date</th>
-                        <th className="py-2.5 font-medium">Priority</th>
-                        <th className="py-2.5 font-medium">Status</th>
-                        <th className="py-2.5 pr-1 text-right font-medium">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tasksData.map((t) => (
-                        <tr key={t.name} className="border-b border-gray-50">
-                          <td className="py-3">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="text-[11px] uppercase tracking-wide text-gray-400 border-b border-gray-100">
+                      <th className="font-medium py-2 pr-3 w-[110px]">Date & Time</th>
+                      <th className="font-medium py-2 pr-3 w-[180px]">Activity</th>
+                      <th className="font-medium py-2 pr-3">Details</th>
+                      <th className="font-medium py-2 pr-3 w-[130px]">By</th>
+                      <th className="font-medium py-2 pr-3 w-[110px]">Source / Type</th>
+                      <th className="font-medium py-2 w-[24px]"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {historyRows.map((row, i) => (
+                      <tr
+                        key={i}
+                        className="border-b border-gray-50 align-top last:border-0"
+                      >
+                        <td className="py-3 pr-3 text-gray-500 text-[12px] whitespace-nowrap">
+                          {row.date}
+                          <br />
+                          {row.time}
+                        </td>
+                        <td className="py-3 pr-3">
+                          <span className="flex items-center gap-1.5 font-medium text-gray-800 text-[13px]">
+                            <row.icon size={13} className="text-blue-500 shrink-0" />
+                            {row.activity}
+                          </span>
+                        </td>
+                        <td className="py-3 pr-3 text-gray-500 text-[12px] max-w-[260px]">
+                          {row.details}
+                        </td>
+                        <td className="py-3 pr-3">
+                          <span className="flex items-center gap-1.5">
                             <span
-                              className={`flex h-4 w-4 items-center justify-center rounded ${
-                                t.checked ? "bg-green-600" : "border border-gray-300"
+                              className={`w-5 h-5 rounded-full text-white text-[10px] font-semibold flex items-center justify-center shrink-0 ${
+                                row.avatarColor || "bg-blue-500"
                               }`}
                             >
-                              {t.checked && <span className="text-[10px] leading-none text-white">✓</span>}
+                              {row.by.charAt(0)}
                             </span>
-                          </td>
-                          <td className={`py-3 pr-2 font-medium ${t.checked ? "text-gray-400 line-through" : "text-gray-800"}`}>
-                            {t.name}
-                          </td>
-                          <td className="py-3 pr-2 text-gray-500">{t.desc}</td>
-                          <td className="py-3 pr-2">
-                            <AssigneeBadge initials={t.assignee.initials} name={t.assignee.name} role={t.assignee.role} />
-                          </td>
-                          <td className="py-3 pr-2">
-                            <div className="flex items-center gap-1.5 whitespace-nowrap text-gray-700">
-                              {t.due}
-                              {t.overdue && (
-                                <span className="rounded bg-red-50 px-1.5 py-0.5 text-[10px] font-medium text-red-500">
-                                  Overdue
-                                </span>
-                              )}
-                            </div>
-                            <div className="text-[11.5px] text-gray-400">{t.time}</div>
-                          </td>
-                          <td className="py-3 pr-2">
-                            <PriorityPill level={t.priority} />
-                          </td>
-                          <td className="py-3 pr-2">
-                            <StatusPill status={t.status} />
-                          </td>
-                          <td className="py-3 text-right">
-                            <MoreVertical className="ml-auto h-4 w-4 text-gray-400" />
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                            <span className="text-[12px]">
+                              {row.by}
+                              <br />
+                              <span className="text-gray-400 text-[11px]">
+                                {row.byRole}
+                              </span>
+                            </span>
+                          </span>
+                        </td>
+                        <td className="py-3 pr-3">
+                          <span
+                            className={`text-[11px] font-medium px-2 py-0.5 rounded ${row.tagColor}`}
+                          >
+                            {row.tag}
+                          </span>
+                        </td>
+                        <td className="py-3 text-gray-300">
+                          <MoreVertical size={15} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
 
-                <div className="mt-4 flex justify-center">
-                  <button className="flex items-center gap-1.5 rounded-lg border border-gray-200 px-4 py-2 text-[13px] font-medium text-gray-600">
-                    Load More <ChevronDown className="h-3.5 w-3.5" />
+                <div className="flex justify-center mt-4">
+                  <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-4 py-1.5 text-[13px] font-medium text-gray-600">
+                    Load More <ChevronDown size={14} />
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Right column */}
-            <div className="w-[280px] shrink-0 space-y-5">
-              {/* Lead Summary */}
-              <div className="rounded-xl border border-gray-200 bg-white p-4">
-                <h3 className="mb-3 text-[14px] font-semibold text-gray-800">Lead Summary</h3>
-                <div className="space-y-2.5 text-[13px]">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Current Stage</span>
-                    <span className="rounded bg-orange-50 px-2 py-0.5 text-[11px] font-semibold text-orange-500">Contacted</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Assigned To</span>
-                    <span className="flex items-center gap-1.5 font-medium text-gray-700">
-                      <span className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[9px] text-white">V</span>
+            <div className="space-y-4">
+              {/* Lead summary */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <p className="font-medium text-gray-800 mb-1">Lead Summary</p>
+                <div className="divide-y divide-gray-50">
+                  <SummaryRow label="Current Stage">
+                    <span className="bg-orange-100 text-orange-600 text-[11px] font-medium px-2 py-0.5 rounded-full">
+                      Contacted
+                    </span>
+                  </SummaryRow>
+                  <SummaryRow label="Assigned To">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[9px] flex items-center justify-center">
+                        V
+                      </span>
                       Vivek
                     </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Lead Score</span>
-                    <span className="text-gray-500">--</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Lead Value</span>
-                    <span className="rounded bg-green-50 px-2 py-0.5 text-[11px] font-semibold text-green-600">High</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">First Enquiry</span>
-                    <span className="text-gray-700">30 Jul, 2025</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Last Contacted</span>
-                    <span className="text-gray-700">30 Jul, 2025</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Next Follow-up</span>
-                    <span className="font-semibold text-red-500">Today, 04:00 PM</span>
-                  </div>
+                  </SummaryRow>
+                  <SummaryRow label="Lead Score">--</SummaryRow>
+                  <SummaryRow label="Lead Value">
+                    <span className="bg-green-100 text-green-700 text-[11px] font-medium px-2 py-0.5 rounded-full">
+                      High
+                    </span>
+                  </SummaryRow>
+                  <SummaryRow label="First Enquiry">30 Jul, 2025</SummaryRow>
+                  <SummaryRow label="Last Contacted">30 Jul, 2025</SummaryRow>
+                  <SummaryRow label="Next Follow-up">
+                    <span className="text-red-500 font-medium">
+                      Today, 04:00 PM
+                    </span>
+                  </SummaryRow>
                 </div>
               </div>
 
-              {/* Next Action */}
-              <div className="rounded-xl border border-gray-200 bg-white p-4">
-                <h3 className="mb-3 text-[14px] font-semibold text-gray-800">Next Action</h3>
-                <div className="mb-3 flex items-center gap-2 text-[13.5px] font-semibold text-red-500">
-                  <CalendarClock className="h-4 w-4" /> Call Today at 04:00 PM
-                </div>
-                <div className="space-y-2.5 text-[13px]">
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Assigned To</span>
-                    <span className="flex items-center gap-1.5 font-medium text-gray-700">
-                      <span className="flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[9px] text-white">V</span>
-                      Vivek
+              {/* Next action */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <p className="font-medium text-gray-800 mb-2">Next Action</p>
+                <p className="text-red-500 font-medium text-[13px] mb-3">
+                  Call Today at 04:00 PM
+                </p>
+                <SummaryRow label="Assigned To">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-4 h-4 rounded-full bg-blue-600 text-white text-[9px] flex items-center justify-center">
+                      V
                     </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-gray-400">Reminder</span>
-                    <span className="text-gray-700">in 15m before</span>
-                  </div>
-                </div>
-                <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 py-2 text-[13px] font-semibold text-blue-600">
-                  <CheckSquare className="h-3.5 w-3.5" /> Mark as Completed
+                    Vivek
+                  </span>
+                </SummaryRow>
+                <SummaryRow label="Reminder">in 15m before</SummaryRow>
+                <button className="w-full flex items-center justify-center gap-2 border border-gray-200 rounded-lg py-2 mt-3 text-[13px] font-medium text-gray-700">
+                  <CheckCircle2 size={15} /> Mark as Completed
                 </button>
               </div>
 
-              {/* Quick Actions */}
-              <div className="rounded-xl border border-gray-200 bg-white p-4">
-                <h3 className="mb-3 text-[14px] font-semibold text-gray-800">Quick Actions</h3>
+              {/* Quick actions */}
+              <div className="bg-white border border-gray-200 rounded-xl p-5">
+                <p className="font-medium text-gray-800 mb-3">Quick Actions</p>
                 <div className="space-y-2">
-                  {[
-                    { label: "Add Note", icon: ChevronRight },
-                    { label: "Schedule Appointment", icon: CalendarClock },
-                    { label: "Add Task", icon: CheckSquare },
-                    { label: "Send WhatsApp", icon: Send },
-                    { label: "Upload Document", icon: Upload },
-                  ].map(({ label, icon: Icon }) => (
-                    <button
-                      key={label}
-                      className="flex w-full items-center justify-between rounded-lg bg-blue-50 px-3.5 py-2.5 text-[13px] font-semibold text-blue-600"
-                    >
-                      {label}
-                      <Icon className="h-3.5 w-3.5" />
-                    </button>
-                  ))}
+                  <QuickAction icon={StickyNote} label="Add Note" color="border-blue-100 bg-blue-50 text-blue-600" />
+                  <QuickAction icon={CalendarPlus} label="Schedule Appointment" color="border-blue-100 bg-blue-50 text-blue-600" />
+                  <QuickAction icon={ListPlus} label="Add Task" color="border-blue-100 bg-blue-50 text-blue-600" />
+                  <QuickAction icon={Send} label="Send WhatsApp" color="border-blue-100 bg-blue-50 text-blue-600" />
+                  <QuickAction icon={UploadCloud} label="Upload Document" color="border-blue-100 bg-blue-50 text-blue-600" />
                 </div>
               </div>
             </div>
