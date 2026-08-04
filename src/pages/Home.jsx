@@ -154,6 +154,12 @@ const Home = () => {
           title="Lifelinkr Asidebar Page"
           theme="sky"
         />
+
+        <PortalCard
+          to="/lifelinkr-notes"
+          title="Lifelinkr Notes Page"
+          theme="sky"
+        />
       </div>
     </div>
   );
