@@ -1,13 +1,10 @@
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
+import LifelinkrTopBar from "../components/LifelinkrTopBar";
+import LifelinkrLeadHeader from "../components/LifelinkrLeadHeader";
 import { NAV_TABS_CLOSE, TabBar } from "../components/CreatorHeaderLayout";
 import Steps from "../components/Steps";
 import {
   ChevronDown,
-  ArrowLeft,
-  Phone,
-  MessageCircle,
-  Mail,
-  Pencil,
   Check,
   ArrowLeftRight,
   ChevronRight,
@@ -17,6 +14,9 @@ import {
   ClipboardCheck,
   Calendar,
   RotateCcw,
+  Phone,
+  MessageCircle,
+  Mail,
 } from "lucide-react";
 
 /* ---------------------------------------------------------------- */
@@ -36,21 +36,6 @@ function Avatar({
     >
       {initials}
     </div>
-  );
-}
-
-function TopButton({ icon: Icon, label, filled }) {
-  return (
-    <button
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13.5px] font-medium border transition-colors ${
-        filled
-          ? "bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
-          : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
-      }`}
-    >
-      <Icon size={15} />
-      {label}
-    </button>
   );
 }
 
@@ -207,272 +192,219 @@ function TimelineEntry({ item, isLast }) {
 export default function LifelinkrLeadDetail() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700">
-      {/*  LEFT SLIM NAVIGATION SIDEBAR  */}
-      <LifelinkrAsidebar />
+      {/* Global Top Bar */}
+      <LifelinkrTopBar />
 
-      {/*  MAIN DASHBOARD CONTENT CONTAINER  */}
-      <main className="min-h-screen min-w-0 overflow-y-auto pb-16 lg:ml-[72px] lg:pb-3">
-        <div className="bg-white px-6 pt-6 mb-5"></div>
-        <div className="px-4 py-5 sm:px-6 lg:px-8 space-y-5">
-          <div className="flex items-center gap-1.5 text-[13px] text-blue-600 font-medium mb-4 cursor-pointer w-fit">
-            <ArrowLeft size={14} />
-            Back to All Leads
-          </div>
+      <div className="flex">
+        {/* Global Sidebar */}
+        <LifelinkrAsidebar />
 
-          {/* Header */}
-          <div className="flex items-start justify-between mb-5">
-            <div className="flex gap-4">
-              <Avatar initials="IS" size={52} />
-              <div>
-                <div className="flex items-center gap-2.5">
-                  <h1 className="text-[21px] font-bold text-slate-900">
-                    Inderjeet Singh
-                  </h1>
-                  <span className="text-[11.5px] font-medium bg-orange-50 text-orange-500 px-2.5 py-0.5 rounded-full">
-                    Contacted
-                  </span>
-                </div>
-                <div className="text-[13px] text-slate-400 mt-1">
-                  L-1012 &nbsp;·&nbsp; UHID: UH-25-000123 &nbsp;·&nbsp; Source:
-                  Google Ads
-                </div>
-                <div className="flex items-center gap-4 mt-2 text-[13px] text-slate-600">
-                  <span className="flex items-center gap-1.5">
-                    <Phone size={13} className="text-slate-400" /> +91 98765
-                    43210
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <MessageCircle size={13} className="text-slate-400" />{" "}
-                    WhatsApp
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Mail size={13} className="text-slate-400" />{" "}
-                    inderjeet.singh@example.com
-                  </span>
+        {/* Main Dashboard Content */}
+        <main className="flex-1 min-w-0 overflow-y-auto pb-16 pb-3">
+          <div className="px-4 py-5 sm:px-6 lg:px-8 space-y-5">
+            {/* Global Lead Header */}
+            <LifelinkrLeadHeader />
+
+            {/* Body grid: left content + right sidebar */}
+            <div
+              className="grid gap-5"
+              style={{ gridTemplateColumns: "1fr 300px" }}
+            >
+              {/* LEFT column */}
+              <div className="min-w-0 space-y-5">
+                {/* Lead Journey */}
+                <Steps />
+                {/* Tabs */}
+                <TabBar tabs={NAV_TABS_CLOSE} activeTab="overview" />
+
+                {/* Cards grid */}
+                <div className="grid grid-cols-3 gap-5 items-start">
+                  <Card
+                    title="Lead Information"
+                    action={
+                      <button className="text-[12.5px] text-blue-600 font-medium border border-slate-200 rounded-md px-2.5 py-1">
+                        Edit
+                      </button>
+                    }
+                  >
+                    <InfoRow label="Age / Gender" value="34 Y / Male" />
+                    <InfoRow label="Marital Status" value="Married" />
+                    <InfoRow label="Trying Since" value="3 Years" />
+                    <InfoRow label="Wife Age" value="31 Years" />
+                    <InfoRow label="Location" value="Chandigarh" />
+                    <InfoRow label="Primary Concern" value="Not Conceiving" />
+                    <InfoRow label="Preferred Language" value="Hindi" />
+                    <InfoRow
+                      label="Enquiry Date"
+                      value="30 Jul, 2026 at 07:26 AM"
+                    />
+                  </Card>
+
+                  <Card
+                    title="Qualification Details"
+                    action={
+                      <button className="text-[12.5px] text-blue-600 font-medium border border-slate-200 rounded-md px-2.5 py-1">
+                        Edit
+                      </button>
+                    }
+                  >
+                    <QualRow label="Previously tried IVF?" value="No" />
+                    <QualRow label="Any children?" value="No" />
+                    <QualRow label="Treatment type interested in?" value="IVF" />
+                    <QualRow label="Budget range?" value="₹2 - ₹3 Lakh" />
+                    <QualRow label="Preferred Doctor?" value="Dr. Mehta" />
+                    <QualRow label="Preferred Time?" value="Evening" />
+                    <QualRow
+                      label="How did you hear about us?"
+                      value="Google Ads"
+                    />
+                  </Card>
+
+                  <Card
+                    title="Activity Timeline"
+                    action={
+                      <span className="text-[12.5px] text-blue-600 font-medium cursor-pointer">
+                        View all
+                      </span>
+                    }
+                    className="row-span-2"
+                  >
+                    {timelineItems.map((item, i) => (
+                      <TimelineEntry
+                        key={i}
+                        item={item}
+                        isLast={i === timelineItems.length - 1}
+                      />
+                    ))}
+                  </Card>
+
+                  <Card title="Latest Notes">
+                    <div className="bg-amber-50 rounded-lg p-3 text-[13px] text-slate-700 leading-relaxed">
+                      Spoke with Inderjeet. Basic details collected. Interested in
+                      IVF. Asked for cost estimate and success rate.
+                    </div>
+                    <div className="flex items-center gap-2 mt-3">
+                      <Avatar
+                        initials="V"
+                        size={22}
+                        bg="bg-blue-600"
+                        text="text-white"
+                      />
+                      <span className="text-[12px] text-slate-500">
+                        Vivek &nbsp;·&nbsp; 30 Jul, 2026 at 07:45 AM
+                      </span>
+                    </div>
+                  </Card>
+
+                  <Card title="Next Follow-up">
+                    <div className="flex items-center gap-2 text-orange-500 font-semibold text-[13.5px]">
+                      <Calendar size={15} />
+                      Call Today at 04:00 PM
+                    </div>
+                    <div className="text-[12.5px] text-slate-400 mt-1">
+                      30 Jul, 2026 &nbsp;·&nbsp; 04:00 PM
+                    </div>
+                    <button className="flex items-center gap-1.5 border border-blue-200 text-blue-600 text-[12.5px] font-medium rounded-lg px-3 py-1.5 mt-4">
+                      <RotateCcw size={13} />
+                      Reschedule
+                    </button>
+                  </Card>
                 </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2.5 shrink-0">
-              <TopButton icon={Phone} label="Call" />
-              <TopButton icon={MessageCircle} label="WhatsApp" />
-              <TopButton icon={Mail} label="Email" />
-              <TopButton icon={Pencil} label="Edit" />
-              <button className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-[13.5px] font-medium">
-                More <ChevronDown size={14} />
-              </button>
-            </div>
-          </div>
 
-          {/* Body grid: left content + right sidebar */}
-          <div
-            className="grid gap-5"
-            style={{ gridTemplateColumns: "1fr 300px" }}
-          >
-            {/* LEFT column */}
-            <div className="min-w-0 space-y-5">
-              {/* Lead Journey */}
-              <Steps />
-              {/* Tabs */}
-              <TabBar tabs={NAV_TABS_CLOSE} activeTab="overview" />
-
-              {/* Cards grid */}
-              <div className="grid grid-cols-3 gap-5 items-start">
-                <Card
-                  title="Lead Information"
-                  action={
-                    <button className="text-[12.5px] text-blue-600 font-medium border border-slate-200 rounded-md px-2.5 py-1">
-                      Edit
-                    </button>
-                  }
-                >
-                  <InfoRow label="Age / Gender" value="34 Y / Male" />
-                  <InfoRow label="Marital Status" value="Married" />
-                  <InfoRow label="Trying Since" value="3 Years" />
-                  <InfoRow label="Wife Age" value="31 Years" />
-                  <InfoRow label="Location" value="Chandigarh" />
-                  <InfoRow label="Primary Concern" value="Not Conceiving" />
-                  <InfoRow label="Preferred Language" value="Hindi" />
-                  <InfoRow
-                    label="Enquiry Date"
-                    value="30 Jul, 2026 at 07:26 AM"
+              {/* RIGHT sidebar */}
+              <div className="space-y-5">
+                <Card title="Lead Summary">
+                  <SummaryRow
+                    label="Current Stage"
+                    value={
+                      <span className="text-[11.5px] font-medium bg-orange-50 text-orange-500 px-2.5 py-0.5 rounded-full">
+                        Contacted
+                      </span>
+                    }
+                  />
+                  <SummaryRow
+                    label="Assigned To"
+                    value={
+                      <span className="flex items-center gap-1.5 font-medium text-slate-700">
+                        <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[9px]">
+                          V
+                        </span>
+                        Vivek
+                      </span>
+                    }
+                  />
+                  <SummaryRow
+                    label="Lead Score"
+                    value={<span className="text-slate-400">—</span>}
+                  />
+                  <SummaryRow
+                    label="Lead Value"
+                    value={
+                      <span className="text-[11.5px] font-medium bg-emerald-50 text-emerald-600 px-2.5 py-0.5 rounded-full">
+                        High
+                      </span>
+                    }
+                  />
+                  <SummaryRow
+                    label="First Enquiry"
+                    value={
+                      <span className="font-medium text-slate-700">30 Jul, 2026</span>
+                    }
+                  />
+                  <SummaryRow
+                    label="Last Contacted"
+                    value={
+                      <span className="font-medium text-slate-700">30 Jul, 2026</span>
+                    }
+                  />
+                  <SummaryRow
+                    label="Next Follow-up"
+                    value={
+                      <span className="font-medium text-red-500">Today, 04:00 PM</span>
+                    }
                   />
                 </Card>
 
-                <Card
-                  title="Qualification Details"
-                  action={
-                    <button className="text-[12.5px] text-blue-600 font-medium border border-slate-200 rounded-md px-2.5 py-1">
-                      Edit
-                    </button>
-                  }
-                >
-                  <QualRow label="Previously tried IVF?" value="No" />
-                  <QualRow label="Any children?" value="No" />
-                  <QualRow label="Treatment type interested in?" value="IVF" />
-                  <QualRow label="Budget range?" value="₹2 - ₹3 Lakh" />
-                  <QualRow label="Preferred Doctor?" value="Dr. Mehta" />
-                  <QualRow label="Preferred Time?" value="Evening" />
-                  <QualRow
-                    label="How did you hear about us?"
-                    value="Google Ads"
-                  />
-                </Card>
-
-                <Card
-                  title="Activity Timeline"
-                  action={
-                    <span className="text-[12.5px] text-blue-600 font-medium cursor-pointer">
-                      View all
-                    </span>
-                  }
-                  className="row-span-2"
-                >
-                  {timelineItems.map((item, i) => (
-                    <TimelineEntry
-                      key={i}
-                      item={item}
-                      isLast={i === timelineItems.length - 1}
-                    />
-                  ))}
-                </Card>
-
-                <Card title="Latest Notes">
-                  <div className="bg-amber-50 rounded-lg p-3 text-[13px] text-slate-700 leading-relaxed">
-                    Spoke with Inderjeet. Basic details collected. Interested in
-                    IVF. Asked for cost estimate and success rate.
-                  </div>
-                  <div className="flex items-center gap-2 mt-3">
-                    <Avatar
-                      initials="V"
-                      size={22}
-                      bg="bg-blue-600"
-                      text="text-white"
-                    />
-                    <span className="text-[12px] text-slate-500">
-                      Vivek &nbsp;·&nbsp; 30 Jul, 2026 at 07:45 AM
-                    </span>
-                  </div>
-                </Card>
-
-                <Card title="Next Follow-up">
-                  <div className="flex items-center gap-2 text-orange-500 font-semibold text-[13.5px]">
+                <Card title="Next Action">
+                  <div className="flex items-center gap-2 text-orange-500 font-semibold text-[14px]">
                     <Calendar size={15} />
                     Call Today at 04:00 PM
                   </div>
-                  <div className="text-[12.5px] text-slate-400 mt-1">
-                    30 Jul, 2026 &nbsp;·&nbsp; 04:00 PM
+                  <div className="mt-3 space-y-1.5">
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-slate-400">Assigned To</span>
+                      <span className="flex items-center gap-1.5 font-medium text-slate-700">
+                        <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[9px]">
+                          V
+                        </span>
+                        Vivek
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-[13px]">
+                      <span className="text-slate-400">Reminder</span>
+                      <span className="font-medium text-slate-700">15 mins before</span>
+                    </div>
                   </div>
-                  <button className="flex items-center gap-1.5 border border-blue-200 text-blue-600 text-[12.5px] font-medium rounded-lg px-3 py-1.5 mt-4">
-                    <RotateCcw size={13} />
-                    Reschedule
+                  <button className="w-full flex items-center justify-center gap-2 border border-blue-200 text-blue-600 font-medium text-[13px] rounded-lg py-2 mt-4">
+                    <CheckCircle2 size={15} />
+                    Mark as Completed
                   </button>
+                </Card>
+
+                <Card title="Quick Actions">
+                  <div className="space-y-2">
+                    <QuickAction icon={ArrowLeftRight} label="Move Stage" />
+                    <QuickAction icon={StickyNote} label="Add Note" />
+                    <QuickAction icon={CalendarPlus} label="Schedule Appointment" />
+                    <QuickAction icon={ClipboardCheck} label="Add Task" />
+                  </div>
                 </Card>
               </div>
             </div>
-
-            {/* RIGHT sidebar */}
-            <div className="space-y-5">
-              <Card title="Lead Summary">
-                <SummaryRow
-                  label="Current Stage"
-                  value={
-                    <span className="text-[11.5px] font-medium bg-orange-50 text-orange-500 px-2.5 py-0.5 rounded-full">
-                      Contacted
-                    </span>
-                  }
-                />
-                <SummaryRow
-                  label="Assigned To"
-                  value={
-                    <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                      <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[9px]">
-                        V
-                      </span>
-                      Vivek
-                    </span>
-                  }
-                />
-                <SummaryRow
-                  label="Lead Score"
-                  value={<span className="text-slate-400">—</span>}
-                />
-                <SummaryRow
-                  label="Lead Value"
-                  value={
-                    <span className="text-[11.5px] font-medium bg-emerald-50 text-emerald-600 px-2.5 py-0.5 rounded-full">
-                      High
-                    </span>
-                  }
-                />
-                <SummaryRow
-                  label="First Enquiry"
-                  value={
-                    <span className="font-medium text-slate-700">
-                      30 Jul, 2026
-                    </span>
-                  }
-                />
-                <SummaryRow
-                  label="Last Contacted"
-                  value={
-                    <span className="font-medium text-slate-700">
-                      30 Jul, 2026
-                    </span>
-                  }
-                />
-                <SummaryRow
-                  label="Next Follow-up"
-                  value={
-                    <span className="font-medium text-red-500">
-                      Today, 04:00 PM
-                    </span>
-                  }
-                />
-              </Card>
-
-              <Card title="Next Action">
-                <div className="flex items-center gap-2 text-orange-500 font-semibold text-[14px]">
-                  <Calendar size={15} />
-                  Call Today at 04:00 PM
-                </div>
-                <div className="mt-3 space-y-1.5">
-                  <div className="flex items-center justify-between text-[13px]">
-                    <span className="text-slate-400">Assigned To</span>
-                    <span className="flex items-center gap-1.5 font-medium text-slate-700">
-                      <span className="w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center text-[9px]">
-                        V
-                      </span>
-                      Vivek
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-[13px]">
-                    <span className="text-slate-400">Reminder</span>
-                    <span className="font-medium text-slate-700">
-                      15 mins before
-                    </span>
-                  </div>
-                </div>
-                <button className="w-full flex items-center justify-center gap-2 border border-blue-200 text-blue-600 font-medium text-[13px] rounded-lg py-2 mt-4">
-                  <CheckCircle2 size={15} />
-                  Mark as Completed
-                </button>
-              </Card>
-
-              <Card title="Quick Actions">
-                <div className="space-y-2">
-                  <QuickAction icon={ArrowLeftRight} label="Move Stage" />
-                  <QuickAction icon={StickyNote} label="Add Note" />
-                  <QuickAction
-                    icon={CalendarPlus}
-                    label="Schedule Appointment"
-                  />
-                  <QuickAction icon={ClipboardCheck} label="Add Task" />
-                </div>
-              </Card>
-            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

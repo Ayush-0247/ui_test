@@ -1,34 +1,10 @@
 import { useState } from "react";
 import Steps from "../components/Steps";
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
+import LifelinkrTopBar from "../components/LifelinkrTopBar";
+import LifelinkrLeadHeader from "../components/LifelinkrLeadHeader";
 import {
-  Menu,
-  Search,
-  Bell,
-  Globe,
   ChevronDown,
-  ArrowLeft,
-  Phone,
-  MessageCircle,
-  Mail,
-  Pencil,
-  LayoutDashboard,
-  Users,
-  ClipboardList,
-  FlaskConical,
-  Package,
-  Archive,
-  Receipt,
-  Target,
-  ListChecks,
-  FileInput,
-  HandCoins,
-  MessagesSquare,
-  Contact,
-  UserCog,
-  Landmark,
-  BarChart3,
-  ChevronLeft,
   PhoneCall,
   Send,
   StickyNote,
@@ -37,44 +13,8 @@ import {
   Plus,
   CalendarPlus,
   CheckSquare,
+  MessageCircle,
 } from "lucide-react";
-
-const sidebarSections = [
-  {
-    items: [{ label: "Dashboard", icon: LayoutDashboard }],
-  },
-  {
-    items: [
-      { label: "Clients", icon: Users },
-      { label: "Patient Management", icon: ClipboardList },
-      { label: "Embryology Lab", icon: FlaskConical },
-      { label: "Inventory Master", icon: Package },
-      { label: "Inventory", icon: Package },
-      { label: "Cryo Storage", icon: Archive },
-      { label: "Billing", icon: Receipt },
-    ],
-  },
-  {
-    heading: "Lead Management",
-    active: true,
-    items: [
-      { label: "All Leads", icon: Target, sub: true, active: true },
-      { label: "Registration Targets", icon: Target, sub: true },
-      { label: "Task", icon: ListChecks, sub: true },
-      { label: "Import / Export", icon: FileInput, sub: true },
-    ],
-  },
-  {
-    items: [
-      { label: "Financial Counselling", icon: HandCoins },
-      { label: "Communication", icon: MessagesSquare },
-      { label: "CRM", icon: Contact },
-      { label: "User Management", icon: UserCog },
-      { label: "Ref Bank Management", icon: Landmark },
-      { label: "Insights", icon: BarChart3 },
-    ],
-  },
-];
 
 const tabs = [
   "Overview",
@@ -130,27 +70,6 @@ const timelineEvents = [
   },
 ];
 
-function SidebarItem({ item }) {
-  const Icon = item.icon;
-  return (
-    <button
-      className={[
-        "w-full flex items-center gap-2.5 rounded-lg text-[13px] transition-colors",
-        item.sub ? "pl-8 pr-2 py-1.5" : "px-2.5 py-1.5",
-        item.active
-          ? "bg-blue-50 text-blue-600 font-medium"
-          : "text-gray-600 hover:bg-gray-50",
-      ].join(" ")}
-    >
-      <Icon
-        size={16}
-        className={item.active ? "text-blue-600" : "text-gray-400"}
-      />
-      <span className="truncate">{item.label}</span>
-    </button>
-  );
-}
-
 function QuickActionButton({ icon: Icon, label }) {
   return (
     <button className="w-full flex items-center justify-between border border-blue-100 bg-blue-50/60 hover:bg-blue-50 text-blue-600 text-[13px] font-medium rounded-lg px-3 py-2.5 transition-colors">
@@ -165,134 +84,19 @@ export default function LeadDetailDashboard() {
 
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-gray-800 font-sans">
-      {/* Top Navbar */}
-      <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 lg:px-5 sticky top-0 z-30">
-        <div className="flex items-center gap-3 lg:gap-4 min-w-0">
-          <button
-            className="lg:hidden text-gray-500"
-            onClick={() => setMobileNavOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            <Menu size={22} />
-          </button>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <div className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center">
-              <div className="w-2.5 h-2.5 bg-white rounded-sm" />
-            </div>
-            <span className="font-semibold text-[15px] text-gray-900 hidden sm:inline">
-              LIFELINKR
-            </span>
-          </div>
-          <button className="hidden lg:flex text-gray-400">
-            <Menu size={18} />
-          </button>
-          <div className="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2 w-56 lg:w-72">
-            <Search size={15} className="text-gray-400 shrink-0" />
-            <span className="text-[13px] text-gray-400 ml-2 truncate">
-              Search by name, phone, email, UHID...
-            </span>
-            <span className="ml-auto text-[11px] text-gray-400 border border-gray-300 rounded px-1.5 py-0.5 shrink-0">
-              ⌘ K
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 lg:gap-4 shrink-0">
-          <button className="relative text-gray-500 hidden sm:block">
-            <Bell size={19} />
-            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">
-              9
-            </span>
-          </button>
-          <button className="hidden sm:flex items-center gap-1 text-gray-500 text-[13px]">
-            <Globe size={16} />
-            <span>EN</span>
-            <ChevronDown size={13} />
-          </button>
-          <div className="flex items-center gap-2">
-            <div className="text-right hidden sm:block leading-tight">
-              <div className="text-[13px] font-medium text-gray-900">Vivek</div>
-              <div className="text-[11px] text-gray-400">Connector</div>
-            </div>
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-semibold">
-              V
-            </div>
-          </div>
-        </div>
-      </header>
+      {/* Global Top Navbar */}
+      <LifelinkrTopBar />
 
       <div className="flex">
-        {/* Sidebar */}
+        {/* Global Sidebar */}
         <LifelinkrAsidebar />
 
         {/* Main content */}
         <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-5">
-          <button className="flex items-center gap-1.5 text-[13px] text-gray-500 mb-3">
-            <ArrowLeft size={15} />
-            Back to All Leads
-          </button>
+          {/* Global Lead Header */}
+          <LifelinkrLeadHeader />
 
-          {/* Lead header card */}
-          <div className="bg-white border border-gray-200 rounded-xl p-4 sm:p-5 mb-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-12 h-12 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-[15px] font-semibold shrink-0">
-                  IS
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h1 className="text-[17px] font-semibold text-gray-900">
-                      Inderjeet Singh
-                    </h1>
-                    <span className="text-[11px] font-medium text-orange-600 bg-orange-50 border border-orange-100 rounded-full px-2.5 py-0.5">
-                      Contacted
-                    </span>
-                  </div>
-                  <div className="text-[12.5px] text-gray-400 mt-0.5">
-                    L-1006 &nbsp;·&nbsp; UHID: UHI-26-000123 &nbsp;·&nbsp;
-                    Source: Google Ads
-                  </div>
-                  <div className="flex items-center gap-4 mt-1.5 text-[12.5px] text-gray-500">
-                    <span className="flex items-center gap-1.5">
-                      <Phone size={13} className="text-gray-400" />
-                      +91 98765 43210
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <MessageCircle size={13} className="text-green-500" />
-                      WhatsApp
-                    </span>
-                    <span className="flex items-center gap-1.5 truncate">
-                      <Mail size={13} className="text-gray-400" />
-                      inderjeet.singh@example.com
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 flex-wrap shrink-0">
-                <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
-                  <Phone size={14} />
-                  Call
-                </button>
-                <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
-                  <MessageCircle size={14} className="text-green-500" />
-                  WhatsApp
-                </button>
-                <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
-                  <Mail size={14} />
-                  Email
-                </button>
-                <button className="flex items-center gap-1.5 border border-gray-200 rounded-lg px-3 py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
-                  <Pencil size={14} />
-                  Edit
-                </button>
-                <button className="flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-3.5 py-2 text-[12.5px] font-medium">
-                  More
-                  <ChevronDown size={14} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col xl:flex-row gap-4">
+          <div className="flex flex-col xl:flex-row gap-4 mt-4">
             {/* Left / center column */}
             <div className="flex-1 min-w-0 space-y-4">
               {/* Lead journey */}
@@ -351,9 +155,7 @@ export default function LeadDetailDashboard() {
                                 <div className="text-[13.5px] font-medium text-gray-900">
                                   {ev.title}
                                 </div>
-                                <div className="text-[12.5px] text-gray-500">
-                                  {ev.desc}
-                                </div>
+                                <div className="text-[12.5px] text-gray-500">{ev.desc}</div>
                               </div>
                               <div className="text-[11.5px] text-gray-400 sm:text-right shrink-0 whitespace-nowrap">
                                 <div>{ev.time}</div>
@@ -419,9 +221,7 @@ export default function LeadDetailDashboard() {
                   </div>
                   <div className="flex items-center justify-between">
                     <dt className="text-gray-500">Next Follow-up</dt>
-                    <dd className="text-blue-600 font-medium">
-                      Today, 04:00 PM
-                    </dd>
+                    <dd className="text-blue-600 font-medium">Today, 04:00 PM</dd>
                   </div>
                 </dl>
               </div>
@@ -446,9 +246,7 @@ export default function LeadDetailDashboard() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-500">Reminder</span>
-                    <span className="text-gray-800 font-medium">
-                      in 15m before
-                    </span>
+                    <span className="text-gray-800 font-medium">in 15m before</span>
                   </div>
                 </div>
                 <button className="w-full flex items-center justify-center gap-1.5 border border-gray-200 rounded-lg py-2 text-[12.5px] font-medium text-gray-700 hover:bg-gray-50">
@@ -464,11 +262,9 @@ export default function LeadDetailDashboard() {
                 </div>
                 <div className="space-y-2">
                   <QuickActionButton icon={Plus} label="Add Note" />
-                  <QuickActionButton
-                    icon={CalendarPlus}
-                    label="Schedule Appointment"
-                  />
+                  <QuickActionButton icon={CalendarPlus} label="Schedule Appointment" />
                   <QuickActionButton icon={CheckSquare} label="Add Task" />
+                  <QuickActionButton icon={MessageCircle} label="Send WhatsApp" />
                 </div>
               </div>
             </div>
