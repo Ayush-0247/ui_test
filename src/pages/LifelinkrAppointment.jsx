@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
   Menu,
   Search,
@@ -37,6 +37,7 @@ import {
   User,
 } from "lucide-react";
 import Steps from "../components/Steps";
+import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
 const sidebarSections = [
   {
     items: [{ label: "Dashboard", icon: LayoutDashboard }],
@@ -72,8 +73,6 @@ const sidebarSections = [
     ],
   },
 ];
-
-
 
 const tabs = [
   "Overview",
@@ -160,8 +159,6 @@ const appointments = [
   },
 ];
 
-
-
 function SidebarItem({ item }) {
   const Icon = item.icon;
   return (
@@ -208,7 +205,6 @@ function StatusBadge({ value }) {
 
 export default function LeadAppointmentsDashboard() {
   const [activeTab, setActiveTab] = useState("Appointments");
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-gray-800 font-sans">
@@ -269,70 +265,7 @@ export default function LeadAppointmentsDashboard() {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside
-          className={[
-            "w-60 shrink-0 bg-white border-r border-gray-200 flex flex-col",
-            "fixed lg:sticky top-16 left-0 h-[calc(100vh-64px)] z-20 transition-transform duration-200",
-            mobileNavOpen
-              ? "translate-x-0"
-              : "-translate-x-full lg:translate-x-0",
-          ].join(" ")}
-        >
-          <div className="p-3">
-            <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 mb-3">
-              <Search size={14} className="text-gray-400" />
-              <span className="text-[13px] text-gray-400 ml-2">Search</span>
-              <span className="ml-auto text-[11px] text-gray-400">⌘ K</span>
-            </div>
-            <div className="flex border-b border-gray-100">
-              <button className="flex items-center gap-1.5 px-1 pb-2 text-[12.5px] font-semibold text-blue-600 border-b-2 border-blue-600 -mb-px">
-                <ListChecks size={13} />
-                MENU
-              </button>
-              <button className="flex items-center gap-1.5 px-3 pb-2 text-[12.5px] font-medium text-gray-400">
-                <Contact size={13} />
-                ACCOUNT
-              </button>
-            </div>
-          </div>
-          <nav className="flex-1 overflow-y-auto px-3 space-y-4 pb-3 pt-1">
-            {sidebarSections.map((section, i) => (
-              <div key={i}>
-                {section.heading && (
-                  <div className="px-2.5 py-1.5 mb-1 text-blue-600 font-semibold text-[13px]">
-                    {section.heading}
-                  </div>
-                )}
-                <div
-                  className={[
-                    "space-y-0.5",
-                    section.heading ? "bg-blue-50/60 rounded-lg py-1" : "",
-                  ].join(" ")}
-                >
-                  {section.items.map((item) => (
-                    <SidebarItem key={item.label} item={item} />
-                  ))}
-                </div>
-                {i < sidebarSections.length - 1 && (
-                  <div className="h-px bg-gray-100 mt-3" />
-                )}
-              </div>
-            ))}
-          </nav>
-          <div className="p-3 border-t border-gray-100">
-            <button className="w-full flex items-center justify-center gap-2 text-[12.5px] text-gray-500 bg-gray-50 hover:bg-gray-100 rounded-lg py-2">
-              <ChevronLeft size={14} />
-              Collapse
-            </button>
-          </div>
-        </aside>
-
-        {mobileNavOpen && (
-          <div
-            className="fixed inset-0 bg-black/30 z-10 lg:hidden"
-            onClick={() => setMobileNavOpen(false)}
-          />
-        )}
+        <LifelinkrAsidebar />
 
         {/* Main content */}
         <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-5">

@@ -1,5 +1,4 @@
-
-import SidebarClose from "../components/SidebarClose";
+import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
 import { NAV_TABS_CLOSE, TabBar } from "../components/CreatorHeaderLayout";
 import Steps from "../components/Steps";
 import {
@@ -40,23 +39,20 @@ function Avatar({
   );
 }
 
-
-
 function TopButton({ icon: Icon, label, filled }) {
   return (
     <button
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13.5px] font-medium border transition-colors ${filled
+      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-[13.5px] font-medium border transition-colors ${
+        filled
           ? "bg-blue-600 border-blue-600 text-white hover:bg-blue-700"
           : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
-        }`}
+      }`}
     >
       <Icon size={15} />
       {label}
     </button>
   );
 }
-
-
 
 function Card({ title, action, children, className = "" }) {
   return (
@@ -117,7 +113,6 @@ function QuickAction({ icon: Icon, label }) {
     </button>
   );
 }
-
 
 /* ---------------------------------------------------------------- */
 /* Activity timeline                                                 */
@@ -213,7 +208,7 @@ export default function LifelinkrLeadDetail() {
   return (
     <div className="min-h-screen overflow-hidden bg-[#F8FAFC] text-slate-800 font-sans antialiased selection:bg-purple-100 selection:text-purple-700">
       {/*  LEFT SLIM NAVIGATION SIDEBAR  */}
-      <SidebarClose />
+      <LifelinkrAsidebar />
 
       {/*  MAIN DASHBOARD CONTENT CONTAINER  */}
       <main className="min-h-screen min-w-0 overflow-y-auto pb-16 lg:ml-[72px] lg:pb-3">
