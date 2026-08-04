@@ -49,15 +49,15 @@ export default function LifelinkrHistory() {
   const [activeTab, setActiveTab] = useState("History");
 
   return (
-    <LifelinkrPageLayout>
-      <LifelinkrTopBar />
-      <div className="flex">
-        <LifelinkrAsidebar />
-        <main className="flex-1 min-w-0">
-          <LifelinkrLeadHeader />
-          <div className="p-4 sm:p-5 lg:p-6">
-            <div className="flex flex-col xl:flex-row gap-5">
-              {/* ── left column ── */}
+     <LifelinkrPageLayout>
+         <LifelinkrTopBar />
+         <div className="flex">
+           <LifelinkrAsidebar />
+           <main className="flex-1 min-w-0">
+             <LifelinkrLeadHeader />
+             <div className="p-4 sm:p-5 lg:p-6">
+               <div className="flex flex-col xl:flex-row gap-5">
+                 {/* ── left column ── */}
               <div className="flex-1 min-w-0 space-y-5">
                 <Steps />
                 <LifelinkrTabNav activeTab={activeTab} onTabChange={setActiveTab} />
