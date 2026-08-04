@@ -1,17 +1,6 @@
 import React from "react";
 import {
-  Menu,
-  Search,
-  Bell,
-  Globe,
   ChevronDown,
-  ArrowLeft,
-  Phone,
-  MessageCircle,
-  Mail,
-  Pencil,
-  ClipboardList,
-  UserCircle2,
   ChevronRight,
   Filter,
   UploadCloud,
@@ -24,208 +13,13 @@ import {
   FileSpreadsheet,
   Image as ImageIcon,
   File,
+  Search,
+  UserCircle2,
 } from "lucide-react";
 import LifelinkrAsidebar from "../components/LifelinkrAsidebar";
-
-
-function TopBar() {
-  return (
-    <div className="h-[64px] bg-white border-b border-gray-200 flex items-center gap-4 px-6 sticky top-0 z-10">
-      <button className="text-gray-500">
-        <Menu className="w-5 h-5" />
-      </button>
-      <div className="flex-1 max-w-xl">
-        <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2">
-          <Search className="w-4 h-4 text-gray-400" />
-          <span className="text-[13px] text-gray-400 flex-1">
-            Search by name, phone, email, UHID...
-          </span>
-          <span className="text-[11px] text-gray-400 bg-white border border-gray-200 rounded px-1.5 py-0.5">
-            ⌘K
-          </span>
-        </div>
-      </div>
-      <div className="flex items-center gap-4 ml-auto">
-        <button className="relative text-gray-500">
-          <Bell className="w-5 h-5" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] rounded-full flex items-center justify-center font-semibold">
-            2
-          </span>
-        </button>
-        <button className="text-gray-500">
-          <Globe className="w-5 h-5" />
-        </button>
-        <div className="flex items-center gap-1 text-[13px] text-gray-600 font-medium">
-          <span>EN</span>
-          <ChevronDown className="w-3.5 h-3.5" />
-        </div>
-        <div className="flex items-center gap-2.5 pl-2">
-          <div className="text-right leading-tight">
-            <div className="text-[13px] font-semibold text-gray-800">Vivek</div>
-            <div className="text-[11px] text-gray-400">Connector</div>
-          </div>
-          <div className="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center text-[13px] font-semibold">
-            V
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- Lead header ---------- */
-
-function LeadHeader() {
-  return (
-    <div className="flex items-center justify-between mb-5">
-      <button className="flex items-center gap-1.5 text-[13.5px] text-blue-600 font-medium">
-        <ArrowLeft className="w-4 h-4" />
-        Back to All Leads
-      </button>
-      <div className="flex items-center gap-2.5">
-        <ActionButton icon={Phone} label="Call" />
-        <ActionButton icon={MessageCircle} label="WhatsApp" />
-        <ActionButton icon={Mail} label="Email" />
-        <ActionButton icon={Pencil} label="Edit" />
-        <button className="flex items-center gap-1.5 bg-blue-600 text-white text-[13.5px] font-medium px-4 py-2 rounded-lg hover:bg-blue-700">
-          More
-          <ChevronDown className="w-3.5 h-3.5" />
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function ActionButton({ icon: Icon, label }) {
-  return (
-    <button className="flex items-center gap-1.5 border border-gray-200 text-gray-700 text-[13.5px] font-medium px-3.5 py-2 rounded-lg hover:bg-gray-50">
-      <Icon className="w-4 h-4 text-gray-500" />
-      {label}
-    </button>
-  );
-}
-
-function LeadProfile() {
-  return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-5">
-      <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
-          IS
-        </div>
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="text-[19px] font-bold text-gray-900">
-              Inderjeet Singh
-            </h1>
-            <span className="text-[11px] font-semibold bg-orange-100 text-orange-600 px-2.5 py-0.5 rounded-full">
-              Contacted
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-[13px] text-gray-500 mt-1">
-            <span>L-1012</span>
-            <Dot />
-            <span>UHID: UH-25-000123</span>
-            <Dot />
-            <span>Source: Google Ads</span>
-          </div>
-          <div className="flex items-center gap-5 text-[13px] text-gray-600 mt-2.5">
-            <span className="flex items-center gap-1.5">
-              <Phone className="w-3.5 h-3.5 text-gray-400" />
-              +91 98765 43210
-            </span>
-            <span className="flex items-center gap-1.5">
-              <MessageCircle className="w-3.5 h-3.5 text-gray-400" />
-              WhatsApp
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Mail className="w-3.5 h-3.5 text-gray-400" />
-              inderjeet.singh@example.com
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function Dot() {
-  return <span className="w-1 h-1 rounded-full bg-gray-300" />;
-}
-
-/* ---------- Lead journey ---------- */
-
-const journeySteps = [
-  { n: 1, label: "Query", date: "29 Jul", state: "done" },
-  { n: 2, label: "Contacted", date: "30 Jul", state: "current" },
-  { n: 3, label: "IVF Relevant", state: "todo" },
-  { n: 4, label: "Follow Up", state: "todo" },
-  { n: 5, label: "Agree to Visit", state: "todo" },
-  { n: 6, label: "Appointment", state: "todo" },
-  { n: 7, label: "Visited", state: "todo" },
-  { n: 8, label: "Registered", state: "todo" },
-  { n: 9, label: "Lost", state: "todo" },
-];
-
-function LeadJourney() {
-  return (
-    <div className="bg-white rounded-2xl border border-gray-200 p-6 mb-5">
-      <h3 className="text-[15px] font-semibold text-gray-900 mb-6">
-        Lead Journey
-      </h3>
-      <div className="flex items-start">
-        {journeySteps.map((step, i) => (
-          <React.Fragment key={step.n}>
-            <div className="flex flex-col items-center w-[90px] shrink-0">
-              <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-semibold ${
-                  step.state === "current"
-                    ? "bg-blue-600 text-white"
-                    : step.state === "done"
-                    ? "bg-gray-100 text-gray-500 border border-gray-300"
-                    : "bg-white text-gray-400 border border-gray-300"
-                }`}
-              >
-                {step.n}
-              </div>
-              <span
-                className={`mt-2 text-[12px] text-center leading-tight ${
-                  step.state === "current"
-                    ? "text-gray-900 font-semibold"
-                    : "text-gray-500"
-                }`}
-              >
-                {step.label}
-              </span>
-              {step.date && (
-                <span className="text-[11px] text-gray-400 mt-0.5">
-                  {step.date}
-                </span>
-              )}
-            </div>
-            {i < journeySteps.length - 1 && (
-              <div className="flex-1 h-px bg-gray-200 mt-4" />
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-
-      <div className="flex items-center gap-4 mt-8">
-        <span className="text-[13px] font-medium text-gray-700 shrink-0">
-          Journey Progress
-        </span>
-        <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-blue-600 rounded-full" style={{ width: "22%" }} />
-        </div>
-        <span className="text-[13px] text-gray-500 shrink-0">
-          Completed 2 / 9 stages
-        </span>
-        <span className="text-[13px] text-gray-500 shrink-0 ml-auto">
-          22% Complete
-        </span>
-      </div>
-    </div>
-  );
-}
+import LifelinkrTopBar from "../components/LifelinkrTopBar";
+import LifelinkrLeadHeader from "../components/LifelinkrLeadHeader";
+import Steps from "../components/Steps";
 
 /* ---------- Tabs ---------- */
 
@@ -242,11 +36,11 @@ const tabs = [
 
 function Tabs({ active }) {
   return (
-    <div className="flex items-center gap-6 border-b border-gray-200 mb-5">
+    <div className="flex items-center gap-6 border-b border-gray-200 mb-5 overflow-x-auto">
       {tabs.map((tab) => (
         <button
           key={tab}
-          className={`text-[13.5px] pb-3 ${
+          className={`text-[13.5px] pb-3 whitespace-nowrap ${
             tab === active
               ? "text-blue-600 font-semibold border-b-2 border-blue-600"
               : "text-gray-500 font-medium"
@@ -376,9 +170,7 @@ function DocumentsPanel() {
         <div className="flex items-center gap-2.5">
           <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-3 py-2 w-56">
             <Search className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-[13px] text-gray-400">
-              Search documents...
-            </span>
+            <span className="text-[13px] text-gray-400">Search documents...</span>
           </div>
           <button className="flex items-center gap-1.5 border border-gray-200 text-gray-700 text-[13px] font-medium px-3.5 py-2 rounded-lg">
             <Filter className="w-3.5 h-3.5" />
@@ -414,17 +206,13 @@ function DocumentsPanel() {
                     <doc.Icon className={`w-4 h-4 ${doc.iconColor}`} />
                   </div>
                   <div>
-                    <div className="text-[13.5px] font-medium text-gray-800">
-                      {doc.name}
-                    </div>
+                    <div className="text-[13.5px] font-medium text-gray-800">{doc.name}</div>
                     <div className="text-[12px] text-gray-400">{doc.desc}</div>
                   </div>
                 </div>
               </td>
               <td className="py-3.5 pr-4">
-                <span
-                  className={`text-[11px] font-semibold px-2 py-1 rounded ${doc.typeColor}`}
-                >
+                <span className={`text-[11px] font-semibold px-2 py-1 rounded ${doc.typeColor}`}>
                   {doc.type}
                 </span>
               </td>
@@ -442,9 +230,7 @@ function DocumentsPanel() {
                   <div className="leading-tight">
                     <div className="text-[13px] text-gray-700">{doc.by}</div>
                     {doc.byTag && (
-                      <div className="text-[11px] text-gray-400">
-                        {doc.byTag}
-                      </div>
+                      <div className="text-[11px] text-gray-400">{doc.byTag}</div>
                     )}
                   </div>
                 </div>
@@ -453,13 +239,9 @@ function DocumentsPanel() {
                 <div className="text-[13px] text-gray-700">{doc.date}</div>
                 <div className="text-[11px] text-gray-400">{doc.time}</div>
               </td>
-              <td className="py-3.5 pr-4 text-[13px] text-gray-600">
-                {doc.size}
-              </td>
+              <td className="py-3.5 pr-4 text-[13px] text-gray-600">{doc.size}</td>
               <td className="py-3.5 pr-4">
-                <span
-                  className={`text-[11px] font-medium px-2.5 py-1 rounded-full ${doc.catColor}`}
-                >
+                <span className={`text-[11px] font-medium px-2.5 py-1 rounded-full ${doc.catColor}`}>
                   {doc.category}
                 </span>
               </td>
@@ -498,9 +280,7 @@ function SummaryRow({ label, children }) {
 function LeadSummary() {
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-5 mb-5">
-      <h3 className="text-[15px] font-bold text-gray-900 mb-2">
-        Lead Summary
-      </h3>
+      <h3 className="text-[15px] font-bold text-gray-900 mb-2">Lead Summary</h3>
       <div className="divide-y divide-gray-50">
         <SummaryRow label="Current Stage">
           <span className="bg-blue-50 text-blue-600 text-[11px] font-semibold px-2.5 py-1 rounded-full">
@@ -534,9 +314,7 @@ function LeadSummary() {
 function NextAction() {
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-5 mb-5">
-      <h3 className="text-[15px] font-bold text-gray-900 mb-3">
-        Next Action
-      </h3>
+      <h3 className="text-[15px] font-bold text-gray-900 mb-3">Next Action</h3>
       <div className="text-[14px] font-semibold text-red-500 mb-3">
         Call Today at 04:00 PM
       </div>
@@ -551,9 +329,7 @@ function NextAction() {
       </div>
       <div className="flex items-center justify-between py-1.5 mb-4">
         <span className="text-[13px] text-gray-400">Reminder</span>
-        <span className="text-[13px] font-medium text-gray-800">
-          in 15m before
-        </span>
+        <span className="text-[13px] font-medium text-gray-800">in 15m before</span>
       </div>
       <button className="w-full flex items-center justify-center gap-2 border border-blue-200 text-blue-600 text-[13.5px] font-semibold py-2.5 rounded-lg hover:bg-blue-50">
         <CheckSquare className="w-4 h-4" />
@@ -575,15 +351,13 @@ function QuickActionBtn({ icon: Icon, label }) {
 function QuickActions() {
   return (
     <div className="bg-white rounded-2xl border border-gray-200 p-5">
-      <h3 className="text-[15px] font-bold text-gray-900 mb-3">
-        Quick Actions
-      </h3>
+      <h3 className="text-[15px] font-bold text-gray-900 mb-3">Quick Actions</h3>
       <div className="space-y-2">
         <QuickActionBtn icon={ChevronRight} label="Add Note" />
-        <QuickActionBtn icon={ClipboardList} label="Schedule Appointment" />
+        <QuickActionBtn icon={FileUp} label="Schedule Appointment" />
         <QuickActionBtn icon={CheckSquare} label="Add Task" />
         <QuickActionBtn icon={Send} label="Send WhatsApp" />
-        <QuickActionBtn icon={FileUp} label="Upload Document" />
+        <QuickActionBtn icon={UploadCloud} label="Upload Document" />
       </div>
     </div>
   );
@@ -593,23 +367,33 @@ function QuickActions() {
 
 export default function LifelinkrLeadDetail() {
   return (
-    <div className="flex bg-gray-50 min-h-screen font-sans text-gray-900">
-      <LifelinkrAsidebar />
-      <div className="flex-1 min-w-0">
-        <TopBar />
-        <div className="p-6">
-          <LeadHeader />
-          <div className="grid grid-cols-[1fr_320px] gap-5 items-start">
-            <div className="min-w-0">
-              <LeadProfile />
-              <LeadJourney />
-              <Tabs active="Documents" />
-              <DocumentsPanel />
-            </div>
-            <div>
-              <LeadSummary />
-              <NextAction />
-              <QuickActions />
+    <div className="flex flex-col bg-gray-50 min-h-screen font-sans text-gray-900">
+      {/* Global Top Bar */}
+      <LifelinkrTopBar />
+
+      <div className="flex flex-1 min-h-0">
+        {/* Global Sidebar */}
+        <LifelinkrAsidebar />
+
+        <div className="flex-1 min-w-0">
+          <div className="p-6">
+            {/* Global Lead Header */}
+            <LifelinkrLeadHeader />
+
+            <div className="grid grid-cols-[1fr_320px] gap-5 items-start mt-5">
+              <div className="min-w-0">
+                {/* Steps (global) */}
+                <Steps />
+                <div className="mt-5">
+                  <Tabs active="Documents" />
+                  <DocumentsPanel />
+                </div>
+              </div>
+              <div>
+                <LeadSummary />
+                <NextAction />
+                <QuickActions />
+              </div>
             </div>
           </div>
         </div>
